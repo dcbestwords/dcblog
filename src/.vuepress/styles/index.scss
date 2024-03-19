@@ -1,0 +1,64 @@
+// place your custom styles here
+
+// 引用
+blockquote {
+  border-left: 4px solid #42b983;
+  color: #777;
+  background-color: rgba(66, 185, 131, 0.1);
+  padding: 0.7rem 0 0.7rem 1rem;
+}
+mark {
+  background-color: #81a781;
+  border-radius: 2px;
+  padding: 2px 4px;
+  margin: 0 2px;
+  color: #222;
+  font-weight: 500;
+}
+
+
+//更改行内代码的部分样式
+.theme-hope-content code:not(pre code) {
+    font-size: 1rem;
+    color: #e96900;
+}
+.blog-page-wrapper .vp-blogger-avatar{
+	object-fit: cover;
+}
+#navbar .search-pro-button{
+	background-color: var(--vp-bglt);
+	box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+//效果页面样式
+.theme-container.project-page-class {
+  .theme-default-content:not(.custom) {
+    max-width: 1500px;
+  }
+  .sidebar {
+    width: 14rem;
+  }
+  .page {
+    padding-left: 14rem;
+  }
+}
+// 外部资源页面样式
+.theme-container.external-document {
+  .theme-hope-content:not(.custom) {
+    max-width: 100vw;
+    padding: 0;
+    border: 0;
+    height: calc(100vh - var(--navbar-height) - 4px);
+  }
+  .vp-page-title {
+    display: none;
+  }
+  #main-content {
+    padding: var(--navbar-height) 0 0;
+  }
+  .vp-breadcrumb {
+    padding: 0;
+  }
+  .page-meta {
+    padding: 0;
+  }
+}
