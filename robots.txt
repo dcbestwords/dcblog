@@ -1,0 +1,5 @@
+
+User-agent:*
+Disallow:
+
+Sitemap: https://dcbestwords.gitee.io/dcblog/sitemap.xml
