@@ -1,6 +1,7 @@
 ---
 title: JavaScript基础
 order: 1
+star: true
 ---
 
 ## 一、语言基础

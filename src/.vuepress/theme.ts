@@ -3,7 +3,7 @@ import navbar from './navbar.js';
 import sidebar from './sidebar.js';
 
 export default hopeTheme({
-  hostname: 'https://dcbestwords.gitee.io/',
+  hostname: 'https://github.com/',
 
   author: {
     name: 'Dachao',
@@ -16,7 +16,7 @@ export default hopeTheme({
 
   logo: '/logo.png', // 博主头像
 
-  repo: 'vuepress-theme-hope/vuepress-theme-hope',
+  repo: 'dcbestwords/dcBlog',
 
   docsDir: 'src',
 
@@ -45,7 +45,7 @@ export default hopeTheme({
       //博主的媒体链接配置
       BiliBili: 'https://space.bilibili.com/102455608',
       Email: 'mailto:wyc168hard@163.com',
-      Gitee: 'https://gitee.com/dcbestwords/dcblog',
+      Gitee: 'https://gitee.com/dcbestwords',
       GitHub: 'https://github.com/dcbestwords',
     },
   },

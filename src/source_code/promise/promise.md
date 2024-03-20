@@ -1,5 +1,6 @@
 ---
 title: 手写promise
+star: true
 ---
 
 ## 一、Promise规范

@@ -1,5 +1,6 @@
 ---
 title: async的实现原理
+star: true
 ---
 
 async 函数的实现原理，就是将 `Generator` 函数和自动执行器，包装在一个函数里。
