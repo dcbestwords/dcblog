@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://dcbestwords.gitee.io/dcBlog/sitemap.xml
+Sitemap: https://github.com/dcBlog/sitemap.xml
