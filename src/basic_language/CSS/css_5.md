@@ -2,6 +2,12 @@
 title: 过渡、动画与响应式
 icon: animation
 order: 5
+category:
+  - CSS
+tag:
+  - 移动端适配
+  - Animation
+  - 响应式
 ---
 
 ## 一、Animation

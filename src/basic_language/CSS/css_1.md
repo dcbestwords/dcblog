@@ -2,6 +2,13 @@
 title: css基本规则
 icon: setting
 order: 1
+category:
+  - CSS
+tag:
+  - 选择器
+  - 层叠
+  - 单位
+  - 继承
 ---
 
 ::: tip 提示

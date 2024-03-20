@@ -42,7 +42,7 @@ const parseParem = (url) => {
 >
 > 输入：'http://sample.com/?a=1&e&b=2&c=xx&d#hash' 
 >
-> 输出：{a: 1, b: 2, c: 'xx', d: ''}  
+> 输出：`{a: 1, b: 2, c: 'xx', d: ''}  `
 
 ```js
 function getQueryObj(url) {

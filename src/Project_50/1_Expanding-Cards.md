@@ -203,19 +203,19 @@ order: 1
     }
  }
     .bg-img0 {
-        background: url('/assets/images/card1.png') center no-repeat;
+        background: url('/dcBlog/assets/images/card1.png') center no-repeat;
     }
     .bg-img1 {
-        background: url('/assets/images/card2.png') center no-repeat;
+        background: url('/dcBlog/assets/images/card2.png') center no-repeat;
     }
     .bg-img2 {
-        background: url('/assets/images/card3.png') center no-repeat;
+        background: url('/dcBlog/assets/images/card3.png') center no-repeat;
     }
     .bg-img3 {
-        background: url('/assets/images/card4.png') center no-repeat;
+        background: url('/dcBlog/assets/images/card4.png') center no-repeat;
     }
     .bg-img4 {
-        background: url('/assets/images/card5.png') center no-repeat;
+        background: url('/dcBlog/assets/images/card5.png') center no-repeat;
     }
 </style>
 ```

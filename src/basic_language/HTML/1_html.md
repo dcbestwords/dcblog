@@ -1,6 +1,10 @@
 ---
 title: html初级笔记
 order: 1
+category:
+  - HTML
+tag:
+  - html
 ---
 
 ## 一、前置知识

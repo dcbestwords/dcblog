@@ -2,6 +2,15 @@
 title: css布局
 icon: layout
 order: 3
+category:
+  - CSS
+tag:
+  - 布局
+  - 浮动
+  - 定位
+  - flex
+  - BFC
+  - grid
 ---
 
 ## 一、常规流布局

@@ -1,5 +1,9 @@
 ---
 title: attribute和property
+category:
+  - HTML
+tag:
+  - attribute
 ---
 
 ## 一、定义
