@@ -327,3 +327,5 @@ eg：`em（强调）、strong（粗体）、q(行内引用)、blockquote（块�
 
 当然我们可以使用`<script src='xxx' async></script>`来异步加载js文件；或使用`<script src='xxx' defer></script>`延迟加载js文件。参考 [图解 script 标签中的 async 和 defer 属性](https://juejin.cn/post/6894629999215640583?searchId=20230818160034898AE4D25E63C1A72C5D)。
 
+
+

@@ -72,7 +72,6 @@ class MyPromise {
     // 变更状态
     this.#state = state;
     this.#result = result;
-    console.log(this.#state, this.#result);
     // 状态变更时执行对应的回调函数
     this.#run();
   }
@@ -201,6 +200,12 @@ class MyPromise {
 }
 ```
 
+`promise.then(callback)`返回一个新的`promise`，它的状态由如下确定：
+
+- `callback`是函数且返回值不是`thenable`对象，则`resolve(callback())`
+- `callback`是函数且返回值是`thenable`对象，则` callback().then(resolve, reject);`，但在浏览器实际的实现中与规范有出入，具体可看下面的面试题目。
+- `callback`不是函数，则它的状态和原始`promise`相同（状态穿透）
+
 ## 三、Promise.all
 
 ```js
@@ -278,7 +283,7 @@ Promise.resolve().then(() => {
 > - 求值（`Promise.resolve(4)`）的任务（ ==额外==  ）
 > - 「Promise { 4 }」的 `onfulfill`， 即`Promise.resolve().then`返回promise的resolve函数（ ==规范== ）
 
-```
+```js
 let p2 = Promise.resolve().then(() => {
     console.log(0);
     return Promise.resolve(4);
