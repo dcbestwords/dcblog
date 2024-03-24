@@ -391,6 +391,14 @@ if (!prevVnode) {
 
 ![patch.jpg](./images/123123141.png)
 
+![image-20240324215104187](./images/image-20240324215104187.png)
+
+先有vue的组件实例，然后生成整个页面的虚拟dom树（此时子组件对应的是占位符vnode），当进行diff操作时，创建子组件，调用init钩子函数，根据占位符vnode的信息（`vnode.componentOptions.Ctor`），生成子组件实例赋值给`vnode.componentInstance`，并执行子组件的挂载，在`vm._update`的阶段会将生成的新的`vnode`挂载到`vm._node`，在根据新的vnode生成dom树后将其挂载到`vnode.elm`。
+
+```
+vm --> vm._vnode --> vm._vnode.children[i] --> vm._vnode.children[i].componentInstance
+```
+
 ## 九、总览
 
 ![new vue](./images/new_vue.png)
@@ -419,7 +427,7 @@ if (!prevVnode) {
 
 ### 3. 虚拟dom
 
-虚拟dom，即vnode是一个树形结构，children中包含着它的子节点。
+渲染vnode，即vnode是一个树形结构，children中包含着它的子节点。
 
 ![image-20240318102542437](./images/image-20240318102542437.png)
 

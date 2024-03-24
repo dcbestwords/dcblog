@@ -1900,9 +1900,7 @@ el.nativeEvents = {
 }
 ```
 
-==调用render函数== 生成虚拟dom中，会调用`createComponent`函数创建VNode节点，也就是前面提到的`_c`，其中把自定义事件`data.on` 赋值给了 `listeners`，把浏览器原生事件 `data.nativeOn` 赋值给了 `data.on`，这说明 ==所有的原生浏览器事件处理是在当前父组件环境中处理的== 。
-
-而对于自定义事件，会把 `listeners` 作为 `vnode` 的 `componentOptions` 传入，放在 ==子组件初始化阶段== 中处理， 在子组件初始化的时候， 拿到父组件传入的 `listeners`，然后在执行 `initEvents` 的过程中，会处理这个 `listeners`。
+==调用render函数== 生成虚拟dom中，会调用`createComponent`函数创建占位符VNode节点，其中把自定义事件`data.on` 赋值给了 `listeners`，把浏览器原生事件 `data.nativeOn` 赋值给了 `data.on`，这说明 ==所有的原生浏览器事件处理是在当前父组件环境中处理的== 。
 
 ```js
 export function createComponent (
@@ -1932,7 +1930,25 @@ export function createComponent (
 }
 ```
 
-#### initEvent函数
+而对于自定义事件，会把 `listeners` 作为 `vnode` 的 `componentOptions` 传入，放在 ==子组件初始化阶段== 中处理， 在子组件初始化的时候， 拿到父组件传入的 `listeners`，然后在执行 `initEvents` 的过程中，会处理这个 `listeners`。
+
+==合并配置项==
+
+```js {9}
+// _init
+if (options && options._isComponent) {
+    initInternalComponent(vm, options)
+}
+
+// initInternalComponent内部
+const vnodeComponentOptions = parentVnode.componentOptions // 占位符组件的配置项
+opts.propsData = vnodeComponentOptions.propsData
+opts._parentListeners = vnodeComponentOptions.listeners
+opts._renderChildren = vnodeComponentOptions.children
+opts._componentTag = vnodeComponentOptions.tag
+```
+
+==initEvent函数==
 
 ```js {5}
 export function initEvents(vm: Component) {
