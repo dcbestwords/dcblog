@@ -410,19 +410,47 @@ vm --> vm._vnode --> vm._vnode.children[i] --> vm._vnode.children[i].componentIn
 - `parent`:当前实例的父组件，帮助`initLifecycle`确认组件之间的父子关系（`$parent、$children、$root`）
 - `propsData`：父组件实际传递的`props`值，帮助`initProps`定义prop的响应式（`vm.prop`）
 - `_componentTag`：当前组件的名称
-- `_parentListeners`：父组件注册的自定义事件，提供了可供用户访问的公共属性`vm.$listeners`
-- `_parentVnode`：当前组件的占位符节点，提供了可供用户访问的公共属性`vm.$vnode`
+- `_parentListeners`：父组件注册的自定义事件，提供了可供用户访问的公共属性`vm.$listeners`（`initRender`）
+- `_parentVnode`：当前组件的占位符节点，提供了可供用户访问的公共属性`vm.$vnode`（`initRender`）
 - `_propKeys`：储存所有 `props` 的 `key` 值。当一个 prop 发生变化时，Vue 需要知道哪些组件需要更新。而这个 `_propKeys` 数组就可以很好地帮助我们找到哪些组件是依赖于这个 prop 的。
+
+> `initInternalComponent` 初始化组件的配置项
+>
+> ```js
+> export function initInternalComponent (vm, options) {
+>   const opts = vm.$options = Object.create(vm.constructor.options) // 组件配置项
+>   const parentVnode = options._parentVnode // 组件占位符vnode
+>   opts.parent = options.parent // 父组件实例
+>   opts._parentVnode = parentVnode
+> 
+>   const vnodeComponentOptions = parentVnode.componentOptions // 占位符节点的配置项
+>   opts.propsData = vnodeComponentOptions.propsData
+>   opts._parentListeners = vnodeComponentOptions.listeners
+>   opts._renderChildren = vnodeComponentOptions.children
+>   opts._componentTag = vnodeComponentOptions.tag
+> 
+>   if (options.render) {
+>     opts.render = options.render
+>     opts.staticRenderFns = options.staticRenderFns
+>   }
+> }
+> ```
 
 ### 2. 实例属性
 
 ![image-20240316201127650](./images/image-20240316201127650.png)
 
 - `$parent、$root、$children、$vnode、$listeners`：见上节
+
 - `$attrs`：组件占位符节点`data.attrs`的供用户访问版
+
 - `$createElement`：`(a, b, c, d) => createElement(vm, a, b, c, d, true)`
+
 - `$slots`：用来访问父组件传递的 ==静态插槽== ，包含对应插槽名称的vnode节点数组
-- `$scopedSlots`：用来访问 ==作用域插槽== ，包含一个返回相应 VNode 的函数。
+
+  > 上述api均来自`initRender`
+
+- `$scopedSlots`：用来访问 ==作用域插槽== ，包含一个返回相应 VNode 的函数。（`vm._render`）
   - 自2.6.0后，所有的 `$slots` 都会作为函数暴露在 `$scopedSlots` 中
 
 ### 3. 虚拟dom

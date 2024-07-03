@@ -75,3 +75,15 @@ plugins: [
 配置之后，每次我们运行`npm run dev`，就会将之前的 dist 目录删除掉，然后重新生成新的 dist 目录。
 
 >注：使用 *clean-webpack-plugin* 这个插件时，必须首字母大写，否则会报错。
+
+在Webpack5 中清除输出目录开箱可用，无须安装 `clean-webpack-plugin`
+
+```js
+module.exports = {
+  mode: "production",
+  output: {
+    clean: true,
+  },
+};
+```
+
