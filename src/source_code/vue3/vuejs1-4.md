@@ -286,8 +286,8 @@ const obj = new Proxy(data, {
 >
 > **action**：添加副作用函数注册机制
 
-```js
-// 用一个全局变量存储被注册的副作用函数
+```js {1}
+// 用一个全局变量存储被注册的副作用函数 || vue2中使用的是Dep.target  
 let activeEffect
 // effect 函数用于注册副作用函数
 function effect(fn) {
@@ -337,6 +337,8 @@ const obj = new Proxy(data, {
 > **action**：改写“桶”的结构
 
 ![](./images/weakmap.png)
+
+vue2中使用`Object.defineProperty`来完成代理，属于属性级别的劫持，所以没有代理对象这层，通过闭包在属性的get中维护dep依赖。
 
 ![image-20230517192740314](./images/image-20230517192740314.png)
 
@@ -457,7 +459,7 @@ const obj = new Proxy(data, {
 
 然而并没有，因为这个“桶”它只进不出，之前存进去的就一直呆在里面了，所以以后再修改obj.text的值时，依然会触发副作用函数执行。
 
-==要知道哪些依赖集合中包含这个副作用函数==
+比如模板中经常会包含v-if等判断分支，随着用户的交互导致最终render函数所执行的代码分支是变化的，因此需要对包含此副作用函数的依赖集合进行更新。为此我们==需要知道哪些依赖集合中包含这个副作用函数==。
 
 **修改副作用注册函数**
 
@@ -471,11 +473,14 @@ function effect(fn) {
         fn()
     }
     // activeEffect.deps 用来存储所有与该副作用函数相关联的依赖集合
+    // 类似于watcher.deps，不再使用类的写法
     effectFn.deps = []
     // 执行副作用函数
     effectFn()
 }
 ```
+
+vue2中的方案是在Dep中维护了一个subs数组，用来存储依赖的watchers；而watcher中同样维护了deps用来存储对应的依赖集合，在收集依赖时进行双向的收集。
 
 **track函数**
 
@@ -571,7 +576,7 @@ function trigger(target, key) {
 > })
 > ```
 >
-> **action**：准备一个副作用函数栈
+> **action**：准备一个副作用函数栈（vue2中采用相同的处理）
 
 不支持嵌套的原因是使用变量activeEffect保存当前的副作用函数，同时只能存在一个，后来的会覆盖先前的，所以我们需要一个副作用函数栈 effectStack， 在副作用函数执行时，将当前副作用函数压入栈中，待副作用函数执行完毕后将其从栈中弹出，并始终让 activeEffect 指向栈顶的副作用函数。
 

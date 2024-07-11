@@ -1,14 +1,14 @@
-# 五、非原始值的响应式方案
+# 非原始值的响应式方案
 
 > 霍春阳《Vue.js设计与实现》的笔记
 
-## 1. 理解Proxy和Reflect
+## 一、 理解Proxy和Reflect
 
 使用 `Proxy` 可以创建一个代理对象。它能够实现对 ==其他对象== 的代理。而代理，指的是对一个对象 ==基本语义== 的代理。它允许我们拦截并重新定义对一个对象的基本操作。
 
 `Reflect`对象的方法与`Proxy`对象的方法一一对应，只要是`Proxy`对象的方法，就能在`Reflect`对象上找到对应的方法。这就让`Proxy`对象可以方便地调用对应的`Reflect`方法，完成默认行为，作为修改行为的基础。而且`Reflect`中的一些函数还能接收第三个参数，即指定接收者 `receiver`，你可以把它理解为函数调用过程中的 this。
 
-### target[key]
+### 1. target[key]
 
 > 直接使用存在的问题
 
@@ -20,13 +20,26 @@ const obj = {
     } 
 }
 
+const p = new Proxy(obj, { 
+    get(target, key) { 
+        track(target, key) 
+        // 注意，这里我们没有使用 Reflect.get 完成读取 
+        return target[key] 
+    }, 
+    set(target, key, newVal) { 
+        // 这里同样没有使用 Reflect.set 完成设置 
+        target[key] = newVal 
+        trigger(target, key) 
+    } 
+})
+
 effect(() => { 
-    console.log(p.bar) // 1 
+    console.log(p.bar) // 1 等同于obj.foo
 })
 p.foo++
 ```
 
-此时副作用函数没有重新执行。在 get 拦截函数内，`target[key]` 相当于 `obj.bar`。因此，当我们使用 `p.bar` 访问 `bar` 属性时，它的 getter 函数内的 this 指向的其实是原始对象 obj， 这说明我们最终访问的其实是 ==obj.foo==。在副作用函数内通过原始对象访问它的某个属性是不会建立响应联系的。
+当 `effect` 注册的副作用函数执行时，会读取 `p.bar` 属性，它发现 `p.bar` 是一个访问器属 性，因此执行 getter 函数。由于在 getter 函数中通过 `this.foo` 读取了 foo 属性值，因此我们认为副作用函数与属性 foo 之间也会建 立联系。当我们修改 `p.foo` 的值时应该能够触发响应，使得副作用函数重新执行才对，然而其并没有重新执行。在 get 拦截函数内，`target[key]` 相当于 `obj.bar`。因此，当我们使用 `p.bar` 访问 `bar` 属性时，它的 getter 函数内的 this 指向的其实是原始对象 obj， 这说明我们 ==最终访问的其实是 `obj.foo`。在副作用函数内通过原始对象访问它的某个属性是不会建立响应联系的==。
 
 > 将`target[key]`改成`Reflect.get(target, key, receiver)`
 
@@ -40,11 +53,11 @@ const obj = {
 }
 ```
 
-当我们使用代理对象 p 访问 bar 属性时，那么 receiver 就是 p，你可以把它简单地理解为函数调用中的 this，此时访问器属性 bar 的 getter 函 数内的 this 指向代理对象 p。这会在副作用函数与响应式数据之间建立响应联系，从而达到依赖收集的效果。
+当我们使用代理对象 p 访问 bar 属性时，那么 receiver 就是 p，你可以把它简单地理解为函数调用中的 this，此时访问器属性 bar 的 getter 函数内的 this 指向代理对象 p。这会在副作用函数与响应式数据之间建立响应联系，从而达到依赖收集的效果。
 
 ---
 
-### 理解JS对象和Proxy工作原理
+### 2. 理解JS对象和Proxy工作原理
 
 根据ECMA，在javascript中分为2种对象：**常规对象**和**异质对象**。任何不属于常规对象的都叫异质对象。
 
@@ -64,7 +77,7 @@ const obj = {
 
 创建代理对象时指定的拦截函数，实际上是用来 ==自定义代理对象本身的内部方法和行为== 的，而不是用来指定被代理对象的内部方法和行为的。
 
-## 2. 代理函数的完善
+## 二、代理函数的完善
 
 原有的“读取”操作拦截太过简单，实际上读取包括：
 
@@ -72,9 +85,11 @@ const obj = {
 - `key in obj`
 - `for (const key in obj){}`
 
-### `in`操作符的拦截
+> 对象默认不包含可迭代协议，因此不考虑`for..of`
 
-访问属性通过前面说的get拦截函数实现。而对于`in`操作符，我们根据ECMA规范了解到in 操作符的运算结果是通过调用一个叫作 ==HasProperty== 的抽象方法得到的，而它的返回值是通过调用对象的内部方法 ==[[HasProperty]]== 得到的。我们可以通过 ==has 拦截函数== 实现对 in 操作符的代理：
+### 1. `in`操作符的拦截
+
+访问属性通过前面说的get拦截函数实现。而对于`in`操作符，我们根据ECMA规范了解到 in 操作符的运算结果是通过调用一个叫作 ==HasProperty== 的抽象方法得到的，而它的返回值是通过调用对象的内部方法 ==[[HasProperty]]== 得到的。我们可以通过 ==has 拦截函数== 实现对 in 操作符的代理：
 
 ```js {3-6}
 const obj = { foo: 1 } 
@@ -88,9 +103,11 @@ const p = new Proxy(obj, {
 
 ---
 
-### `for...in`操作符的拦截
+### 2. `for...in`操作符的拦截
 
 对于`for...in`操作符，根据ECMA规范其中使用了 ==EnumerateObjectProperties== 这个抽象方法，该方法返回 一个迭代器对象。而其内部实现使用了 ==Reflect.ownKeys(obj)== 来获取只属于对象自身拥有的键。所以我们使用 ==ownKeys 拦截函数== 来拦截 Reflect.ownKeys 操作：
+
+- 同时也会拦截`Object.keys()`操作
 
 ```js {2,5-9}
 const obj = { foo: 1 } 
@@ -149,7 +166,7 @@ function trigger(target, key) {
 }
 ```
 
-- 此时修改一个已存在的属性也会触发副作用函数重新执行，带来不必要的性能开销
+- 此时修改一个已存在的属性也会触发`ITERATE_KEY`对应的副作用函数重新执行，带来不必要的性能开销
 
 ==此时需要我们在 set 拦截函数内能够区分操作的类型，到底是添加新属性还是设置已有属性==
 
@@ -209,7 +226,7 @@ function trigger(target, key, type) {
 }
 ```
 
-### 代理 `delete` 操作符
+### 3. 代理 `delete` 操作符
 
  ==deleteProperty拦截函数== 
 
@@ -233,9 +250,13 @@ const p = new Proxy(obj, {
 })
 ```
 
-## 3. 合理触发响应
+## 三、合理触发响应
 
-> 当为属性设置新的值时，如果值没有发生变化，则不需要触发响应。
+### 1. 减少不必要的响应
+
+当为属性设置新的值时，如果值没有发生变化，则不需要触发响应。
+
+- NaN === NaN 永远等于 false，故需要单独处理。
 
 **代理函数**
 
@@ -258,21 +279,21 @@ newVal)) {
 })
 ```
 
-- 添加的不都是 NaN的判断是因为在js中 NaN === NaN会输出false。
+添加的不都是 NaN的判断是因为在js中 `NaN === NaN`会输出false。
 
 > 封装`reactive`函数，该函数接收一个对象作为参数，并返回为其创建的响应式数据
 
 ```js
 function reactive(obj) { 
     return new Proxy(obj, { 
-        // 省略前文讲解的拦截函数 
+        // 省略前文讲解的拦截函数
     }) 
 }
 ```
 
-- reactive 函数只是对 Proxy 进行了一层封装
+reactive 函数只是对 Proxy 进行了一层封装
 
-> 原型链继承问题
+### 2. 原型链继承问题
 
 **问题演示**
 
@@ -291,9 +312,11 @@ effect(() => {
 child.bar = 2 // 会导致副作用函数重新执行两次
 ```
 
-- 当我们创建两个响应式对象，并强制指定一种继承关系，使得其中一个`Proxy`实例继承了另一个`Proxy`实例时，被继承的那个实例则存在一个副作用。
-- `child`对象上并没有`bar`这个属性，那么js会沿着原型链依次向上查找，就会找到`parent`，并执行`[[Get]]`去获取这个属性，然后这个动作就会被`Proxy`拦截。这会导致`child.bar` 和 `parent.bar` 都与副作用函数建立了响应联系。
-- 当设置新值时，ECMA规定：如果设置的属性不存在于对象上，那么会取得其原型，并调用原型的 [[Set]] 方法。这会导致set函数被调用两次。
+当我们创建两个响应式对象，并强制指定一种继承关系，使得其中一个`Proxy`实例继承了另一个`Proxy`实例时，被继承的那个实例则存在一个副作用。
+
+`child`对象上并没有`bar`这个属性，那么js会沿着原型链依次向上查找，就会找到`parent`，并执行`[[Get]]`去获取这个属性，然后这个动作就会被`Proxy`拦截。这会导致`child.bar` 和 `parent.bar` 都与副作用函数建立了响应联系。
+
+当设置新值时，ECMA规定：如果设置的属性不存在于对象上，那么会取得其原型，并调用原型的 [[Set]] 方法。这会导致set函数被调用两次。
 
 **解决方式**
 
@@ -301,6 +324,8 @@ child.bar = 2 // 会导致副作用函数重新执行两次
 
 - receiver 一直是触发对象，即target的代理对象。
 - 只有当 receiver 是 target 的代理对象时才触发更新。
+
+代理对象可以通过 raw 属性访问原始数据 
 
 ```js
 child.raw === obj // true
@@ -313,7 +338,7 @@ parent.raw === proto // true
 function reactive(obj) { 
     return new Proxy(obj,{ 
         get(target, key, receiver) { 
-            // 代理对象可以通过 raw 属性访问原始数据 
+            // 为下述修改作准备
             if (key === 'raw') { 
                 return target 
             } 
@@ -338,7 +363,7 @@ function reactive(obj) {
 }
 ```
 
-## 4. 浅响应和深响应
+## 四、浅响应和深响应
 
 我们目前实现的reactive是浅响应的，只处理对象最外层属性的响应式。
 
@@ -352,9 +377,9 @@ effect(() => {
 obj.foo.bar = 2
 ```
 
-通过 `Reflect.get` 得到 obj.foo 的结果是一个普通对象，即 { bar: 1 }，它并不是一个响应式对象，所以在副作用函数中访问 obj.foo.bar 时，是不能建立响应联系的。
+通过 `Reflect.get` 得到 obj.foo 的结果是一个普通对象，即 `{ bar: 1 }`，它并不是一个响应式对象，所以在副作用函数中访问 `obj.foo.bar` 时，是不能建立响应联系的。
 
-### 实现深响应
+### 1. 实现深响应
 
 ```js {10-14}
 function reactive(obj) { 
@@ -379,9 +404,9 @@ function reactive(obj) {
 }
 ```
 
-然而，并非所有情况下我们都希望深响应，这就催生了 shallowReactive，即浅响应。
+然而，并非所有情况下我们都希望深响应，这就催生了 `shallowReactive`，即浅响应。
 
-### 完成深浅响应
+### 2. 完成深浅响应
 
 **createReactive函数**
 
@@ -423,7 +448,7 @@ function shallowReactive(obj) {
 }
 ```
 
-## 5. 只读和浅只读
+## 五、只读和浅只读
 
 我们希望一些数据是只读的，当用户尝试修改只读数据时，会收到一条警告信息。
 
@@ -487,9 +512,9 @@ function createReactive(obj, isShallow = false, isReadonly = false) {
 
 ```
 
-- 如果一个数据是只读的，那就意味着任何方式都无法修改它。因此，没有必要为只读数据建立响应联系。出于这个原因，在副作用函数中读取一个只读属性的值时，不调用 track 函数追踪响应。
+如果一个数据是只读的，那就意味着任何方式都无法修改它。因此，没有必要为只读数据建立响应联系。出于这个原因，在副作用函数中读取一个只读属性的值时，不调用 track 函数追踪响应。
 
-同样的，上面实现的只读属于浅只读，为了实现深只读，应该在 get 拦截函数内递归地调用 readonly 将数据包装成只读的代理对象
+同样的，上面实现的只读属于浅只读，为了实现深只读，应该在 get 拦截函数内递归地调用 readonly 将数据包装成只读的代理对象。
 
 ```js {17}
 function createReactive(obj, isShallow = false, isReadonly = false) { 
@@ -528,11 +553,7 @@ function shallowReadonly(obj) {
 }
 ```
 
-## 6. 代理数组
-
-### 数组的索引与 length
-
-首先要知道数组属于异质对象，因为数组对象的 `[[DefineOwnProperty]]` 内部方法与常规对象不同。
+## 六、代理数组
 
 所有对数组元素或属性的“ ==读取== ”操作
 
@@ -549,13 +570,25 @@ function shallowReadonly(obj) {
 - 数组的栈方法：`push/pop/shift/unshift`。 
 - 修改原数组的原型方法：`splice/fill/sort` 等。
 
+### 1. 数组的索引与 length
+
+首先要知道数组属于异质对象，因为数组对象的 `[[DefineOwnProperty]]` 内部方法与常规对象不同。大部分用来代理常规对象的代码对于数组也是生效的，只是与之不同的是：
+
+- 当通过索引设置元素值时，可能会隐式地修改 length 的属性值。因此在触发响应时，也应该触发与 length 属性相关联的副作用函数重新执行。
+- 修改 length 属性值时，那些 索引值大于或等于新的 length 属性值的元素需要触发响应。
+
 #### 响应数组下标的变化
 
-我们给数组中不存在的元素赋值，那就是新增，反之就只是更新。 比如`arr.lenght = 2;arr[2] = 2`
+我们给数组中不存在的元素赋值，那就是新增，反之就只是更新。 比如：
+
+```js
+arr.lenght = 2;
+arr[2] = 2 //新增
+```
 
 **createReactive函数**
 
-新增 ==对数组类型的判断==
+新增 ==对数组类型的判断== ，完善之前对`ITERATE_KEY`的处理。
 
 ```js {11-15}
 function createReactive(obj, isShallow = false, isReadonly = false) { 
@@ -586,9 +619,11 @@ function createReactive(obj, isShallow = false, isReadonly = false) {
     }
 ```
 
-- 使用proxy进行响应式时，`代理对象[index]`可以正常触发get代理
+使用proxy进行响应式时，`代理对象[index]`可以正常触发get代理。
 
 **trigger函数**
+
+当通过超出length的索引对数组进行操作时视为`ADD`，会隐式地修改`length`值，此时应该额外触发与 length 属性相关联的副作用函数重新执行。
 
 ```js {4-14}
 function trigger(target, key, type) { 
@@ -669,7 +704,7 @@ function trigger(target, key, type, newVal) {
 
 ```
 
-###  遍历数组
+###  2. 遍历数组
 
 #### 响应使用`for...in`遍历数组
 
@@ -694,7 +729,7 @@ function createReactive(obj, isShallow = false, isReadonly = false) {
 
 `for ... of`是用来遍历可迭代对象的，其中调用了数组内部的迭代器，通过`length`判断元素是否存在，当元素存在时在next方法中返回元素本身。因此，只需要在副作用函数与数组长度和索引之间建立响应式联系，就是能够响应`for...of`。 而这一点，在上面已经实现，因此我们无需再修改代码就可以实现响应。
 
-需要指出的是，无论是使用 for...of 循环，还是调用 values 等方法，它们都会读取数组的 Symbol.iterator 属性。为了避免发生意外的错误，以及性能上的考虑，我们不应该在副作用函数与 Symbol.iterator 这类 symbol 值之间建立响应联系，我们应该在get的时候再判断一些，如果碰到这种，就无需追踪了
+需要指出的是，无论是使用 for...of 循环，还是调用 values 等方法，它们都会读取数组的 `Symbol.iterator` 属性。为了避免发生意外的错误，以及性能上的考虑，我们不应该在副作用函数与 `Symbol.iterator` 这类 symbol 值之间建立响应联系，我们应该在get的时候再判断一些，如果碰到这种，就无需追踪了。
 
 ```js {8-11}
 function createReactive(obj, isShallow = false, isReadonly = false) { 
@@ -722,7 +757,9 @@ function createReactive(obj, isShallow = false, isReadonly = false) {
 }
 ```
 
-### 数组的查找方法
+### 3. 重写部分数组的查找方法
+
+> 通过`proxy.includes`等方法查找是否存在某属性时，方法内部的this为代理对象，获取数组元素时得到的值也是代理对象，使用原始值查找是查找不到的，因此需要对其进行重写。
 
 #### includes的边界考虑
 
@@ -851,7 +888,7 @@ const arrayInstrumentations = {};
 
 ---
 
-### 隐式修改数组长度的原型方法
+### 4. 重写会修改数组长度的方法
 
 上面我们学习了如何处理数组中的一些遍历方法，这些方法大部分都是不会更改数组本身的，因此我们只需要处理一些边际情况就可以了，但是数组中还有一些其他方法会修改原始数据，比如最常用的`push`方法。
 
@@ -928,7 +965,7 @@ let shouldTrack = true;
 })
 ```
 
-## 7. 代理Set和Map
+## 七、代理Set和Map
 
 **Set 类型的原型属性和方法**
 
@@ -938,7 +975,7 @@ let shouldTrack = true;
 | `add(value)`                 | 向集合中添加给定的值                                         |
 | `delete(value)`              | 从集合中删除给定的值                                         |
 | values()                     | 对于 Set 集合类型来说，keys() 与 values() 等价               |
-| keys()                       | 返回一个迭代器对象。可用于 for...of 循环，迭代 器对象产生的值为集合中的元素值。 |
+| keys()                       | 返回一个迭代器对象。可用于 for...of 循环，迭代器对象产生的值为集合中的元素值。 |
 | clear()                      | 清空集合                                                     |
 | has(value)                   | 判断集合中是否存在给定的值                                   |
 | entries()                    | 返回一个迭代器对象。迭代过程中为集合中的每一 个元素产生一个数组值 [value, value] |
@@ -959,9 +996,9 @@ let shouldTrack = true;
 | entries()                      | 返回一个迭代器对象。迭代过程中会产生由 [key, value] 组成的数组值 |
 | `forEach(callback[, thisArg])` | forEach 函数会遍历 Map 数据的所有键值对，并对每一个键值对调用 callback 函 数。forEach 函数接收可选的第二个参数 thisArg，用于指定 callback 函数执行时的 this 值 |
 
-### 如何代理 Set 和 Map
+### 1. 如何代理 Set 和 Map
 
-在数组中，`Array.length`是一个属性值，是可以直接通过`[[GET]]`获取，但是如果你通过`Proxy`去获取`Set.size`，那么就会被报错。因为在ECMA中，`Set.size`其实是一个访问器属性。 它内部使用`RequireInternalSlot(this, [[SetData]])`检查this（这里指代理对象）是否存在内部槽`[[SetData]]`，很显然，代理对象不存在 `[[SetData]]` 这 个内部槽，所以抛出了这个错误。
+在数组中，`Array.length`是一个属性值，是可以直接通过`[[GET]]`获取，但是如果你通过`Proxy`去获取`Set.size`，那么就会被报错。因为在ECMA中，`Set.size`其实是一个访问器属性。 它内部使用`RequireInternalSlot(this, [[SetData]])`检查this（这里指代理对象）是否存在内部槽`[[SetData]]`，很显然，代理对象不存在 `[[SetData]]` 这个内部槽，所以抛出了这个错误。
 
 > 首先我们封装一个获取变量类型的函数，然后当数据是`Set`并且获取size的时候，让this指向本身，自然能够正确执行。
 
@@ -1017,7 +1054,7 @@ function createReactive(obj, isShallow = false, isReadonly = false) {
 }
 ```
 
-### 建立响应式
+### 2. 建立响应式
 
 > 在访问 `size` 属性时调用 `track` 函数进行依赖追踪，然后在 `add` 方法执行时调用`trigger` 函数触发响应（我们需要自定义add方法）
 
@@ -1059,7 +1096,7 @@ const mutableInstrumentations = {
 }
 ```
 
--  ==指定了操作类型为 ADD==
+==指定了操作类型为 ADD==
 
 > 如果调用 `add` 方法添加的元素已经存在于 `Set` 集合中了， 就不再需要触发响应了
 
@@ -1100,9 +1137,9 @@ const mutableInstrumentations = {
 }
 ```
 
-- delete 方法只有在要删除的元素确实在集合中存在时，才需要触发响应，这一点恰好与 add 方法相反
+delete 方法只有在要删除的元素确实在集合中存在时，才需要触发响应，这一点恰好与 add 方法相反
 
-### 避免污染原始数据
+### 3. 避免污染原始数据
 
 有了实现 add、delete 等方法的经验，我们可以对应实现Map的get 和 set 这两个方法。
 
@@ -1190,7 +1227,7 @@ const mutableInstrumentations = {
 
 这里存在一个问题，raw 属性可能与用户自定义的 raw 属性冲突，所以在一个严谨的实现中，我们需要使用唯一的标识来作为访问原始数据的键，例如使用 Symbol 类型来代替。
 
-### 处理forEach
+### 4. 处理forEach
 
 遍历操作只与键值对的数量有关，因此任何会修改 Map 对象键值对数量的操作都应该触发副作用函数重新执行。
 
@@ -1279,7 +1316,7 @@ function trigger(target, key, type, newVal) {
 }
 ```
 
-### 迭代器方法
+### 5. 迭代器方法
 
 以目前的实现，我们直接使用`for...of`遍历代理对象是行不通的，因为一个对象能否迭代，取决于该对象是否实现了迭代协议，即`Symbol.iterator` 方法，很明显代理对象没有。
 
@@ -1376,7 +1413,7 @@ function iterationMethod() {
 }
 ```
 
-### values 与 keys 方法
+### 6. values 与 keys 方法
 
 > values 方法的实现与 entries 方法类似，只是得到的仅仅是Map数据的值，而不是键值对。
 
@@ -1414,7 +1451,7 @@ function valuesIterationMethod() {
 
 ```
 
-- 将上面高亮部分替换为： `const itr = target.keys()`即实现`keys`方法的代理
+将上面高亮部分替换为： `const itr = target.keys()`即实现`keys`方法的代理
 
 > 使用 `for...of` 循环遍历 `p.keys`，然后调用 `p.set('key2', 'value3')`会导致副作用函数重新应该执行
 
