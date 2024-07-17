@@ -8,6 +8,8 @@ tag:
 
 ## 一、定义
 
+### 1. attribute
+
 html标签的**预定义**和**自定义属性**我们统称为attribute（html概念）
 
 > 只要是DOM标签中出现的属性（html代码），都是**Attribute**
@@ -20,9 +22,19 @@ html标签的**预定义**和**自定义属性**我们统称为attribute（html�
 
 - class特性在变成属性时，名字会变成“className”
 
-- 它的值只能够是**字符串**
+==attribute的值只能够是字符串== ，使用 setAttribute 函数设置的值总是会被字符串化，例如：
+
+```js
+el.setAttribute('disabled', false)
+// 等同于
+el.setAttribute('disabled', 'false')
+```
+
+
 
 ---
+
+### 2. property
 
 js原生对象的直接属性，我们统称为**property**（js概念）
 
@@ -30,10 +42,37 @@ js原生对象的直接属性，我们统称为**property**（js概念）
 
 - attributes是属于property的一个子集
 
+
+```js
+const el = document.querySelector('#my-input')
+el.xxx
+```
+
+很多 HTML Attributes 在 DOM 对象上有与之同名的 DOM Propertiess，例如 id="my-input" 对 应 el.id，type="text" 对应 el.type，value="foo" 对应 el.value 等。但 ==DOM Properties 与 HTML Attributes 的名字不总是一 模一样的== ，例如：
+
+```html
+ <div class="foo"></div>
+```
+
+class="foo" 对应的 DOM Properties 则是 el.className。另 外， ==并不是所有 HTML Attributes 都有与之对应的 DOM Properties== ，例 如：
+
+```html
+<div aria-valuenow="75"></div>
+```
+
+aria-* 类的 HTML Attributes 就没有与之对应的 DOM Properties。
+
+类似地，也不是所有 DOM Properties 都有与之对应的 HTML Attributes，例如可以用 el.textContent 来设置元素的文本内容， 但并没有与之对应的 HTML Attributes 来完成同样的工作。
+
+> HTML Attributes 的值与 DOM Properties 的值之间是有关联的，大致可以认为：
+>
+> - HTML Attributes 的作用是设置与之对应的 DOM Pr operties 的初始值
+
 ## 二、布尔值属性与非布尔值属性
 
-​	property的属性值为布尔类型的  我们统称为布尔值属性
-​	property的属性值为非布尔类型的  我们统称为非布尔值属性
+property的属性值为布尔类型的  我们统称为布尔值属性
+
+property的属性值为非布尔类型的  我们统称为非布尔值属性
 
 ## 三、attribute和property的同步关系（预定义属性）
 
