@@ -99,6 +99,13 @@ export default sidebar({
       link: 'vue3/',
       children: 'structure',
     },
+    {
+      text: 'vue生态',
+      icon: 'vue',
+      prefix: 'vue_related/',
+      link: 'vue_related/',
+      children: 'structure',
+    },
   ],
   '/browser_internet/': [
     {
