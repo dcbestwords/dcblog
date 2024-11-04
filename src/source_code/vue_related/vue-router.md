@@ -213,11 +213,11 @@ matcher 对象主要为后续路由的跳转提供支持，createMatcher 主要�
   const router = new VueRouter({
     routes
   })
-
+  
   // 匹配如下路由路径
   const match = router.match('/about')
   console.log(match)
-
+  
   // 输出结果，外层是一个route对象，matched是一个record对象
   {
     path: '/about',
@@ -560,6 +560,8 @@ Vue-Router 还内置了另一个组件 `<router-link>`，它支持用户在具�
 - 根据不同的配置对 exactActiveClass 、 activeClass 和 ariaCurrentValue 做处理
 - 创建了一个守卫函数 handler，会监听点击事件或者其它可以通过 prop 传入的事件类型，在某些情况下拦截路由跳转，放行通过后会执行 `router.push` 或者 `router.replace` 函数，实际上就是执行了 history 的 push 和 replace 方法做路由跳转。
 - 最后判断当前 tag 是否是`<a>`标签，`<router-link> `默认会渲染成 `<a>` 标签，当然我们也可以修改 tag 的 prop 渲染成其他节点，这种情况下会尝试找它子元素的 `<a>` 标签，如果有则把事件绑定到 `<a> `标签上并添加 href 属性，否则绑定到外层元素本身。
+
+![整体流程](./images/image-20241102223046773.png)
 
 ## 五、总结
 
