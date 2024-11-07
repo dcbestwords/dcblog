@@ -40,7 +40,7 @@ export default navbar([
     icon: 'page',
   },
   {
-    text: '论文课题',
+    text: '课题公考',
     link: '/paper/',
     icon: 'study',
   },

@@ -132,10 +132,10 @@ export default sidebar({
       children: 'structure',
     },
     {
-      text: '论文笔记',
+      text: '公考笔记',
       icon: 'study',
-      prefix: 'paper/',
-      link: 'paper/',
+      prefix: 'exam/',
+      link: 'exam/',
       children: 'structure',
     },
   ],
