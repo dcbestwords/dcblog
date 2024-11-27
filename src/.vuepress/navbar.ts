@@ -34,11 +34,11 @@ export default navbar([
     link: '/algorithm/',
     icon: 'edit',
   },
-  {
-    text: '页面练习',
-    link: '/Project_50/',
-    icon: 'page',
-  },
+  // {
+  //   text: '页面练习',
+  //   link: '/Project_50/',
+  //   icon: 'page',
+  // },
   {
     text: '课题公考',
     link: '/paper/',
