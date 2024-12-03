@@ -16,7 +16,7 @@ export default hopeTheme({
 
   logo: '/logo.png', // 博主头像
 
-  repo: 'dcbestwords/dcBlog',
+  repo: 'dcbestwords',
 
   docsDir: 'src',
 
