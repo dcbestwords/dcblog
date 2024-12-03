@@ -136,6 +136,6 @@ export default sidebar({
       collapsible: true,
     },
   ],
-  // '/Project_50/': 'structure',
   '/reference/': 'structure',
+  '/life/': 'structure',
 });
