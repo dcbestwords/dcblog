@@ -3,9 +3,8 @@ home: true
 layout: BlogHome
 icon: house fas
 title: 主页
-heroImage: /logo.svg
-bgImage: /assets/images/bg.jpg
-heroText: DcBlog
+bgImage: /assets/images/bg.png
+heroText: 阴雨连绵
 heroFullScreen: true
 footer: 恁翻个锤子
 ---
