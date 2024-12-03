@@ -1,16 +1,21 @@
-# HTTPS协议
-HTTPS （全称：Hypertext Transfer Protocol Secure），是以安全为目标的 HTTP 通道，在HTTP的基础上通过传输加密和身份认证保证了传输过程的安全性。HTTPS 在HTTP 的基础上加入SSL，HTTPS 的安全基础是 SSL，因此加密的详细内容就需要 SSL。 
+---
+order: 4
+category:
+  - 前端
+tag:
+  - 网络安全
+  - https
+---
 
-> SSL（Secure Sockets Layer），安全套接字协议
-> TLS（Transport Layer Security），传输层安全性协议
-> **TLS是SSL的升级版，两者几乎是一样的**
-> **所以简单来说 HTTPS = HTTP + SSL/TLS**
+# HTTPS 协议
+
+HTTPS （全称：Hypertext Transfer Protocol Secure），是以安全为目标的 HTTP 通道，在 HTTP 的基础上通过传输加密和身份认证保证了传输过程的安全性。HTTPS 在 HTTP 的基础上加入 SSL，HTTPS 的安全基础是 SSL，因此加密的详细内容就需要 SSL。
+
+> SSL（Secure Sockets Layer），安全套接字协议 TLS（Transport Layer Security），传输层安全性协议 **TLS 是 SSL 的升级版，两者几乎是一样的** > **所以简单来说 HTTPS = HTTP + SSL/TLS**
 
 ![](./images/16807529096431.jpg)
 
-有这么一个漫画描述HTTPS比较的浅显易懂：[漫画：什么是 HTTPS 协议？](https://blog.csdn.net/bjweimengshu/article/details/87706654)
-
-
+有这么一个漫画描述 HTTPS 比较的浅显易懂：[漫画：什么是 HTTPS 协议？](https://blog.csdn.net/bjweimengshu/article/details/87706654)
 
 # 面试题
 
@@ -61,6 +66,6 @@ HTTPS （全称：Hypertext Transfer Protocol Secure），是以安全为目标�
 
 6. 如何劫持 https 的请求，提供思路
 
-   >  https 有防篡改的特点，只要浏览器证书验证过程是正确的，很难在用户不察觉的情况下进行攻击。但若能够更改浏览器的证书验证过程，便有机会实现 https 中间人攻击。
+   > https 有防篡改的特点，只要浏览器证书验证过程是正确的，很难在用户不察觉的情况下进行攻击。但若能够更改浏览器的证书验证过程，便有机会实现 https 中间人攻击。
    >
-   >  所以，要劫持 https，首先要伪造一个证书，并且要想办法让用户信任这个证书，可以有多种方式，比如病毒、恶意软件、诱导等。一旦证书被信任后，就可以利用普通中间人攻击的方式，使用伪造的证书进行攻击。
+   > 所以，要劫持 https，首先要伪造一个证书，并且要想办法让用户信任这个证书，可以有多种方式，比如病毒、恶意软件、诱导等。一旦证书被信任后，就可以利用普通中间人攻击的方式，使用伪造的证书进行攻击。

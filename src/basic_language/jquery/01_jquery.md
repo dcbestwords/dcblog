@@ -1,6 +1,10 @@
 ---
 title: JQuery
 icon: jQuery
+category:
+  - 前端
+tag:
+  - JQuery
 ---
 
 ## 一、jQuery 简介
@@ -11,7 +15,7 @@ icon: jQuery
 - jQuery 选择器
 - jQuery 的筛选方法
 - jQuery 中操作属性的方法
-- jQuery 中操作CSS的方法
+- jQuery 中操作 CSS 的方法
 - jQuery 的文档处理方法
 - jQuery 的事件处理
 - jQuery 动画
@@ -29,16 +33,16 @@ jQuery 不是用来替代原生 JS 的，它只是在原生 JS 的基础上进�
 
 ```html
 <ul>
-    <li>选择器</li>
-    <li>筛选</li>
-    <li>属性</li>
-    <li>CSS</li>
+  <li>选择器</li>
+  <li>筛选</li>
+  <li>属性</li>
+  <li>CSS</li>
 </ul>
 <script>
-    let lis = document.getElementsByTagName("li");
-    for(let i = 0;i < lis.length;i++){
-        lis[i].style.color = "red";
-    }
+  let lis = document.getElementsByTagName('li');
+  for (let i = 0; i < lis.length; i++) {
+    lis[i].style.color = 'red';
+  }
 </script>
 ```
 
@@ -46,7 +50,7 @@ jQuery 不是用来替代原生 JS 的，它只是在原生 JS 的基础上进�
 
 ```html
 <script>
-    $("li").css("color","red");
+  $('li').css('color', 'red');
 </script>
 ```
 
@@ -86,20 +90,19 @@ jQuery 不是用来替代原生 JS 的，它只是在原生 JS 的基础上进�
 
 这个方法能够构建一个 jQuery 对象。你记住，要想调用 jQuery 的各种方法，首先需要得到一个 jQuery 对象。它还有个别名：`$()`
 
-二者是等价的，一般情况下，我们都会使用更加简便的符号，只有当被其他库占用时，才会使用它的全名`jQuery()`。
- 这个核心方法的参数有很多：
+二者是等价的，一般情况下，我们都会使用更加简便的符号，只有当被其他库占用时，才会使用它的全名`jQuery()`。   这个核心方法的参数有很多：
 
 ```js
 // 通过选择器获取
-$("#id")
+$('#id');
 // 标签对象转换为 jQuery 对象
-$(document.body)
+$(document.body);
 // 将数组对象转换为 jQuery 对象
-$([1,2,3])
+$([1, 2, 3]);
 // 将html标签转换为 jQuery 对象
-$("<p></p>")
+$('<p></p>');
 // $(document).ready()的缩写形式，表示当 DOM 文档加载完毕时执行回调
-$(function(){})
+$(function () {});
 ```
 
 由此可见，构建 jQuery 对象方式多种多样。那么之前我们用到的 JS 原生对象都能转换为 jQuery 对象，从而使用它的各种方法来实现效果。
@@ -107,7 +110,7 @@ $(function(){})
 既然原生对象能够转换为 jQuery 对象，那么一个 jQuery 对象又能否转换为 JS 对象呢？比如下面这个例子：
 
 ```js
-$("#root").html("<h1>根元素</h1>");
+$('#root').html('<h1>根元素</h1>');
 ```
 
 这是通过 id 选择器获取的 jQuery 对象，然后利用 html 方法将一个 h1 标签增加到 id 为 root 的标签中。那如果我不想用 jQuery 的 html 方法，而是想用原生 DOM 的 innerHTML 来实现呢？
@@ -116,8 +119,7 @@ $("#root").html("<h1>根元素</h1>");
 $("#root).get(0).innerHTML = "<h1>根元素</h1>";
 ```
 
-这个 get 方法就是将 jQuery 对象转换为原生对象，其中的 0 表示下标。因为通过选择器可能获取多个元素。 
-还有种更简便的方法转换：
+这个 get 方法就是将 jQuery 对象转换为原生对象，其中的 0 表示下标。因为通过选择器可能获取多个元素。  还有种更简便的方法转换：
 
 ```js
 $("#root)[0].innerHTML = "<h1>根元素</h1>";
@@ -128,18 +130,17 @@ $("#root)[0].innerHTML = "<h1>根元素</h1>";
 这是循环 jQuery 对象的方法。
 
 ```js
-$("#root > p").each(function(i){
-    console.log($(this),i);
+$('#root > p').each(function (i) {
+  console.log($(this), i);
 });
 ```
 
-each 和循环数组的 forEach 类似，其中的 this 表示每次遍历出来的对象。注意，该对象是原生对象而不是 jQuery 对象。如果想调用 jQuery 的方法，需要在它外面包裹一个`$()`。 回调函数中还有个参数，它是下标值。
- 这个 each 方法不能循环 JS 中的数组，如果想要循环数组需要先将它转换为 jQuery 对象，比如：
+each 和循环数组的 forEach 类似，其中的 this 表示每次遍历出来的对象。注意，该对象是原生对象而不是 jQuery 对象。如果想调用 jQuery 的方法，需要在它外面包裹一个`$()`。  回调函数中还有个参数，它是下标值。   这个 each 方法不能循环 JS 中的数组，如果想要循环数组需要先将它转换为 jQuery 对象，比如：
 
 ```js
-let ary = [1,2,3];
-$(ary).each(function(){
-    console.log(this);
+let ary = [1, 2, 3];
+$(ary).each(function () {
+  console.log(this);
 });
 ```
 
@@ -148,18 +149,18 @@ $(ary).each(function(){
 在 jQuery 里面，我们可以看到两种写法：
 
 ```js
-$(document).ready(function(){})
+$(document).ready(function () {});
 ```
 
 以及
 
 ```js
-$(function(){})
+$(function () {});
 ```
 
 这两个方法的效果都是一样的，后面的写法是前面写法的一种简写。它们都是在 DOM 文档树加载完之后执行一个函数
 
->注：这里面的文档树加载完不代表全部文件加载完。
+> 注：这里面的文档树加载完不代表全部文件加载完。
 
 在我们原生的 JavaScript 中，会经常使用 `window.onload` 方法。该方法是在 DOM 文档树加载完和**所有文件（例如图片文件加载）**加载完之后执行一个函数。
 
@@ -173,15 +174,15 @@ $(function(){})
 
 ```js
 $.extend({
-    max : function(a,b){
-        return a > b ? a : b;
-    },
-    min : function(a,b){
-        return a < b ? a : b;
-    }
+  max: function (a, b) {
+    return a > b ? a : b;
+  },
+  min: function (a, b) {
+    return a < b ? a : b;
+  },
 });
-console.log($.max(3,5)); // 5
-console.log($.min(3,5)); // 3
+console.log($.max(3, 5)); // 5
+console.log($.min(3, 5)); // 3
 ```
 
 （ 2 ）`$.fn.extend({})`插件，对 jQuery.prototype 进行扩展，提到插件那么就得说一下另一种方法`$.fn.method = function(){}`。示例如下：
@@ -190,16 +191,16 @@ console.log($.min(3,5)); // 3
 
 ```html
 <body>
-    <input type="text">
-    <script src="./jquery-1.12.4.min.js"></script>
-    <script>
-        // 扩展一个方法
-        $.fn.toColor = function (color) {
-            $(this).css('background', color);
-        }
-        // 在 jQuery 实例对象上面使用
-        $('input').toColor('red');
-    </script>
+  <input type="text" />
+  <script src="./jquery-1.12.4.min.js"></script>
+  <script>
+    // 扩展一个方法
+    $.fn.toColor = function (color) {
+      $(this).css('background', color);
+    };
+    // 在 jQuery 实例对象上面使用
+    $('input').toColor('red');
+  </script>
 </body>
 ```
 
@@ -211,22 +212,22 @@ console.log($.min(3,5)); // 3
 
 ```html
 <body>
-    <input type="text">
-    <script src="./jquery-1.12.4.min.js"></script>
-    <script>
-        // 扩展多个方法
-        $.fn.extend({
-            toColor: function (color) {
-                $(this).css('background', color);
-            },
-            toWidth: function (width) {
-                $(this).css('width', width);
-            }
-        });
-        // 在 jQuery 实例对象上面使用
-        $('input').toColor('red');
-        $('input').toWidth('200px');
-    </script>
+  <input type="text" />
+  <script src="./jquery-1.12.4.min.js"></script>
+  <script>
+    // 扩展多个方法
+    $.fn.extend({
+      toColor: function (color) {
+        $(this).css('background', color);
+      },
+      toWidth: function (width) {
+        $(this).css('width', width);
+      },
+    });
+    // 在 jQuery 实例对象上面使用
+    $('input').toColor('red');
+    $('input').toWidth('200px');
+  </script>
 </body>
 ```
 
@@ -234,23 +235,23 @@ console.log($.min(3,5)); // 3
 
 ![-w378](./images/15554915951261.jpg)
 
->注：`jQuery.fn.extend` 等价于 `jQuery.prototype.extend`
+> 注：`jQuery.fn.extend` 等价于 `jQuery.prototype.extend`
 
 （ 3 ）继承。进行浅拷贝与深拷贝。
 
-- 浅拷贝。`$.extend(a,b)`表示 a 使用 b 的属性。 
+- 浅拷贝。`$.extend(a,b)`表示 a 使用 b 的属性。
 
 ```js
 let a = {};
 let b = {
-    name : 'xiejie',
-    age : 18,
-    wife : {
-        name : 'yajing',
-        age : 20
-    }
+  name: 'xiejie',
+  age: 18,
+  wife: {
+    name: 'yajing',
+    age: 20,
+  },
 };
-$.extend(a,b); // 进行浅拷贝
+$.extend(a, b); // 进行浅拷贝
 console.log(a.name); // xiejie
 console.log(a.age); // 18
 console.log(a.wife.name); // yajing
@@ -263,14 +264,14 @@ console.log(b.wife.name); // song ya jing
 ```js
 let a = {};
 let b = {
-    name : 'xiejie',
-    age : 18,
-    wife : {
-        name : 'yajing',
-        age : 20
-    }
+  name: 'xiejie',
+  age: 18,
+  wife: {
+    name: 'yajing',
+    age: 20,
+  },
 };
-$.extend(true,a,b); // 进行深拷贝
+$.extend(true, a, b); // 进行深拷贝
 console.log(a.name); // xiejie
 console.log(a.age); // 18
 console.log(a.wife.name); // yajing
@@ -282,9 +283,9 @@ console.log(b.wife.name); // yajing
 
 ```js
 let a = {};
-let b = { name : 'xiejie' };
-let c = { age : 18 };
-$.extend(a,b,c); 
+let b = { name: 'xiejie' };
+let c = { age: 18 };
+$.extend(a, b, c);
 console.log(a.name); // xiejie
 console.log(a.age); // 18
 ```
@@ -299,9 +300,7 @@ console.log(a.age); // 18
 
 ## 三、jQuery 选择器
 
-关于 jQuery 中可用的选择器可以参看 API 文档。这里主要讲讲其中比较常用的一些方法。 
-从文档中可以看出，绝大部分的选择器和 CSS 的选择器是相同的。因此只要你有 CSS 的基础，jQuery 的选择器学起来应该说非常容易。
- 下面列举一些 jQuery 特有的选择器：
+关于 jQuery 中可用的选择器可以参看 API 文档。这里主要讲讲其中比较常用的一些方法。  从文档中可以看出，绝大部分的选择器和 CSS 的选择器是相同的。因此只要你有 CSS 的基础，jQuery 的选择器学起来应该说非常容易。   下面列举一些 jQuery 特有的选择器：
 
 - `:first`
 - `:last`
@@ -366,7 +365,7 @@ console.log(a.age); // 18
 下面看个例子：
 
 ```js
-let elements = $("p");
+let elements = $('p');
 console.log(elements.eq(0));
 ```
 
@@ -405,25 +404,25 @@ console.log(elements.get(0));
 我们先来看看 attr 的用法，如果是获取属性，可以用一个参数代表要获取的属性名：
 
 ```js
-$("a").attr("href");
+$('a').attr('href');
 ```
 
 如果要设置属性，可以这样：
 
 ```js
-$("a").attr("title","百度");
+$('a').attr('title', '百度');
 ```
 
 如果设置多个属性，可以用 JSON 对象：
 
 ```js
-$("a").attr({href:"https://www.baidu.com",title:"百度"});
+$('a').attr({ href: 'https://www.baidu.com', title: '百度' });
 ```
 
- removeAttr 的参数只有 1 个，就是要删除的属性名：
+removeAttr 的参数只有 1 个，就是要删除的属性名：
 
 ```js
-$("a").removeAttr("title");
+$('a').removeAttr('title');
 ```
 
 attr 和 prop 的用法完全一样，它们的区别在于 attr 是针对普通属性。prop 是针对特殊属性。大多数属性都是普通属性，比如 id、name、title、alt 等等。而特殊属性的值只有 true 和 false，如果直接将它们写在标签上，只需要写一个属性名即可，比如：
@@ -433,7 +432,7 @@ attr 和 prop 的用法完全一样，它们的区别在于 attr 是针对普通
 <input type="checkbox" checked >
 ```
 
- 类似这样的特殊有：
+类似这样的特殊有：
 
 - autofocus
 - readonly
@@ -445,23 +444,23 @@ attr 和 prop 的用法完全一样，它们的区别在于 attr 是针对普通
 prop 就专为对这些属性进行访问和设置的，示例如下：
 
 ```js
-$(":checkbox").prop("checked"); //获取复选框的选中状态
-$("options:selected").prop("selected",false); //取消所有选中的option
+$(':checkbox').prop('checked'); //获取复选框的选中状态
+$('options:selected').prop('selected', false); //取消所有选中的option
 ```
 
 html、text、val 是非常重用的 3 个方法，原生 JS 有 3 个和它们对应，分别是 innerHTML、innerText、value。
 
 ```js
-let root = document.getElementById("root");
-root.innerHTML = "<p></p>";
-$("#root").html("<p></p>");
+let root = document.getElementById('root');
+root.innerHTML = '<p></p>';
+$('#root').html('<p></p>');
 
-root.firstChild.innerText = "添加元素";
-$("#root>p").text("添加元素");
+root.firstChild.innerText = '添加元素';
+$('#root>p').text('添加元素');
 
-let phone = document.getElementById("phone");
-phone.value = "默认值";
-$("#phone").val("默认值");
+let phone = document.getElementById('phone');
+phone.value = '默认值';
+$('#phone').val('默认值');
 ```
 
 方法的更多具体细节请参看 API 文档。
@@ -487,28 +486,28 @@ jQuery 提供了专门操作 CSS 的一些方法：
 获取样式：
 
 ```js
-$("#root").css("color");
+$('#root').css('color');
 ```
 
- 设置单个样式：
+设置单个样式：
 
 ```js
-$("#root").css("color","red");
+$('#root').css('color', 'red');
 ```
 
 设置多个样式：
 
 ```js
-$("#root").css({
-    color: "red",
-    fontSize: 20,
-    width: 100,
-    height: 100,
-    border: "1px solid red"
+$('#root').css({
+  color: 'red',
+  fontSize: 20,
+  width: 100,
+  height: 100,
+  border: '1px solid red',
 });
 ```
 
- 多个样式可以使用 JSON 对象。注意，如果设置的属性有多个单词构成，需要使用驼峰命名法。
+多个样式可以使用 JSON 对象。注意，如果设置的属性有多个单词构成，需要使用驼峰命名法。
 
 ### offset 和 position
 
@@ -516,14 +515,14 @@ $("#root").css({
 
 ```html
 <body>
-    <div style="width:150px;height:150px;background:blue;">
-        <div id="sub" style="width:75px;height:75px;background:red;margin:100px"></div>
-    </div>
+  <div style="width:150px;height:150px;background:blue;">
+    <div id="sub" style="width:75px;height:75px;background:red;margin:100px"></div>
+  </div>
 
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        console.log($("#sub").position());
-    </script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    console.log($('#sub').position());
+  </script>
 </body>
 ```
 
@@ -535,21 +534,22 @@ position 是获取相对于父元素的偏移位置。
 
 ```html
 <body>
-    <div style="width:150px;height:150px;background:blue;position:relative;left:100px;top:100px;">
-        <div id="sub" style="width:75px;height:75px;background:red;position:relative;left:50px;top:50px;"></div>
-    </div>
+  <div style="width:150px;height:150px;background:blue;position:relative;left:100px;top:100px;">
+    <div
+      id="sub"
+      style="width:75px;height:75px;background:red;position:relative;left:50px;top:50px;"></div>
+  </div>
 
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        console.log($("#sub").position());
-    </script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    console.log($('#sub').position());
+  </script>
 </body>
 ```
 
 效果：
 
-![-w611](./images/15298957919059.jpg)
- 不过要注意的是，子元素会去找离它最近的已经定位的父元素来计算偏移。如果没有设置父元素的定位属性，那么最终会找到根元素。因此，一般来说，通过它获取的偏移需要将父元素及子元素都设置定位属性。
+![-w611](./images/15298957919059.jpg)   不过要注意的是，子元素会去找离它最近的已经定位的父元素来计算偏移。如果没有设置父元素的定位属性，那么最终会找到根元素。因此，一般来说，通过它获取的偏移需要将父元素及子元素都设置定位属性。
 
 方法的更多具体细节请参看 API 文档。
 
@@ -558,16 +558,16 @@ position 是获取相对于父元素的偏移位置。
 在 DOM 规范中，节点的操作往往涉及到大量的方法。比如创建节点、增加节点、修改节点、删除节点等等。代码写起来比较繁琐，比如往一个 div 节点中添加 1 个 h1 和 p 元素，需要这样写：
 
 ```js
-let root = document.getElementById("root");
+let root = document.getElementById('root');
 // 添加标题元素
-let h1 = document.createElement("h1");
-let titleText = document.createTextNode("标题");
+let h1 = document.createElement('h1');
+let titleText = document.createTextNode('标题');
 h1.appendChild(titleText);
 root.appendChild(h1);
 
 // 添加p元素
-let p = document.createElement("p");
-let pText = document.createTextNode("文本段落");
+let p = document.createElement('p');
+let pText = document.createTextNode('文本段落');
 p.appendChild(pText);
 root.appendChild(p);
 ```
@@ -575,8 +575,8 @@ root.appendChild(p);
 有了 innerHTML，可以简化许多：
 
 ```js
-let root = document.getElementById("root");
-root.innerHTML = "<h1>标题</h1><p>文本段落</p>";
+let root = document.getElementById('root');
+root.innerHTML = '<h1>标题</h1><p>文本段落</p>';
 ```
 
 但是 innerHTML 与节点操作的方法本质上是不一样的。innerHTML 实质上是将指定的内容替换原来的内容，这个指定内容是用字符串构成。如果想要追加内容到原来的内容之后，可以用字符串拼接的方式。但是，如果想往原来内容的中间添加，这个操作也会比较麻烦，会涉及到复杂的字符串操作。
@@ -584,11 +584,10 @@ root.innerHTML = "<h1>标题</h1><p>文本段落</p>";
 jQuery 中提供了大量的方法来简化节点的操作，比如刚才的代码可写成这样：
 
 ```js
-$("#root").append("<h1>标题</h1><p>文本段落</p>");
+$('#root').append('<h1>标题</h1><p>文本段落</p>');
 ```
 
-感觉和 innerHTML 差不多，但是它并不是节点的替换，而是追加。 
-jQuery 提供了大量这种方法来实现文档操作：
+感觉和 innerHTML 差不多，但是它并不是节点的替换，而是追加。  jQuery 提供了大量这种方法来实现文档操作：
 
 - append
 - appendTo
@@ -627,13 +626,13 @@ jQuery 提供了大量这种方法来实现文档操作：
 这里有 8 个方法，但是其中每种情况都有两个一样效果的方法。这是 jQuery 为两种不同编写风格提供的。比如 append 方法，它要求被添加的节点在前，添加的节点在后，比如：
 
 ```js
-$("#root").append("<h1>标题</h1>");
+$('#root').append('<h1>标题</h1>');
 ```
 
 其中 root 就是被添加的节点，也可理解成父节点。`<h1>标题</h1>`就是添加的节点。如果用 appendTo 呢？如：
 
 ```js
-$("<h1>标题</h1>").appendTo("#root");
+$('<h1>标题</h1>').appendTo('#root');
 ```
 
 两种方法实现的效果一样，只是写法上有所不同，你可以根据自己的习惯进行选择。其余的方法大抵如此。
@@ -646,8 +645,8 @@ $("<h1>标题</h1>").appendTo("#root");
 二者效果一样，replaceWith 表示被修改的节点在前，修改的节点在后。replaceAll 则相反。
 
 ```js
-$("#root h1").replaceWith("<h3>标题</h3>");
-$("<h3>标题</h3>").replaceAll("#root h1");
+$('#root h1').replaceWith('<h3>标题</h3>');
+$('<h3>标题</h3>').replaceAll('#root h1');
 ```
 
 ### 3. 删除节点
@@ -659,14 +658,14 @@ $("<h3>标题</h3>").replaceAll("#root h1");
 empty 表示清空指定节点中的所有内容，但指定的节点本身不会删除。
 
 ```js
-$("#root").empty();
+$('#root').empty();
 ```
 
 remove 表示包括节点本身也会被删除。remove 方法中可以选择器来指定删除某个元素。
 
 ```js
-$("#root").remove();
-$("#root").remove("p");
+$('#root').remove();
+$('#root').remove('p');
 ```
 
 detach 和 remove 效果类似，但是 detach 实际上并没有把匹配的元素从 jQuery 对象中删除。其中所有的绑定事件、附加数据都会保留下来。
@@ -702,19 +701,19 @@ JS 中编写事件处理的方法有 3 种：
 在标签上绑定事件的做法就不说了。DOM 0 级的事件处理方法最为常用，写起来也简单：
 
 ```js
-let btn = document.getElementById("btn");
-btn.onclick = function(){}
+let btn = document.getElementById('btn');
+btn.onclick = function () {};
 ```
 
 它的优点是新老版本的浏览器都支持。缺点是无法为同一个标签添加多个相同类型的事件处理方法。比如：
 
 ```js
-btn.onclick = function(){
-    console.log("event1");
-}
-btn.onclick = function(){
-    console.log("event2");
-}
+btn.onclick = function () {
+  console.log('event1');
+};
+btn.onclick = function () {
+  console.log('event2');
+};
 ```
 
 当点击按钮后，只会执行最后一次绑定的事件处理方法。
@@ -722,11 +721,11 @@ btn.onclick = function(){
 DOM 2 级的事件能够解决这个问题：
 
 ```js
-btn.addEventListener("click",function(){
-    console.log("event1");
+btn.addEventListener('click', function () {
+  console.log('event1');
 });
-btn.addEventListener("click",function(){
-    console.log("event12");
+btn.addEventListener('click', function () {
+  console.log('event12');
 });
 ```
 
@@ -768,7 +767,7 @@ jQuery 提供了大量处理事件的方法，这些方法既解决了兼容性�
 这个方法的作用是当 DOM 节点加载完成后执行，如：
 
 ```js
-$(document).ready(function(){});
+$(document).ready(function () {});
 ```
 
 **ready 和 onload 的区别**
@@ -776,7 +775,7 @@ $(document).ready(function(){});
 和 ready 类似的事件是 window.onload：
 
 ```js
-window.onload = function(){}
+window.onload = function () {};
 ```
 
 二者的区别是 ready 只是在 DOM 加载完成（不包括图片、视频等媒体资源）后执行，onload 是指整个页面加载完成后执行。
@@ -786,29 +785,29 @@ window.onload = function(){}
 on 方法集合了事件处理的所有功能，也就是说，用一个 on 就能完全应付任何事件处理的情况。off 是取消事件，但是要注意其中的回调函数必须和添加该事件时的回调函数相同（这里相同是指引用的同一个函数）。
 
 ```js
-$("#btn").on("click",function(){});
-let fn = function(){};
-$(":text").on("focus",fn);
-$(":text").off("focus",fn); // fn 引用的是同一个函数
+$('#btn').on('click', function () {});
+let fn = function () {};
+$(':text').on('focus', fn);
+$(':text').off('focus', fn); // fn 引用的是同一个函数
 ```
 
 on 也能做事件委托：
 
 ```html
 <div id="list">
-    <h1>title</h1>
-    <p>first</p>
-    <p>second</p>
-    <p>third</p>
+  <h1>title</h1>
+  <p>first</p>
+  <p>second</p>
+  <p>third</p>
 </div>
 <script>
-    $("#list").on("click","p",function(){
-        console.log(this);
-    });
+  $('#list').on('click', 'p', function () {
+    console.log(this);
+  });
 </script>
 ```
 
-将 p 元素上发生的点击事件都委托给它的父元素div来处理。
+将 p 元素上发生的点击事件都委托给它的父元素 div 来处理。
 
 **on、one、bind、live、delegate 的区别**
 
@@ -825,7 +824,10 @@ live 和 delegate 主要用来做事件委托。live 的版本较早，现在已
 它是将 mouseover 和 mouseout 集合到一起的方法：
 
 ```js
-$("#root").hover(function(){},function(){});
+$('#root').hover(
+  function () {},
+  function () {}
+);
 ```
 
 其中有两个参数，都是回调函数。第一个回调等同于 mouseover，第二个回调等同于 mouseout。
@@ -835,8 +837,8 @@ $("#root").hover(function(){},function(){});
 还有些诸如 mouseover、mouseout、click 等方法，实际上是事件处理的快捷方式：
 
 ```js
-$("btn").click(function(){});
-$(":text").focus(function(){});
+$('btn').click(function () {});
+$(':text').focus(function () {});
 ```
 
 但是这些方法并没有包含所有的类型，比如 input 事件就没有。
@@ -845,8 +847,8 @@ $(":text").focus(function(){});
 
 jQuery 中的事件可以通过回调函数中的参数来获取。它的属性和方法大多数都和原生 JS 一样，当然也有不一样的。还有，用 jQuery 的 event 对象不需要考虑浏览器兼容性问题。下面列举一些较为常见的属性和方法：
 
-- event.target - 最初触发实现的DOM元素
-- event.currentTarget - 当前DOM元素
+- event.target - 最初触发实现的 DOM 元素
+- event.currentTarget - 当前 DOM 元素
 - event.pageX - 鼠标相对于文档的左边缘位置
 - event.pageY - 鼠标相对于文档的上边缘位置
 - event.type - 事件的类型
@@ -860,29 +862,29 @@ jQuery 中的事件可以通过回调函数中的参数来获取。它的属性�
 
 ```html
 <body>
-    <table id="tb" border="1">
-        <tr>
-            <td>1</td>
-            <td>张三</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>王五</td>
-            <td>21</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>李四</td>
-            <td>22</td>
-        </tr>
-    </table>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $("#tb").on("click", "tr", function (e) {
-            console.log(e.target, e.currentTarget);
-        });
-    </script>
+  <table id="tb" border="1">
+    <tr>
+      <td>1</td>
+      <td>张三</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>王五</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>李四</td>
+      <td>22</td>
+    </tr>
+  </table>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $('#tb').on('click', 'tr', function (e) {
+      console.log(e.target, e.currentTarget);
+    });
+  </script>
 </body>
 ```
 
@@ -894,9 +896,7 @@ jQuery 中的事件可以通过回调函数中的参数来获取。它的属性�
 
 **event.which**
 
-它会自动根据事件类型来获取键值码或字符码。
-如果是 keydown 和 keyup 事件，它获取的是键值码。
-如果是 keypress 事件，它获取的是字符码。
+它会自动根据事件类型来获取键值码或字符码。如果是 keydown 和 keyup 事件，它获取的是键值码。如果是 keypress 事件，它获取的是字符码。
 
 方法的更多具体细节请参看 API 文档。
 
@@ -928,9 +928,9 @@ hide 方法是将一个显示出来的元素，从大到小隐藏的效果。
 toggle 方法是在显示和隐藏之间进行切换，效果就是从小到大或从大到小。
 
 ```js
-$("#demo").show(500);
-$("#demo").hide(500);
-$("#demo").toggle(500);
+$('#demo').show(500);
+$('#demo').hide(500);
+$('#demo').toggle(500);
 ```
 
 ![-w140](./images/15402548055490.gif)
@@ -967,22 +967,25 @@ fadeToggle 方法是在显示和隐藏之间进行切换，效果淡入或淡出
 
 ### 4. animate
 
-以上的方法实现了显示和隐藏的动画效果。不过，动画不仅限于显示或隐藏，比如节点的移动、放大缩小。这些动画效果可以用animate来实现。
+以上的方法实现了显示和隐藏的动画效果。不过，动画不仅限于显示或隐藏，比如节点的移动、放大缩小。这些动画效果可以用 animate 来实现。
 
 animate 各种节点的动画效果，包括显示或隐藏，看看它的用法：
 
 ```js
-$("#demo").animate({
-    width:150,
-    height:150,
-    marginLeft:100
-},500,function(){
-    console.log("动画播放完毕");
-});
+$('#demo').animate(
+  {
+    width: 150,
+    height: 150,
+    marginLeft: 100,
+  },
+  500,
+  function () {
+    console.log('动画播放完毕');
+  }
+);
 ```
 
-![-w336](./images/15402548482207.gif)
- animate有 3 个参数：
+![-w336](./images/15402548482207.gif)  animate 有 3 个参数：
 
 参数 1：指定动画完成后的最终值，可以同时有多个，它们的动画会同时进行。如果值的单位是 px，可以省略 px。
 
@@ -990,23 +993,29 @@ $("#demo").animate({
 
 参数 3：动画完成后执行的回调。
 
->注意：参数 1 是一个 JSON 对象，其中的属性只能是以数字为值的样式，比如 width、height 等等。像 color、font-style 这类的样式是不能做动画的。
+> 注意：参数 1 是一个 JSON 对象，其中的属性只能是以数字为值的样式，比如 width、height 等等。像 color、font-style 这类的样式是不能做动画的。
 
 animate 本身是一个异步方法，也就是说，它不会阻塞后面代码的执行。但是，假如多个 animate 同时执行，会不会导致动画混乱呢？
 
 关于这个问题，你不用担心。我们之前讲 JS 的异步操作时提到过，JS 的异步实际上是单线程非阻塞式的。也就是说，每个 animate 执行后，动画的执行都会放到队列中排队。当其他代码执行完后，才轮到队里中的动画执行，并且一次只会执行一个动画，其他动画都会排队等待。看这个例子：
 
 ```js
-$("#demo").animate({
-    width:150,
-    height:150,
-    marginLeft:100
-},500);
-$("#demo").animate({
-    width:100,
-    height:100,
-    marginTop:100
-},500);
+$('#demo').animate(
+  {
+    width: 150,
+    height: 150,
+    marginLeft: 100,
+  },
+  500
+);
+$('#demo').animate(
+  {
+    width: 100,
+    height: 100,
+    marginTop: 100,
+  },
+  500
+);
 ```
 
 ![-w251](./images/15402548820387.gif)
@@ -1017,7 +1026,7 @@ $("#demo").animate({
 
 jQuery 提供了 2 个方法实现停止动画：stop 和 finish。其中 stop 有 2 个参数，都是布尔值，又可以分 4 种情况。所以，停止动画实际上有 5 种情况：
 
-**1.	finish**
+**1. finish**
 
 停止动画，并清空队列，直接显示动画的最终状态。
 
@@ -1025,15 +1034,15 @@ jQuery 提供了 2 个方法实现停止动画：stop 和 finish。其中 stop �
 
 ![-w236](./images/15402547764447.gif)
 
-**2.	stop(true,true)**
+**2. stop(true,true)**
 
-停止当前动画，清空队列，显示当前动画的最终状态。 注意它和 finish 的区别在于它只会来到当前动画的最终状态，finish 是来到所有动画的最终状态。
+停止当前动画，清空队列，显示当前动画的最终状态。  注意它和 finish 的区别在于它只会来到当前动画的最终状态，finish 是来到所有动画的最终状态。
 
 效果：
 
 ![-w287](./images/15402550332890.gif)
 
-**3.	stop(true,false)**
+**3. stop(true,false)**
 
 停止当前动画，清空队列，不显示当前动画的最终状态。
 
@@ -1041,7 +1050,7 @@ jQuery 提供了 2 个方法实现停止动画：stop 和 finish。其中 stop �
 
 ![-w282](./images/15402549982704.gif)
 
-**4.	stop(false,true)**
+**4. stop(false,true)**
 
 停止当前动画，不清空队列，显示当前动画的最终状态
 
@@ -1049,7 +1058,7 @@ jQuery 提供了 2 个方法实现停止动画：stop 和 finish。其中 stop �
 
 ![-w264](./images/15402549780061.gif)
 
-**5.	stop(false,false)**
+**5. stop(false,false)**
 
 停止当前动画，不清空队列，不显示当前动画的最终状态
 
@@ -1062,24 +1071,33 @@ jQuery 提供了 2 个方法实现停止动画：stop 和 finish。其中 stop �
 用来在多个动画之间插入延迟时间：如
 
 ```js
-$("#demo").animate({
-    width:150,
-    height:150,
-    marginLeft:100
-},1500,function(){
-    console.log("动画播放完毕");
-})
-.delay(1000)
-.animate({
-    width:100,
-    height:100,
-    marginTop:100
-},1500,function(){
-    console.log("动画播放完毕");
-});
+$('#demo')
+  .animate(
+    {
+      width: 150,
+      height: 150,
+      marginLeft: 100,
+    },
+    1500,
+    function () {
+      console.log('动画播放完毕');
+    }
+  )
+  .delay(1000)
+  .animate(
+    {
+      width: 100,
+      height: 100,
+      marginTop: 100,
+    },
+    1500,
+    function () {
+      console.log('动画播放完毕');
+    }
+  );
 ```
 
->注意，该方法是将队列中的两次动画间加入延迟，可以用在 animate 以及前面介绍的那几个显示和隐藏的动画中。但它并不能完全代替 setTimeout。
+> 注意，该方法是将队列中的两次动画间加入延迟，可以用在 animate 以及前面介绍的那几个显示和隐藏的动画中。但它并不能完全代替 setTimeout。
 
 方法的更多具体细节请参看 API 文档。
 
@@ -1096,7 +1114,7 @@ jQuery 提供很多 Ajax 的方法，方便我们使用 Ajax 请求服务器。�
 
 ### 1. ajax 方法
 
-这是最常用的方法，所有的 ajax 请求都可以用它来实现。它的方法中有个参数，是一个 JSON 对象，用来对ajax的请求进行配置。
+这是最常用的方法，所有的 ajax 请求都可以用它来实现。它的方法中有个参数，是一个 JSON 对象，用来对 ajax 的请求进行配置。
 
 ```js
 $.ajax({
@@ -1115,9 +1133,9 @@ $.ajax({
 只支持 get 请求的 ajax 方法，对上面方法的简化：
 
 ```js
-$.get("url",{传递给服务器的参数},function(data){
-    // 服务器返回的消息
-}); 
+$.get('url', { 传递给服务器的参数 }, function (data) {
+  // 服务器返回的消息
+});
 ```
 
 ### 3. post 方法
@@ -1125,9 +1143,9 @@ $.get("url",{传递给服务器的参数},function(data){
 只支持 post 请求的 ajax 方法，对上面方法的简化：
 
 ```js
-$.post("url",{传递给服务器的参数},function(data){
-    // 服务器返回的消息
-}); 
+$.post('url', { 传递给服务器的参数 }, function (data) {
+  // 服务器返回的消息
+});
 ```
 
 ### 4. load 方法
@@ -1135,8 +1153,8 @@ $.post("url",{传递给服务器的参数},function(data){
 这个方法的作用是向指定路径发送请求，并把返回的内容插入到指定的标签中：
 
 ```js
-$("#root").load("url",{传递给服务器的参数},function(){
-    // 插入完成后执行
+$('#root').load('url', { 传递给服务器的参数 }, function () {
+  // 插入完成后执行
 });
 ```
 
@@ -1150,21 +1168,24 @@ serialize 返回的是字符串形式的参数，serializeArray 返回的是 JSO
 
 ```html
 <form id="fm" action="#">
-    <label>手机号：</label><input type="text" name="phone">
-    <label>密码：</label><input type="password" name="pwd">
-    <label>邮箱：</label><input type="email" name="email">
-    <input type="submit">
+  <label>手机号：</label>
+  <input type="text" name="phone" />
+  <label>密码：</label>
+  <input type="password" name="pwd" />
+  <label>邮箱：</label>
+  <input type="email" name="email" />
+  <input type="submit" />
 </form>
 <script>
-    $("#fm").on("submit",function(e){
-        e.preventDefault();
-        console.log($("#fm").serialize()); 
-        console.log($("#fm").serializeArray());
-    });
+  $('#fm').on('submit', function (e) {
+    e.preventDefault();
+    console.log($('#fm').serialize());
+    console.log($('#fm').serializeArray());
+  });
 </script>
 ```
 
->注意：只有表单元素有 name 属性时，它的值才会被封装。
+> 注意：只有表单元素有 name 属性时，它的值才会被封装。
 
 方法的更多具体细节请参看 API 文档。
 
@@ -1174,17 +1195,17 @@ serialize 返回的是字符串形式的参数，serializeArray 返回的是 JSO
 
 ```js
 // 添加样式
-$("#root").css({
-    width:100,
-    height:100,
-    background:"red"
+$('#root').css({
+  width: 100,
+  height: 100,
+  background: 'red',
 });
 
 // 添加属性
-$("#root").attr("data-name","content");
+$('#root').attr('data-name', 'content');
 
 // 追加内容
-$("#root").html("<h1>标题</h1>");
+$('#root').html('<h1>标题</h1>');
 ```
 
 这样的代码不够简洁，在 jQuery 中我们还可以这样写：
@@ -1209,7 +1230,7 @@ jQuery 筛选方法中有个叫做 end 的方法，从 API 中可以看到对它
 首先我们要搞清楚什么是"破坏性"操作。我们知道 jQuery 中很多方法都会返回当前 jQuery 对象，比如`css()`、`attr()`、`html()`等等。但是还有些方法并不会返回当前 jQuery 对象，而是获取筛选过后的 jQuery 对象，比如：
 
 ```js
-$("#root").find("h1");
+$('#root').find('h1');
 ```
 
 find 方法执行后返回的就不是 id 为 root 这个 jQuery 对象，而是它的子元素 h1。这就相当于破坏了之前的"链条"，而产生了一个新的"链条"。因此，这种方法就称为“破坏性”操作。这类拥有"破坏性"特性的方法有：
@@ -1234,12 +1255,7 @@ find 方法执行后返回的就不是 id 为 root 这个 jQuery 对象，而是
 end 方法可以回到最近一次性"破坏性"操作之前，比如：
 
 ```js
-$("#root")
-    .html("<h1>标题</h1>")
-    .find("h1")
-    .css("color", "red")
-    .end()
-    .append("<p>正文</p>");
+$('#root').html('<h1>标题</h1>').find('h1').css('color', 'red').end().append('<p>正文</p>');
 ```
 
 当 find 调用后，操作的 jQuery 对象已经是 h1 了。但是在调用了 end 后，操作对象又回到了 root 元素。
@@ -1265,8 +1281,8 @@ $("#root p")
 这一条也是为了能够先缩小查询的范围，比如：
 
 ```js
-$("h1.title");
-$("p.list");
+$('h1.title');
+$('p.list');
 ```
 
 ### 3. 尽量使用 id 选择器替代 class 选择器
@@ -1278,10 +1294,7 @@ $("p.list");
 链式操作能够简化代码，而且也不会反复的获取相同的元素对象。如：
 
 ```js
- $("#root")
-    .css("color", "red")
-    .attr("data-name", "content")
-    .html("<h1>标题</h1>");
+$('#root').css('color', 'red').attr('data-name', 'content').html('<h1>标题</h1>');
 ```
 
 适当的时候用是推荐的，但也不能盲目使用。
@@ -1291,7 +1304,7 @@ $("p.list");
 这也是编码的一个技巧。因为每一次的 jQuery 方法调用，都会在页面上进行搜索，虽然时间很短，但性能上也会有所影响。如果在第一次获取时将它赋给一个变量缓存下来，后面再用它时就不会再次到页面上进行搜索。
 
 ```js
-let $root = $("#root");
+let $root = $('#root');
 $root.css();
 $root.html();
 ```
@@ -1303,19 +1316,19 @@ $root.html();
 频繁的 DOM 操作对性能是极大的损耗，比如下面这段代码：
 
 ```js
-let $root = $("#root");
-for(let i = 1;i <= 50;i++){
-    $root.append(`<p>第${i}项</p>`);
+let $root = $('#root');
+for (let i = 1; i <= 50; i++) {
+  $root.append(`<p>第${i}项</p>`);
 }
 ```
 
 这段代码实现了将 50 个 p 元素加入到 id 为 root 的标签中。每次循环都用了 append 方法。这会导致 DOM 操作进行了 50 次，也就意味着页面会重新渲染 50 次。如果整个页面还有很多其他元素在，那么这个渲染过程是很耗时的。下面我换种做法：
 
 ```js
-let $root = $("#root");
-let str = "";
-for(let i = 1;i <= 50;i++){
-    str += `<p>第${i}项</p>`
+let $root = $('#root');
+let str = '';
+for (let i = 1; i <= 50; i++) {
+  str += `<p>第${i}项</p>`;
 }
 $root.append(str);
 ```
@@ -1341,26 +1354,3 @@ live 方法是早前版本的事件委托方法，现在要尽可能用新版本
 严格意义上这不是 jQuery 的性能问题。子代选择器是">"，后代是" "。二者的区别是否只查找一级子元素。子代选择器只会查找一级，通俗点说就是只找“儿子”。后代选择器除了找“儿子”还要找“孙子”，甚至“重孙”等等。
 
 其实也是尽量缩小查找的范围。当然，还是要根据具体业务具体分析。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

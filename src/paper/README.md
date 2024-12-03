@@ -1,5 +1,6 @@
 ---
 title: 论文
+star: true
 index: false
 icon: user-graduate fas
 category:

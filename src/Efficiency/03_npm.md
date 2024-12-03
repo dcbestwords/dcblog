@@ -2,6 +2,10 @@
 title: 包管理工具
 order: 1
 icon: npm fa-brands
+category:
+  - 前端
+tag:
+  - 包管理工具
 ---
 
 ![06_包管理工具](./images/1.jpg)

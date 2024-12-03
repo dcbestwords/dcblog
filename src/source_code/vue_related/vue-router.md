@@ -1,3 +1,11 @@
+---
+order: 2
+category:
+  - 源码解析
+tag:
+  - vue生态
+---
+
 # vue-router 原理解析
 
 > 基本原理参考：[手写 vue-router 原理](https://juejin.cn/post/6854573222231605256?searchId=202408191039247CFA7EF46D1E3902A82F)
@@ -213,11 +221,11 @@ matcher 对象主要为后续路由的跳转提供支持，createMatcher 主要�
   const router = new VueRouter({
     routes
   })
-  
+
   // 匹配如下路由路径
   const match = router.match('/about')
   console.log(match)
-  
+
   // 输出结果，外层是一个route对象，matched是一个record对象
   {
     path: '/about',

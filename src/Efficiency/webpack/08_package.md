@@ -1,6 +1,11 @@
 ---
 title: webpack打包原理
 order: 8
+category:
+  - 前端
+tag:
+  - 模块化
+  - webpack
 ---
 
 [原链接 | 掘金](https://juejin.cn/post/6844904038543130637#heading-21)
@@ -23,7 +28,7 @@ Webpack 的运行流程是一个串行的过程,从启动到结束会依次执�
 
 > `compiler.js`
 >
-> **模块数组modules**
+> **模块数组 modules**
 >
 > ```js
 > [
@@ -56,6 +61,7 @@ Webpack 的运行流程是一个串行的过程,从启动到结束会依次执�
 >        }
 > }
 > ```
+>
 > 根据生成的关系依赖图输出`bundle.js`文件
 
 ```js
@@ -131,14 +137,15 @@ class Compiler {
 
 module.exports = Compiler;
 ```
+
 - 前提：已经准备好生成的 ==依赖关系图==
-- 目标：生成一个 IIFE (匿名闭包)，可以执行所有书写的js脚本
+- 目标：生成一个 IIFE (匿名闭包)，可以执行所有书写的 js 脚本
 - 困难：代码中含有`require`，`export`，浏览器无法识别
-- 做法：自定义require和export传递给代码执行器（作为参数）
+- 做法：自定义 require 和 export 传递给代码执行器（作为参数）
 
 > `Parser.js`
 >
-> - AST树（用于解析依赖）
+> - AST 树（用于解析依赖）
 > - 依赖模块（包含依赖的路径）
 > - 转换过的代码
 
@@ -186,18 +193,18 @@ const Parser = {
 module.exports = Parser;
 ```
 
-## Loader和Plugin的区别
+## Loader 和 Plugin 的区别
 
 `Loader` 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。 因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。
 
 ==src/raw-loader.js==
 
 ```js
-module.exports = function(source) {
-    const json = JSON.stringify(source)
-    .replace(/\u2028/g, '\\u2028' ) // 为了安全起见, ES6模板字符串的问题
+module.exports = function (source) {
+  const json = JSON.stringify(source)
+    .replace(/\u2028/g, '\\u2028') // 为了安全起见, ES6模板字符串的问题
     .replace(/\u2029/g, '\\u2029');
-    return `export default ${json}`;
+  return `export default ${json}`;
 };
 ```
 
@@ -211,15 +218,15 @@ module.exports = function(source) {
 */
 
 class LicenseWebpackPlugin {
-    constructor(parmas) {
-        console.log(parmas) 
-    }
-    apply(complier) {
-        complier.hooks.emit.tapAsync('LicenseWebpackPlugin', (compliation, cb) => {
-            console.log(compliation.assets)
-            compliation.assets['LICENSE'] = {
-                source: function() {
-                    return `
+  constructor(parmas) {
+    console.log(parmas);
+  }
+  apply(complier) {
+    complier.hooks.emit.tapAsync('LicenseWebpackPlugin', (compliation, cb) => {
+      console.log(compliation.assets);
+      compliation.assets['LICENSE'] = {
+        source: function () {
+          return `
 The MIT License (MIT)
 
 Copyright (c) 2013-present, Yuxi (Evan) You
@@ -241,12 +248,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-`
-                }
-            }
-            cb();
-        })
-    }
+`;
+        },
+      };
+      cb();
+    });
+  }
 }
 
 module.exports = LicenseWebpackPlugin;
@@ -260,14 +267,14 @@ module.exports = LicenseWebpackPlugin;
 
 原理：轮询判断文件的最后编辑时间是否变化，变化后根据配置的时间执行重新打包
 
-Webpack开启监听模式，有两种方式：
+Webpack 开启监听模式，有两种方式：
 
 - 启动 webpack 命令时，带上 `--watch` 参数
 - 在配置 webpack.config.js 中设置 `watch:true`
 
 ## Webpack 的热更新原理
 
-HMR的核心就是客户端从服务端拉取更新后的文件，准确的说是 `chunk diff` (chunk 需要更新的部分)，实际上 WDS 与浏览器之间维护了一个 `Websocket`（下图4），当本地资源发生变化时，WDS 会向浏览器推送更新，并带上重新构建后的 hash。然后客户端会向 WDS 发起 Ajax 请求来获取更改内容(文件列表、hash)，这样客户端就可以再借助这些信息继续向 WDS 发起 jsonp 请求获取该chunk的增量更新。
+HMR 的核心就是客户端从服务端拉取更新后的文件，准确的说是 `chunk diff` (chunk 需要更新的部分)，实际上 WDS 与浏览器之间维护了一个 `Websocket`（下图 4），当本地资源发生变化时，WDS 会向浏览器推送更新，并带上重新构建后的 hash。然后客户端会向 WDS 发起 Ajax 请求来获取更改内容(文件列表、hash)，这样客户端就可以再借助这些信息继续向 WDS 发起 jsonp 请求获取该 chunk 的增量更新。
 
 ![img](./images/1645076523410-a913585e-1cb0-42eb-8ea4-ab6f952a21dd.png)
 
@@ -275,7 +282,7 @@ HMR的核心就是客户端从服务端拉取更新后的文件，准确的说�
 - `watch③`：webpack-dev-server 对文件变化的一个监控，变化后会通知浏览器端对应用进行 ==刷新== 。
 
 - `socket④`：WDS 与浏览器之间维护了一个 `Websocket`，将 webpack 编译打包的各个阶段的状态信息告知浏览器端，最主要信息还是新模块的 hash 值。
-  -  webpack-dev-server 修改了webpack 配置中的 entry 属性，在里面添加了 webpack-dev-client 的代码，这样在最后的 bundle.js 文件中就会有接收 websocket 消息的代码了。
+  - webpack-dev-server 修改了 webpack 配置中的 entry 属性，在里面添加了 webpack-dev-client 的代码，这样在最后的 bundle.js 文件中就会有接收 websocket 消息的代码了。
 
 ![img](./images/v2-90e0f2c5b41f5487014996f87098169e720w.png)
 
@@ -289,6 +296,6 @@ HMR的核心就是客户端从服务端拉取更新后的文件，准确的说�
 
 设置指纹
 
-- js：output中 filename直接设置
-- css：借助插件MiniCssExtractPlugin设置filename。
-- 图片：file-loader的name
+- js：output 中 filename 直接设置
+- css：借助插件 MiniCssExtractPlugin 设置 filename。
+- 图片：file-loader 的 name

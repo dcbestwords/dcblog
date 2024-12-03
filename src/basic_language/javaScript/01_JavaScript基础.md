@@ -1,43 +1,46 @@
 ---
 title: JavaScript基础
 order: 1
-star: true
+category:
+  - 前端
+tag:
+  - JavaScript
 ---
 
 ## 一、语言基础
 
-1. JS中严格区分大小写
+1. JS 中严格区分大小写
 
-2. JS中每一条语句以`；`结尾（非必须），可以使用 C 语言的风格用一对大括号将多条语句组合到一个代码块里面。
+2. JS 中每一条语句以`；`结尾（非必须），可以使用 C 语言的风格用一对大括号将多条语句组合到一个代码块里面。
 
-    ```js
-    {
-        let i = 10;
-        console.log(i); // 10
-    }
-    ```
+   ```js
+   {
+     let i = 10;
+     console.log(i); // 10
+   }
+   ```
 
-3. JS中自动忽略多个空格和换行。
+3. JS 中自动忽略多个空格和换行。
 
 4. 声明变量：`var age = 80;`
 
 5. 在 JavaScript 中，注释可以分为单行注释和多行注释。
 
-    ```js
-    // 这是一个单行注释
-    /*
-     *
-     * 这是一个较长的 
-     * 多行的注释
-     * 
-     */
-    ```
+   ```js
+   // 这是一个单行注释
+   /*
+    *
+    * 这是一个较长的
+    * 多行的注释
+    *
+    */
+   ```
 
 6. 标识符（命名规则）
-    - 标识符中可以含有字母、数字、_、$
-    - 标识符不能以数字开头
-    - 标识符不能是ES中的关键字或保留字
-    - 标识符一般都采用驼峰命名法（helloWorld）
+   - 标识符中可以含有字母、数字、\_、$
+   - 标识符不能以数字开头
+   - 标识符不能是 ES 中的关键字或保留字
+   - 标识符一般都采用驼峰命名法（helloWorld）
 
 ## 二、变量
 
@@ -45,7 +48,7 @@ star: true
 
 ### 1. 声明变量
 
-在 JavaScript 中声明变量的方式有3种：`var`，`let`，`const`。其中`var`现在已经不推荐使用了，因为会有变量提升等问题。（后面我们会具体来探讨此问题）
+在 JavaScript 中声明变量的方式有 3 种：`var`，`let`，`const`。其中`var`现在已经不推荐使用了，因为会有变量提升等问题。（后面我们会具体来探讨此问题）
 
 `const`和`let`的区别在于，`const`所声明的变量如果是简单数据类型，那么是不能够再改变的。而`let`所声明的变量无论是简单数据类型还是复杂数据类型，在后面是可以改变的。示例如下：
 
@@ -76,7 +79,9 @@ let a = 3;
 当然我们也可以一次性初始化多个变量，将其写在一行里面。
 
 ```js
-let x = 3,y = 4,z = 5;
+let x = 3,
+  y = 4,
+  z = 5;
 ```
 
 如果声明变量时没有赋予初值，那么默认值为`undefined`
@@ -88,7 +93,7 @@ console.log(a); // undefined
 
 ### 3. 使用 var 声明变量
 
-前面有提到过，在 JavaScript 中声明变量的方式有3种：`var`，`let`，`const`。其中`var`现在已经不推荐使用了。这是因为使用`var`来声明变量会伴随着一些问题。当然，这些问题也经常被看作是 JavaScript 的一些特点。这里要介绍到的是 ==重复声明== 和  ==遗漏声明== 。
+前面有提到过，在 JavaScript 中声明变量的方式有 3 种：`var`，`let`，`const`。其中`var`现在已经不推荐使用了。这是因为使用`var`来声明变量会伴随着一些问题。当然，这些问题也经常被看作是 JavaScript 的一些特点。这里要介绍到的是 ==重复声明== 和 ==遗漏声明== 。
 
 #### 重复声明
 
@@ -125,8 +130,8 @@ console.log(a);
 
 ```js
 {
-    a = 5;
-    console.log(a); // 5
+  a = 5;
+  console.log(a); // 5
 }
 console.log(a); // 5
 ```
@@ -149,8 +154,8 @@ let a = 5; // 这是一个全局变量
 
 ```js
 {
-    let i = 10;
-    console.log(i); // 10
+  let i = 10;
+  console.log(i); // 10
 }
 console.log(i);
 // ReferenceError: i is not defined
@@ -160,8 +165,8 @@ console.log(i);
 
 ```js
 {
-    var i = 10;
-    console.log(i); // 10
+  var i = 10;
+  console.log(i); // 10
 }
 console.log(i); // 10
 ```
@@ -171,8 +176,8 @@ console.log(i); // 10
 ```js
 let i = 10;
 {
-    let i = 100;
-    console.log(i); // 100
+  let i = 100;
+  console.log(i); // 100
 }
 console.log(i); // 10
 ```
@@ -181,14 +186,14 @@ console.log(i); // 10
 
 ```js
 {
-    i = 10;
+  i = 10;
 }
 console.log(i); // 10
 ```
 
 - var 声明的变量可以重复声明不会报错
 
-- var声明的变量没有 ==块级作用域==
+- var 声明的变量没有 ==块级作用域==
 
 ## 三、数据类型
 
@@ -202,14 +207,14 @@ console.log(i); // 10
 
 以下介绍的是 ==简单数据类型==
 
-### 1. String 
+### 1. String
 
 #### 字符串介绍
 
 这是程序里面使用最为广泛的一种类型。在 JavaScript 里面，可以使用单引号，也可以使用双引号
 
 ```js
-let a = "abcd";
+let a = 'abcd';
 let b = 'abcd';
 ```
 
@@ -226,13 +231,13 @@ let c = "Hello "World",welcome"; // 错误
 ```js
 let a = "Hello 'World',welcome"; // 正确
 let b = 'Hello "World",welcome'; // 正确
-let c = "Hello \"World\",welcome"; // 正确
+let c = 'Hello "World",welcome'; // 正确
 ```
 
 字符串这种数据类型非常的霸道，==它和其他数据类型相加都会被转换为字符串类型==，示例如下：
 
 ```js
-let a = "abcd";
+let a = 'abcd';
 let b = 13 + a;
 let c = 3.14 + a;
 let d = true + a;
@@ -256,7 +261,10 @@ console.log(typeof f); // string
 示例：
 
 ```js
-let a = 10,b = true,c = null,d;
+let a = 10,
+  b = true,
+  c = null,
+  d;
 console.log(typeof a.toString()); // string
 console.log(typeof b.toString()); // string
 console.log(typeof c.toString()); // 报错
@@ -279,11 +287,14 @@ console.log(i.toString(16)); // a
 当想要将 null 和 undefined 转换成字符串时，可以使用`String()`方法。该方法可以 ==将 5 种数据类型都转换为字符串==。示例如下：
 
 ```js
-let a = 10,b = true,c = null,d;
-console.log(String(a),typeof String(a)); // 10 string
-console.log(String(b),typeof String(b)); // true string
-console.log(String(c),typeof String(c)); // null string
-console.log(String(d),typeof String(d)); // undefined string
+let a = 10,
+  b = true,
+  c = null,
+  d;
+console.log(String(a), typeof String(a)); // 10 string
+console.log(String(b), typeof String(b)); // true string
+console.log(String(c), typeof String(c)); // null string
+console.log(String(d), typeof String(d)); // undefined string
 ```
 
 #### 字符串模板
@@ -320,23 +331,23 @@ console.log(str.length); // 12
 变量占位符由起始的`${`与结束的`}`来界定，之间允许放入任意的 JavaScript 表达式。示例如下：
 
 ```js
-let name = "xiejie";
+let name = 'xiejie';
 console.log(`Hello,${name}`);
 // Hello,xiejie
 ```
 
-占位符`${name}`会访问本地变量`name`，并将其值插入到字符串中。 
+占位符`${name}`会访问本地变量`name`，并将其值插入到字符串中。
 
 既然占位符是可以是 JavaScript 表达式，那么可替换的就不仅仅是简单的变量名，可以轻易嵌入运算符、函数调用等，示例如下：
 
 ```js
-let count = 10,price = 0.25;
-console.log(`${count} items cost $${(count*price).toFixed(2)}`);
+let count = 10,
+  price = 0.25;
+console.log(`${count} items cost $${(count * price).toFixed(2)}`);
 // 10 items cost $2.50
 ```
 
-
-### 2. Number 
+### 2. Number
 
 数字类型又被称之为`number`类型。`number`类型的值可以分为**整数和实数**两大类。
 
@@ -359,8 +370,8 @@ let b = 017; // 15
 // 十进制
 let c = 21; // 21
 // 十六进制
-let d = 0xFD; // 253
-console.log(a,b,c,d);
+let d = 0xfd; // 253
+console.log(a, b, c, d);
 ```
 
 需要注意的是，不管参与运算的变量是多少进制，最终计算结果仍然会为十进制。
@@ -370,7 +381,7 @@ console.log(a,b,c,d);
 ```js
 let a = 017;
 let b = 0o17;
-console.log(a,b); // 15 15
+console.log(a, b); // 15 15
 ```
 
 #### 实数
@@ -379,8 +390,8 @@ console.log(a,b); // 15 15
 
 ```js
 let a = 3.14;
-let b = 9.12e+2;
-console.log(a,b); // 3.14 912
+let b = 9.12e2;
+console.log(a, b); // 3.14 912
 ```
 
 #### 数值范围（扩展）
@@ -399,14 +410,14 @@ console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
 大于等于 2 的 1024 次方的数为无穷大
 
 ```js
-let i = Math.pow(2,1024);
+let i = Math.pow(2, 1024);
 console.log(i); // Infinity
 ```
 
 小于等于 2 的 1024 次方的数为无穷小
 
 ```js
-let i = -Math.pow(2,1024);
+let i = -Math.pow(2, 1024);
 console.log(i); // -Infinity
 ```
 
@@ -415,7 +426,7 @@ console.log(i); // -Infinity
 示例：如果是无穷大数，会返回 false，否则返回 true（其实这个函数就是用于判断一个变量是否为数值的）
 
 ```js
-let i = Math.pow(2,1024);
+let i = Math.pow(2, 1024);
 console.log(isFinite(i)); // fasle
 let j = 7;
 console.log(isFinite(j)); // true
@@ -442,19 +453,19 @@ console.log(NaN === NaN); // false
 
 ```js
 console.log(isNaN(NaN)); // true
-console.log(isNaN("123")); // false
+console.log(isNaN('123')); // false
 console.log(isNaN(123)); // false
-console.log(isNaN("Hello")); // true
+console.log(isNaN('Hello')); // true
 console.log(isNaN(true)); // false
 ```
 
-最后需要补充说明一下的是，==NaN是属于number类型的==：
+最后需要补充说明一下的是，==NaN 是属于 number 类型的==：
 
 ```js
 console.log(typeof NaN); // number
 ```
 
-### 3. Boolean 
+### 3. Boolean
 
 布尔类型，也被称为`boolean`类型。这个类型的值只有两个，一个是 true，另一个是 false。
 
@@ -464,13 +475,12 @@ console.log(i); // true
 console.log(typeof i); // boolean
 ```
 
-需要注意的是，这两个值与数字值不是一回事，因此 true 不一定等于 1，而 false 也不一定等于0。
-还有一点就是布尔类型的字面值 true 和 false 是区分大小写的。也就是说，True 和 False 都不是布尔值。
+需要注意的是，这两个值与数字值不是一回事，因此 true 不一定等于 1，而 false 也不一定等于 0。还有一点就是布尔类型的字面值 true 和 false 是区分大小写的。也就是说，True 和 False 都不是布尔值。
 
 虽然布尔类型的字面值只有 2 个，但是 ECMAScript 中**所有类型的值都可以转换为布尔类型**。可以使用`Boolean()`函数将其他类型转换为布尔值。
 
 ```js
-console.log(Boolean("Hello")); // true
+console.log(Boolean('Hello')); // true
 console.log(Boolean(42)); // true
 console.log(Boolean(0)); // false
 ```
@@ -480,14 +490,14 @@ console.log(Boolean(0)); // false
 - ""：双引号的空字符串
 - ''：单引号的空字符串
 - ``：空字符串模板
-- 0：数字0
+- 0：数字 0
 - -0：==JavaScript 中 -0 和 0 为不同的值==
 - NaN
 - false
 - null
 - undefined
 
-### 4. Null 
+### 4. Null
 
 `null`类型的值也是只有一个，就是 null。`null`表示一个空的对象。从逻辑角度来看，==null 值表示一个空对象指针== ，这也正是用`typeof`操作符检测 null 值时会返回 object 的原因。
 
@@ -498,11 +508,11 @@ let i = null;
 console.log(typeof i); // object
 ```
 
-实际上，undefined 值是从 null 值派生而来的，因此当我们对这两个数据类型进行相等测试时，会返回true。如下：
+实际上，undefined 值是从 null 值派生而来的，因此当我们对这两个数据类型进行相等测试时，会返回 true。如下：
 
 ```js
-if(null == undefined){
-    console.log('Yes'); // Yes
+if (null == undefined) {
+  console.log('Yes'); // Yes
 }
 ```
 
@@ -521,9 +531,9 @@ console.log(j);
 // ReferenceError: j is not defined
 ```
 
-### 6.  [bigint](https://wangdoc.com/es6/number#bigint-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
+### 6. [bigint](https://wangdoc.com/es6/number#bigint-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
 
-### 7.  [symbol](https://wangdoc.com/es6/symbol)
+### 7. [symbol](https://wangdoc.com/es6/symbol)
 
 ### 8. 类型的转换
 
@@ -546,9 +556,7 @@ console.log(j);
 | undefined | undefined | NaN    |
 | null      | null      | 0      |
 
-预期为字符串的时候：如果有一个操作数为字符串时，使用`+`符号做相加运算时，会自动转换为字符串。
-	
-预期为布尔的时候：前面在介绍布尔类型时所提到的 9 个值会转为 false，其余转为 true
+预期为字符串的时候：如果有一个操作数为字符串时，使用`+`符号做相加运算时，会自动转换为字符串。 预期为布尔的时候：前面在介绍布尔类型时所提到的 9 个值会转为 false，其余转为 true
 
 **2. 显性转换**
 
@@ -570,7 +578,7 @@ console.log(j);
 
 ## 四、运算符
 
-###     1. 算数运算符
+### 1. 算数运算符
 
 常见的算数运算符有加减乘除和取模运算。主要需要注意的就是，在动态语言中做除法运算时，能够得到小数。下面是关于算数运算符的示例：
 
@@ -621,7 +629,7 @@ let a = 2;
 let b = 10;
 let c = --a + b;
 let d = a + b;
-console.log(a,b,c,d); // 1 10 11 11
+console.log(a, b, c, d); // 1 10 11 11
 ```
 
 后置示例：
@@ -631,10 +639,10 @@ let a = 2;
 let b = 10;
 let c = a-- + b;
 let d = a + b;
-console.log(a,b,c,d); // 1 10 12 11
+console.log(a, b, c, d); // 1 10 12 11
 ```
 
-> 即a--表示的是--前的数值，而--a表示的是--后的数值
+> 即 a--表示的是--前的数值，而--a 表示的是--后的数值
 
 需要注意的是，我们的自增自减操作符不仅仅局限于数值，其他类型也可以，遵循下面的规则：
 
@@ -647,9 +655,9 @@ console.log(a,b,c,d); // 1 10 12 11
 示例：
 
 ```js
-let s1 = "123";
-let s2 = "123Hello";
-let s3 = "Hello";
+let s1 = '123';
+let s2 = '123Hello';
+let s3 = 'Hello';
 let s4 = true;
 let s5 = 3.14;
 console.log(--s1); // 122
@@ -661,7 +669,7 @@ console.log(--s5); // 2.14
 
 ### 3. 逻辑运算符
 
-JS中为我们提供了三种逻辑运算符
+JS 中为我们提供了三种逻辑运算符
 
 #### 1. && 与
 
@@ -672,7 +680,7 @@ console.log(false && true); // false
 console.log(true && true); // true
 ```
 
-JavaScript里面的`&&`存在短路现象，具体说明如下：
+JavaScript 里面的`&&`存在短路现象，具体说明如下：
 
 - 第一个操作数为真：会进入第二个操作数的判断，且无论第二个操作数真假，都会返回第二个操作数。
 - 第一个操作数为假：不会进入第二个操作数的判断，直接返回第一个操作数。
@@ -681,10 +689,10 @@ JavaScript里面的`&&`存在短路现象，具体说明如下：
 
 ```js
 console.log(3 && 5); // 5
-console.log("Hello" && 20); // 20
-console.log("Hello" && false); // false
-console.log("" && "shoe"); // ""
-console.log("Hello" && ''); // ''
+console.log('Hello' && 20); // 20
+console.log('Hello' && false); // false
+console.log('' && 'shoe'); // ""
+console.log('Hello' && ''); // ''
 ```
 
 下面是关于`&&`运算符的一道经典练习题：
@@ -720,10 +728,10 @@ JavaScript 里面的`||`同样存在短路现象，具体说明如下：
 
 ```js
 console.log(false || true); // true
-console.log("Hello" || ""); // Hello
-console.log("Hello" || "str"); // Hello
-console.log(NaN || ""); // ""
-console.log(0 || "Hello World"); // Hello World
+console.log('Hello' || ''); // Hello
+console.log('Hello' || 'str'); // Hello
+console.log(NaN || ''); // ""
+console.log(0 || 'Hello World'); // Hello World
 console.log('' || 'str'); // str
 console.log('' || false); // false
 ```
@@ -743,7 +751,7 @@ let b = a || c; // 因为a是false,所以会判断第2个数
 console.log(b); // true
 ```
 
-####  3. ! 非
+#### 3. ! 非
 
 所谓非，就是取反，非真即假，非假即真
 
@@ -757,7 +765,7 @@ console.log(!i); // false
 - 如果操作数是一个对象，返回 false
 - 如果操作数是一个空字符串，返回 true
 - 如果操作数是一个非空字符串，返回 false
-- 如果操作数是数值 0，返回true
+- 如果操作数是数值 0，返回 true
 - 如果操作数是任意非 0 数值（包括 Infinity），返回 false
 - 如果操作数是 null，返回 true
 - 如果操作数是 NaN，返回 true
@@ -765,16 +773,16 @@ console.log(!i); // false
 
 ```js
 console.log(!false); // true
-console.log(!"blue"); // false
+console.log(!'blue'); // false
 console.log(!0); // true
 console.log(!NaN); // true
-console.log(!""); // true
+console.log(!''); // true
 console.log(!12); // false
 ```
 
 可使用双否定`!!`来判定一个值是真值还是假值，
 
-简单来说,!!,就是把一个值转换为boolean类型
+简单来说,!!,就是把一个值转换为 boolean 类型
 
 如下：
 
@@ -798,8 +806,8 @@ console.log(3 > 5); // false
 主要说一下字符串的比较，如下：
 
 ```js
-console.log("c" > "b"); // true
-console.log("c" > "box"); // true
+console.log('c' > 'b'); // true
+console.log('c' > 'box'); // true
 ```
 
 这里的比较主要是按照 ASCII 码来进行比较的。
@@ -807,9 +815,9 @@ console.log("c" > "box"); // true
 如果是字符串和数字进行比较，那么会将字符串先转换为数字，如果不能转换为数字，则转换为 NaN
 
 ```js
-console.log("5" > 3); // true，因为"5"转为了5
+console.log('5' > 3); // true，因为"5"转为了5
 // 任何一个数与 NaN 进行关系比较,返回的都是 false
-console.log("Hello" > 3); // false，因为"Hello"转为了NaN
+console.log('Hello' > 3); // false，因为"Hello"转为了NaN
 ```
 
 完整的特殊规则如下：
@@ -857,41 +865,41 @@ console.log(10 < NaN); // false
 全等是`===`，不全等是`!==`，所谓全等，就是要求数据类型和数值都必须相等，如下：
 
 ```js
-console.log("5" == 5); // true
-console.log("5" === 5); // false
+console.log('5' == 5); // true
+console.log('5' === 5); // false
 ```
 
 ### 5. 三目运算符
 
-条件表达式?语句1:语句2;
+条件表达式?语句 1:语句 2;
 
-- 条件运算符在执行时，首先对条件表达式进行求值，如果该值为true，则执行语句1，并返回执行结果；如果该值为false，则执行语句2，并返回执行结果。
+- 条件运算符在执行时，首先对条件表达式进行求值，如果该值为 true，则执行语句 1，并返回执行结果；如果该值为 false，则执行语句 2，并返回执行结果。
 
 - 如果条件的表达式的求值结果是一个非布尔值，会将其转换为布尔值然后再运算。
 
-### 6.  运算符的优先级
+### 6. 运算符的优先级
 
 JavaScript 中的运算符优先级是一套规则。该规则在计算表达式时控制运算符执行的顺序。具有较高优先级的运算符先于较低优先级的运算符执行。例如，乘法的执行先于加法。
 
 下表按照最高到最低的优先级列出了 JavaScript 运算符。具有相同优先级的运算符按从左至右的顺序求值。
 
-| 运算符 | 描述  |
-| ----  | ---- |
+| 运算符 | 描述 |
+| --- | --- | --- | --- |
 | `.` `[]` `()` | 字段访问，数组下标，函数调用以及表达式分组 |
-| `++` `--` `-` `~` `!` `delete` `new` `typeof` `void` | 一元运算符，返回类型，对象创建，未定义值   |
-| `*` `/` `%`        | 乘法，除法，取模                   |
-| `+` `-` `+`        | 加法，减法，字符串拼接              |
-| `<<` `>>` `>>>`    | 移位                             |
-| `<` `<=` `>` `>=` `instanceof`| 小于，小于等于，大于，大于等于，instanceof |
-| `==` `!=` `===` `!==` | 等于，不等于，全等，不全等        |
-| `&`                   | 按位与                         |
-| `^`                   | 按位异或                       |
-| `|`                   | 按位或                        |
-| `&&`                  | 逻辑与                        |
-| `||`                  | 逻辑或                        |
-| `?:`                  | 三目运算符                     |
-| `=`                   | 赋值                          |
-| `,`                   | 多重赋值                      |
+| `++` `--` `-` `~` `!` `delete` `new` `typeof` `void` | 一元运算符，返回类型，对象创建，未定义值 |
+| `*` `/` `%` | 乘法，除法，取模 |
+| `+` `-` `+` | 加法，减法，字符串拼接 |
+| `<<` `>>` `>>>` | 移位 |
+| `<` `<=` `>` `>=` `instanceof` | 小于，小于等于，大于，大于等于，instanceof |
+| `==` `!=` `===` `!==` | 等于，不等于，全等，不全等 |
+| `&` | 按位与 |
+| `^` | 按位异或 |
+| ` | ` | 按位或 |
+| `&&` | 逻辑与 |
+| ` |  | ` | 逻辑或 |
+| `?:` | 三目运算符 |
+| `=` | 赋值 |
+| `,` | 多重赋值 |
 
 - 算数和比较运算符的优先级大于逻辑运算符
 - 三目运算符的优先级很低
@@ -900,22 +908,22 @@ JavaScript 中的运算符优先级是一套规则。该规则在计算表达式
 
 所谓流程控制，主要就是用于控制整个程序的走向的。默认情况下，程序是从上往下，逐条执行，这种情况我们将其称之为顺序结构。但是并不是所有的程序都是使用顺序结构就能够完成的。在我们书写程序时往往还需要对整个程序进行分支，或者对某一段代码进行重复执行。
 
-###     1. 条件判断语句
+### 1. 条件判断语句
 
 ```js
-if(条件表达式){
-    语句1
-}else if(条件表达式){
-    语句2
-}else if(条件表达式){
-    语句3
-}else{
-    语句4
+if (条件表达式) {
+  语句1;
+} else if (条件表达式) {
+  语句2;
+} else if (条件表达式) {
+  语句3;
+} else {
+  语句4;
 }
 ```
 
-- if语句只能控制紧随其后的那个语句,如果希望if语句可以控制多条语句，可以将这些语句统一放到代码块中。（建议都加上代码块，以便代码阅读）
-- JS中的空格和换行会自动忽略，所以仅靠缩进无法表示彼此间的联系。
+- if 语句只能控制紧随其后的那个语句,如果希望 if 语句可以控制多条语句，可以将这些语句统一放到代码块中。（建议都加上代码块，以便代码阅读）
+- JS 中的空格和换行会自动忽略，所以仅靠缩进无法表示彼此间的联系。
 - 如果条件不是一个布尔值，那么会被自动转换为布尔值
 
 ### 2. 条件分支语句
@@ -936,30 +944,30 @@ switch(条件表达式){
 
 - 和其他静态语言有所不同的是， ==case 后面的值不一定必须是常量，可以是变量甚至是表达式==
 - `switch`语句在执行时会依次将`case`后的表达式的值和`switch`后的条件表达式的值进行全等比较，所以当数据类型不同时，判断为`false`。
-- `break`用于跳出某一个 case，如果不书写 break 的话，进入 case 以后会继续进入后面的case语句。
+- `break`用于跳出某一个 case，如果不书写 break 的话，进入 case 以后会继续进入后面的 case 语句。
 - `default`用于书写默认的条件，如果前面都不满足的话，就进入到 default 语句里面。
 
-### 3. while循环
+### 3. while 循环
 
 ```js
 while(条件表达式){
     语句...
 }
-    
+
 do{
     语句...
 }while(条件表达式)
 ```
 
-- 这两个语句功能类似，不同的是`while`是先判断后执行，如果表达式成立，执行循环体，否则结束循环；而`do...while`会先执行后判断，`do...while`可以保证 ==循环体至少执行一次== ，而while不能。
+- 这两个语句功能类似，不同的是`while`是先判断后执行，如果表达式成立，执行循环体，否则结束循环；而`do...while`会先执行后判断，`do...while`可以保证 ==循环体至少执行一次== ，而 while 不能。
 
-### 4. for循环
+### 4. for 循环
 
 ```js
 for(①初始化表达式;②条件表达式;④更新表达式){
     ③语句...
 }
-    
+
 //举例：
 for(var i = 0 ; i < 10 ; i++ ){
     alert(i);
@@ -967,46 +975,46 @@ for(var i = 0 ; i < 10 ; i++ ){
 ```
 
 - 它执行的顺序为：首先执行初始化表达式 ，然后进行条件表达式的判断，如果表达式成立，那么执行循环体，循环体执行结束后，执行更新表达式，然后回头再看条件表达式是否成立，成立就执行循环体，不成立该循环就结束
-- for循环中的三个部分都可以省略，也可以写在外部，如果在for循环中不写任何的表达式，只写两个;此时循环是一个死循环会一直执行下去。
-- for循环的嵌套使用
+- for 循环中的三个部分都可以省略，也可以写在外部，如果在 for 循环中不写任何的表达式，只写两个;此时循环是一个死循环会一直执行下去。
+- for 循环的嵌套使用
 
 #### 遍历数组
 
 最早的时候，在 JavaScript 里面就经常使用 for 循环来对数组进行遍历。示例如下：
 
 ```js
-let arr = [1,2,3,4,5];
-for(let i=0;i<arr.length;i++){
-    console.log(arr[i]);
+let arr = [1, 2, 3, 4, 5];
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
 }
 ```
 
 这里有一个小技巧，就是在使用 for 循环来遍历数组的时候，使用一个变量来存储数组的长度，这样可以大大提升程序的效率，因为不用每次都去重新计算数组的长度
 
 ```js
-let arr = [1,2,3,4,5];
-for(let i=0,j=arr.length;i<j;i++){
-    console.log(arr[i]);
+let arr = [1, 2, 3, 4, 5];
+for (let i = 0, j = arr.length; i < j; i++) {
+  console.log(arr[i]);
 }
 ```
 
-### 5. break和continue
+### 5. break 和 continue
 
-####  break
+#### break
 
-- break关键字可以用来退出switch或循环语句，不能在if语句中使用break和continue
-- break关键字，会立即终止离他最近的那个循环语句
-- 可以为循环语句创建一个label，来标识当前的循环
+- break 关键字可以用来退出 switch 或循环语句，不能在 if 语句中使用 break 和 continue
+- break 关键字，会立即终止离他最近的那个循环语句
+- 可以为循环语句创建一个 label，来标识当前的循环
+
   - label:循环语句
 
-    `outer:
-    for(;;){}`
-    
-  - 使用break语句时，可以在break后跟着一个label，这样break将会结束指定的循环，而不是最近的
+    `outer: for(;;){}`
+
+  - 使用 break 语句时，可以在 break 后跟着一个 label，这样 break 将会结束指定的循环，而不是最近的
 
 #### continue
 
-- continue关键字可以用来跳过当次循环，同样continue也是默认只会对离他最近的循环循环起作用。
+- continue 关键字可以用来跳过当次循环，同样 continue 也是默认只会对离他最近的循环循环起作用。
 
 ## 六、对象
 
@@ -1026,9 +1034,9 @@ let objName = {};
 
 ```javascript
 let xiejie = {};
-xiejie.name = "xiejie";
+xiejie.name = 'xiejie';
 xiejie.age = 18;
-xiejie.gender = "male";
+xiejie.gender = 'male';
 xiejie.score = 100;
 ```
 
@@ -1036,10 +1044,10 @@ xiejie.score = 100;
 
 ```javascript
 let xiejie = {
-    name : "xiejie",
-    age : 18,
-    gender : "male",
-    score : 100
+  name: 'xiejie',
+  age: 18,
+  gender: 'male',
+  score: 100,
 };
 ```
 
@@ -1057,10 +1065,10 @@ let xiejie = {
 
 ```javascript
 let xiejie = {
-    name : "xiejie",
-    age : 18,
-    gender : "male",
-    score : 100
+  name: 'xiejie',
+  age: 18,
+  gender: 'male',
+  score: 100,
 };
 console.log(xiejie.name); // xiejie
 console.log(xiejie.age); // 18
@@ -1074,15 +1082,15 @@ console.log(xiejie.score); // 100
 
 ```javascript
 let xiejie = {
-    name : "xiejie",
-    age : 18,
-    gender : "male",
-    score : 100
+  name: 'xiejie',
+  age: 18,
+  gender: 'male',
+  score: 100,
 };
-console.log(xiejie["name"]); // xiejie
-console.log(xiejie["age"]); // 18
-console.log(xiejie["gender"]); // male
-console.log(xiejie["score"]); // 100
+console.log(xiejie['name']); // xiejie
+console.log(xiejie['age']); // 18
+console.log(xiejie['gender']); // male
+console.log(xiejie['score']); // 100
 ```
 
 一般来讲，访问对象属性的时候使用点访问法的情况要多一些，那什么时候使用中括号访问方法呢？
@@ -1091,12 +1099,12 @@ console.log(xiejie["score"]); // 100
 
 ```javascript
 let xiejie = {
-    name : "xiejie",
-    age : 18,
-    gender : "male",
-    score : 100
+  name: 'xiejie',
+  age: 18,
+  gender: 'male',
+  score: 100,
 };
-let str = "name";
+let str = 'name';
 console.log(xiejie[str]); // xiejie
 ```
 
@@ -1106,10 +1114,10 @@ console.log(xiejie[str]); // xiejie
 
 ```javascript
 let obj = {
-    1 : "Bill",
-    2 : "Lucy",
-    3 : "David"
-}
+  1: 'Bill',
+  2: 'Lucy',
+  3: 'David',
+};
 console.log(obj[1]); // Bill
 console.log(obj[2]); // Lucy
 console.log(obj[3]); // David
@@ -1128,12 +1136,12 @@ console.log(obj[3]); // David
 ```javascript
 // 假设 person 对象是从外部库引入的一个对象
 let person = {
-    name : "xiejie"
-}
+  name: 'xiejie',
+};
 console.log(person.name); // xiejie
 // 接下来我手动为 person 这个对象添加了一个 name 属性
 // 这里便产生的属性冲突
-person.name = "yajing";
+person.name = 'yajing';
 console.log(person.name); // yajing
 ```
 
@@ -1150,7 +1158,7 @@ let sym = Symbol(描述信息);
 示例：
 
 ```javascript
-let name = Symbol("这是一个名字");
+let name = Symbol('这是一个名字');
 console.log(name); // Symbol(这是一个名字)
 console.log(typeof name); // symbol
 ```
@@ -1159,10 +1167,10 @@ console.log(typeof name); // symbol
 
 ```javascript
 let person = {
-    name : "xiejie"
-}
-let name = Symbol("这是一个名字");
-person[name] = "yajing";
+  name: 'xiejie',
+};
+let name = Symbol('这是一个名字');
+person[name] = 'yajing';
 console.log(person.name); // xiejie
 console.log(person[name]); // yajing
 ```
@@ -1175,9 +1183,9 @@ ECMAScript 6 提供了一个可以随时访问的全局 symbol 注册表。当�
 
 ```javascript
 let obj = {};
-let name = Symbol.for("test"); // 此时的 test 不在是描述信息，而是全局表里的键
-obj[name] = "xiejie";
-let name2 = Symbol.for("test");
+let name = Symbol.for('test'); // 此时的 test 不在是描述信息，而是全局表里的键
+obj[name] = 'xiejie';
+let name2 = Symbol.for('test');
 console.log(obj[name2]); // xiejie
 ```
 
@@ -1186,7 +1194,7 @@ console.log(obj[name2]); // xiejie
 ```javascript
 let obj = {};
 let name = Symbol.for();
-obj[name] = "xiejie";
+obj[name] = 'xiejie';
 let name2 = Symbol.for(undefined);
 console.log(obj[name2]); // xiejie
 ```
@@ -1195,12 +1203,12 @@ ECMAScript 6 里面还提供了`Symbol.keyFor()`方法来查找一个 symbol 的
 
 但是需要注意的是，该方法只能找到注册到全局表里面的 symbol 的键。如果是通过`Symbol()`方法创建的 symbol，是无法找到的。
 
->其实也很好理解，因为通过`Symbol()`方法创建的 symbol 不存在有键。
+> 其实也很好理解，因为通过`Symbol()`方法创建的 symbol 不存在有键。
 
 ```javascript
 let obj = {};
-let name1 = Symbol("test1");
-let name2 = Symbol.for("test2");
+let name1 = Symbol('test1');
+let name2 = Symbol.for('test2');
 let i = Symbol.keyFor(name1);
 let j = Symbol.keyFor(name2);
 console.log(i); // udnefined
@@ -1209,21 +1217,21 @@ console.log(j); // test2
 
 前面有提到，如果一个对象的属性对应的是一个函数，那么这个函数被称之为对象的方法。调用对象方法的方式和前面介绍的访问对象属性的方式是一样的，可以通过点访问法，中括号访问法以及 symbol 访问法来进行对象方法的调用。
 
->其实方法也可以看作是对象的一个属性，只是对应的值为一个函数而已。
+> 其实方法也可以看作是对象的一个属性，只是对应的值为一个函数而已。
 
 ```javascript
-let walk = Symbol("this is a test");
+let walk = Symbol('this is a test');
 let person = {
-    name : "xiejie",
-    walk : function(){
-        console.log("I'm walking");
-    },
-    [walk] : function(){
-        console.log("I'm walking,too");
-    }
-}
+  name: 'xiejie',
+  walk: function () {
+    console.log("I'm walking");
+  },
+  [walk]: function () {
+    console.log("I'm walking,too");
+  },
+};
 person.walk(); // I'm walking
-person["walk"](); // I'm walking
+person['walk'](); // I'm walking
 person[walk](); // I'm walking,too
 ```
 
@@ -1233,12 +1241,12 @@ person[walk](); // I'm walking,too
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 console.log(person.age); // 18
 delete person.age; // 删除 age 这个属性
 console.log(person.age); // undefined
@@ -1260,16 +1268,16 @@ person.walk(); // 报错
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
-console.log("name" in person); // true
-console.log("age" in person); // true
+person[gender] = 'male';
+console.log('name' in person); // true
+console.log('age' in person); // true
 console.log([gender] in person); // 报错
 // TypeError: Cannot convert a Symbol value to a string
 ```
@@ -1280,16 +1288,16 @@ console.log([gender] in person); // 报错
 
 ```js
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
-console.log("name" in person); // true
-console.log("age" in person); // true
+person[gender] = 'male';
+console.log('name' in person); // true
+console.log('age' in person); // true
 console.log(gender in person); // true
 ```
 
@@ -1299,14 +1307,14 @@ console.log(gender in person); // true
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
-for(let i in person){
-    console.log(i);
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
+for (let i in person) {
+  console.log(i);
 }
 // name
 // age
@@ -1317,16 +1325,16 @@ for(let i in person){
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
-for(let i in person){
-    console.log(i);
+person[gender] = 'male';
+for (let i in person) {
+  console.log(i);
 }
 // name
 // age
@@ -1339,20 +1347,20 @@ for(let i in person){
 
 ```javascript
 let person = {
-    name: "xiejie",
-    age: 18,
-    walk: function () {
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
 let score = Symbol("person's score");
-let hobby = Symbol.for("hobby");
-let food = Symbol.for("food");
-person[gender] = "male";
+let hobby = Symbol.for('hobby');
+let food = Symbol.for('food');
+person[gender] = 'male';
 person[score] = 100;
-person[hobby] = "JavaScript";
-person[food] = "meat";
+person[hobby] = 'JavaScript';
+person[food] = 'meat';
 console.log(Object.getOwnPropertySymbols(person));
 // [ Symbol(person's gender),
 //   Symbol(person's score),
@@ -1364,14 +1372,14 @@ console.log(Object.getOwnPropertySymbols(person));
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
+person[gender] = 'male';
 console.log(Reflect.ownKeys(person));
 // [ 'name', 'age', 'walk', Symbol(person's gender) ]
 ```
@@ -1384,16 +1392,16 @@ console.log(Reflect.ownKeys(person));
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
-for(let i of Object.keys(person)){
-    console.log(i);
+person[gender] = 'male';
+for (let i of Object.keys(person)) {
+  console.log(i);
 }
 // name
 // age
@@ -1404,16 +1412,16 @@ for(let i of Object.keys(person)){
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
-for(let i of Object.values(person)){
-    console.log(i);
+person[gender] = 'male';
+for (let i of Object.values(person)) {
+  console.log(i);
 }
 // xiejie
 // 18
@@ -1424,16 +1432,16 @@ for(let i of Object.values(person)){
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let gender = Symbol("person's gender");
-person[gender] = "male";
-for(let i of Object.entries(person)){
-    console.log(i);
+person[gender] = 'male';
+for (let i of Object.entries(person)) {
+  console.log(i);
 }
 // [ 'name', 'xiejie' ]
 // [ 'age', 18 ]
@@ -1446,14 +1454,14 @@ for(let i of Object.entries(person)){
 
 ```javascript
 let family = {
-    xiejie : {
-        age : 18,
-        gender : "male"
-    },
-    song : {
-        age : 20,
-        gender : "female"
-    }
+  xiejie: {
+    age: 18,
+    gender: 'male',
+  },
+  song: {
+    age: 20,
+    gender: 'female',
+  },
 };
 ```
 
@@ -1461,17 +1469,17 @@ let family = {
 
 ```javascript
 let family = {
-    xiejie : {
-        age : 18,
-        gender : "male"
-    },
-    song : {
-        age : 20,
-        gender : "female"
-    }
+  xiejie: {
+    age: 18,
+    gender: 'male',
+  },
+  song: {
+    age: 20,
+    gender: 'female',
+  },
 };
 console.log(family.xiejie.gender); // male 点访问法
-console.log(family["song"]["age"]); // 20 中括号访问法
+console.log(family['song']['age']); // 20 中括号访问法
 ```
 
 ### 6. 对象的解构
@@ -1479,10 +1487,10 @@ console.log(family["song"]["age"]); // 20 中括号访问法
 在前面介绍解构的时候，我们有介绍过数组的解构。这里来看一下对象的解构，基本上和数组的解构类似：
 
 ```js
-let a = {name:"xiejie",age:18};
-let b = {name:"song",age:20};
-let {name:aName,age:aAge} = a;
-let {name:bName,age:bAge} = b;
+let a = { name: 'xiejie', age: 18 };
+let b = { name: 'song', age: 20 };
+let { name: aName, age: aAge } = a;
+let { name: bName, age: bAge } = b;
 console.log(aName); // xiejie
 console.log(aAge); // 18
 console.log(bName); // song
@@ -1492,8 +1500,8 @@ console.log(bAge); // 20
 当属性名和变量名一致的时候，可以进行简写，如下：
 
 ```js
-let a = {name:"xiejie",age:18};
-let {name,age} = a;
+let a = { name: 'xiejie', age: 18 };
+let { name, age } = a;
 console.log(name); // xiejie
 console.log(age); // 18
 ```
@@ -1502,16 +1510,16 @@ console.log(age); // 18
 
 ```js
 let family = {
-    xiejie : {
-        age : 18,
-        gender : "male"
-    },
-    song : {
-        age : 20,
-        gender : "female"
-    }
+  xiejie: {
+    age: 18,
+    gender: 'male',
+  },
+  song: {
+    age: 20,
+    gender: 'female',
+  },
 };
-let {xiejie,song} = family;
+let { xiejie, song } = family;
 console.log(xiejie); // { age: 18, gender: 'male' }
 console.log(song); // { age: 20, gender: 'female' }
 ```
@@ -1519,7 +1527,7 @@ console.log(song); // { age: 20, gender: 'female' }
 顺便一提的是，解构我们也是可以像函数一样设置一个默认值的，如下：
 
 ```js
-let { name = "xiejie", age } = {};
+let { name = 'xiejie', age } = {};
 console.log(name); // xiejie
 console.log(age); // undefined
 
@@ -1533,7 +1541,7 @@ console.log(b); // undefined
 当然，既然叫做默认值，和函数一样，如果有解构的值传过来的话，肯定就是使用解构传过来的值，如下：
 
 ```js
-let { name = "xiejie", age } = { name: "song", age: 10 };
+let { name = 'xiejie', age } = { name: 'song', age: 10 };
 console.log(name); // song
 console.log(age); // 10
 
@@ -1549,11 +1557,11 @@ console.log(b); // 2
 我们先来看一下我们一般函数调用的例子，如下：
 
 ```javascript
-let test = function(name,age){
-    console.log(`我叫${name},我今年${age}岁`);
-}
-test("xiejie",18); // 我叫xiejie,我今年18岁
-test(18,"xiejie"); // 我叫18,我今年xiejie岁
+let test = function (name, age) {
+  console.log(`我叫${name},我今年${age}岁`);
+};
+test('xiejie', 18); // 我叫xiejie,我今年18岁
+test(18, 'xiejie'); // 我叫18,我今年xiejie岁
 ```
 
 可以看到，以前我们传递参数时，实参的顺序必须要和形参的顺序一致。否则就会出现上面第 2 次调用函数时的情况，输出不符合预期的结果。
@@ -1561,24 +1569,24 @@ test(18,"xiejie"); // 我叫18,我今年xiejie岁
 当我们使用对象来作为实参时，形参可以书写解构表达式。这样就不用必须按照定义时形参的顺序来传值，只需要传递一个对象过去即可，对象属性的顺序可以随意。示例如下：
 
 ```javascript
-let test = function({name,age}){
-    console.log(`我叫${name},我今年${age}岁`);
-}
-test({name:"xiejie",age:18}); // 我叫 xiejie,我今年 18 岁
-test({age:18,name:"xiejie"}); // 我叫 xiejie,我今年 18 岁
+let test = function ({ name, age }) {
+  console.log(`我叫${name},我今年${age}岁`);
+};
+test({ name: 'xiejie', age: 18 }); // 我叫 xiejie,我今年 18 岁
+test({ age: 18, name: 'xiejie' }); // 我叫 xiejie,我今年 18 岁
 ```
 
 我们也可以为解构的变量设置一个默认值，甚至可以给整个解构表达式设置一个默认值，示例如下：
 
 ```javascript
 // 给整个解构表达式设置了一个默认值 {name:"Bill",age:20}
-let test = function({name = "xiejie",age = 18} = {name:"Bill",age:20}){
-    console.log(`我叫${name},我今年${age}岁`);
-}
+let test = function ({ name = 'xiejie', age = 18 } = { name: 'Bill', age: 20 }) {
+  console.log(`我叫${name},我今年${age}岁`);
+};
 test(); // 我叫 Bill,我今年 20 岁
 test({}); // 我叫 xiejie,我今年 18 岁
-test({name:"yajing"}); // 我叫 yajing,我今年 18 岁
-test({age:1,name:"xizhi"}); // 我叫 xizhi,我今年 1 岁
+test({ name: 'yajing' }); // 我叫 yajing,我今年 18 岁
+test({ age: 1, name: 'xizhi' }); // 我叫 xizhi,我今年 1 岁
 ```
 
 这种技术被称之为命名参数，经常被用在函数有很多可选参数的时候。
@@ -1593,15 +1601,15 @@ this，翻译成中文是**这个**的意思。当我们在一个对象中使用
 
 ```js
 let person = {
-    name : 'xiejie',
-    age : 18,
-    intro : function(){
-        console.log(this); 
-        // { name: 'xiejie', age: 18, intro: [Function: intro] }
-        console.log(`My name is ${this.name},I'm ${this.age} years old`);
-        // My name is xiejie,I'm 18 years old
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  intro: function () {
+    console.log(this);
+    // { name: 'xiejie', age: 18, intro: [Function: intro] }
+    console.log(`My name is ${this.name},I'm ${this.age} years old`);
+    // My name is xiejie,I'm 18 years old
+  },
+};
 person.intro();
 ```
 
@@ -1619,17 +1627,17 @@ person.intro();
 
 ```javascript
 let myMaths = {
-    // 求平方函数
-    square : function(x){
-        return x * x;
-    },
-    // 传入数组求平均值函数
-    avg : function(arr){
-        let total = arr.reduce((a,b) => a + b);
-        return total / arr.length;
-    }
-}
-let arr = [1,2,3,4,5];
+  // 求平方函数
+  square: function (x) {
+    return x * x;
+  },
+  // 传入数组求平均值函数
+  avg: function (arr) {
+    let total = arr.reduce((a, b) => a + b);
+    return total / arr.length;
+  },
+};
+let arr = [1, 2, 3, 4, 5];
 console.log(myMaths.avg(arr)); // 3
 console.log(myMaths.square(5)); // 25
 ```
@@ -1641,54 +1649,52 @@ console.log(myMaths.square(5)); // 25
 速写属性：如果对象的属性使用了外面变量的值，并且这个变量名与属性名一直，那么就可以直接简写
 
 ```js
-let username = "张三";
+let username = '张三';
 let age = 18;
 let obj = {
-	username:username,
-	age:age
-}
+  username: username,
+  age: age,
+};
 
 //可以直接简写为
 let obj = {
-	username,
-	age
-}
+  username,
+  age,
+};
 ```
 
 速写方法，再对象中，声明函数属性，可以直接函数名()就行了
 
 ```js
 let obj = {
-	show:function(){},
-	info:function(){}
-}
+  show: function () {},
+  info: function () {},
+};
 
 //可以简写为：
 let obj = {
-	show(){},
-	info(){}
-}
+  show() {},
+  info() {},
+};
 ```
 
-
-
 ```javascript
-let username = "jack";
+let username = 'jack';
 let score = 80;
-let sex = "男";
+let sex = '男';
 
 let stu = {
   username,
   score,
   sex,
   show() {
-    console.log("show");
+    console.log('show');
   },
   info() {
-    console.log("info");
+    console.log('info');
   },
   run() {
-    console.log("run");
+    console.log('run');
   },
 };
 console.log(stu.username);
@@ -1699,9 +1705,10 @@ console.log(stu.username);
 ### 1. 概念
 
 数组也是一个对象，是大多数语言里面最常见的一种数据结构，它是一个有序的值列表。
+
 - 它和我们普通对象功能类似，也是用来存储一些值的
 - 不同的是普通对象是使用字符串作为属性名，而数组是使用数字来作为索引操作元素
-  - 索引：从0开始的整数就是索引
+  - 索引：从 0 开始的整数就是索引
 - 数组的存储性能比普通对象要好，在开发中我们经常使用数组来存储一些数据
 - 数组中的元素可以是任意的数据类型（包括对象和函数）
 
@@ -1710,7 +1717,7 @@ console.log(stu.username);
 #### 构造函数创建数组
 
 ```js
-var arr = new Array(1,2,3);
+var arr = new Array(1, 2, 3);
 ```
 
 - 当传入的参数为单一的整数值时，代表的是数组的长度
@@ -1718,19 +1725,19 @@ var arr = new Array(1,2,3);
 #### 静态方法创建数组
 
 ```js
-Array.of(3, 11, 8) // [3,11,8]
-Array.of(3) // [3]
-Array.of(3).length // 1
+Array.of(3, 11, 8); // [3,11,8]
+Array.of(3); // [3]
+Array.of(3).length; // 1
 ```
 
-- `Array.of()`方法用于将一组值，转换为数组，不会因为参数个数的不同而影响Array的行为
+- `Array.of()`方法用于将一组值，转换为数组，不会因为参数个数的不同而影响 Array 的行为
 
 ```js
-Array.from({ length: 2 }, () => 'jack')
+Array.from({ length: 2 }, () => 'jack');
 // ['jack', 'jack']
 
 let spans = document.querySelectorAll('span.name');
-let names2 = Array.from(spans, s => s.textContent)
+let names2 = Array.from(spans, (s) => s.textContent);
 ```
 
 - `Array.from`可以将两类对象转为真正的数组：类似数组的对象和可遍历（iterable）的对象
@@ -1739,7 +1746,7 @@ let names2 = Array.from(spans, s => s.textContent)
 #### 字面量创建数组
 
 ```js
-var arr = [1,2,3,4,5,10];//常用
+var arr = [1, 2, 3, 4, 5, 10]; //常用
 ```
 
 需要注意的是，无论是字面量形式创建的数组，还是构造函数创建的数组，当我们使用`typeof`来打印其数据类型的时候，都会返回一个`object`，如下：
@@ -1755,7 +1762,7 @@ console.log(typeof arr2); // object
 
 给数组赋值的方法也非常简单，不过可以分为先声明再赋值和声明时直接赋值，如下：
 
-**1.	先声明再赋值**
+**1. 先声明再赋值**
 
 ```javascript
 let arr = [];
@@ -1766,10 +1773,10 @@ arr[2] = 3;
 
 注意下标是从 0 开始的。
 
-**2.	声明时直接赋值**
+**2. 声明时直接赋值**
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 ```
 
 需要注意的是我们可以在数组的任意位置进行赋值，数组的长度会自动改变，空的位置使用`undefined`来进行填充
@@ -1785,7 +1792,7 @@ console.log(arr);
 由于 JavaScript 是动态语言，所以 JavaScript 里面数组的数据类型可以是任意类型
 
 ```javascript
-let arr = [1,"Hello",3.14,true];
+let arr = [1, 'Hello', 3.14, true];
 ```
 
 ### 4. 访问数组元素
@@ -1793,16 +1800,16 @@ let arr = [1,"Hello",3.14,true];
 通过数组的下标，我们可以轻松的访问到存储在数组里面的元素，如下：
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 console.log(arr[0]); // 1
 ```
 
->需要注意数组里面的第一个元素是从下标 0 开始的。
+> 需要注意数组里面的第一个元素是从下标 0 开始的。
 
 除了这种常规的访问方式，我们还可以使用变量的方式来进行访问，如下：
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 let i = 2;
 console.log(arr[i]); // 3
 ```
@@ -1812,7 +1819,7 @@ console.log(arr[i]); // 3
 我们可以使用`delete`运算符来删除数组中的某一个元素，示例如下：
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 delete arr[2]; // 删除数组中的第3个元素
 console.log(arr);
 // [ 1, 2, <1 empty item>, 4, 5 ]
@@ -1828,8 +1835,8 @@ console.log(arr);
 
 ```js
 let arr = [1, 2, 3, 4, 5];
-for (let i=0;i<arr.length;i++) {
-    console.log(arr[i]);
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
 }
 // 1
 // 2
@@ -1845,7 +1852,7 @@ for (let i=0;i<arr.length;i++) {
 ```js
 let arr = [1, 2, 3, 4, 5];
 for (let i in arr) {
-    console.log(`键为${i}的元素值为${arr[i]}`);
+  console.log(`键为${i}的元素值为${arr[i]}`);
 }
 // 键为 0 的元素值为 1
 // 键为 1 的元素值为 2
@@ -1861,7 +1868,7 @@ for (let i in arr) {
 ```js
 let arr = [1, 2, 3, 4, 5];
 for (let i of arr) {
-    console.log(i);
+  console.log(i);
 }
 // 1
 // 2
@@ -1875,10 +1882,10 @@ for (let i of arr) {
 最后再介绍一种通过`forEach`的方式来遍历数组，不过这里涉及到了回调函数的知识。在第 5 章我们就会学习回调函数，所以这里大家先了解一下这种遍历的方式即可，示例如下：
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 将数组的每一项传入到回调函数，然后执行回调函数里面的操作
-let i = arr.forEach(function(item){
-    console.log(item);
+let i = arr.forEach(function (item) {
+  console.log(item);
 });
 ```
 
@@ -1891,9 +1898,9 @@ let i = arr.forEach(function(item){
 示例：使用`keys()`方法遍历出数组的键
 
 ```js
-let arr = [3,5,8,1];
-for(let i of arr.keys()){
-    console.log(i);
+let arr = [3, 5, 8, 1];
+for (let i of arr.keys()) {
+  console.log(i);
 }
 // 0
 // 1
@@ -1904,9 +1911,9 @@ for(let i of arr.keys()){
 示例：使用`values()`方法遍历出数组的值
 
 ```js
-let arr = [3,5,8,1];
-for(let i of arr.values()){
-    console.log(i);
+let arr = [3, 5, 8, 1];
+for (let i of arr.values()) {
+  console.log(i);
 }
 // 3
 // 5
@@ -1919,9 +1926,9 @@ for(let i of arr.values()){
 示例：使用`entries()`方法遍历出数组的键和值
 
 ```js
-let arr = [3,5,8,1];
-for(let i of arr.entries()){
-    console.log(i);
+let arr = [3, 5, 8, 1];
+for (let i of arr.entries()) {
+  console.log(i);
 }
 // [ 0, 3 ]
 // [ 1, 5 ]
@@ -1936,20 +1943,18 @@ for(let i of arr.entries()){
 这里我们先来看一下数组的解构，如下：
 
 ```javascript
-let arr = [1,2,3];
-let [a,b,c] = arr;
+let arr = [1, 2, 3];
+let [a, b, c] = arr;
 console.log(a); // 1
 console.log(b); // 2
 console.log(c); // 3
 ```
 
-这里，就是将 arr 这个数组里面的值分解给了 a，b，c
-	
-可以使用逗号来跳过不想要解构的元素，如下：
+这里，就是将 arr 这个数组里面的值分解给了 a，b，c 可以使用逗号来跳过不想要解构的元素，如下：
 
 ```javascript
-let arr = [1,2,3];
-let [a,,b] = arr;
+let arr = [1, 2, 3];
+let [a, , b] = arr;
 console.log(a); // 1
 console.log(b); // 3
 ```
@@ -1957,39 +1962,39 @@ console.log(b); // 3
 在解构出现之前，我们交换两个数需要使用到一个中间变量，但是现在我们可以使用解构来交换两个数
 
 ```javascript
-let a = 1,b = 2;
-[a,b] = [b,a];
+let a = 1,
+  b = 2;
+[a, b] = [b, a];
 console.log(a); // 2
 console.log(b); // 1
 ```
 
 关于对象的解构，我们会在后面进行介绍，详细参见对象的相关章节。
-	
 
 ### 8. 多维数组
 
 首先需要说明的是，JavaScript 里面不支持传统编程语言中的多维数组。但是，由于 JavaScript 的数组里面所存放的数据的数据类型可以是任意类型，所以我们可以模拟出多维数组
 
 ```javascript
-let a = ["Bill","Mary","Lucy"];
-let b = [21,24,27];
-let c = [a,b]; // 这里 c 就是一个多维数组
+let a = ['Bill', 'Mary', 'Lucy'];
+let b = [21, 24, 27];
+let c = [a, b]; // 这里 c 就是一个多维数组
 ```
 
 如果要访问多维数组里面的数据，可以使用下面的形式
 
 ```javascript
-let a = ["Bill","Mary","Lucy"];
-let b = [21,24,27];
-let c = [a,b];
+let a = ['Bill', 'Mary', 'Lucy'];
+let b = [21, 24, 27];
+let c = [a, b];
 console.log(c[0][2]); // Lucy
 ```
 
 利用前面所介绍的解构，我们可以来解构一个多维数组，示例如下：
 
 ```js
-let arr = [[1,2,3],4,5];
-let [a,b,c] = arr;
+let arr = [[1, 2, 3], 4, 5];
+let [a, b, c] = arr;
 console.log(a); // [1,2,3]
 console.log(b); // 4
 console.log(c); // 5
@@ -2000,9 +2005,9 @@ console.log(c); // 5
 扩展运算符是 ECMAScript 6 开始新添加的运算符，用于取出可迭代对象的每一项。这里我们可以用它来快速的展开一个数组
 
 ```javascript
-let a = ["Bill","Mary","Lucy"];
-let b = [21,24,27];
-let c = [...a,...b];
+let a = ['Bill', 'Mary', 'Lucy'];
+let b = [21, 24, 27];
+let c = [...a, ...b];
 console.log(c);
 // [ 'Bill', 'Mary', 'Lucy', 21, 24, 27 ]
 ```
@@ -2010,8 +2015,8 @@ console.log(c);
 我们再来看一个例子：
 
 ```javascript
-let a = [1,2,3];
-let b = [...a,4,5,6];
+let a = [1, 2, 3];
+let b = [...a, 4, 5, 6];
 console.log(b);
 // [ 1, 2, 3, 4, 5, 6 ]
 ```
@@ -2019,7 +2024,7 @@ console.log(b);
 有了这个运算符以后，我们可以使用它将字符串快速转为数组
 
 ```javascript
-let str = "Hello";
+let str = 'Hello';
 let arr = [...str];
 console.log(arr);
 // [ 'H', 'e', 'l', 'l', 'o' ]
@@ -2032,14 +2037,14 @@ console.log(arr);
 这里主要就是要介绍`length`这个属性，用于返回数组元素的个数。
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 console.log(arr.length); // 5
 ```
 
 我们利用此属性，可以快速的清空数组，这种方法比使用重新赋值的效率要高些，如下：
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 arr.length = 0;
 console.log(arr); // []
 ```
@@ -2047,7 +2052,7 @@ console.log(arr); // []
 其实我们使用`length`属性就是可以随意的对数组的长度进行操控，例如：
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 arr.length = 3;
 console.log(arr); // [1,2,3]
 ```
@@ -2062,7 +2067,7 @@ console.log(arr); // [1,2,3]
 
 ```js
 let arr = [];
-let i = arr.push("red","blue");
+let i = arr.push('red', 'blue');
 console.log(arr); // [ 'red', 'blue' ]
 console.log(i); // 2
 
@@ -2085,7 +2090,7 @@ console.log(j); // blue
 ```js
 // 从右往左的队列
 let arr = [];
-arr.push("red","green","pink");
+arr.push('red', 'green', 'pink');
 let item = arr.shift();
 console.log(item); // red
 console.log(arr); // [ 'green', 'pink' ]
@@ -2095,32 +2100,31 @@ console.log(arr); // [ 'green', 'pink' ]
 
 #### 操作方法
 
-操作方法里面介绍3个操作方法，分别是`concat()`，`slice()`和`splice()`
+操作方法里面介绍 3 个操作方法，分别是`concat()`，`slice()`和`splice()`
 
 `concat()`方法是先创建当前数组的一个副本，然后将接收到的参数添加到副本的末尾，最后返回新构建的数组，而原本的数组不会变化。
 
 ```javascript
-let arr = [1,2,3];
-let arr2 = arr.concat("red","blue");
-console.log(arr);//[ 1, 2, 3 ]
-console.log(arr2);//[ 1, 2, 3, 'red', 'blue' ]
+let arr = [1, 2, 3];
+let arr2 = arr.concat('red', 'blue');
+console.log(arr); //[ 1, 2, 3 ]
+console.log(arr2); //[ 1, 2, 3, 'red', 'blue' ]
 ```
 
 `slice()`方法可以接收一个或者两个参数，代表返回项的起始和结束位置。
 
-1 个参数：那就代表起始位置，返回从指定的起始位置到数组末尾的所有项目
-2 个参数：那就代表从指定的起始位置到指定的末尾位置之间的项，但是不包括结束位置的项目。
+1 个参数：那就代表起始位置，返回从指定的起始位置到数组末尾的所有项目 2 个参数：那就代表从指定的起始位置到指定的末尾位置之间的项，但是不包括结束位置的项目。
 
->注意：`slice()`方法不会影响原始数组
+> 注意：`slice()`方法不会影响原始数组
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 一个参数
 let i = arr.slice(3);
 console.log(i); // [ 4, 5, 6, 7, 8, 9, 10 ]
 console.log(arr); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 // 两个参数
-let j = arr.slice(2,6);
+let j = arr.slice(2, 6);
 console.log(j); // [ 3, 4, 5, 6 ]
 console.log(arr); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 ```
@@ -2128,15 +2132,15 @@ console.log(arr); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 如果传入的是负数，则用数组长度加上该数来确定相应的位置
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 一个参数
-let i = arr.slice(-3);// 等价于slice(7)
+let i = arr.slice(-3); // 等价于slice(7)
 console.log(i); // [ 8, 9, 10 ]
 // 两个参数
-let j = arr.slice(-6,-2); // 等价于slice(4,8)
+let j = arr.slice(-6, -2); // 等价于slice(4,8)
 console.log(j); // [ 5, 6, 7, 8 ]
 // 不满足条件返回空数组
-let k = arr.slice(-2,-6); // 等价于slice(8,4)
+let k = arr.slice(-2, -6); // 等价于slice(8,4)
 console.log(k); // []
 ```
 
@@ -2145,10 +2149,10 @@ console.log(k); // []
 ==删除== ：可以删除任意数量的元素，只需要指定 `2` 个参数：要参数的第一项位置和要删除的项数。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 从下标为3的元素开始删除，删除5个元素
 // 将删除的元素返回给i
-let i = arr.splice(3,5);
+let i = arr.splice(3, 5);
 console.log(i); // [ 4, 5, 6, 7, 8 ]
 console.log(arr); // [ 1, 2, 3, 9, 10 ]
 ```
@@ -2156,9 +2160,9 @@ console.log(arr); // [ 1, 2, 3, 9, 10 ]
 ==插入== ：可以向任意位置插入任意数量的元素。只需要提供 `s` 个参数：起始位置，0（要删除的项目），要插入的项目。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 从下标为3的元素之前开始插入
-let i = arr.splice(3,0,"red","blue");
+let i = arr.splice(3, 0, 'red', 'blue');
 console.log(i); // []
 console.log(arr);
 // [ 1, 2, 3, 'red', 'blue', 4, 5, 6, 7, 8, 9, 10 ]
@@ -2167,10 +2171,10 @@ console.log(arr);
 ==替换== ：替换的原理在于插入的时候同时进行删除，这样就实现了替换功能。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 从下标为3的元素之前开始插入
 // 插入多少，刚好就删除多少
-let i = arr.splice(3,2,"red","blue");
+let i = arr.splice(3, 2, 'red', 'blue');
 console.log(i); // [ 4, 5 ]
 console.log(arr);
 // [ 1, 2, 3, 'red', 'blue', 6, 7, 8, 9, 10 ]
@@ -2181,20 +2185,20 @@ console.log(arr);
 `join()`是将数组转为字符串，可以传入分隔符作为参数。
 
 ```javascript
-let arr = [1,2,3];
-let str = arr.join("");
+let arr = [1, 2, 3];
+let str = arr.join('');
 console.log(str); // 123
-let str2 = arr.join(",");
+let str2 = arr.join(',');
 console.log(str2); // 1,2,3
 ```
 
 `split()`是将字符串转为数组，传入参数指明以什么作为分隔符。
 
 ```javascript
-let str = "Hello";
-let arr = str.split("");
+let str = 'Hello';
+let arr = str.split('');
 console.log(arr); // [ 'H', 'e', 'l', 'l', 'o' ]
-let arr2 = str.split("l");
+let arr2 = str.split('l');
 console.log(arr2); // [ 'He', '', 'o' ]
 ```
 
@@ -2205,7 +2209,7 @@ console.log(arr2); // [ 'He', '', 'o' ]
 `reverse()`用于反转数组项的顺序，注意使用该方法时会改变原来数组的顺序，而不是返回一个副本。
 
 ```javascript
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 console.log(arr.reverse()); // [ 5, 4, 3, 2, 1 ]
 console.log(arr); // [ 5, 4, 3, 2, 1 ]
 ```
@@ -2213,7 +2217,7 @@ console.log(arr); // [ 5, 4, 3, 2, 1 ]
 `sort()`是按照升序排列数组每一项。
 
 ```javascript
-let arr = [0,12,3,7,-12,23];
+let arr = [0, 12, 3, 7, -12, 23];
 console.log(arr.sort());
 // [ -12, 0, 12, 23, 3, 7 ]
 ```
@@ -2225,41 +2229,47 @@ console.log(arr.sort());
 解决方法：`sort()`方法可以接收一个比较函数作为参数，以便我们指定哪个值位于哪个值的前面。比较函数接收两个参数，如果第一个参数应该位于第二个数的前面，返回一个负数，如果两个参数相等，返回 0，如果第一个参数应该位于第二个数的后面，返回一个正数。
 
 ```javascript
-let arr = [0,12,3,7,-12,23];
-console.log(arr.sort(function(a,b){
-    if(a < b){
-        return -1;
-    }else if(a > b){
-        return 1;
-    }else{
-        return 0;
+let arr = [0, 12, 3, 7, -12, 23];
+console.log(
+  arr.sort(function (a, b) {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
     }
-}));
+  })
+);
 ```
 
 如果是要进行降序排列，只需要将返回值进行修改即可。
 
 ```javascript
-let arr = [0,12,3,7,-12,23];
-console.log(arr.sort(function(a,b){
-    if(a < b){
-        return 1;
-    }else if(a > b){
-        return -1;
-    }else{
-        return 0;
+let arr = [0, 12, 3, 7, -12, 23];
+console.log(
+  arr.sort(function (a, b) {
+    if (a < b) {
+      return 1;
+    } else if (a > b) {
+      return -1;
+    } else {
+      return 0;
     }
-}));
+  })
+);
 ```
 
 事实上我们的比较函数还有一种更加简单的书写方法，如下：
 
 ```javascript
-let arr = [0,12,3,7,-12,23];
-console.log(arr.sort(function(a,b){
+let arr = [0, 12, 3, 7, -12, 23];
+console.log(
+  arr.sort(function (a, b) {
     return a - b;
     // 降序就返回 b - a
-}));
+  })
+);
 ```
 
 最后需要注意的是，`reverse()`和`sort()`方法，返回值是经过排序之后的数组。
@@ -2271,27 +2281,27 @@ JavaScript 还为数组提供了两个位置方法：`indexOf()`和`lastIndexOf(
 - 这两个方法都接收两个参数：要查找的项目和查找的起点位置索引。区别在于一个是从数组开头开始找，一个是从数组末尾开始找。如果没找到就返回 -1。
 
 ```javascript
-let arr = ["H","e","l","l","o"];
-console.log(arr.indexOf("l")); // 2
-console.log(arr.lastIndexOf("l")); // 3
-console.log(arr.indexOf("z")); // -1
+let arr = ['H', 'e', 'l', 'l', 'o'];
+console.log(arr.indexOf('l')); // 2
+console.log(arr.lastIndexOf('l')); // 3
+console.log(arr.indexOf('z')); // -1
 ```
 
 - 还需要注意的是，这两个方法进行查找时使用的是 ==全等== 进行比较。
 
 ```javascript
-let arr = ["1","2","3"];
+let arr = ['1', '2', '3'];
 console.log(arr.indexOf(1)); // -1
 ```
 
-> 因为`NaN===NaN`为`false`，所以这两种方法无法用来查找数组中是否存在`NaN`，可使用es6中新加的`find`和`findIndex`
+> 因为`NaN===NaN`为`false`，所以这两种方法无法用来查找数组中是否存在`NaN`，可使用 es6 中新加的`find`和`findIndex`
 
 `includes()`用于查看数组里面是否包含某个元素，包含返回 true，否则返回 false。
 
 ```javascript
-let arr = ["1","2","3"];
+let arr = ['1', '2', '3'];
 console.log(arr.includes(2)); // false
-console.log(arr.includes("2")); // true
+console.log(arr.includes('2')); // true
 console.log(arr.includes(7)); // false
 ```
 
@@ -2299,9 +2309,9 @@ console.log(arr.includes(7)); // false
 
 ```js
 const arr = [5, 12, 8, 130, 44];
-arr.at(2) // 8
-arr.at(-2) // 130
-arr.at(10) //undefined
+arr.at(2); // 8
+arr.at(-2); // 130
+arr.at(10); //undefined
 ```
 
 - 如果参数位置超出了数组范围，`at()`返回`undefined`
@@ -2311,8 +2321,8 @@ arr.at(10) //undefined
 `every()`方法测试一个数组内的所有元素是否 ==都能通过== 指定函数的测试。它返回一个布尔值。
 
 ```js
-[12, 5, 8, 130, 44].every((ele,idx,arr)=> ele >= 10); // false
-[12, 54, 18, 130, 44].every((ele,idx,arr)=> ele >= 10); // true
+[12, 5, 8, 130, 44].every((ele, idx, arr) => ele >= 10); // false
+[12, 54, 18, 130, 44].every((ele, idx, arr) => ele >= 10); // true
 ```
 
 `filter()` 方法创建给定数组一部分的[浅拷贝](https://developer.mozilla.org/zh-CN/docs/Glossary/Shallow_copy)，其包含通过所提供函数实现的测试的所有元素。
@@ -2329,7 +2339,7 @@ console.log(result);
 ```js
 const array = [1, 2, 3, 4, 5];
 const even = (element) => element % 2 === 0;
-console.log(array.some(even));// true
+console.log(array.some(even)); // true
 ```
 
 ## 九、集合
@@ -2352,7 +2362,7 @@ Set 集合是一种无重复元素的列表，这是这种数据结构最大的�
 
 ```javascript
 let s1 = new Set();
-let s2 = new Set([1,2,3]);
+let s2 = new Set([1, 2, 3]);
 console.log(s1); // Set {}
 console.log(s2); // Set { 1, 2, 3 }
 ```
@@ -2374,7 +2384,7 @@ console.log(s1);
 
 ```javascript
 let s1 = new Set();
-s1.add([1,2,3]);
+s1.add([1, 2, 3]);
 console.log(s1);
 // Set { [ 1, 2, 3 ] }
 ```
@@ -2384,7 +2394,7 @@ console.log(s1);
 建立 Set 对象时传入数组，数组每一项成为 Set 对象的一个元素
 
 ```javascript
-let s1 = new Set([1,2,3]);
+let s1 = new Set([1, 2, 3]);
 console.log(s1); // Set { 1, 2, 3 }
 console.log(s1.size); // 3
 ```
@@ -2393,7 +2403,7 @@ console.log(s1.size); // 3
 
 ```javascript
 let s1 = new Set();
-s1.add([1,2,3]);
+s1.add([1, 2, 3]);
 console.log(s1); // Set { [ 1, 2, 3 ] }
 console.log(s1.size); // 1
 ```
@@ -2409,19 +2419,19 @@ console.log(s1);
 
 ### 4. 集合相关属性和方法
 
-**1.	用`size`属性获取元素个数**
+**1. 用`size`属性获取元素个数**
 
 ```javascript
-let s1 = new Set([1,2,3]);
+let s1 = new Set([1, 2, 3]);
 console.log(s1.size); // 3
 ```
 
-**2.	使用`has()`方法来查看一个集合中是否包含某一个值**
+**2. 使用`has()`方法来查看一个集合中是否包含某一个值**
 
 ```javascript
-let s1 = new Set([1,2,3]);
+let s1 = new Set([1, 2, 3]);
 console.log(s1.has(1)); // true
-console.log(s1.has("1")); // false
+console.log(s1.has('1')); // false
 ```
 
 **3. 删除集合值**
@@ -2429,19 +2439,19 @@ console.log(s1.has("1")); // false
 使用`delete()`方法删除 Set 对象里面的某一个元素
 
 ```javascript
-let s1 = new Set([1,2,3]);
+let s1 = new Set([1, 2, 3]);
 s1.delete(2);
 console.log(s1); // Set { 1, 3 }
 // 没有的元素也不会报错
-s1.delete("2");
+s1.delete('2');
 console.log(s1); // Set { 1, 3 }
 ```
 
 如果要一次性删除所有的元素，可以使用`clear()`方法
 
 ```javascript
-let s1 = new Set([1,2,3]);
-s1.clear()
+let s1 = new Set([1, 2, 3]);
+s1.clear();
 console.log(s1); // Set {}
 ```
 
@@ -2450,9 +2460,9 @@ console.log(s1); // Set {}
 集合也是可以枚举的，我们同样可以使用`for-of`来对集合进行遍历，如下：
 
 ```javascript
-let s = new Set([1,2,3,4,5]);
-for(let i of s){
-    console.log(i);
+let s = new Set([1, 2, 3, 4, 5]);
+for (let i of s) {
+  console.log(i);
 }
 // 1
 // 2
@@ -2465,8 +2475,8 @@ for(let i of s){
 
 ```js
 //使用 forEach 进行遍历
-let s = new Set([1,2,3,4,5]);
-s.forEach(ele => console.log(ele));
+let s = new Set([1, 2, 3, 4, 5]);
+s.forEach((ele) => console.log(ele));
 // 1
 // 2
 // 3
@@ -2479,9 +2489,9 @@ s.forEach(ele => console.log(ele));
 `keys()`方法遍历集合的键：
 
 ```javascript
-let s = new Set(["Bill","Lucy","David"]);
-for(let i of s.keys()){
-    console.log(i);
+let s = new Set(['Bill', 'Lucy', 'David']);
+for (let i of s.keys()) {
+  console.log(i);
 }
 // Bill
 // Lucy
@@ -2491,9 +2501,9 @@ for(let i of s.keys()){
 `values()`方法遍历集合的值：
 
 ```javascript
-let s = new Set(["Bill","Lucy","David"]);
-for(let i of s.values()){
-    console.log(i);
+let s = new Set(['Bill', 'Lucy', 'David']);
+for (let i of s.values()) {
+  console.log(i);
 }
 // Bill
 // Lucy
@@ -2503,9 +2513,9 @@ for(let i of s.values()){
 `entries()`方法同时遍历集合的键与值：
 
 ```javascript
-let s = new Set(["Bill","Lucy","David"]);
-for(let i of s.entries()){
-    console.log(i);
+let s = new Set(['Bill', 'Lucy', 'David']);
+for (let i of s.entries()) {
+  console.log(i);
 }
 // [ 'Bill', 'Bill' ]
 // [ 'Lucy', 'Lucy' ]
@@ -2517,7 +2527,7 @@ for(let i of s.entries()){
 将集合转为数组，最快的方法就是使用前面所讲过的扩展运算符，如下：
 
 ```javascript
-let s1 = new Set([1,2,3]);
+let s1 = new Set([1, 2, 3]);
 console.log(s1); // Set { 1, 2, 3 }
 let arr = [...s1];
 console.log(arr); // [ 1, 2, 3 ]
@@ -2526,7 +2536,7 @@ console.log(arr); // [ 1, 2, 3 ]
 除此之外，我们还可以使用 Array 类的静态方法`from()`来进行转换
 
 ```javascript
-let s1 = new Set([1,2,3]);
+let s1 = new Set([1, 2, 3]);
 console.log(s1); // Set { 1, 2, 3 }
 let arr = Array.from(s1);
 console.log(arr); // [ 1, 2, 3 ]
@@ -2535,7 +2545,7 @@ console.log(arr); // [ 1, 2, 3 ]
 前面我们有提到过，Set 对象里面是不能够存放相同的元素的，利用这个特性，我们可以快速的为数组去重，如下：
 
 ```javascript
-let arr = [1,2,2,3,4,3,1,6,7,3,5,7];
+let arr = [1, 2, 2, 3, 4, 3, 1, 6, 7, 3, 5, 7];
 let s1 = new Set(arr);
 let arr2 = [...s1];
 console.log(arr2); // [ 1, 2, 3, 4, 6, 7, 5 ]
@@ -2546,7 +2556,7 @@ console.log(arr2); // [ 1, 2, 3, 4, 6, 7, 5 ]
 当对象添加到集合中时，只要集合存在，它们就一直存储在集合。即使对象的引用被删除了也依然如此，我们来看下面的这个例子：
 
 ```javascript
-let arr = [1,2,3];
+let arr = [1, 2, 3];
 let s = new Set(arr);
 arr = null; // 删除arr数组的指向
 console.log(s); // Set { 1, 2, 3 } 数组依然存在于集合中
@@ -2562,7 +2572,7 @@ console.log(arr); // null
 例如：
 
 ```javascript
-let arr = [1,2,3];
+let arr = [1, 2, 3];
 arr = null;
 ```
 
@@ -2587,7 +2597,7 @@ weak.add(1);
 除了这个限制以外，弱集合和普通集合还有一些细微的区别，例如无法在创建弱集合时传入一个数组进行初始化。
 
 ```js
-let arr = [1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 let weak = new WeakSet(arr);
 // TypeError: Invalid value used in weak set
 // 无法在创建弱集合时传入一个数组进行初始化
@@ -2597,7 +2607,7 @@ let weak = new WeakSet(arr);
 
 ```javascript
 let weak = new WeakSet();
-let arr = [1,2,3];
+let arr = [1, 2, 3];
 weak.add(arr);
 console.log(weak); // WeakSet {}
 console.log(weak.has(arr)); // true
@@ -2609,7 +2619,7 @@ console.log(weak.has(arr)); // true
 
 ### 1. 什么是映射
 
-JavaScript 的对象（Object），本质上是键值对的集合（Hash结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制。
+JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制。
 
 为了解决这个问题，ECMAScript 6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是"键"的范围不仅仅局限于字符串，而是各种类型的值（包括对象）都可以当作键。也就是说，Object 结构（对象结构）提供了" ==字符串—值== "的对应，而 Map 结构提供了" ==值—值== "的对应，是一种更完善的 Hash 结构的实现。
 
@@ -2619,11 +2629,11 @@ JavaScript 的对象（Object），本质上是键值对的集合（Hash结构�
 
 ```javascript
 let m = new Map();
-m.set("name","xiejie");
-m.set("age",18);
+m.set('name', 'xiejie');
+m.set('age', 18);
 console.log(m);
 // Map { 'name' => 'xiejie', 'age' => 18 }
-console.log(m.get("name"));
+console.log(m.get('name'));
 // xiejie
 ```
 
@@ -2631,9 +2641,9 @@ console.log(m.get("name"));
 
 ```javascript
 let m = new Map();
-m.set({},"xiejie");
-m.set([1,2,3],18);
-m.set(3581,18);
+m.set({}, 'xiejie');
+m.set([1, 2, 3], 18);
+m.set(3581, 18);
 console.log(m);
 // Map { {} => 'xiejie', [ 1, 2, 3 ] => 18, 3581 => 18 }
 ```
@@ -2643,7 +2653,10 @@ console.log(m);
 可以向 Map 构造函数传入一个数组来初始化 Map 映射，这一点同样与 Set 集合相似。数组中的每个元素都是一个子数组，子数组中包含一个键值对的键名与值两个元素。因此，整个 Map 映射中包含的全是这样的两个元素的二维数组
 
 ```javascript
-let arr = [["name","xiejie"],["age",18]];
+let arr = [
+  ['name', 'xiejie'],
+  ['age', 18],
+];
 let m = new Map(arr);
 console.log(m);
 // Map { 'name' => 'xiejie', 'age' => 18 }
@@ -2662,13 +2675,16 @@ clear()：// 移除Map映射中的所有键值对
 Map 映射同样支持`size`属性，其代表当前集合中包含的键值对数量
 
 ```javascript
-let arr = [["name","xiejie"],["age",18]];
+let arr = [
+  ['name', 'xiejie'],
+  ['age', 18],
+];
 let m = new Map(arr);
 console.log(m); // Map { 'name' => 'xiejie', 'age' => 18 }
 console.log(m.size); // 2
-console.log(m.has("name")); // true
-console.log(m.get("name")); // xiejie
-m.delete("name");
+console.log(m.has('name')); // true
+console.log(m.get('name')); // xiejie
+m.delete('name');
 console.log(m); // Map { 'age' => 18 }
 m.clear();
 console.log(m); // Map {}
@@ -2681,9 +2697,12 @@ console.log(m); // Map {}
 使用`for-of`来遍历映射：
 
 ```javascript
-let m = new Map([["name","xiejie"],["age",18]]);
-for(let i of m){
-    console.log(i);
+let m = new Map([
+  ['name', 'xiejie'],
+  ['age', 18],
+]);
+for (let i of m) {
+  console.log(i);
 }
 // [ 'name', 'xiejie' ]
 // [ 'age', 18 ]
@@ -2692,9 +2711,12 @@ for(let i of m){
 `keys()`方法遍历映射的键：
 
 ```javascript
-let m = new Map([["name","xiejie"],["age",18]]);
-for(let i of m.keys()){
-    console.log(i);
+let m = new Map([
+  ['name', 'xiejie'],
+  ['age', 18],
+]);
+for (let i of m.keys()) {
+  console.log(i);
 }
 // name
 // age
@@ -2703,9 +2725,12 @@ for(let i of m.keys()){
 `values()`方法遍历映射的值：
 
 ```javascript
-let m = new Map([["name","xiejie"],["age",18]]);
-for(let i of m.values()){
-    console.log(i);
+let m = new Map([
+  ['name', 'xiejie'],
+  ['age', 18],
+]);
+for (let i of m.values()) {
+  console.log(i);
 }
 // xiejie
 // 18
@@ -2714,9 +2739,12 @@ for(let i of m.values()){
 `entries()`方法同时遍历映射的键与值：
 
 ```javascript
-let m = new Map([["name","xiejie"],["age",18]]);
-for(let i of m.entries()){
-    console.log(i);
+let m = new Map([
+  ['name', 'xiejie'],
+  ['age', 18],
+]);
+for (let i of m.entries()) {
+  console.log(i);
 }
 // [ 'name', 'xiejie' ]
 // [ 'age', 18 ]
@@ -2727,7 +2755,10 @@ for(let i of m.entries()){
 Map 结构转为数组结构，比较快速的方法还是使用前面介绍过的扩展运算符`...`
 
 ```javascript
-let arr = [["name","xiejie"],["age",18]];
+let arr = [
+  ['name', 'xiejie'],
+  ['age', 18],
+];
 let m = new Map(arr);
 console.log([...m.keys()]); // [ 'name', 'age' ]
 console.log([...m.values()]); // [ 'xiejie', 18 ]
@@ -2738,7 +2769,10 @@ console.log([...m]); // [ [ 'name', 'xiejie' ], [ 'age', 18 ] ]
 或者使用 Array 类的静态方法`from()`
 
 ```javascript
-let arr = [["name","xiejie"],["age",18]];
+let arr = [
+  ['name', 'xiejie'],
+  ['age', 18],
+];
 let m = new Map(arr);
 console.log(Array.from(m));
 // [ [ 'name', 'xiejie' ], [ 'age', 18 ] ]
@@ -2754,7 +2788,7 @@ let weakMap = new WeakMap();
 
 弱映射和普通映射一样，同样也具有`has()`，`get()`，`set()`，`delete()`等方法。
 
-## 十一、Date对象
+## 十一、Date 对象
 
 Date 对象主要是用于处理和时间相关的操作。
 
@@ -2797,24 +2831,24 @@ console.log(now); // 1511767768
 
 2. '月 日,年' 如 January 12,2004 或 Jan 12,2004
 
-3. '星期 月 日 年 时:分:秒 时区'  如 Tue May 25 2004 00:00:00 GMT-0700
+3. '星期 月 日 年 时:分:秒 时区' 如 Tue May 25 2004 00:00:00 GMT-0700
 
 如果字符串无法识别，将返回 NaN
 
->注：浏览器不支持不表示日期只表示时间的字符串格式
+> 注：浏览器不支持不表示日期只表示时间的字符串格式
 
 ```javascript
-console.log(Date.parse("1990/03/23")); // 638121600000
-console.log(Date.parse("March 23,1990")); // 638121600000
-console.log(Date.parse("2017")); // 1483228800000
-console.log(Date.parse("Hello")); // NaN
+console.log(Date.parse('1990/03/23')); // 638121600000
+console.log(Date.parse('March 23,1990')); // 638121600000
+console.log(Date.parse('2017')); // 1483228800000
+console.log(Date.parse('Hello')); // NaN
 ```
 
->注：在 ECMAScript5 中，如果使用标准的日期时间字符串格式规则的字符串中，数学前有前置 0，则会解析为 UTC 时间，时间没有前置 0，则会解析为本地时间。其他情况一般都会解析为本地时间。
+> 注：在 ECMAScript5 中，如果使用标准的日期时间字符串格式规则的字符串中，数学前有前置 0，则会解析为 UTC 时间，时间没有前置 0，则会解析为本地时间。其他情况一般都会解析为本地时间。
 >
->UTC 时间：协调世界时，又称世界统一时间、世界标准时间、国际协调时间。由于英文（CUT）和法文（TUC）的缩写不同，作为妥协，简称 UTC。
+> UTC 时间：协调世界时，又称世界统一时间、世界标准时间、国际协调时间。由于英文（CUT）和法文（TUC）的缩写不同，作为妥协，简称 UTC。
 >
->协调世界时是以原子时秒长为基础，在时刻上尽量接近于世界时的一种时间计量系统。
+> 协调世界时是以原子时秒长为基础，在时刻上尽量接近于世界时的一种时间计量系统。
 
 **`Date.UTC()`方法**
 
@@ -2832,13 +2866,13 @@ Date.UTC(year,month,day,hours,minutes,seconds,ms)
 console.log(Date.UTC.length); // 7
 ```
 
->注：该方法使用的是 UTC 时间，而不是本地时间。
+> 注：该方法使用的是 UTC 时间，而不是本地时间。
 
 ```javascript
-console.log(Date.UTC("1990/03/23")); // NaN
-console.log(Date.UTC(1990,3,23)); // 640828800000
+console.log(Date.UTC('1990/03/23')); // NaN
+console.log(Date.UTC(1990, 3, 23)); // 640828800000
 console.log(Date.UTC(2017)); // 1483228800000
-console.log(Date.UTC("Hello")); // NaN
+console.log(Date.UTC('Hello')); // NaN
 ```
 
 ### 3. 日期对象构造函数
@@ -2852,7 +2886,7 @@ console.log(Date.UTC("Hello")); // NaN
 ```javascript
 console.log(Date());
 // Mon Nov 27 2017 16:03:33 GMT+0800 (CST)
-console.log(Date("1990-03-23"));
+console.log(Date('1990-03-23'));
 // Mon Nov 27 2017 16:03:33 GMT+0800 (CST)
 ```
 
@@ -2878,16 +2912,16 @@ console.log(date); // 1990-03-22T16:00:00.000Z
 可以接收多个数字参数，这个时候形式有点类似于`Date.UTC()`这个方法，不过返回的是一个对象，而不是毫秒数。
 
 ```javascript
-let date = new Date(1990,3,23);
+let date = new Date(1990, 3, 23);
 console.log(date); // 1990-04-22T15:00:00.000Z
 ```
 
 如果传入的是字符串参数，则返回该日期对象。如果字符串不能被解析为日期，则返回 Invalid Date
 
 ```javascript
-let date = new Date("1990-03-23");
+let date = new Date('1990-03-23');
 console.log(date); // 1990-03-23T00:00:00.000Z
-let date2 = new Date("Hello");
+let date2 = new Date('Hello');
 console.log(date2); // Invalid Date
 ```
 
@@ -2920,11 +2954,11 @@ toLocaleDateString():toDateString() 方法的本地化转换。
 个别方法演示：
 
 ```javascript
-console.log(new Date("1990-03-23").toString());
+console.log(new Date('1990-03-23').toString());
 // Fri Mar 23 1990 08:00:00 GMT+0800 (CST)
-console.log(new Date("1990-03-23").toDateString()); // Fri Mar 23 1990
-console.log(new Date("1990-03-23").toTimeString()); // 08:00:00 GMT+0800 (CST)
-console.log(new Date("1990-03-23").toLocaleString()); // 1990-3-23 08:00:00
+console.log(new Date('1990-03-23').toDateString()); // Fri Mar 23 1990
+console.log(new Date('1990-03-23').toTimeString()); // 08:00:00 GMT+0800 (CST)
+console.log(new Date('1990-03-23').toLocaleString()); // 1990-3-23 08:00:00
 ```
 
 **2. get 类**
@@ -2958,15 +2992,15 @@ get[UTC]Seconds():返回秒值(0 - 59)。
 get[UTC]Milliseconds():返回毫秒值(0 - 999)。
 ```
 
->注意：通过标准日期时间格式字符串，且有前置 0 的形式的参数设置，设置的是 UTC 时间。
+> 注意：通过标准日期时间格式字符串，且有前置 0 的形式的参数设置，设置的是 UTC 时间。
 
 个别方法演示：
 
 ```javascript
-console.log(new Date("1990-03-23").valueOf()); // 638150400000
-console.log(new Date("1990-03-23").getTime()); // 638150400000
-console.log(new Date("1990-03-23").getDay()); // 5
-console.log(new Date("1990-03-23").getMonth()); // 2
+console.log(new Date('1990-03-23').valueOf()); // 638150400000
+console.log(new Date('1990-03-23').getTime()); // 638150400000
+console.log(new Date('1990-03-23').getDay()); // 5
+console.log(new Date('1990-03-23').getMonth()); // 2
 ```
 
 **3. set 类**
@@ -2975,7 +3009,7 @@ Date 对象提供了一系列 set 类方法，用来设置实例对象各个方�
 
 set 方法基本与 get 方法相似，传入类似于`Date.UTC()`的参数，返回调整后的日期的内部毫秒数。
 
->注意：星期只能获取，不能设置。
+> 注意：星期只能获取，不能设置。
 
 ```
 setTime():使用毫秒的格式，设置一个 Date 对象的值。
@@ -2992,31 +3026,31 @@ set[UTC]Milliseconds():设置毫秒值(0 - 999)。
 个别方法演示：
 
 ```javascript
-let date = new Date("1990-03-23");
-console.log(date.setFullYear(1992),date.getFullYear());
+let date = new Date('1990-03-23');
+console.log(date.setFullYear(1992), date.getFullYear());
 // 701308800000 1992
-console.log(date.setMonth(4),date.getMonth());
+console.log(date.setMonth(4), date.getMonth());
 // 706579200000 4
 ```
 
 ## 十二、Math
 
-Math和其他的对象不同，它不是一个构造函数，它属于一个工具类不用创建对象，它里边封装了数学运算相关的属性和方法
+Math 和其他的对象不同，它不是一个构造函数，它属于一个工具类不用创建对象，它里边封装了数学运算相关的属性和方法
 
-###  1. 属性
+### 1. 属性
 
 Math 对象常见的属性如下表：
 
-| 属性         | 说明                              |
-| ------------ | --------------------------------- |
-| Math.E       | 自然对数的底数，即常量 e 的值     |
-| Math.LN10    | 10 的自然对数                     |
-| Math.LN2     | 2 的自然对数                      |
-| Math.LOG2E   | 以 2 为底 e 的对数                |
-| Math.LOG10E  | 以 10 为底 e 的对象               |
-| Math.PI      | 数学里面 PI 的值                  |
-| Math.SQRT1_2 | 1/2 的平方根（即2的平方根的倒数） |
-| Math.SQRT2   | 2 的平方根                        |
+| 属性         | 说明                                |
+| ------------ | ----------------------------------- |
+| Math.E       | 自然对数的底数，即常量 e 的值       |
+| Math.LN10    | 10 的自然对数                       |
+| Math.LN2     | 2 的自然对数                        |
+| Math.LOG2E   | 以 2 为底 e 的对数                  |
+| Math.LOG10E  | 以 10 为底 e 的对象                 |
+| Math.PI      | 数学里面 PI 的值                    |
+| Math.SQRT1_2 | 1/2 的平方根（即 2 的平方根的倒数） |
+| Math.SQRT2   | 2 的平方根                          |
 
 这里面用得稍微多一点的就是 PI，直接拿来用即可。
 
@@ -3026,13 +3060,13 @@ console.log(Math.PI); // 3.141592653589793
 
 ### 2. 方法
 
-####  `min()`和`max()`
+#### `min()`和`max()`
 
 这两个方法很简单，就是求一组数值的最大值和最小值。
 
 ```javascript
-let max = Math.max(3,5,8,1);
-let min = Math.min(3,5,8,1);
+let max = Math.max(3, 5, 8, 1);
+let min = Math.min(3, 5, 8, 1);
 console.log(max); // 8
 console.log(min); // 1
 ```
@@ -3070,15 +3104,15 @@ console.log(rand); // 41
 练习：封装一个函数，这个函数接收 1 个或者 2 个函数。如果参数只有 1 个，则生成 0 - 参数之间的随机数，如果参数有 2 个，则生成这 2 个参数之间的随机数。
 
 ```javascript
-// 接收 1 个或者 2 个参数 
+// 接收 1 个或者 2 个参数
 // 如果只有 1 个参数 生成 0 - 参数之间的随机数
 // 如果有 2 个参数 则生成这 2 个参数之间的随机数
 const randomNum = function (i, j = 0) {
-    if (i > j) {
-        [i, j] = [j, i];
-    }
-    return Math.floor(Math.random() * (j - i + 1) + i);
-}
+  if (i > j) {
+    [i, j] = [j, i];
+  }
+  return Math.floor(Math.random() * (j - i + 1) + i);
+};
 console.log(randomNum(1, 100));
 console.log(randomNum(100, 1));
 console.log(randomNum(10));
@@ -3103,7 +3137,7 @@ console.log(randomNum(10));
 | Math.sin(x)         | 返回 x 的正弦值         |
 | Math.tan(x)         | 返回 x 的正切值         |
 
-## 十三、String对象
+## 十三、String 对象
 
 ### 1. 属性
 
@@ -3113,20 +3147,20 @@ console.log(randomNum(10));
 
 #### 访问特定字符
 
-`charAt()`:可以返回字符串中指定位置的字符（等同于str[i]）
+`charAt()`:可以返回字符串中指定位置的字符（等同于 str[i]）
 
 ```js
-let str = "Hello World";
+let str = 'Hello World';
 console.log(str.charAt(1)); // e
 console.log(str.charAt('a')); // H 因为 a 被转为了数字0
 ```
 
 - `at()`函数等效
 
-`charCodeAt():`获取指定位置字符的字符编码（Unicode编码）
+`charCodeAt():`获取指定位置字符的字符编码（Unicode 编码）
 
 ```js
-let str = "Hello World";
+let str = 'Hello World';
 console.log(str.charCodeAt(1)); // 101
 console.log(str.charCodeAt('a')); // 72
 ```
@@ -3134,7 +3168,7 @@ console.log(str.charCodeAt('a')); // 72
 `String.formCharCode():`可以根据字符编码去获取字符
 
 ```js
-console.log(String.fromCharCode(104,101,108,108,111)); // hello
+console.log(String.fromCharCode(104, 101, 108, 108, 111)); // hello
 ```
 
 #### 字符串操作方法
@@ -3142,8 +3176,8 @@ console.log(String.fromCharCode(104,101,108,108,111)); // hello
 `concat():`可以用来连接两个或多个字符串(作用和+一样)
 
 ```js
-let str = "Hello";
-let newStr = str.concat(" World!!!");
+let str = 'Hello';
+let newStr = str.concat(' World!!!');
 console.log(str); // Hello
 console.log(newStr); // Hello World!!!
 ```
@@ -3153,9 +3187,9 @@ console.log(newStr); // Hello World!!!
 `trim():`用于删除字符串的头尾空白符
 
 ```js
-let str = "    Hello World    ";
+let str = '    Hello World    ';
 let newStr = str.trim();
-console.log(str); //    Hello World    
+console.log(str); //    Hello World
 console.log(newStr); // Hello World
 ```
 
@@ -3164,24 +3198,24 @@ console.log(newStr); // Hello World
 `includes()`方法用于查看是否包含某个字符，如果包含返回 true，否则返回 false。
 
 ```javascript
-let str = "Hello World";
-console.log(str.includes("l")); // true
-console.log(str.includes("M")); // false
+let str = 'Hello World';
+console.log(str.includes('l')); // true
+console.log(str.includes('M')); // false
 ```
 
 `startsWith()`和`endsWith()`方法分别用于检测开始字符和结束字符。
 
 ```javascript
-let str = "Hello World";
-console.log(str.startsWith("H")); // true
-console.log(str.endsWith("d")); // true
-console.log(str.endsWith("z")); // false
+let str = 'Hello World';
+console.log(str.startsWith('H')); // true
+console.log(str.endsWith('d')); // true
+console.log(str.endsWith('z')); // false
 ```
 
 `repeat()`方法接收一个参数，为字符串重复的次数。返回值为字符串重复指定次数后的新字符串。
 
 ```javascript
-let str = "Hello";
+let str = 'Hello';
 console.log(str.repeat(3));
 // HelloHelloHello
 ```
@@ -3191,15 +3225,15 @@ console.log(str.repeat(3));
 `indexof():`该方法可以检索一个字符串中是否含有指定内容
 
 ```js
-let str = "Hello World";
+let str = 'Hello World';
 console.log(str.indexOf('l')); // 2
 console.log(str.lastIndexOf('l')); // 9
 ```
 
 - 如果字符串中含有该内容，则会返回其第一次出现的索引;如果没有找到指定的内容，则返回-1
 - 可以指定一个第二参数，指定开始查找的位置
-- eg:    `result = str.indexOf("h",1);`
-- 当所传参数为空时，意为检索字符串中是否含有空白，此时会返回0
+- eg: `result = str.indexOf("h",1);`
+- 当所传参数为空时，意为检索字符串中是否含有空白，此时会返回 0
 
 `lastIndexOf()`
 
@@ -3208,12 +3242,12 @@ console.log(str.lastIndexOf('l')); // 9
 
 #### 获取部分字符串
 
-`slice()`  使用方式和数组相同
+`slice()` 使用方式和数组相同
 
 ```js
-let str = "Hello World";
+let str = 'Hello World';
 let str2 = str.slice(2);
-let str3 = str.slice(2,7); // 不包括 7
+let str3 = str.slice(2, 7); // 不包括 7
 console.log(str); // Hello World
 console.log(str2); // llo World
 console.log(str3); // llo W
@@ -3222,7 +3256,7 @@ console.log(str3); // llo W
 `substring()`
 
 ```js
-let str = "Hello World";
+let str = 'Hello World';
 let str1 = str.slice(2);
 let str2 = str.substr(2);
 let str3 = str.substring(2);
@@ -3230,9 +3264,9 @@ console.log(str1); // llo World
 console.log(str2); // llo World
 console.log(str3); // llo World
 
-str1 = str.slice(2,7); // 结束位置为 7,不包含 7
-str2 = str.substr(2,7); // 要返回的字符个数
-str3 = str.substring(2,7); // 结束位置为 7,不包含 7
+str1 = str.slice(2, 7); // 结束位置为 7,不包含 7
+str2 = str.substr(2, 7); // 要返回的字符个数
+str3 = str.substring(2, 7); // 结束位置为 7,不包含 7
 console.log(str1); // llo W
 console.log(str2); // llo Wor
 console.log(str3); // llo W
@@ -3240,20 +3274,20 @@ console.log(str3); // llo W
 
 - 第一个参数：开始截取位置的索引（包括开始位置）
 - 第二个参数：结束位置的索引（不包括结束位置）
-- 不同的是这个方法 ==不能接受负值作为参数，如果传递了一个负值，则默认使用0==
+- 不同的是这个方法 ==不能接受负值作为参数，如果传递了一个负值，则默认使用 0==
 - 同时会自动调整参数的位置，如果第二个参数小于第一个，则自动交换
 
 `substr()`
 
 ```js
-let str = "Hello World";
+let str = 'Hello World';
 let str1 = str.slice(2);
 let str2 = str.substr(2);
 console.log(str1); // llo World
 console.log(str2); // llo World
 
-str1 = str.slice(2,7); // 结束位置为 7,不包含 7
-str2 = str.substr(2,7); // 要返回的字符个数
+str1 = str.slice(2, 7); // 结束位置为 7,不包含 7
+str2 = str.substr(2, 7); // 要返回的字符个数
 console.log(str1); // llo W
 console.log(str2); // llo Wor
 ```
@@ -3268,9 +3302,9 @@ console.log(str2); // llo Wor
 `toLowerCase()：`将一个字符串转换为小写并返回
 
 ```js
-let str = "HELLO";
+let str = 'HELLO';
 console.log(str.toLowerCase()); // hello
-str = "hello";
+str = 'hello';
 console.log(str.toUpperCase()); // HELLO
 ```
 
@@ -3279,12 +3313,12 @@ console.log(str.toUpperCase()); // HELLO
 `padStart()`用于头部补全，`padEnd()`用于尾部补全，共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串。
 
 ```js
-'x'.padStart(5, 'ab') // 'ababx'
-'x'.padStart(4, 'ab') // 'abax'
-'12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
+'x'.padStart(5, 'ab'); // 'ababx'
+'x'.padStart(4, 'ab'); // 'abax'
+'12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
 
-'x'.padEnd(5, 'ab') // 'xabab'
-'x'.padEnd(4, 'ab') // 'xaba
+'x'.padEnd(5, 'ab'); // 'xabab'
+'x'.padEnd(4, 'ab'); // 'xaba
 ```
 
 - 如果用来补全的字符串与原字符串，两者的长度之和超过了最大长度，则会截去超出位数的补全字符串。
@@ -3307,10 +3341,9 @@ console.log(str.toUpperCase()); // HELLO
 `match()`
 
 - 可以根据正则表达式，从一个字符串中将符合条件的内容提取出来
-- 默认情况下我们的match只会找到第一个符合要求的内容，找到以后就停止检索
+- 默认情况下我们的 match 只会找到第一个符合要求的内容，找到以后就停止检索
 - 我们可以设置正则表达式为全局匹配模式，这样就会匹配到所有的内容
-  - 可以为一个正则表达式设置多个匹配模式，且顺序无所谓
-    `result = str.match(/[a-z]/ig);`
+  - 可以为一个正则表达式设置多个匹配模式，且顺序无所谓 `result = str.match(/[a-z]/ig);`
 - match()会将匹配到的内容封装到一个数组中返回，即使只查询到一个结果
 
 `replace()`
@@ -3318,8 +3351,7 @@ console.log(str.toUpperCase()); // HELLO
 - 可以将字符串中指定内容替换为新的内容
 - 参数：
   - 被替换的内容，可以接受一个正则表达式作为参数
-  - 新的内容
-    `result = str.replace(/[a-z]/gi , "");`
+  - 新的内容 `result = str.replace(/[a-z]/gi , "");`
   - 默认只会替换第一个，可以设置全局匹配替换全部
 
 ## 十四、JSON
@@ -3342,14 +3374,14 @@ JSON 最大的优点是在人、机可读性方面达到了一个最佳的临界
 
 ```javascript
 let batman = {
-    "name" : "Batman",
-    "real name" : "Bruce Wayne",
-    "height" : 74,
-    "weight" : 210,
-    "hero" : true,
-    "villain" : false,
-    "allies" : ["Robin","Batgirl","Superman"]
-}
+  name: 'Batman',
+  'real name': 'Bruce Wayne',
+  height: 74,
+  weight: 210,
+  hero: true,
+  villain: false,
+  allies: ['Robin', 'Batgirl', 'Superman'],
+};
 ```
 
 JSON 作为一种数据存储格式从诞生以来日益流行，现在很多编程语言都有现成的库来解析和生成 JSON 对象。从 ECMAScript 5 开始，就已经有了全局的 JSON 对象。
@@ -3364,10 +3396,10 @@ JSON 作为一种数据存储格式从诞生以来日益流行，现在很多编
 
 ```javascript
 let person = {
-    "name" : "xiejie",
-    "age" : 18,
-    "gender" : "male",
-}
+  name: 'xiejie',
+  age: 18,
+  gender: 'male',
+};
 let str = JSON.stringify(person);
 console.log(str);
 // {"name":"xiejie","age":18,"gender":"male"}
@@ -3377,12 +3409,12 @@ console.log(str);
 
 ```javascript
 let person = {
-    name : "xiejie",
-    age : 18,
-    walk : function(){
-        console.log("I'm walking");
-    }
-}
+  name: 'xiejie',
+  age: 18,
+  walk: function () {
+    console.log("I'm walking");
+  },
+};
 let str = JSON.stringify(person);
 console.log(str); // {"name":"xiejie","age":18}
 ```
@@ -3407,12 +3439,12 @@ console.log(obj2);
 
 正则表达式（regular expression）描述了一种字符串匹配的模式（pattern），可以用来检查一个字符串是否含有某种子串，或者对匹配的子串进行替换、取出等操作。
 
-###  1. 创建正则表达式对象
+### 1. 创建正则表达式对象
 
 #### RegExp 构造函数构建正则表达式
 
 ```js
-var 变量 = new RegExp("正则表达式","匹配模式");
+var 变量 = new RegExp('正则表达式', '匹配模式');
 ```
 
 #### 字面量构建正则表达式
@@ -3421,14 +3453,14 @@ var 变量 = new RegExp("正则表达式","匹配模式");
 var 变量 = /正则表达式/匹配模式
 ```
 
-- 匹配模式：i:忽略大小写； g：全局匹配模式；   m：多行匹配
+- 匹配模式：i:忽略大小写； g：全局匹配模式； m：多行匹配
 
 需要注意无论是字面量方式，还是构造函数方式创建的正则表达式，返回的类型都为 **object**。
 
 ```javascript
 let reg1 = /at/i;
 // 等同于
-let reg2 = new RegExp("at","i");
+let reg2 = new RegExp('at', 'i');
 console.log(typeof reg1); // object
 console.log(typeof reg2); // object
 ```
@@ -3439,20 +3471,20 @@ console.log(typeof reg2); // object
 
 JavaScript 所支持的元字符如下表：
 
-| 元字符     | 名称         | 匹配对象                                                     |
-| ---------- | ------------ | ------------------------------------------------------------ |
-| `.`        | 点号         | 单个任意字符(除回车\r、换行\n、行分隔符\u2028和段分隔符\u2029外) |
-| `[]`       | 字符组       | 列出的单个任意字符                                           |
-| `[^]`      | 排除型字符组 | 未列出的单个任意字符                                         |
-| `?`        | 问号         | 匹配0次或1次                                                 |
-| `*`        | 星号         | 匹配0交或多次                                                |
-| `+`        | 加号         | 匹配1次或多次                                                |
-| `{a,b}`    | 区间量词     | 匹配至少a次，最多b次                                         |
-| `^`        | 脱字符       | 行的起始位置                                                 |
-| `$`        | 美元符       | 行的结束位置                                                 |
-| `|`        | 竖线         | 分隔两边的任意一个表达式                                     |
-| `()`       | 括号         | 限制多选结构的范围，标注量词作用的元素，为反向引用捕获文本   |
-| `\1,\2...` | 反向引用     | 匹配之前的第一、第二...组括号内的表达式匹配的文本            |
+| 元字符     | 名称         | 匹配对象                                                           |
+| ---------- | ------------ | ------------------------------------------------------------------ | ------------------------ |
+| `.`        | 点号         | 单个任意字符(除回车\r、换行\n、行分隔符\u2028 和段分隔符\u2029 外) |
+| `[]`       | 字符组       | 列出的单个任意字符                                                 |
+| `[^]`      | 排除型字符组 | 未列出的单个任意字符                                               |
+| `?`        | 问号         | 匹配 0 次或 1 次                                                   |
+| `*`        | 星号         | 匹配 0 交或多次                                                    |
+| `+`        | 加号         | 匹配 1 次或多次                                                    |
+| `{a,b}`    | 区间量词     | 匹配至少 a 次，最多 b 次                                           |
+| `^`        | 脱字符       | 行的起始位置                                                       |
+| `$`        | 美元符       | 行的结束位置                                                       |
+| `          | `            | 竖线                                                               | 分隔两边的任意一个表达式 |
+| `()`       | 括号         | 限制多选结构的范围，标注量词作用的元素，为反向引用捕获文本         |
+| `\1,\2...` | 反向引用     | 匹配之前的第一、第二...组括号内的表达式匹配的文本                  |
 
 ### 3. 字符组元字符
 
@@ -3486,7 +3518,7 @@ console.log(/[a-c^]/.test('^')); // true
 \W:非字母、数字、下划线，等同于 [^0-9A-Za-z_]
 ```
 
->注意：`\w` 不仅包括字母、数字，还包括下划线。在进行数字验证时，只允许输入字母和数字时，不可以使用 `\w`，因为还包含了下划线。所以应该使用`[0-9a-zA-Z]`
+> 注意：`\w` 不仅包括字母、数字，还包括下划线。在进行数字验证时，只允许输入字母和数字时，不可以使用 `\w`，因为还包含了下划线。所以应该使用`[0-9a-zA-Z]`
 
 #### 任意字符
 
@@ -3544,7 +3576,7 @@ console.log(/[\d\D]/.test('\r')); // true
 
 ```javascript
 let reg = /a+/;
-let str = "aaabbcc";
+let str = 'aaabbcc';
 console.log(reg.exec(str));
 // [ 'aaa', index: 0, input: 'aaabbcc' ]
 ```
@@ -3568,7 +3600,7 @@ console.log(reg.exec(str));
 
 ```javascript
 let reg = /a+?/;
-let str = "aaabbcc";
+let str = 'aaabbcc';
 console.log(reg.exec(str));
 // [ 'a', index: 0, input: 'aaabbcc' ]
 ```
@@ -3584,14 +3616,14 @@ console.log(reg.exec(str));
 例如：如果希望字符串`ab`重复出现 2 次，应该写为`(ab){2}`，而如果写为`ab{2}`，则`{2}`只限定 b，如下：
 
 ```javascript
-console.log(/ab{2}/.test("abab")); // false
-console.log(/(ab){2}/.test("abab")); // true
+console.log(/ab{2}/.test('abab')); // false
+console.log(/(ab){2}/.test('abab')); // true
 ```
 
 身份证长度有 15 位和 18 位两种，如果只匹配长度，可能会想当然地写成`\d{15,18}`，实际上这是错误的，因为它包括 15、16、17、18 这 4 种长度。因此，正确的写法如下：
 
 ```javascript
-/\d{15}(\d{3})?/
+/\d{15}(\d{3})?/;
 ```
 
 #### 捕获
@@ -3601,7 +3633,7 @@ console.log(/(ab){2}/.test("abab")); // true
 比如，要匹配诸如 2016 - 06 - 23 这样的日期字符串：
 
 ```javascript
-/(\d{4})-(\d{2})-(\d{2})/
+/(\d{4})-(\d{2})-(\d{2})/;
 ```
 
 与以往不同的是，年、月、日这三个数值被括号括起来了，从左到右的第 1 个、第 2 个、第 3 个括号，分别代表第 1、2、3 个捕获组。
@@ -3612,29 +3644,29 @@ ECMAScript 有 9 个用于存储捕获组的构造函数属性，如果使用的
 // RegExp.$1\RegExp.$2\RegExp.$3…… 到 RegExp.$9
 // 分别用于存储第一、第二……第九个匹配的捕获组。
 // 在调用 exec() 或 test() 方法时，这些属性会被自动填充
-console.log(/(\d{4})-(\d{2})-(\d{2})/.test('2016-06-23'));//true
-console.log(RegExp.$1);//2016
-console.log(RegExp.$2);//06
-console.log(RegExp.$3);//23
-console.log(RegExp.$4);//""
+console.log(/(\d{4})-(\d{2})-(\d{2})/.test('2016-06-23')); //true
+console.log(RegExp.$1); //2016
+console.log(RegExp.$2); //06
+console.log(RegExp.$3); //23
+console.log(RegExp.$4); //""
 ```
 
 再例如：
 
 ```javascript
 let reg = /(a+)(b*)xj/;
-let str = "aabbbxj";
-console.log(reg.test(str));//true
-console.log("$1的值:",RegExp.$1);//$1的值: aa
-console.log("$2的值:",RegExp.$2);//$2的值: bbb
-console.log("$3的值:",RegExp.$3);//$3的值:
+let str = 'aabbbxj';
+console.log(reg.test(str)); //true
+console.log('$1的值:', RegExp.$1); //$1的值: aa
+console.log('$2的值:', RegExp.$2); //$2的值: bbb
+console.log('$3的值:', RegExp.$3); //$3的值:
 ```
 
 而`exec()`方法是专门为捕获组而设计的，返回的数组中，第一项是与整个模式匹配的字符串， 其他项是与模式中的 ==捕获组匹配的字符串== ，如果要获取，那么可以通过指定数组的下标来进行获取，如下：
 
 ```javascript
 let reg = /(\d{4})-(\d{2})-(\d{2})/;
-let str = "2017-03-21";
+let str = '2017-03-21';
 let i = reg.exec(str);
 console.log(i);
 /*
@@ -3654,20 +3686,20 @@ console.log(i[3]); // 21
 捕获分组捕获的文本，不仅可以用于数据提取，也可以用于替换。字符串的`replace()`方法就是用于进行数据替换的，该方法接收两个参数，第一个参数为待查找的内容，而第二个参数为替换的内容。
 
 ```javascript
-let str = "2017-12-12";
-console.log(str.replace(/-/g,"."));
+let str = '2017-12-12';
+console.log(str.replace(/-/g, '.'));
 // 2017.12.12
 ```
 
->注：这里书写正则表达式的时候必须要写上模式修正符`g`，这样才能够进行全局匹配。
+> 注：这里书写正则表达式的时候必须要写上模式修正符`g`，这样才能够进行全局匹配。
 
 在`replace()`方法中也可以引用分组，形式还是用`$num`，其中 num 是对应分组的编号。
 
 ```javascript
 //把2017-03-23的形式变成03-23-2017
 let reg = /(\d{4})-(\d{2})-(\d{2})/;
-let str = "2017-03-23";
-console.log(str.replace(reg,"$2-$3-$1"));
+let str = '2017-03-23';
+console.log(str.replace(reg, '$2-$3-$1'));
 //03-23-2017
 ```
 
@@ -3688,7 +3720,7 @@ console.log(reg.test('ab')); // false
 
 ```javascript
 let reg = /(ab)(cd)\1xj/;
-let str = "abcdabxj";
+let str = 'abcdabxj';
 console.log(reg.test(str)); // true
 ```
 
@@ -3696,8 +3728,8 @@ console.log(reg.test(str)); // true
 
 ```javascript
 let reg = /(?:ab)(cd)\1xj/;
-let str = "abcdabxj";
-let str2 = "abcdcdxj";
+let str = 'abcdabxj';
+let str2 = 'abcdcdxj';
 console.log(reg.test(str)); // false
 console.log(reg.test(str2)); // true
 ```
@@ -3723,11 +3755,11 @@ console.log(/<([^>]+)>[\s\S]*?<\/\1>/.test('<a>123</b>')); // false
 
 ```javascript
 // 限定 abc 要出现 2 次 , 并且会对内容进行捕获
-console.log(/(abc){2}/.exec('abcabc')); 
+console.log(/(abc){2}/.exec('abcabc'));
 // [ 'abcabc', 'abc', index: 0, input: 'abcabc', groups: undefined ]
 
 // 同样是限定 abc 要出现 2 次 , 但是不会对内容进行捕获
-console.log(/(?:abc){2}/.exec('abcabc')); 
+console.log(/(?:abc){2}/.exec('abcabc'));
 // [ 'abcabc', index: 0, input: 'abcabc', groups: undefined ]
 ```
 
@@ -3780,7 +3812,7 @@ a|[ab]
 
 ### 7. 断言相关元字符（扩展）
 
-在正则表达式中，有些结构并不真正匹配文本，而只负责判断在某个位置左/右侧是否符合要求，这种结构被称为断言(assertion)，也称为锚点(anchor)，常见的断言有3种： ==单词边界、行开头结尾、环视== 。
+在正则表达式中，有些结构并不真正匹配文本，而只负责判断在某个位置左/右侧是否符合要求，这种结构被称为断言(assertion)，也称为锚点(anchor)，常见的断言有 3 种： ==单词边界、行开头结尾、环视== 。
 
 #### 单词边界
 
@@ -3792,10 +3824,10 @@ a|[ab]
 
 ```javascript
 let reg = /\bis\b/;
-let str = "this is a test";
+let str = 'this is a test';
 console.log(reg.exec(str));
 // [ 'is', index: 5, input: 'this is a test' ]
-console.log(reg.exec("is"));
+console.log(reg.exec('is'));
 // [ 'is', index: 0, input: 'is' ]
 ```
 
@@ -3805,8 +3837,8 @@ console.log(reg.exec("is"));
 
 ```javascript
 let reg = /^\d\w*/;
-let str1 = "1asd";
-let str2 = "qwe2";
+let str1 = '1asd';
+let str2 = 'qwe2';
 console.log(reg.test(str1)); // true
 console.log(reg.test(str2)); // false
 ```
@@ -3814,15 +3846,15 @@ console.log(reg.test(str2)); // false
 `^`和`$`的常用功能是删除字符串首尾多余的空白，类似于字符串对象的`trim()`方法。
 
 ```javascript
-let fnTrim = function(str){
-    return str.replace(/^\s+|\s+$/,'')
-}  
+let fnTrim = function (str) {
+  return str.replace(/^\s+|\s+$/, '');
+};
 console.log(fnTrim('      hello world   ')); // 'hello world'
 ```
 
 #### 环视
 
-环视，在不同的地方又称之为零宽断言，简称断言。环视强调的是它所在的位置，前面或者后面，必须满足环视表达式中的匹配情况，才能匹配成功。 
+环视，在不同的地方又称之为零宽断言，简称断言。环视强调的是它所在的位置，前面或者后面，必须满足环视表达式中的匹配情况，才能匹配成功。
 
 环视可以认为是虚拟加入到它所在位置的附加判断条件，并不消耗正则的匹配字符。
 
@@ -3849,7 +3881,7 @@ console.log(reg.test('BBC')); // fasle
 
 ```javascript
 let reg = /\w+(?=\.js)/;
-let str = "test.js";
+let str = 'test.js';
 console.log(reg.test(str)); // true
 ```
 
@@ -3857,11 +3889,11 @@ console.log(reg.test(str)); // true
 
 ```javascript
 let reg = /a(?=b)bc/; // 正则 a 后面必须书写 b
-let str1 = "abc";
-let str2 = "acc";
-let str3 = "abb";
-let str4 = "abbc";
-let str5 = "abcc";
+let str1 = 'abc';
+let str2 = 'acc';
+let str3 = 'abb';
+let str4 = 'abbc';
+let str5 = 'abcc';
 console.log(reg.test(str1)); // true
 console.log(reg.test(str2)); // false
 console.log(reg.test(str3)); // false
@@ -3874,12 +3906,12 @@ console.log(reg.test(str5)); // true
 如果像下面这样写，那么是不可能匹配上的。
 
 ```javascript
-let reg = /a(?=b)c/; 
-let str1 = "abc";
-let str2 = "acc";
-let str3 = "abb";
-let str4 = "abbc";
-let str5 = "abcc";
+let reg = /a(?=b)c/;
+let str1 = 'abc';
+let str2 = 'acc';
+let str3 = 'abb';
+let str4 = 'abbc';
+let str5 = 'abcc';
 console.log(reg.test(str1)); // false
 console.log(reg.test(str2)); // false
 console.log(reg.test(str3)); // false
@@ -3891,7 +3923,7 @@ console.log(reg.test(str5)); // false
 
 ```javascript
 let reg = /a(?!b)c/;
-let str = "ac";
+let str = 'ac';
 console.log(reg.test(str)); // true
 ```
 
@@ -3899,9 +3931,9 @@ console.log(reg.test(str)); // true
 
 ```javascript
 let reg = /a(?!b)b/;
-let str1 = "axb";
-let str2 = "abb";
-let str3 = "acb";
+let str1 = 'axb';
+let str2 = 'abb';
+let str3 = 'acb';
 console.log(reg.test(str1)); // false
 console.log(reg.test(str2)); // false
 console.log(reg.test(str3)); // false
@@ -3910,9 +3942,9 @@ console.log(reg.test(str3)); // false
 注意：环视虽然也用到括号，却与捕获型分组编号无关；但如果环视结构出现捕获型括号，则会影响分组
 
 ```javascript
-console.log(/ab(?=cd)/.exec("abcd"));
+console.log(/ab(?=cd)/.exec('abcd'));
 // [ 'ab', index: 0, input: 'abcd' ]
-console.log(/ab(?=(cd))/.exec("abcd"));
+console.log(/ab(?=(cd))/.exec('abcd'));
 // [ 'ab', 'cd', index: 0, input: 'abcd' ]
 ```
 
@@ -3927,8 +3959,8 @@ console.log(/ab(?=(cd))/.exec("abcd"));
 **i：**默认地，正则表达式是区分大小写的，通过设置标志`i`，可以忽略大小写（ignore case）。
 
 ```javascript
-console.log(/ab/.test("aB")); // false
-console.log(/ab/i.test("aB")); // true
+console.log(/ab/.test('aB')); // false
+console.log(/ab/i.test('aB')); // true
 ```
 
 **m：**默认地，正则表达式中的`^`和`$`匹配的是整个字符串的起始位置和结束位置，而通过设置标志`m`，开启多行模式，它们也能匹配字符串内部某一行文本的起始位置和结束位置。
@@ -3941,8 +3973,8 @@ console.log(/^b/m.test('a\nb')); // true
 **g：**默认地，第一次匹配成功后，正则对象就停止向下匹配了。`g`修饰符表示全局匹配（global），设置`g`标志后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。
 
 ```javascript
-console.log('1a,2a,3a'.replace(/a/,'b')); // 1b,2a,3a
-console.log('1a,2a,3a'.replace(/a/g,'b')); // 1b,2b,3b
+console.log('1a,2a,3a'.replace(/a/, 'b')); // 1b,2a,3a
+console.log('1a,2a,3a'.replace(/a/g, 'b')); // 1b,2b,3b
 ```
 
 ### 9. 优先级
@@ -3965,7 +3997,7 @@ console.log(/ab{2}/.test('abab')); // false
 console.log(/(ab){2}/.test('abab')); // true
 ```
 
->注意：选择符`|`的优先级最低，比起始和结束位置都要低
+> 注意：选择符`|`的优先级最低，比起始和结束位置都要低
 
 ```javascript
 console.log(/^ab|cd$/.test('abc')); // true
@@ -3979,11 +4011,11 @@ console.log(/^(ab|cd)$/.test('cd')); // true
 尽管 JavaScript 中的正则表达式功能比较完备，但与其他语言相比，缺少某些特性。下面列出了 JavaScript 的正则表达式所不支持的特性。
 
 - POSIX 字符组（只支持普通字符组和排除型字符组）
-- Unicode支持（只支持单个Unicode字符）
-- 匹配字符串开始和结尾的\A和\Z锚（只支持^和$）
+- Unicode 支持（只支持单个 Unicode 字符）
+- 匹配字符串开始和结尾的\A 和\Z 锚（只支持^和$）
 - 逆序环视（只支持顺序环视）
-- 命名分组（只支持0-9编号的捕获组）
-- 单行模式和注释模式（只支持m、i、g）
+- 命名分组（只支持 0-9 编号的捕获组）
+- 单行模式和注释模式（只支持 m、i、g）
 - 模式作用范围
 - 纯文本模式
 
@@ -4016,12 +4048,12 @@ console.log(reg.source); // test
 
 RegExp 的`exec()`或`test()`函数，如果设定了全局模式`g`，正则表达式的匹配就会从`lastIndex`的位置开始，并且在每次匹配成功之后重新设定`lastIndex`，继续往后匹配。这样，就可以在字符串中重复迭代，依次寻找各个匹配结果。
 
-但是，如果需要对不同字符串调用同一个RegExp的`exec()`或`test()`方法，这个变量也可能会带来意料之外的匹配结果，所以在更换字符串时，要显式地将RegExp的`lastIndex`置为 0。
+但是，如果需要对不同字符串调用同一个 RegExp 的`exec()`或`test()`方法，这个变量也可能会带来意料之外的匹配结果，所以在更换字符串时，要显式地将 RegExp 的`lastIndex`置为 0。
 
 ```javascript
 // exec()方法以数组形式返回匹配项
 let reg = /\w/g;
-let str = "abcd";
+let str = 'abcd';
 console.log(reg.lastIndex); // 0
 console.log(reg.exec(str)); // [ 'a', index: 0, input: 'abcd' ]
 console.log(reg.lastIndex); // 1
@@ -4058,39 +4090,39 @@ rightContext      $'                input字符串中lastMatch之后的文本
 // test()用于测试一个字符串是否匹配某个正则表达式，并返回一个布尔值
 let text = 'this has been a short summer';
 let pattern = /(.)hort/g;
-if(pattern.test(text)){
-    console.log(RegExp.input); // 'this has been a short summer'
-    console.log(RegExp.leftContext); // 'this has been a '
-    console.log(RegExp.rightContext); // ' summer'
-    console.log(RegExp.lastMatch); // 'short'
-    console.log(RegExp.lastParen); // 's'
-    console.log(RegExp.multiline); // undefined
-    console.log(RegExp['$_']); // 'this has been a short summer'
-    console.log(RegExp['$`']); // 'this has been a '
-    console.log(RegExp["$'"]); // ' summer'
-    console.log(RegExp['$&']); // 'short'
-    console.log(RegExp['$+']); // 's'
-    console.log(RegExp['$*']); // undefined        
+if (pattern.test(text)) {
+  console.log(RegExp.input); // 'this has been a short summer'
+  console.log(RegExp.leftContext); // 'this has been a '
+  console.log(RegExp.rightContext); // ' summer'
+  console.log(RegExp.lastMatch); // 'short'
+  console.log(RegExp.lastParen); // 's'
+  console.log(RegExp.multiline); // undefined
+  console.log(RegExp['$_']); // 'this has been a short summer'
+  console.log(RegExp['$`']); // 'this has been a '
+  console.log(RegExp["$'"]); // ' summer'
+  console.log(RegExp['$&']); // 'short'
+  console.log(RegExp['$+']); // 's'
+  console.log(RegExp['$*']); // undefined
 }
 ```
 
 JavaScript 有 9 个用于存储捕获组的构造函数属性，在调用`exec()`或`test()`方法时，这些属性会被自动填充。
 
->注：理论上，应该保存整个表达式匹配文本的 RegExp.$0 并不存在，值为 undefined。
+> 注：理论上，应该保存整个表达式匹配文本的 RegExp.$0 并不存在，值为 undefined。
 
 ```javascript
 // RegExp.$1,RegExp.$2,RegExp.$3...到 RegExp.$9 分别用于存储第一、第二……第九个匹配的捕获组
 let text = 'this has been a short summer';
 let pattern = /(..)or(.)/g;
-if(pattern.test(text)){
-    console.log(RegExp.$1);//sh
-    console.log(RegExp.$2);//t
+if (pattern.test(text)) {
+  console.log(RegExp.$1); //sh
+  console.log(RegExp.$2); //t
 }
 ```
 
 ### 实例方法
 
-RegExp 对象的实例方法共 5 个，分为两类。包括`toString()`、`toLocalString()`、`valueOf()`这3种对象通用方法和`test()`、`exec()`这2种正则匹配方法
+RegExp 对象的实例方法共 5 个，分为两类。包括`toString()`、`toLocalString()`、`valueOf()`这 3 种对象通用方法和`test()`、`exec()`这 2 种正则匹配方法
 
 **对象通用方法（扩展）**
 
@@ -4102,10 +4134,10 @@ toLocaleString():toLocaleString()方法返回正则表达式的字面量。
 valueOf():valueOf()方法返回返回正则表达式对象本身。
 ```
 
->注意：不论正则表达式的创建方式是哪种，这三个方法都只返回其字面量形式
+> 注意：不论正则表达式的创建方式是哪种，这三个方法都只返回其字面量形式
 
 ```javascript
-let pattern1 = new RegExp('[bc]at','gi');
+let pattern1 = new RegExp('[bc]at', 'gi');
 console.log(pattern1.toString()); // '/[bc]at/gi'
 console.log(pattern1.toLocaleString()); // '/[bc]at/gi'
 console.log(pattern1.valueOf()); // /[bc]at/gi
@@ -4124,7 +4156,7 @@ console.log(pattern2.valueOf()); // /[bc]at/gi
 
 ```javascript
 let reg = /test/;
-let str = "this is a test";
+let str = 'this is a test';
 console.log(reg.test(str)); // true
 ```
 
@@ -4138,21 +4170,21 @@ console.log(pattern.test('2016-06-23')); // true
 console.log(pattern.test('2016-06-23')); // false
 // 正确的做法应该是在验证不同字符串前，先将 lastIndex 重置为 0
 let pattern = /^\d{4}-\d{2}-\d{2}$/g;
-console.log(pattern.test('2016-06-23'));// true
+console.log(pattern.test('2016-06-23')); // true
 pattern.lastIndex = 0;
-console.log(pattern.test('2016-06-23'));// true
+console.log(pattern.test('2016-06-23')); // true
 ```
 
-前面有介绍过，JavaScript有 9 个用于存储捕获组的构造函数属性，在调用`exec()`或`test()`方法时，这些属性会被自动填充。
+前面有介绍过，JavaScript 有 9 个用于存储捕获组的构造函数属性，在调用`exec()`或`test()`方法时，这些属性会被自动填充。
 
->注意：理论上，应该保存整个表达式匹配文本的`RegExp.$0`并不存在，值为`undefined`。
+> 注意：理论上，应该保存整个表达式匹配文本的`RegExp.$0`并不存在，值为`undefined`。
 
 ```javascript
-if(/^(\d{4})-(\d{2})-(\d{2})$/.test('2016-06-23')){
-    console.log(RegExp.$1); // '2016'
-    console.log(RegExp.$2); // '06'
-    console.log(RegExp.$3); // '23'
-    console.log(RegExp.$0); // undefined
+if (/^(\d{4})-(\d{2})-(\d{2})$/.test('2016-06-23')) {
+  console.log(RegExp.$1); // '2016'
+  console.log(RegExp.$2); // '06'
+  console.log(RegExp.$3); // '23'
+  console.log(RegExp.$0); // undefined
 }
 ```
 
@@ -4185,39 +4217,39 @@ console.log(matches);
 let text = 'cat,bat,sat,fat';
 let pattern1 = /.at/;
 let matches = pattern1.exec(text);
-console.log(pattern1,matches);
-/* 
- *  /.at/ [ 'cat', index: 0, input: 'cat,bat,sat,fat' ] 
+console.log(pattern1, matches);
+/*
+ *  /.at/ [ 'cat', index: 0, input: 'cat,bat,sat,fat' ]
  */
 
 let text = 'cat,bat,sat,fat';
-matches = pattern1.exec(text);    
-console.log(pattern1,matches);    
+matches = pattern1.exec(text);
+console.log(pattern1, matches);
 /*
  *  /.at/ [ 'cat', index: 0, input: 'cat,bat,sat,fat' ]
- */  
+ */
 ```
 
-而在设置全局标志的情况下，每次调用exec()都会在字符串中继续查找新匹配项。
+而在设置全局标志的情况下，每次调用 exec()都会在字符串中继续查找新匹配项。
 
 ```javascript
 let text = 'cat,bat,sat,fat';
 let pattern2 = /.at/g;
 let matches = pattern2.exec(text);
-console.log(pattern2,matches);    
-/* 
+console.log(pattern2, matches);
+/*
  *  /.at/g [ 'cat', index: 0, input: 'cat,bat,sat,fat' ]
- */  
+ */
 
 let text = 'cat,bat,sat,fat';
 matches = pattern2.exec(text);
-console.log(pattern2,matches);    
-/* 
+console.log(pattern2, matches);
+/*
  *  /.at/g [ 'bat', index: 4, input: 'cat,bat,sat,fat' ]
- */  
+ */
 ```
 
->注意：用`exec()`方法找出匹配的所有位置和所有值。
+> 注意：用`exec()`方法找出匹配的所有位置和所有值。
 
 ```javascript
 let string = 'j1h342jg24g234j 3g24j1';
@@ -4226,8 +4258,8 @@ let valueArray = []; // 值
 let indexArray = []; // 位置
 let temp;
 while ((temp = pattern.exec(string)) != null) {
-    valueArray.push(temp[0]);
-    indexArray.push(temp.index);
+  valueArray.push(temp[0]);
+  indexArray.push(temp.index);
 }
 console.log(valueArray);
 console.log(indexArray);
@@ -4243,7 +4275,7 @@ console.log(indexArray);
 
 ### 1. 声明函数的方式
 
-####  构造器声明函数
+#### 构造器声明函数
 
 ```js
 var fun = new Function("console.log('Hello 这是我的第一个函数');");
@@ -4254,8 +4286,8 @@ var fun = new Function("console.log('Hello 这是我的第一个函数');");
 #### 函数表达式声明函数
 
 ```js
-var 变量 = function(){
-    // 函数体
+var 变量 = function () {
+  // 函数体
 };
 ```
 
@@ -4289,21 +4321,21 @@ JavaScript 里面关于函数的形参，有以下几个注意点:
 
 - 多个形参之间使用`,`隔开，声明形参就相当于在函数内部声明了对应的变量，但是并不赋值
 - 调用函数时解析器不会检查实参的类型，所以要注意，是否有可能会接收到非法的参数，如果有可能则需要对参数进行 ==类型的检查==
-- 调用函数时，解析器也不会检查实参的数量，==多余实参不会被赋值，如果实参的数量少于形参的数量，则没有对应实参的形参将是undefined== 
+- 调用函数时，解析器也不会检查实参的数量，==多余实参不会被赋值，如果实参的数量少于形参的数量，则没有对应实参的形参将是 undefined==
 - 实参可以是任意的数据类型，包括对象，当我们的参数过多时，可以将参数封装到一个对象中，然后通过对象传递。
 - 实参可以是一个对象，也可以是一个函数（经常将函数作为实参传递给另一函数）
 
-#### arguments参数
+#### arguments 参数
 
 当一个函数要被执行的时候，系统会在执行函数体代码前做一些初始化工作，其中之一就是为函数创建一个 arguments 的 ==伪数组对象== 。这个伪数组对象将包含调用函数时传递的所有的实际参数。
 
 ```js
-function test(x){
-    for(let i=0;i<arguments.length;i++){
-        console.log(arguments[i]);
-    }
+function test(x) {
+  for (let i = 0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+  }
 }
-test(1,2,3);
+test(1, 2, 3);
 // 1
 // 2
 // 3
@@ -4320,23 +4352,23 @@ test(1,2,3);
 不定参数是从 ECMAScript 6 开始新添加的功能，在最后一个形式参数前面添加 3 个点，会将所有的实参放入到一个数组里面，示例如下：
 
 ```javascript
-function test(a,...b){
-    console.log(a); // 1
-    console.log(b); // [2,3]
+function test(a, ...b) {
+  console.log(a); // 1
+  console.log(b); // [2,3]
 }
-test(1,2,3);
+test(1, 2, 3);
 ```
 
 这里的不定参数就是一个真正的数组，可以使用数组的相关方法
 
 ```javascript
-function test(a,...b){
-    console.log(a); // 1
-    console.log(b); // [2,3]
-    b.push(100);
-    console.log(b); // [ 2, 3, 100 ]
+function test(a, ...b) {
+  console.log(a); // 1
+  console.log(b); // [2,3]
+  b.push(100);
+  console.log(b); // [ 2, 3, 100 ]
 }
-test(1,2,3);
+test(1, 2, 3);
 ```
 
 还有一点需要注意的是，不定参数都是放在形式参数的最后面，如果不是放在最后，则会报错。
@@ -4355,44 +4387,44 @@ test(1,2,3);
 从 ECMAScript 6 开始，书写函数的时候可以给函数的形式参数一个默认值。这样如果在调用函数时没有传递相应的实际参数，就使用默认值。如果传递了相应的实际参数，则使用传过去的参数。
 
 ```javascript
-function test(name = "world"){
-    console.log("Hello,"+name);
+function test(name = 'world') {
+  console.log('Hello,' + name);
 }
-test("xiejie"); // Hello,xiejie
+test('xiejie'); // Hello,xiejie
 test(); // Hello,world
 ```
 
 如果参数是一个数组，要为这个数组设置默认值的话，写法稍微有些不同，如下：
 
 ```js
-let fn = function([a = 1,b = 2] = []){
-    console.log(a,b);
-}
+let fn = function ([a = 1, b = 2] = []) {
+  console.log(a, b);
+};
 fn(); // 1 2
-fn([3,4]); // 3 4
+fn([3, 4]); // 3 4
 ```
 
 包括后面我们要介绍的对象，也是可以设定默认值的，其写法和上面为数组设置默认值类似，如下：
 
 ```js
-let fn = function({name = 'xiejie',age = 18} = {}){
-    console.log(name,age);
-}
+let fn = function ({ name = 'xiejie', age = 18 } = {}) {
+  console.log(name, age);
+};
 fn(); // xiejie 18
-fn({name:"song",age:20}); // song 20
+fn({ name: 'song', age: 20 }); // song 20
 ```
 
 ### 3. 函数的返回值
 
 函数的返回值的关键字为`return`。代表要从函数体内部返回给外部的值
 
-在函数中return后的语句都不会执行，如果return语句后不跟任何值就相当于返回一个undefined，如果函数中不写return，则也会返回undefined。
+在函数中 return 后的语句都不会执行，如果 return 语句后不跟任何值就相当于返回一个 undefined，如果函数中不写 return，则也会返回 undefined。
 
 ```js
-let test = function(){
-    return 1;
-    console.log("Hello");
-}
+let test = function () {
+  return 1;
+  console.log('Hello');
+};
 let i = test();
 console.log(i); // 1
 ```
@@ -4401,25 +4433,25 @@ console.log(i); // 1
 
 ### 4. 作用域问题
 
-作用域指一个变量作用的范围，在JS中一共有3种作用域：全局作用域，函数作用域以及 eval 作用域。
+作用域指一个变量作用的范围，在 JS 中一共有 3 种作用域：全局作用域，函数作用域以及 eval 作用域。
 
 #### 全局作用域
 
-- 直接编写在script标签中的JS代码，都在全局作用域
+- 直接编写在 script 标签中的 JS 代码，都在全局作用域
 - 全局作用域在页面打开时创建，在页面关闭时销毁
-- 在全局作用域中有一个全局对象window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用
+- 在全局作用域中有一个全局对象 window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用
 - 在全局作用域中：
-  - 创建的变量都会作为window对象的属性保存
-  - 创建的函数都会作为window对象的方法保存
+  - 创建的变量都会作为 window 对象的属性保存
+  - 创建的函数都会作为 window 对象的方法保存
   - 全局作用域中的变量都是全局变量，在页面的任意的部分都可以访问的到
 
 #### 函数作用域
 
 - 函数作用域在编码的时候就确定了，一旦确实就不再变化
 - 在函数作用域中可以访问到全局作用域的变量；在全局作用域中无法访问到函数作用域的变量
-- 当在函数作用域操作一个变量时，它会先在自身作用域中寻找，如果有就直接使用；如果没有则向上一级作用域中寻找，直到找到全局作用域，如果全局作用域中依然没有找到，则会报错ReferenceError
-- 在函数中要访问全局变量可以使用window对象                                     
-- 在函数中，不使用var声明的变量都会成为全局变量
+- 当在函数作用域操作一个变量时，它会先在自身作用域中寻找，如果有就直接使用；如果没有则向上一级作用域中寻找，直到找到全局作用域，如果全局作用域中依然没有找到，则会报错 ReferenceError
+- 在函数中要访问全局变量可以使用 window 对象
+- 在函数中，不使用 var 声明的变量都会成为全局变量
 
 ### 5. 变量提升
 
@@ -4441,9 +4473,9 @@ let i = 10;
 如果我们在函数里面声明变量时没有添加关键字，那么默认将会是在全局环境中声明一个变量：
 
 ```javascript
-let test = function(){
-    i = 10;
-}
+let test = function () {
+  i = 10;
+};
 test();
 console.log(i); // 10
 ```
@@ -4456,22 +4488,22 @@ console.log(i); // 10
 
 ```js
 console.log(i); // ReferenceError: i is not defined
-let test = function(){
-    i = 10;
-}
+let test = function () {
+  i = 10;
+};
 test();
 ```
 
 可以看到这里会报错，显示的是"i is not defined"，从而证明了不具有变量提升的特性。
 
-### 6.  函数提升
+### 6. 函数提升
 
 所谓函数提升，是指当我们使用字面量方式来声明一个函数的时候，此时函数的声明会提升到当前作用域的最顶端，这意味着我们可以将函数的调用书写到函数的声明之前。
 
 ```javascript
 test(); // Hello!
-function test(){
-    console.log("Hello!");
+function test() {
+  console.log('Hello!');
 }
 // 等价于
 // test : pointer to  test()
@@ -4485,9 +4517,9 @@ function test(){
 
 ```javascript
 test();
-let test = function(){
-    console.log("Hello!");
-}
+let test = function () {
+  console.log('Hello!');
+};
 // ReferenceError: test is not defined
 ```
 
@@ -4495,9 +4527,9 @@ let test = function(){
 
 ```javascript
 console.log(test); // undefined
-var test = function(){
-    console.log("Hello!");
-}
+var test = function () {
+  console.log('Hello!');
+};
 console.log(test); // [Function: test]
 ```
 
@@ -4509,17 +4541,17 @@ console.log(test); // [Function: test]
 
 ```javascript
 let 变量 = (形式参数) => {
-    // 函数体
-}
+  // 函数体
+};
 ```
 
 箭头函数具体示例：
 
 ```javascript
 let test = (name) => {
-    console.log("Hello",name);
-}
-test("xiejie"); // Hello xiejie
+  console.log('Hello', name);
+};
+test('xiejie'); // Hello xiejie
 ```
 
 上面所介绍的，只是箭头函数的基本写法。实际上箭头函数根据形式参数和函数体的不同，书写的方式拥有一些变形。如下：
@@ -4527,24 +4559,24 @@ test("xiejie"); // Hello xiejie
 ```javascript
 // 如果没有参数
 let 变量 = () => {
-    // 函数体
-}
+  // 函数体
+};
 // 如果只有一个形参
-let 变量 = 形参 => {
-    // 函数体
-}
+let 变量 = (形参) => {
+  // 函数体
+};
 // 如果函数体只有一个返回值
-let 变量 = 形参 => expression
+let 变量 = (形参) => expression;
 ```
 
 例如：书写求立方根的箭头函数
 
 ```javascript
-let test = x => x*x*x;
+let test = (x) => x * x * x;
 console.log(test(3)); // 27
 ```
 
->注：从 ECMAScript 6 开始已经提供了专门用于求幂的运算符`**`来进行幂运算。
+> 注：从 ECMAScript 6 开始已经提供了专门用于求幂的运算符`**`来进行幂运算。
 
 #### 箭头函数的优点
 
@@ -4569,12 +4601,12 @@ console.log(test(3)); // 27
 所谓回调函数，通俗的来讲，就是指将一个函数作为参数传递给另外一个函数，然后在另外一个函数里面执行传递过去的函数，我们来看一个具体的示例，如下：
 
 ```javascript
-let test = function(fn){
-    fn();
-}
-let test2 = function(){
-    console.log("Hello World");
-}
+let test = function (fn) {
+  fn();
+};
+let test2 = function () {
+  console.log('Hello World');
+};
 test(test2); // Hello World
 ```
 
@@ -4583,14 +4615,14 @@ test(test2); // Hello World
 回调函数可以和其他参数一起传入到一个参数里面，如下：
 
 ```javascript
-let test = function(name,fn){
-    console.log(`My name is ${name}`);
-    fn();
-}
-let test2 = function(){
-    console.log("I'm coding");
-}
-test("xiejie",test2);
+let test = function (name, fn) {
+  console.log(`My name is ${name}`);
+  fn();
+};
+let test2 = function () {
+  console.log("I'm coding");
+};
+test('xiejie', test2);
 // My name is xiejie
 // I'm coding
 ```
@@ -4602,18 +4634,20 @@ test("xiejie",test2);
 使用`sort()`为数组进行排序的时候，默认是使用的 ASCII 码来进行的排序。如果想要按照数值来进行排序，就需要我们传递一个回调函数进去。这里我们一起来复习一下：
 
 ```javascript
-let arr = [0,12,3,7,-12,23];
-console.log(arr.sort(function(a,b){
+let arr = [0, 12, 3, 7, -12, 23];
+console.log(
+  arr.sort(function (a, b) {
     return a - b;
     // 降序就返回 b - a
-}));
+  })
+);
 ```
 
 甚至我们还可以使用前面小节所介绍过的箭头函数，将上面的排序写作如下：
 
 ```js
-let arr = [0,12,3,7,-12,23];
-console.log(arr.sort((a,b) => a - b));
+let arr = [0, 12, 3, 7, -12, 23];
+console.log(arr.sort((a, b) => a - b));
 ```
 
 在 JavaScript 里面，除了`sort()`以外，还有诸如`forEach()`，`map()`，`every()`，`some()`等函数，也是很常见的内置回调函数。
@@ -4623,14 +4657,14 @@ console.log(arr.sort((a,b) => a - b));
 `every()`是对数组的每一项运行给定的函数，如果该函数每一项都返回 true，则返回 true。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 将数组的每一项传入到回调函数，如果每一项返回 true，那么最终返回 true
-let i = arr.every(function(item){
-    if(item % 2 == 0){
-        return true;
-    }else{
-        return false;
-    }
+let i = arr.every(function (item) {
+  if (item % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
 });
 console.log(i); // false
 ```
@@ -4638,14 +4672,14 @@ console.log(i); // false
 与`every()`比较相似的是`some()`，该方法可以对数组的每一项运行指定的函数，如果该函数只要有一项返回 true 则返回 true。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 将数组的每一项传入到回调函数，如果有一项返回 true，那么最终返回 true
-let i = arr.some(function(item){
-    if(item % 2 == 0){
-        return true;
-    }else{
-        return false;
-    }
+let i = arr.some(function (item) {
+  if (item % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
 });
 console.log(i); // true
 ```
@@ -4653,14 +4687,14 @@ console.log(i); // true
 `filter()`中的 filter 是过滤的意思，这个方法会返回一个数组，数组里面返回过滤过的元素。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 将数组的每一项传入到回调函数，然后将返回为 true 的项目组成一个数组
-let i = arr.filter(function(item){
-    if(item % 2 == 0){
-        return true;
-    }else{
-        return false;
-    }
+let i = arr.filter(function (item) {
+  if (item % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
 });
 console.log(i); // [ 2, 4, 6, 8, 10 ]
 ```
@@ -4668,10 +4702,10 @@ console.log(i); // [ 2, 4, 6, 8, 10 ]
 `forEach()`方法在前面介绍数组遍历的时候，就已经见到过了。该方法就是简单的将数组每一项传入到函数，然后执行该函数里面的代码。需要注意一下的是，该回调函数没有返回值。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 将数组的每一项传入到回调函数，然后执行回调函数里面的操作
-let i = arr.forEach(function(item){
-    console.log(item);
+let i = arr.forEach(function (item) {
+  console.log(item);
 });
 console.log(i); // undefined
 ```
@@ -4679,22 +4713,22 @@ console.log(i); // undefined
 `map()`方法是对数组的每一项运行回调函数。最终返回一个数组，这个数组是每次调用函数后的运行结果。
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 将数组的每一项传入到回调函数，然后将返回的结果组成一个新的数组返回
-let i = arr.map(function(item){
-    if(item % 2 == 0){
-        return true;
-    }else{
-        return false;
-    }
+let i = arr.map(function (item) {
+  if (item % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
 });
 console.log(i);
 // [ false, true, false, true, false, true, false, true, false, true ]
 ```
 
->注：以上方法都不会改变原数组的值。
+> 注：以上方法都不会改变原数组的值。
 >
->并且这些方法都可以接收两个参数，第一个是数组的元素值，第二个是数组的索引。上面的例子中我们都只接收了一个参数，即数组的值。
+> 并且这些方法都可以接收两个参数，第一个是数组的元素值，第二个是数组的索引。上面的例子中我们都只接收了一个参数，即数组的值。
 
 #### 归并方法（扩展）
 
@@ -4704,17 +4738,17 @@ console.log(i);
 
 关于作为回调被传入的函数，里面又可以接收 4 个参数，分别是**前一项值**，**当前值**，**数组索引**和**数组对象**。
 
->注：这里的前一项值指的是上一次迭代时的计算结果。
+> 注：这里的前一项值指的是上一次迭代时的计算结果。
 
 这里我们可以将回调函数的参数打印出来看一下，如下：
 
 没有初始值的情况：
 
 ```javascript
-let arr = [1,2,3,4,5];
-let i = arr.reduce(function(pre,cur,index,arr){
-    console.log(pre,cur,index,arr);
-    return pre + cur
+let arr = [1, 2, 3, 4, 5];
+let i = arr.reduce(function (pre, cur, index, arr) {
+  console.log(pre, cur, index, arr);
+  return pre + cur;
 });
 console.log(i);
 // 1 2 1 [ 1, 2, 3, 4, 5 ]
@@ -4727,11 +4761,11 @@ console.log(i);
 有初始值的情况：
 
 ```javascript
-let arr = [1,2,3,4,5];
-let i = arr.reduce(function(pre,cur,index,arr){
-    console.log(pre,cur,index,arr);
-    return pre + cur
-},100);
+let arr = [1, 2, 3, 4, 5];
+let i = arr.reduce(function (pre, cur, index, arr) {
+  console.log(pre, cur, index, arr);
+  return pre + cur;
+}, 100);
 console.log(i);
 // 100 1 0 [ 1, 2, 3, 4, 5 ]
 // 101 2 1 [ 1, 2, 3, 4, 5 ]
@@ -4746,9 +4780,9 @@ console.log(i);
 下面的例子演示了使用`reduce()`方法来实现数值的累加：
 
 ```javascript
-let arr = [1,2,3,4,5,6,7,8,9,10];
-let i = arr.reduce(function(pre,cur){
-    return pre + cur;
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let i = arr.reduce(function (pre, cur) {
+  return pre + cur;
 });
 console.log(i); // 55
 ```
@@ -4773,25 +4807,26 @@ console.log(sum); // 110
 函数定义完，立即被调用，这种函数叫做立即执行函数，立即执行函数往往只会执行一次
 
 ```js
-(function(a,b){
-    console.log("a = "+a);
-    console.log("b = "+b);
-})(123,456);
+(function (a, b) {
+  console.log('a = ' + a);
+  console.log('b = ' + b);
+})(123, 456);
 ```
+
 IIFE 可以在执行一个任务的同时，将所有的变量都封装到函数的作用域里面，从而保证了全局的命名空间不会被很多变量名污染。
 
 通过 IIFE，我们可以对我们的代码进行分块。并且块与块之间不会互相影响，哪怕有同名的变量也没问题，因为 IIFE 也是函数，在函数内部声明的变量是一个局部变量，示例如下：
 
 ```js
 (function () {
-    //block A
-    var name = "xiejie";
-    console.log(`my name is ${name}`);
+  //block A
+  var name = 'xiejie';
+  console.log(`my name is ${name}`);
 })();
 (function () {
-    //block B
-    var name = "song";
-    console.log(`my name is ${name}`);
+  //block B
+  var name = 'song';
+  console.log(`my name is ${name}`);
 })();
 // my name is xiejie
 // my name is song
@@ -4809,26 +4844,26 @@ IIFE 可以在执行一个任务的同时，将所有的变量都封装到函数
 
 ```js
 function show(valid) {
-    if (valid) {
-        var a = 100;
-    }
-    console.log('a:', a);
+  if (valid) {
+    var a = 100;
+  }
+  console.log('a:', a);
 }
 show(true); // a: 100
 ```
 
-这个例子中，a变量是在`if`块中声明，但是它的外部仍然能输出它的结果。
+这个例子中，a 变量是在`if`块中声明，但是它的外部仍然能输出它的结果。
 
 解决这个问题有 2 种方法，第一：使用 ECMAScript 6 中的 let 关键字声明变量，这样它就有块级作用域。第二：使用 IIFE，示例如下：
 
 ```js
 function show(valid) {
-    if (valid) {
-        (function () {
-            var a = 100;
-        })();
-    }
-    console.log('a:', a);
+  if (valid) {
+    (function () {
+      var a = 100;
+    })();
+  }
+  console.log('a:', a);
 }
 show(true); // ReferenceError: a is not defined
 ```
@@ -4841,12 +4876,12 @@ show(true); // ReferenceError: a is not defined
 var b = 10;
 (function b() {
   b = 20;
-  console.log(b)
-})()
-// function b() { b = 20; console.log(b) } 
+  console.log(b);
+})();
+// function b() { b = 20; console.log(b) }
 ```
 
-> 当 *JavaScript* 解释器遇到非匿名立即执行函数（题目中的 *b*）时，会创建一个辅助的特定对象，然后将函数名称当作这个对象的属性，因此函数内部可以访问到 *b*，但是这个值又是只读的，所以对他的赋值并不生效，所以打印的结果还是这个函数，并且外部的值也没有发生更改。
+> 当 _JavaScript_ 解释器遇到非匿名立即执行函数（题目中的 _b_）时，会创建一个辅助的特定对象，然后将函数名称当作这个对象的属性，因此函数内部可以访问到 _b_，但是这个值又是只读的，所以对他的赋值并不生效，所以打印的结果还是这个函数，并且外部的值也没有发生更改。
 
 ### 10.函数属性和方法
 
@@ -4855,8 +4890,8 @@ var b = 10;
 表示函数的函数名
 
 ```javascript
-function test(){
-    console.log("Hello");
+function test() {
+  console.log('Hello');
 }
 console.log(test.name); // test
 ```
@@ -4864,9 +4899,9 @@ console.log(test.name); // test
 我们可以通过这个`name`属性来证明函数表达式的变量不是函数名，如下：
 
 ```javascript
-let test = function test2(){
-    console.log("Hello");
-}
+let test = function test2() {
+  console.log('Hello');
+};
 console.log(test.name); // test2
 ```
 
@@ -4877,21 +4912,21 @@ console.log(test.name); // test2
 具体示例如下：
 
 ```javascript
-const test = function (a, b, c) { }
+const test = function (a, b, c) {};
 console.log(test.length); // 3
 ```
 
 统计具有默认值之前的参数个数。
 
 ```js
-const test = function (a, b = 5, c) { }
+const test = function (a, b = 5, c) {};
 console.log(test.length); // 1
 ```
 
 不会包括剩余参数的个数。
 
 ```js
-const test = function (a, b, ...c) { }
+const test = function (a, b, ...c) {};
 console.log(test.length); // 2
 ```
 
@@ -4900,14 +4935,14 @@ console.log(test.length); // 2
 函数对象的`length`属性是表示 ==形式参数的个数== 。`arguments`伪数组对象的`length`属性是调用函数时实际参数的个数。如下：
 
 ```javascript
-let test = function(a,b,c){
-    console.log(arguments.length); // 5
-    console.log(arguments.callee.length); // 3
-}
-test(1,2,3,4,5);
+let test = function (a, b, c) {
+  console.log(arguments.length); // 5
+  console.log(arguments.callee.length); // 3
+};
+test(1, 2, 3, 4, 5);
 ```
 
-####  `caller`属性（扩展）
+#### `caller`属性（扩展）
 
 `caller`属性是函数对象本身的属性，它显示了函数的调用者。
 
@@ -4917,53 +4952,53 @@ test(1,2,3,4,5);
 
 ```html
 <body>
-    <script>
-        let test = function(){
-            console.log(test.caller);
-        }
-        test(); // null
-    </script>
+  <script>
+    let test = function () {
+      console.log(test.caller);
+    };
+    test(); // null
+  </script>
 </body>
 ```
 
 Node.js 中的全局执行环境中被调用：
 
 ```javascript
-let test = function(){
-    console.log(test.caller);
-}
+let test = function () {
+  console.log(test.caller);
+};
 test(); // [Function]
 ```
 
 被一个函数所调用：
 
 ```javascript
-let test = function(){
-    let test2 = function(){
-        console.log(test2.caller);
-        // [Function: test]
-        // 因为这个函数的调用者就是 test 函数
-    }
-    test2();
-}
+let test = function () {
+  let test2 = function () {
+    console.log(test2.caller);
+    // [Function: test]
+    // 因为这个函数的调用者就是 test 函数
+  };
+  test2();
+};
 test();
 ```
 
-####  `callee`属性（扩展）
+#### `callee`属性（扩展）
 
 `callee`是`arguments`对象的一个属性，该属性是一个指针，指向拥有这个`arguments`对象的函数
 
 ```javascript
-let test = function(){
-    let test2 = function(){
-        let test3 = function(){
-            console.log(arguments.callee);
-            // [Function: test3]
-        }
-        test3();
-    }
-    test2();
-}
+let test = function () {
+  let test2 = function () {
+    let test3 = function () {
+      console.log(arguments.callee);
+      // [Function: test3]
+    };
+    test3();
+  };
+  test2();
+};
 test();
 ```
 
@@ -4971,13 +5006,13 @@ test();
 
 ```javascript
 // 计算阶乘的递归函数
-let test = function(i){
-    if(i == 1){
-        return 1;
-    }else{
-        return i * test(i-1); // 这里就和函数名紧紧的关联了起来
-    }
-}
+let test = function (i) {
+  if (i == 1) {
+    return 1;
+  } else {
+    return i * test(i - 1); // 这里就和函数名紧紧的关联了起来
+  }
+};
 console.log(test(3));
 ```
 
@@ -4985,18 +5020,18 @@ console.log(test(3));
 
 ```javascript
 // 计算阶乘的递归函数
-let test = function(i){
-    if(i === 1){
-        return 1;
-    }else{
-        return i * test(i-1); // 这里就和函数名紧紧的关联了起来
-    }
-}
+let test = function (i) {
+  if (i === 1) {
+    return 1;
+  } else {
+    return i * test(i - 1); // 这里就和函数名紧紧的关联了起来
+  }
+};
 let test2 = test; // 将阶乘函数赋值给 test2
 // 改变 test 这个阶乘函数的函数体
-test = function(){
-    console.log("我已经改变了");
-}
+test = function () {
+  console.log('我已经改变了');
+};
 console.log(test2(3));
 // 我已经改变了
 // NaN
@@ -5006,18 +5041,18 @@ console.log(test2(3));
 
 ```javascript
 // 计算阶乘的递归函数
-let test = function(i){
-    if(i == 1){
-        return 1;
-    }else{
-        return i * arguments.callee(i-1); // callee 指向拥有 arguments 对象的函数
-    }
-}
+let test = function (i) {
+  if (i == 1) {
+    return 1;
+  } else {
+    return i * arguments.callee(i - 1); // callee 指向拥有 arguments 对象的函数
+  }
+};
 let test2 = test; // 将阶乘函数赋值给 test2
 // 改变 test 这个阶乘函数的函数体
-test = function(){
-    console.log("我已经改变了");
-}
+test = function () {
+  console.log('我已经改变了');
+};
 console.log(test2(3)); // 6
 ```
 
@@ -5025,31 +5060,31 @@ console.log(test2(3)); // 6
 
 ### 1. 经典真题
 
-- *use strict* 是什么意思 ? 使用它区别是什么？
+- _use strict_ 是什么意思 ? 使用它区别是什么？
 
 ### 2. 什么是严格模式
 
-严格模式是从 *ES5* 开始新增的一种方式，是采用具有限制性 *JavaScript* 变体的一种方式，从而使代码隐式地脱离“马虎模式/稀松模式/懒散模式“（*sloppy*）模式。
+严格模式是从 _ES5_ 开始新增的一种方式，是采用具有限制性 _JavaScript_ 变体的一种方式，从而使代码隐式地脱离“马虎模式/稀松模式/懒散模式“（_sloppy_）模式。
 
 设立"严格模式"的目的，主要有以下几个：
 
-- 消除 *Javascript* 语法的一些不合理、不严谨之处，减少一些怪异行为;
+- 消除 _Javascript_ 语法的一些不合理、不严谨之处，减少一些怪异行为;
 - 消除代码运行的一些不安全之处，保证代码运行的安全；
 - 提高编译器效率，增加运行速度；
-- 为未来新版本的 *Javascript* 做好铺垫。
+- 为未来新版本的 _Javascript_ 做好铺垫。
 
-“严格模式”体现了 *Javascript* 更合理、更安全、更严谨的发展方向，支持严格模式的浏览器有：*Internet Explorer 10 +、 Firefox 4+ Chrome 13+、 Safari 5.1+、 Opera 12+*。
+“严格模式”体现了 _Javascript_ 更合理、更安全、更严谨的发展方向，支持严格模式的浏览器有：_Internet Explorer 10 +、 Firefox 4+ Chrome 13+、 Safari 5.1+、 Opera 12+_。
 
 在“严格模式下”，同样的代码，可能会有不一样的运行结果。一些在“正常模式”下可以运行的语句，在“严格模式”下将不能运行。
 
-掌握这些内容，有助于更细致深入地理解 *Javascript*，让你变成一个更好的程序员。
+掌握这些内容，有助于更细致深入地理解 _Javascript_，让你变成一个更好的程序员。
 
 ### 3. 开启严格模式
 
 进入“严格模式”的标志，是下面这行语句：
 
 ```js
-"use strict";
+'use strict';
 ```
 
 老版本的浏览器会把它当作一行普通字符串，加以忽略。
@@ -5058,42 +5093,42 @@ console.log(test2(3)); // 6
 
 **针对整个脚本文件**
 
-将 *“use strict”* 放在脚本文件的第一行，则整个脚本都将以“严格模式”运行。
+将 _“use strict”_ 放在脚本文件的第一行，则整个脚本都将以“严格模式”运行。
 
 如果这行语句不在第一行，则无效，整个脚本以“正常模式”运行。如果不同模式的代码文件合并成一个文件，这一点需要特别注意。
 
 ```js
-"use strict";
-console.log("这是严格模式。");
+'use strict';
+console.log('这是严格模式。');
 ```
 
-在上面的代码中，我们第一行书写了 *“use strict”*，所以整个代码会进入到严格模式执行。
+在上面的代码中，我们第一行书写了 _“use strict”_，所以整个代码会进入到严格模式执行。
 
 ```html
 <script>
-  "use strict";
-  console.log("这是严格模式。");
+  'use strict';
+  console.log('这是严格模式。');
 </script>
 
 <script>
-  console.log("这是正常模式。");
+  console.log('这是正常模式。');
 </script>
 ```
 
-上面的代码表示，一个网页中依次有两段 *Javascript* 代码。前一个 *script* 标签是严格模式，后一个不是。
+上面的代码表示，一个网页中依次有两段 _Javascript_ 代码。前一个 _script_ 标签是严格模式，后一个不是。
 
 **针对单个函数**
 
-将 *“use strict”* 放在函数体的第一行，则整个函数以“严格模式”运行。
+将 _“use strict”_ 放在函数体的第一行，则整个函数以“严格模式”运行。
 
 ```js
-function strict(){
-  "use strict";
-  return "这是严格模式。";
+function strict() {
+  'use strict';
+  return '这是严格模式。';
 }
 
 function notStrict() {
-  return "这是正常模式。";
+  return '这是正常模式。';
 }
 ```
 
@@ -5102,29 +5137,29 @@ function notStrict() {
 因为第一种调用方法不利于文件合并，所以更好的做法是，借用第二种方法，将整个脚本文件放在一个立即执行的匿名函数之中。
 
 ```js
-(function (){
-  "use strict";
+(function () {
+  'use strict';
   // some code here
 })();
 ```
 
 ### 4. 严格模式和普通模式区别
 
-接下来，我们就来看一下严格模式下对 *Javascript* 的语法和行为，都做了哪些改变。
+接下来，我们就来看一下严格模式下对 _Javascript_ 的语法和行为，都做了哪些改变。
 
-**没有使用 *var* 声明的变量不能使用**
+**没有使用 _var_ 声明的变量不能使用**
 
 在普通模式下，我们可以使用一个未声明的变量，此时该变量会成为一个全局变量。但是这种使用方式在严格模式下会报错。
 
 ```js
-"use strict"
-a=10; // ReferenceError: a is not defined
-console.log(a)
-function sum(){
-	var a=10;
-	console.log(a)
+'use strict';
+a = 10; // ReferenceError: a is not defined
+console.log(a);
+function sum() {
+  var a = 10;
+  console.log(a);
 }
-sum()
+sum();
 ```
 
 **删除变量和不存在的属性会报错**
@@ -5134,7 +5169,7 @@ sum()
 在严格模式下则会保存，例如：
 
 ```js
-"use strict"
+'use strict';
 var i = 10;
 delete i; // SyntaxError: Delete of an unqualified identifier in strict mode.
 console.log(i); // 10
@@ -5145,21 +5180,21 @@ console.log(i); // 10
 在普通模式下，函数中两个形参名相同也不会报错，只不过后面的形参所接收到的值会覆盖前面的同名形参。
 
 ```js
-function a(b,b){
-    console.log(b); // 2
+function a(b, b) {
+  console.log(b); // 2
 }
-a(1, 2)   
+a(1, 2);
 ```
 
 但是在严格模式下，相同的形参名会报错。
 
 ```js
-"use strict"
+'use strict';
 // SyntaxError: Duplicate parameter name not allowed in this context
-function a(b,b){
-    console.log(b);
+function a(b, b) {
+  console.log(b);
 }
-a(1, 2)   
+a(1, 2);
 ```
 
 **对象不能有重名的属性**
@@ -5167,89 +5202,88 @@ a(1, 2)
 正常模式下，如果对象有多个重名属性，最后赋值的那个属性会覆盖前面的值。严格模式下，这属于语法错误。
 
 ```js
-"use strict";
+'use strict';
 var o = {
   p: 1,
-  p: 2
+  p: 2,
 }; // 语法错误
 ```
 
 **禁止八进制表示法**
 
-正常模式下，整数的第一位如果是 *0*，表示这是八进制数，比如 *010* 等于十进制的 *8*。
+正常模式下，整数的第一位如果是 _0_，表示这是八进制数，比如 _010_ 等于十进制的 _8_。
 
 ```js
 var i = 010;
 console.log(i); // 8
 ```
 
-严格模式禁止这种表示法，整数第一位为 *0*，将报错。
+严格模式禁止这种表示法，整数第一位为 _0_，将报错。
 
 ```js
-"use strict"
+'use strict';
 var i = 010; // SyntaxError: Octal literals are not allowed in strict mode.
 console.log(i);
 ```
 
-**函数内部 *this* 值为 *undefined***
+**函数内部 _this_ 值为 _undefined_**
 
-在普通模式下，函数中的 *this* 在以函数的形式被调用时，指向全局对象。而在严格模式中，得到的值为 *undefined*。
+在普通模式下，函数中的 _this_ 在以函数的形式被调用时，指向全局对象。而在严格模式中，得到的值为 _undefined_。
 
 ```js
-"use strict"
-function a(){
-    console.log(this); // undefined
+'use strict';
+function a() {
+  console.log(this); // undefined
 }
 a();
 ```
 
-**创设 *eval* 作用域**
+**创设 _eval_ 作用域**
 
-正常模式下，*Javascript* 语言有两种变量作用域（*scope*）：全局作用域和函数作用域。
+正常模式下，_Javascript_ 语言有两种变量作用域（_scope_）：全局作用域和函数作用域。
 
-严格模式创设了第三种作用域：*eval* 作用域。
+严格模式创设了第三种作用域：_eval_ 作用域。
 
-正常模式下，*eval* 语句的作用域，取决于它处于全局作用域，还是处于函数作用域。
+正常模式下，_eval_ 语句的作用域，取决于它处于全局作用域，还是处于函数作用域。
 
-严格模式下，*eval* 语句本身就是一个作用域，不再能够生成全局变量了，它所生成的变量只能用于 *eval* 内部。
+严格模式下，_eval_ 语句本身就是一个作用域，不再能够生成全局变量了，它所生成的变量只能用于 _eval_ 内部。
 
 ```js
-"use strict";
+'use strict';
 var x = 2;
-console.info(eval("var x = 5; x")); // 5
+console.info(eval('var x = 5; x')); // 5
 console.info(x); // 2
 ```
 
 **保留字**
 
-为了向将来 *Javascript* 的新版本过渡，严格模式新增了一些保留字：*implements, interface, let, package, private, protected, public, static, yield*。使用这些词作为变量名将会报错。
+为了向将来 _Javascript_ 的新版本过渡，严格模式新增了一些保留字：_implements, interface, let, package, private, protected, public, static, yield_。使用这些词作为变量名将会报错。
 
 ```js
-"use strict";
-var public = "hello world" // SyntaxError: Unexpected strict mode reserved word
+'use strict';
+var public = 'hello world'; // SyntaxError: Unexpected strict mode reserved word
 console.log(public);
 ```
 
 更多关于严格模式的内容，可以参阅 ：
 
-*MDN*：*https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Strict_mode*
+_MDN_：*https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Strict_mode*
 
-《*Javascript* 严格模式详解 *By* 阮一峰》：*http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html*
+《_Javascript_ 严格模式详解 _By_ 阮一峰》：*http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html*
 
 ### 5. 真题解答
 
-- *use strict* 是什么意思 ? 使用它区别是什么？
+- _use strict_ 是什么意思 ? 使用它区别是什么？
 
 > 参考答案：
 >
-> *use strict* 代表开启严格模式，这种模式使得 *Javascript* 在更严格的条件下运行，实行更严格解析和错误处理。
+> _use strict_ 代表开启严格模式，这种模式使得 _Javascript_ 在更严格的条件下运行，实行更严格解析和错误处理。
 >
 > 开启“严格模式”的优点：
 >
-> - 消除 *Javascript* 语法的一些不合理、不严谨之处，减少一些怪异行为;
+> - 消除 _Javascript_ 语法的一些不合理、不严谨之处，减少一些怪异行为;
 > - 消除代码运行的一些不安全之处，保证代码运行的安全；
 > - 提高编译器效率，增加运行速度；
-> - 为未来新版本的 *Javascript* 做好铺垫。
+> - 为未来新版本的 _Javascript_ 做好铺垫。
 >
 > 回答一些具体的严格模式下和普通模式之间的区别。
-

@@ -1,6 +1,13 @@
 ---
 title: 跨域问题及解决方案
 order: 3
+category:
+  - 前端
+tag:
+  - ajax
+  - 通信
+  - 同源策略
+  - 跨域
 ---
 
 ## 一、同源策略及跨域问题
@@ -25,7 +32,7 @@ order: 3
 
 `http://localhost:7001/index.html`的源为`http://localhost:7001`
 
-两个URL地址的源**完全相同**，则称之为**同源**，否则称之为**异源（跨域）**
+两个 URL 地址的源**完全相同**，则称之为**同源**，否则称之为**异源（跨域）**
 
 ![image-20230112163455982](./images/202301121634016.png)
 
@@ -35,7 +42,7 @@ order: 3
 
 - **网络通信**
 
-  a元素的跳转；加载css、js、图片等；AJAX等等
+  a 元素的跳转；加载 css、js、图片等；AJAX 等等
 
 - JS API
 
@@ -51,7 +58,7 @@ order: 3
 
 ### 3. 网络中的跨域
 
-当浏览器运行页面后，会发出很多的网络请求，例如CSS、JS、图片、AJAX等等
+当浏览器运行页面后，会发出很多的网络请求，例如 CSS、JS、图片、AJAX 等等
 
 请求页面的源称之为**页面源**，在该页面中发出的请求称之为**目标源**。
 
@@ -64,7 +71,7 @@ order: 3
 浏览器出于多方面的考量，制定了非常繁杂的规则来限制各种跨域请求，但总体的原则非常简单：
 
 - 对标签发出的跨域请求轻微限制
-- 对AJAX发出的跨域请求**严厉限制**
+- 对 AJAX 发出的跨域请求**严厉限制**
 
 ![image-20230112201027855](./images/202301122010888.png)
 
@@ -74,24 +81,24 @@ order: 3
 
 CORS（Cross-Origin Resource Sharing）是最正统的跨域解决方案，同时也是浏览器推荐的解决方案。
 
-CORS是一套规则，用于帮助浏览器判断是否校验通过。
+CORS 是一套规则，用于帮助浏览器判断是否校验通过。
 
 ![image-20230112202539003](./images/202301122025029.png)
 
-CORS的基本理念是：
+CORS 的基本理念是：
 
 - 只要服务器明确表示**允许**，则校验**通过**
 - 服务器明确拒绝或没有表示，则校验不通过
 
-**所以，使用CORS解决跨域，必须要保证服务器是「自己人」**
+**所以，使用 CORS 解决跨域，必须要保证服务器是「自己人」**
 
 #### 请求分类
 
-CORS将请求分为两类：==简单请求== 和 ==预检请求==。
+CORS 将请求分为两类：==简单请求== 和 ==预检请求==。
 
 对不同种类的请求它的规则有所区别。
 
-所以要理解CORS，首先要理解它是如何划分请求的。
+所以要理解 CORS，首先要理解它是如何划分请求的。
 
 ##### 简单请求
 
@@ -101,7 +108,7 @@ CORS将请求分为两类：==简单请求== 和 ==预检请求==。
 
 - 请求方法是`GET`、`POST`、`HEAD`之一
 
-- 头部字段满足CORS安全规范，详见 [W3C](https://fetch.spec.whatwg.org/#cors-safelisted-request-header)
+- 头部字段满足 CORS 安全规范，详见 [W3C](https://fetch.spec.whatwg.org/#cors-safelisted-request-header)
 
   > 浏览器默认自带的头部字段都是满足安全规范的，只要开发者不改动和新增头部，就不会打破此条规则
 
@@ -161,11 +168,11 @@ fetch('https://douyin.com', {
 
 2. 发送真实请求（和简单请求一致）
 
-#### 细节1 - 关于cookie
+#### 细节 1 - 关于 cookie
 
-默认情况下，ajax的跨域请求并不会附带cookie，这样一来，某些需要权限的操作就无法进行
+默认情况下，ajax 的跨域请求并不会附带 cookie，这样一来，某些需要权限的操作就无法进行
 
-不过可以通过简单的配置就可以实现附带cookie
+不过可以通过简单的配置就可以实现附带 cookie
 
 ```js
 // xhr
@@ -174,13 +181,13 @@ xhr.withCredentials = true;
 
 // fetch api
 fetch(url, {
-  credentials: "include"
-})
+  credentials: 'include',
+});
 ```
 
-这样一来，该跨域的ajax请求就是一个*附带身份凭证的请求*
+这样一来，该跨域的 ajax 请求就是一个*附带身份凭证的请求*
 
-当一个请求需要附带cookie时，无论它是简单请求，还是预检请求，都会在请求头中添加`cookie`字段
+当一个请求需要附带 cookie 时，无论它是简单请求，还是预检请求，都会在请求头中添加`cookie`字段
 
 而服务器响应时，需要明确告知客户端：服务器允许这样的凭据
 
@@ -188,11 +195,11 @@ fetch(url, {
 
 对于一个附带身份凭证的请求，若服务器没有明确告知，浏览器仍然视为跨域被拒绝。
 
-另外要特别注意的是：**对于附带身份凭证的请求，服务器不得设置 `Access-Control-Allow-Origin 的值为*`**。这就是为什么不推荐使用*的原因
+另外要特别注意的是：**对于附带身份凭证的请求，服务器不得设置 `Access-Control-Allow-Origin 的值为*`**。这就是为什么不推荐使用\*的原因
 
-#### 细节2 - 关于跨域获取响应头
+#### 细节 2 - 关于跨域获取响应头
 
-在跨域访问时，JS只能拿到一些最基本的响应头，如：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma，如果要访问其他头，则需要服务器设置本响应头。
+在跨域访问时，JS 只能拿到一些最基本的响应头，如：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma，如果要访问其他头，则需要服务器设置本响应头。
 
 `Access-Control-Expose-Headers`头让服务器把允许浏览器访问的头放入白名单，例如：
 
@@ -200,11 +207,11 @@ fetch(url, {
 Access-Control-Expose-Headers: authorization, a, b
 ```
 
-这样JS就能够访问指定的响应头了。
+这样 JS 就能够访问指定的响应头了。
 
 ### 2. JSONP
 
-在很久很久以前...并没有CORS方案
+在很久很久以前...并没有 CORS 方案
 
 ![image-20230112205454350](./images/202301122054396.png)
 
@@ -212,9 +219,9 @@ Access-Control-Expose-Headers: authorization, a, b
 
 ![image-20230112205613983](./images/202301122056031.png)
 
-虽然可以解决问题，但JSONP有着明显的缺陷：
+虽然可以解决问题，但 JSONP 有着明显的缺陷：
 
-- 仅能使用GET请求
+- 仅能使用 GET 请求
 
 - 容易产生安全隐患
 
@@ -222,11 +229,11 @@ Access-Control-Expose-Headers: authorization, a, b
 
 - 容易被非法站点恶意调用
 
-**因此，除非是某些特殊的原因，否则永远不应该使用JSONP**
+**因此，除非是某些特殊的原因，否则永远不应该使用 JSONP**
 
 ### 3. 代理
 
-CORS和JSONP均要求服务器是「自己人」
+CORS 和 JSONP 均要求服务器是「自己人」
 
 那如果不是呢？
 

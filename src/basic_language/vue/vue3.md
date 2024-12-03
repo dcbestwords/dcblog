@@ -1,6 +1,11 @@
 ---
 title: Vue3基础
 icon: vuejs fa-brands
+category:
+  - 前端
+tag:
+  - 框架
+  - vue
 ---
 
 <p><img src="./images/icon.png" alt style="width: 300px;" /></p>
@@ -297,6 +302,7 @@ setup(){
 #### Vue3.0 的响应式
 
 - 实现原理:
+
   - 通过 Proxy（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。
   - 通过 Reflect（反射）: 对源对象的属性进行操作。
   - MDN 文档中描述的 Proxy 与 Reflect：

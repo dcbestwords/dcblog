@@ -2,6 +2,11 @@
 title: 模块化编程
 order: 2
 icon: cubes fas
+category:
+  - 前端
+tag:
+  - 模块化
+  - esm
 ---
 
 ## 一、模块化发展史

@@ -1,6 +1,11 @@
 ---
 title: 开发服务器
 order: 4
+category:
+  - 前端
+tag:
+  - 模块化
+  - webpack
 ---
 
 ## 开发服务器
@@ -10,11 +15,11 @@ order: 4
 1. 编写代码
 2. 控制台运行命令完成打包
 3. 打开页面查看效果
-4. 继续编写代码，回到步骤2
+4. 继续编写代码，回到步骤 2
 
 并且，我们往往希望把最终生成的代码和页面部署到服务器上，来模拟真实环境
 
-为了解决这些问题，webpack官方制作了一个单独的库：`webpack-dev-server`
+为了解决这些问题，webpack 官方制作了一个单独的库：`webpack-dev-server`
 
 首先需要在项目中安装 `webpack-dev-server`，安装命令为:
 
@@ -68,12 +73,12 @@ devServer:{
 ```
 
 前端访问代码：
+
 ```js
-async function test(){
-    let result = await fetch("/api/user");
-    let json = await result.json()
-    console.log(json);
+async function test() {
+  let result = await fetch('/api/user');
+  let json = await result.json();
+  console.log(json);
 }
 test();
 ```
-

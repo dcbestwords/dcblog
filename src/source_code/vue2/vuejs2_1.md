@@ -1,13 +1,18 @@
 ---
 title: Vue2源码（功能篇）
 star: true
+order: 1
+category:
+  - 源码解析
+tag:
+  - vue
 ---
 
 ## 一、组件挂载
 
 ![image-20230922182344463](./images/image-20230922182344463.png)
 
-## 二、生成vnode
+## 二、生成 vnode
 
 `_render`函数的总流程大致如下：
 
@@ -18,7 +23,7 @@ star: true
 假设组件标签如下
 
 ```vue
-<HelloWorld id="js_hello" :flag="flag" msg="Welcome to Your Vue.js App"/>
+<HelloWorld id="js_hello" :flag="flag" msg="Welcome to Your Vue.js App" />
 ```
 
 ```js {2-13}
@@ -48,17 +53,17 @@ star: true
 }
 ```
 
-组件占位符VNode 里面存储子组件Vue实例的构造函数、以及存储传给子组件的数据。他的作用其实就是一个占位符。当子组件的DOM创建完成，会将 DOM 赋值给组件占位符VNode 的`elm` 属性。而渲染时使用的就是这个`elm`。
+组件占位符 VNode 里面存储子组件 Vue 实例的构造函数、以及存储传给子组件的数据。他的作用其实就是一个占位符。当子组件的 DOM 创建完成，会将 DOM 赋值给组件占位符 VNode 的`elm` 属性。而渲染时使用的就是这个`elm`。
 
 ![image-20230922172952626](./images/image-20230922172952626.png)
 
-- `vm.$vnode = parentVnode`组件实例的`$vnode`属性指向组件的占位符VNode
+- `vm.$vnode = parentVnode`组件实例的`$vnode`属性指向组件的占位符 VNode
 - `vm.$options._parentVnode = parentVnode;`
-- `vnode.parent = parentVnode`组件渲染VNode的`parent`属性指向组件的占位符VNode
+- `vnode.parent = parentVnode`组件渲染 VNode 的`parent`属性指向组件的占位符 VNode
 
 ![](./images/IMG_0107.png)
 
-### 2. 渲染VNode 数据结构
+### 2. 渲染 VNode 数据结构
 
 假设组件内容如下
 
@@ -73,7 +78,7 @@ star: true
 ```js
 {
     children: [{  // 子元素
-        context: {}, 
+        context: {},
         data: { // 组件标签上的属性或者 render 函数的第二个参数
             staticClass: 'hello',
         },
@@ -99,12 +104,12 @@ star: true
 }
 ```
 
-组件占位符VNode 和渲染VNode 的区别:
+组件占位符 VNode 和渲染 VNode 的区别:
 
-- 组件占位符VNode，是一个占位符；描述的是 ==组件标签== 。存储传递给子组件的信息`componentOptions`
-- 渲染VNode，描述普通标签。存储标签信息。
+- 组件占位符 VNode，是一个占位符；描述的是 ==组件标签== 。存储传递给子组件的信息`componentOptions`
+- 渲染 VNode，描述普通标签。存储标签信息。
 
-> vue中将`template`编译为`render`函数并挂载到组件实例的`$options`中，其中`render`函数使用了如下方式进行包裹以便在模板中可以直接访问组件实例的属性和方法。
+> vue 中将`template`编译为`render`函数并挂载到组件实例的`$options`中，其中`render`函数使用了如下方式进行包裹以便在模板中可以直接访问组件实例的属性和方法。
 >
 > ```js
 > with(this){return ${code}}
@@ -112,7 +117,7 @@ star: true
 
 ## 三、data
 
-在组件实例化（ ==new vue | vm== ）时会进行组件的初始化（ ==_init== ），初始化阶段操作的主要对象是`vm.$options`，即用户自定义的配置对象，会将 `data`、`props`、`computed`、`watch` 设置为 ==响应式对象== ，另外为了方便用户的操作，将配置项中的部分内容挂载到组件实例上。
+在组件实例化（ ==new vue | vm== ）时会进行组件的初始化（ ==\_init== ），初始化阶段操作的主要对象是`vm.$options`，即用户自定义的配置对象，会将 `data`、`props`、`computed`、`watch` 设置为 ==响应式对象== ，另外为了方便用户的操作，将配置项中的部分内容挂载到组件实例上。
 
 `vm._data`
 
@@ -125,18 +130,18 @@ star: true
 ![observer.jpg](./images/1782631879236.png)
 
 ```js
-data = vm._data = typeof data === "function" ? getData(data, vm) : data || {};
+data = vm._data = typeof data === 'function' ? getData(data, vm) : data || {};
 proxy(vm, `_data`, key); // 代理到组件属性
-observe(data, true /* asRootData */) // 添加响应式
+observe(data, true /* asRootData */); // 添加响应式
 
 const dataDef = {};
 dataDef.get = function () {
-    return this._data;
+  return this._data;
 };
-Object.defineProperty(Vue.prototype, "$data", dataDef); 
+Object.defineProperty(Vue.prototype, '$data', dataDef);
 ```
 
-在Vue的设计中，`_` 开头的属性被认为是私有的，可能会修改，而 `$` 开头的属性则被认为是内部的，可以被外部调用但不应被外部赋值。为了保护 `_data`，不让外部直接操作，所以通过 `Object.defineProperty` 来创建 `$data`，只允许获取 `_data`，而无法设置它。
+在 Vue 的设计中，`_` 开头的属性被认为是私有的，可能会修改，而 `$` 开头的属性则被认为是内部的，可以被外部调用但不应被外部赋值。为了保护 `_data`，不让外部直接操作，所以通过 `Object.defineProperty` 来创建 `$data`，只允许获取 `_data`，而无法设置它。
 
 ![image-20240316094656477](./images/image-20240316094656477.png)
 
@@ -144,7 +149,7 @@ Object.defineProperty(Vue.prototype, "$data", dataDef);
 
 ### 1. 子组件获取传入的`props`数据
 
-在执行父组件的`render`函数时，会为子组件创建组件占位符VNode，此时会根据子组件中`props`的定义从组件标签的属性中匹配传入的数据，并存储在组件占位符VNode 中。
+在执行父组件的`render`函数时，会为子组件创建组件占位符 VNode，此时会根据子组件中`props`的定义从组件标签的属性中匹配传入的数据，并存储在组件占位符 VNode 中。
 
 ![image-20230922184232782](./images/image-20230922184232782.png)
 
@@ -155,18 +160,18 @@ proxy(vm, `_props`, key);
 
 const propsDef = {};
 propsDef.get = function () {
-    return this._props;
+  return this._props;
 };
-Object.defineProperty(Vue.prototype, "$props", propsDef);
+Object.defineProperty(Vue.prototype, '$props', propsDef);
 ```
 
 ![image-20240316153703286](./images/image-20240316153703286.png)
 
-### 2. props的初始化
+### 2. props 的初始化
 
 ![initprops.jpg](./images/1728631786925.png)
 
-### 3. props更新
+### 3. props 更新
 
 初始化子组件的 Vue 实例时，通过`Object.defineProperty`给传入的`prop`数据添加拦截，如果传入的是一个对象类型，由于父组件已经对对象的属性添加了拦截，所以不会再次在子组件添加拦截。
 
@@ -183,19 +188,19 @@ Object.defineProperty(Vue.prototype, "$props", propsDef);
 
 #### 传给子组件的是基本数据类型
 
-父组件创建 VNode 时，收集当前 Render Watcher 到响应式属性的`dep.subs`中。创建 子组件VNode 时，也会收集当前Render Watcher 到`prop`数据的`dep.subs`中。
+父组件创建 VNode 时，收集当前 Render Watcher 到响应式属性的`dep.subs`中。创建 子组件 VNode 时，也会收集当前 Render Watcher 到`prop`数据的`dep.subs`中。
 
-当父组件修改数据时，触发父组件的视图更新，获取最新的`prop`数据；在创建父组件 DOM树的过程中，赋值给子组件的`vm._props`；从而被`prop`数据的`setter`捕获，触发子组件视图更新。
+当父组件修改数据时，触发父组件的视图更新，获取最新的`prop`数据；在创建父组件 DOM 树的过程中，赋值给子组件的`vm._props`；从而被`prop`数据的`setter`捕获，触发子组件视图更新。
 
 ==也就是说，如果传给子组件的是基本数据类型，他们的更新原理是父组件驱动子组件更新==
 
 #### 传给子组件的是对象
 
-父组件创建 VNode 时，收集当前 Render Watcher 到响应式属性的`dep.subs`中。创建 子组件VNode 时，也会收集当前Render Watcher 到`prop`数据的`dep.subs`中。和上面不同的是，当子组件使用的是`prop`数据的内部属性时，会将Render Watcher 添加到父组件对应内部属性的`dep.subs`中。
+父组件创建 VNode 时，收集当前 Render Watcher 到响应式属性的`dep.subs`中。创建 子组件 VNode 时，也会收集当前 Render Watcher 到`prop`数据的`dep.subs`中。和上面不同的是，当子组件使用的是`prop`数据的内部属性时，会将 Render Watcher 添加到父组件对应内部属性的`dep.subs`中。
 
-当父组件修改属性的内部属性时，不会触发父组件更新，因为父组件没有使用这个内部属性，而使用的是整个对象。但是会触发子组件更新，因为子组件的Render Watcher 被收集到了这个内部属性的`dep.subs`里面了。
+当父组件修改属性的内部属性时，不会触发父组件更新，因为父组件没有使用这个内部属性，而使用的是整个对象。但是会触发子组件更新，因为子组件的 Render Watcher 被收集到了这个内部属性的`dep.subs`里面了。
 
-==也就是说如果传给子组件的是一个对象，并且子组件使用了这个内部属性，子组件的 Render Watcher会被这个内部属性的dep.subs收集==
+==也就是说如果传给子组件的是一个对象，并且子组件使用了这个内部属性，子组件的 Render Watcher 会被这个内部属性的 dep.subs 收集==
 
 如果父组件直接修改这个对象的引用，则和传入基本数据类型的更新流程一致。
 
@@ -222,20 +227,18 @@ Object.defineProperty(Vue.prototype, "$props", propsDef);
 ```js
 // Watcher类内部代码
 
-this.lazy = !!options.lazy
+this.lazy = !!options.lazy;
 // ...
 
-this.dirty = this.lazy
+this.dirty = this.lazy;
 // ...
 
-this.value = this.lazy ? undefined : this.get()
-
+this.value = this.lazy ? undefined : this.get();
 ```
 
 - `Computed Watcher`的`lazy`为`true`，并且`dirty`也为`true`；
 
 - 因为 `lazy`为`true`，所以在创建`Computed Watcher`过程中并不会执行`this.get()` 方法；也就不会立即获取计算属性的返回值。
-
 
 ![image-20240316161744870](./images/image-20240316161744870.png)
 
@@ -244,25 +247,24 @@ this.value = this.lazy ? undefined : this.get()
 #### 依赖收集
 
 ```js
-function createComputedGetter (key) {
-  return function computedGetter () {
-    const watcher = this._computedWatchers && this._computedWatchers[key]
+function createComputedGetter(key) {
+  return function computedGetter() {
+    const watcher = this._computedWatchers && this._computedWatchers[key];
     if (watcher) {
       // 只做一次依赖收集
       if (watcher.dirty) {
         // dirty变为false，执行定义的get函数，收集依赖
-        watcher.evaluate()
+        watcher.evaluate();
       }
       if (Dep.target) {
         // 将render watcher 添加到依赖属性的dep中，当依赖属性修改后，通过render watcher的get方法去触发组件更新
-        watcher.depend()
+        watcher.depend();
       }
-      // 之前获取的计算属性的值保存在watcher.value中 
-      return watcher.value
+      // 之前获取的计算属性的值保存在watcher.value中
+      return watcher.value;
     }
-  }
+  };
 }
-
 ```
 
 - 将`Computed Watcher`添加到响应式变量的`dep.subs`中，第一次获取计算属性时，执行上述函数收集依赖（当响应式数据变化时可以更新计算属性）
@@ -285,7 +287,7 @@ function createComputedGetter (key) {
 在初始化过程中会为每个`watch`创建一个`User Watcher`，而创建过程中会对被监听属性做依赖收集
 
 ```js
-const watcher = new Watcher(vm, expOrFn, cb, options)
+const watcher = new Watcher(vm, expOrFn, cb, options);
 
 // vm 组件实例
 // expOrFn 被监听的属性名（xxx、'xxx.yyy'）
@@ -341,7 +343,7 @@ run () {
 #### watch
 
 - 没有缓存性，更多的是观察的作用，某些数据变化时会执行回调
-- watch支持异步；可以设置异步返回前的中间状态
+- watch 支持异步；可以设置异步返回前的中间状态
 - 可以在初始化时执行回调
 - 可以深度监听对象属性
 - 可以设置回调的执行时机，通过设置`sync`属性可以在当前队列执行，默认是下一队列
@@ -363,10 +365,10 @@ run () {
 
 ## 七、methods
 
-`initMethods`时直接遍历所有定义的method，将其挂载到组件实例上。
+`initMethods`时直接遍历所有定义的 method，将其挂载到组件实例上。
 
 ```js
-vm[key] = typeof methods[key] !== "function" ? noop : bind(methods[key], vm);
+vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm);
 ```
 
 ![image-20240316154022019](./images/image-20240316154022019.png)
@@ -375,25 +377,25 @@ vm[key] = typeof methods[key] !== "function" ? noop : bind(methods[key], vm);
 
 ![](./images/IMG_0106.png)
 
-当组件挂载时，创建`Render Watcher`，执行`render`函数获取组件的 ==渲染VNode== ；然后执行`_update`函数，`_update`函数内执行`patch`函数创建节点并插入到DOM中（`vm.$el = vm.__patch__()`）；如果组件中有子组件，调用组件占位符VNode的`init`钩子函数，为子组件创建`Vue`实例，执行子组件的`$mount`方法创建`Render Watcher`，并对子组件执行上述流程。
+当组件挂载时，创建`Render Watcher`，执行`render`函数获取组件的 ==渲染 VNode== ；然后执行`_update`函数，`_update`函数内执行`patch`函数创建节点并插入到 DOM 中（`vm.$el = vm.__patch__()`）；如果组件中有子组件，调用组件占位符 VNode 的`init`钩子函数，为子组件创建`Vue`实例，执行子组件的`$mount`方法创建`Render Watcher`，并对子组件执行上述流程。
 
 ```js
 if (!prevVnode) {
-    // 首次渲染时
-    vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */); // 新的dom节点
+  // 首次渲染时
+  vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */); // 新的dom节点
 } else {
-    // 更新页面时
-    vm.$el = vm.__patch__(prevVnode, vnode);
+  // 更新页面时
+  vm.$el = vm.__patch__(prevVnode, vnode);
 }
 ```
 
-等子组件执行完成之后将子组件的DOM树挂载到组件占位符VNode的`elm`上，并将其插入到父元素中或相邻元素前后。这样父子组件的DOM树就关联起来了。
+等子组件执行完成之后将子组件的 DOM 树挂载到组件占位符 VNode 的`elm`上，并将其插入到父元素中或相邻元素前后。这样父子组件的 DOM 树就关联起来了。
 
 ![patch.jpg](./images/123123141.png)
 
 ![image-20240324215104187](./images/image-20240324215104187.png)
 
-先有vue的组件实例，然后生成整个页面的虚拟dom树（此时子组件对应的是占位符vnode），当进行diff操作时，创建子组件，调用init钩子函数，根据占位符vnode的信息（`vnode.componentOptions.Ctor`），生成子组件实例赋值给`vnode.componentInstance`，并执行子组件的挂载，在`vm._update`的阶段会将生成的新的`vnode`挂载到`vm._node`，在根据新的vnode生成dom树后将其挂载到`vnode.elm`。
+先有 vue 的组件实例，然后生成整个页面的虚拟 dom 树（此时子组件对应的是占位符 vnode），当进行 diff 操作时，创建子组件，调用 init 钩子函数，根据占位符 vnode 的信息（`vnode.componentOptions.Ctor`），生成子组件实例赋值给`vnode.componentInstance`，并执行子组件的挂载，在`vm._update`的阶段会将生成的新的`vnode`挂载到`vm._node`，在根据新的 vnode 生成 dom 树后将其挂载到`vnode.elm`。
 
 ```
 vm --> vm._vnode --> vm._vnode.children[i] --> vm._vnode.children[i].componentInstance
@@ -408,7 +410,7 @@ vm --> vm._vnode --> vm._vnode.children[i] --> vm._vnode.children[i].componentIn
 ![image-20240316152343097](./images/image-20240316152343097.png)
 
 - `parent`:当前实例的父组件，帮助`initLifecycle`确认组件之间的父子关系（`$parent、$children、$root`）
-- `propsData`：父组件实际传递的`props`值，帮助`initProps`定义prop的响应式（`vm.prop`）
+- `propsData`：父组件实际传递的`props`值，帮助`initProps`定义 prop 的响应式（`vm.prop`）
 - `_componentTag`：当前组件的名称
 - `_parentListeners`：父组件注册的自定义事件，提供了可供用户访问的公共属性`vm.$listeners`（`initRender`）
 - `_parentVnode`：当前组件的占位符节点，提供了可供用户访问的公共属性`vm.$vnode`（`initRender`）
@@ -417,21 +419,21 @@ vm --> vm._vnode --> vm._vnode.children[i] --> vm._vnode.children[i].componentIn
 > `initInternalComponent` 初始化组件的配置项
 >
 > ```js
-> export function initInternalComponent (vm, options) {
->   const opts = vm.$options = Object.create(vm.constructor.options) // 组件配置项
->   const parentVnode = options._parentVnode // 组件占位符vnode
->   opts.parent = options.parent // 父组件实例
->   opts._parentVnode = parentVnode
-> 
->   const vnodeComponentOptions = parentVnode.componentOptions // 占位符节点的配置项
->   opts.propsData = vnodeComponentOptions.propsData
->   opts._parentListeners = vnodeComponentOptions.listeners
->   opts._renderChildren = vnodeComponentOptions.children
->   opts._componentTag = vnodeComponentOptions.tag
-> 
+> export function initInternalComponent(vm, options) {
+>   const opts = (vm.$options = Object.create(vm.constructor.options)); // 组件配置项
+>   const parentVnode = options._parentVnode; // 组件占位符vnode
+>   opts.parent = options.parent; // 父组件实例
+>   opts._parentVnode = parentVnode;
+>
+>   const vnodeComponentOptions = parentVnode.componentOptions; // 占位符节点的配置项
+>   opts.propsData = vnodeComponentOptions.propsData;
+>   opts._parentListeners = vnodeComponentOptions.listeners;
+>   opts._renderChildren = vnodeComponentOptions.children;
+>   opts._componentTag = vnodeComponentOptions.tag;
+>
 >   if (options.render) {
->     opts.render = options.render
->     opts.staticRenderFns = options.staticRenderFns
+>     opts.render = options.render;
+>     opts.staticRenderFns = options.staticRenderFns;
 >   }
 > }
 > ```
@@ -446,22 +448,22 @@ vm --> vm._vnode --> vm._vnode.children[i] --> vm._vnode.children[i].componentIn
 
 - `$createElement`：`(a, b, c, d) => createElement(vm, a, b, c, d, true)`
 
-- `$slots`：用来访问父组件传递的 ==静态插槽== ，包含对应插槽名称的vnode节点数组
+- `$slots`：用来访问父组件传递的 ==静态插槽== ，包含对应插槽名称的 vnode 节点数组
 
-  > 上述api均来自`initRender`
+  > 上述 api 均来自`initRender`
 
 - `$scopedSlots`：用来访问 ==作用域插槽== ，包含一个返回相应 VNode 的函数。（`vm._render`）
-  - 自2.6.0后，所有的 `$slots` 都会作为函数暴露在 `$scopedSlots` 中
+  - 自 2.6.0 后，所有的 `$slots` 都会作为函数暴露在 `$scopedSlots` 中
 
-### 3. 虚拟dom
+### 3. 虚拟 dom
 
-渲染vnode，即vnode是一个树形结构，children中包含着它的子节点。
+渲染 vnode，即 vnode 是一个树形结构，children 中包含着它的子节点。
 
 ![image-20240318102542437](./images/image-20240318102542437.png)
 
 - `compomnentInstance和componentOptions`是组件占位符特有的属性
-- `child`指向vnode的`compomnentInstance`，所以也是当vnode为组件占位符时才有值
+- `child`指向 vnode 的`compomnentInstance`，所以也是当 vnode 为组件占位符时才有值
 
 ## 十、单文件组件
 
-当我们使用webpack或者vue-cli进行单文件组件的开发时，使用vue-loader来进行解析，具体过程可以参考[一文读懂 vue-loader 原理 ](https://juejin.cn/post/7028410359207690247)
+当我们使用 webpack 或者 vue-cli 进行单文件组件的开发时，使用 vue-loader 来进行解析，具体过程可以参考[一文读懂 vue-loader 原理 ](https://juejin.cn/post/7028410359207690247)

@@ -1,6 +1,10 @@
 ---
 title: sass 应用
 icon: sass fa-brands
+category:
+  - 前端
+tag:
+  - 预处理器
 ---
 
 ## 一、Sass 简介

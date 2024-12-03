@@ -1,12 +1,16 @@
 ---
 title: WebSocket
 order: 4
-star: true
+category:
+  - 前端
+tag:
+  - 通信
+  - WebSocket
 ---
 
-##  一、WebSocket基础知识
+## 一、WebSocket 基础知识
 
-在讲解WebSocket之前，大家首先考虑一下网页中如果出现以下的场景，应该怎么处理？
+在讲解 WebSocket 之前，大家首先考虑一下网页中如果出现以下的场景，应该怎么处理？
 
 - 弹幕
 - 在线教育
@@ -26,11 +30,11 @@ star: true
 
 ![img](./images/chat.jpg)
 
-因为我们的HTTP协议是request(请求)-response(响应)模式,**请求必须在前，响应必须在后**，这就导致了服务器无法「主动」的把消息告诉客户端。
+因为我们的 HTTP 协议是 request(请求)-response(响应)模式,**请求必须在前，响应必须在后**，这就导致了服务器无法「主动」的把消息告诉客户端。
 
 开发者想了很多办法来解决这一问题
 
-当然终极解决方案自然是WebSocket，但了解过去的一些做法、参观前辈们经历的痛苦还是有益的。
+当然终极解决方案自然是 WebSocket，但了解过去的一些做法、参观前辈们经历的痛苦还是有益的。
 
 ### 1. 短轮询 short polling
 
@@ -87,7 +91,7 @@ Note right of 服务器: 一段时间之后,有消息了
 
 - 客户端长时间收不到响应会导致超时，从而主动断开和服务器的连接
 
-  > 这种情况是可以处理的，在ajax请求因为超时而结束时，立即重新发送请求到服务器
+  > 这种情况是可以处理的，在 ajax 请求因为超时而结束时，立即重新发送请求到服务器
   >
   > 虽然这种做法会让之前的请求变得无意义，但毕竟比短轮询好多了
 
@@ -95,42 +99,42 @@ Note right of 服务器: 一段时间之后,有消息了
 
 ### 3. WebSocket
 
-WebSocket是HTML5中新协议、新API，在单个TCP连接上提供全双工的通讯模式。
+WebSocket 是 HTML5 中新协议、新 API，在单个 TCP 连接上提供全双工的通讯模式。
 
-WebSocket是独立的基于TCP的协议。
+WebSocket 是独立的基于 TCP 的协议。
 
-WebSocket和HTTP的关系是，WebSocket是基于Http协议的，或者说借用了Http协议来完成一部分握手。WebSocket的握手被翻译成HTTP的升级请求。
+WebSocket 和 HTTP 的关系是，WebSocket 是基于 Http 协议的，或者说借用了 Http 协议来完成一部分握手。WebSocket 的握手被翻译成 HTTP 的升级请求。
 
-下图描述了HTTP与WebSocket之间的简单关系
+下图描述了 HTTP 与 WebSocket 之间的简单关系
 
 ![img](./images/websocket.jpg)
 
-WebSocket从**协议**上赋予了服务器主动推送消息的能力
+WebSocket 从**协议**上赋予了服务器主动推送消息的能力
 
 ![img](./images/websocket_1.jpg)
 
 从上图可以看出：
 
-- WebSocket也是建立在TCP协议之上的，利用的是TCP全双工通信的能力
-- 使用WebSocket，会经历两个阶段：握手阶段、通信阶段
+- WebSocket 也是建立在 TCP 协议之上的，利用的是 TCP 全双工通信的能力
+- 使用 WebSocket，会经历两个阶段：握手阶段、通信阶段
 
-虽然优于轮询方案，但WebSocket仍然是有缺点的：
+虽然优于轮询方案，但 WebSocket 仍然是有缺点的：
 
 - 兼容性
 
-  WebSocket是HTML5新增的内容，因此古董版本的浏览器并不支持
+  WebSocket 是 HTML5 新增的内容，因此古董版本的浏览器并不支持
 
-- 维持TCP连接需要耗费资源
+- 维持 TCP 连接需要耗费资源
 
-  对于那些消息量少的场景，维持TCP连接确实会造成资源的浪费
+  对于那些消息量少的场景，维持 TCP 连接确实会造成资源的浪费
 
-  > 为了充分利用TCP连接的资源，在使用了WebSocket的页面，可以放弃ajax，都用WebSocket进行通信，当然这会带来程序设计上的一些问题，需要权衡。
+  > 为了充分利用 TCP 连接的资源，在使用了 WebSocket 的页面，可以放弃 ajax，都用 WebSocket 进行通信，当然这会带来程序设计上的一些问题，需要权衡。
 
 ### 4. 握手
 
-> WebSocket协议是一个高扩展性的协议，详细内容会比较复杂，这里仅讲解面试中会问到的握手协议
+> WebSocket 协议是一个高扩展性的协议，详细内容会比较复杂，这里仅讲解面试中会问到的握手协议
 
-当客户端需要和服务器使用WebSocket进行通信时，首先会使用**HTTP协议**完成一次特殊的请求-响应，这一次请求-响应就是**WebSocket握手**
+当客户端需要和服务器使用 WebSocket 进行通信时，首先会使用**HTTP 协议**完成一次特殊的请求-响应，这一次请求-响应就是**WebSocket 握手**
 
 在握手阶段，首先由客户端向服务器发送一个请求，请求地址格式如下：
 
@@ -159,7 +163,7 @@ Upgrade: websocket /* 升级到websocket */
 Sec-WebSocket-Accept: ZzIzMzQ1Z2V3NDUyMzIzNGVy /* 密钥：上山打老虎 */
 ```
 
-**握手完成，后续消息收发不再使用HTTP，任何一方都可以主动发消息给对方**
+**握手完成，后续消息收发不再使用 HTTP，任何一方都可以主动发消息给对方**
 
 ![img](./images/websocket_2.jpg)
 

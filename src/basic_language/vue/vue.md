@@ -1,6 +1,11 @@
 ---
 title: vue2基础
 icon: vuejs fa-brands
+category:
+  - 前端
+tag:
+  - 框架
+  - vue
 ---
 
 ## 一、Vue 核心

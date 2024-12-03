@@ -1,6 +1,10 @@
 ---
 title: 事件
 order: 7
+category:
+  - 前端
+tag:
+  - 事件
 ---
 
 事件最早是在 Internet Explorer 3 和 Netscape Navigator 2 中出现的，当时是作为分担服务器运算负担的一种手段。要实现和网页的互动，就需要通过 JavaScript 里面的事件来实现。
@@ -21,23 +25,22 @@ JavaScript 中采用一个叫做事件监听器的东西来监听事件是否发
 
 通过这种方式，就可以避免让程序不断地去检查事件是否发生，让程序在等待事件发生的同时，可以继续做其他的任务。
 
->这其实就是后面我们会介绍到的异步，后面的章节会具体的介绍异步相关的知识。
+> 这其实就是后面我们会介绍到的异步，后面的章节会具体的介绍异步相关的知识。
 
 接下来我们来看一个事件的快速入门案例，如下：
 
 ```html
 <body>
-    <button onclick="test()">点击我</button>
-    <script>
-        let test = function(){
-            alert("我知道你已经点击了");
-        }
-    </script>
+  <button onclick="test()">点击我</button>
+  <script>
+    let test = function () {
+      alert('我知道你已经点击了');
+    };
+  </script>
 </body>
 ```
 
-效果：点击按钮以后弹出一个对话框
-![-w848](./images/15118596271091.jpg)
+效果：点击按钮以后弹出一个对话框 ![-w848](./images/15118596271091.jpg)
 
 这里我们就给 button 元素节点绑定了一个点击事件，当用户点击该按钮时，会执行`test()`函数。
 
@@ -60,13 +63,13 @@ Internet Explorer 的事件流叫做事件冒泡（event bubbling），即事件
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Document</title>
-    </head>
-    <body>
-        <div></div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div></div>
+  </body>
 </html>
 ```
 
@@ -93,30 +96,30 @@ Internet Explorer 的事件流叫做事件冒泡（event bubbling），即事件
 
 ```html
 <body>
-    <div id="box" style="height:100px;width:300px;background-color:pink;"></div>
-    <button id="reset">还原</button>
-    <script>
-        // IE 8 以下浏览器返回 div body html document
-        // 其他浏览器返回 div body html document window
-        reset.onclick = function () { 
-            history.go(); 
-        }
-        box.onclick = function () { 
-            box.innerHTML += 'div\n'; 
-        }
-        document.body.onclick = function () { 
-            box.innerHTML += 'body\n'; 
-        }
-        document.documentElement.onclick = function () {
-            box.innerHTML += 'html\n'; 
-        }
-        document.onclick = function () { 
-            box.innerHTML += 'document\n'; 
-        }
-        window.onclick = function () { 
-            box.innerHTML += 'window\n'; 
-        }
-    </script>
+  <div id="box" style="height:100px;width:300px;background-color:pink;"></div>
+  <button id="reset">还原</button>
+  <script>
+    // IE 8 以下浏览器返回 div body html document
+    // 其他浏览器返回 div body html document window
+    reset.onclick = function () {
+      history.go();
+    };
+    box.onclick = function () {
+      box.innerHTML += 'div\n';
+    };
+    document.body.onclick = function () {
+      box.innerHTML += 'body\n';
+    };
+    document.documentElement.onclick = function () {
+      box.innerHTML += 'html\n';
+    };
+    document.onclick = function () {
+      box.innerHTML += 'document\n';
+    };
+    window.onclick = function () {
+      box.innerHTML += 'window\n';
+    };
+  </script>
 </body>
 ```
 
@@ -133,13 +136,13 @@ Netscape Communicator 团队提出的另一种事件流叫做事件捕获（even
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Document</title>
-    </head>
-    <body>
-        <div></div>    
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div></div>
+  </body>
 </html>
 ```
 
@@ -166,34 +169,54 @@ Internet Explorer 9、Firefox、Chrome、Safari 等现代浏览器都支持事�
 
 ```html
 <body>
-    <div id="box" style="height:100px;width:300px;background-color:pink;"></div>
-    <button id="reset">还原</button>
-    <script>
-        // IE 8 以下浏览器不支持
-        // 其他浏览器返回 window document html body div
-        reset.onclick = function () { 
-            history.go(); 
-        }
-        box.addEventListener('click', function () { 
-            box.innerHTML += 'div\n' 
-        }, true)
-        document.body.addEventListener('click', function () { 
-            box.innerHTML += 'body\n'; 
-        }, true);
-        document.documentElement.addEventListener('click',function(){
-            box.innerHTML+='html\n';
-        },true);
-        document.addEventListener('click', function () { 
-            box.innerHTML += 'document\n'; 
-        }, true);
-        window.addEventListener('click', function () { 
-            box.innerHTML += 'window\n'; 
-        }, true);
-    </script>
+  <div id="box" style="height:100px;width:300px;background-color:pink;"></div>
+  <button id="reset">还原</button>
+  <script>
+    // IE 8 以下浏览器不支持
+    // 其他浏览器返回 window document html body div
+    reset.onclick = function () {
+      history.go();
+    };
+    box.addEventListener(
+      'click',
+      function () {
+        box.innerHTML += 'div\n';
+      },
+      true
+    );
+    document.body.addEventListener(
+      'click',
+      function () {
+        box.innerHTML += 'body\n';
+      },
+      true
+    );
+    document.documentElement.addEventListener(
+      'click',
+      function () {
+        box.innerHTML += 'html\n';
+      },
+      true
+    );
+    document.addEventListener(
+      'click',
+      function () {
+        box.innerHTML += 'document\n';
+      },
+      true
+    );
+    window.addEventListener(
+      'click',
+      function () {
+        box.innerHTML += 'window\n';
+      },
+      true
+    );
+  </script>
 </body>
 ```
 
-效果：当我们点击了页面的div元素以后，出现的文字顺序如下：
+效果：当我们点击了页面的 div 元素以后，出现的文字顺序如下：
 
 ![-w301](./images/15118765123553.jpg)
 
@@ -229,12 +252,12 @@ HTML 事件监听器，又被称之为行内事件监听器。这是在浏览器
 
 ```html
 <body>
-    <button onclick="test()">点击我</button>
-    <script>
-        let test = function(){
-            alert("我知道你已经点击了");
-        }
-    </script>
+  <button onclick="test()">点击我</button>
+  <script>
+    let test = function () {
+      alert('我知道你已经点击了');
+    };
+  </script>
 </body>
 ```
 
@@ -254,13 +277,13 @@ HTML 事件监听器，又被称之为行内事件监听器。这是在浏览器
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        test.onclick = function(){
-            console.log("this is a test");
-        }
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function () {
+      console.log('this is a test');
+    };
+  </script>
 </body>
 ```
 
@@ -270,16 +293,16 @@ HTML 事件监听器，又被称之为行内事件监听器。这是在浏览器
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        test.onclick = function(){
-            console.log("this is a test");
-        }
-        test.onclick = function(){
-            console.log("this is a test,too");
-        }
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function () {
+      console.log('this is a test');
+    };
+    test.onclick = function () {
+      console.log('this is a test,too');
+    };
+  </script>
 </body>
 ```
 
@@ -295,16 +318,24 @@ DOM 2 级事件处理程序通过`addEventListener()`可以为一个元素添加
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        test.addEventListener("click",function(){
-            console.log("this is a test");
-        },false);
-        test.addEventListener("click",function(){
-            console.log("this is a test,too");
-        },false);
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    test.addEventListener(
+      'click',
+      function () {
+        console.log('this is a test');
+      },
+      false
+    );
+    test.addEventListener(
+      'click',
+      function () {
+        console.log('this is a test,too');
+      },
+      false
+    );
+  </script>
 </body>
 ```
 
@@ -312,7 +343,7 @@ DOM 2 级事件处理程序通过`addEventListener()`可以为一个元素添加
 
 ![-w144](./images/15118614815302.jpg)
 
->注：在 Internet Explorer 浏览器中使用的方法为`attachEvent()`。
+> 注：在 Internet Explorer 浏览器中使用的方法为`attachEvent()`。
 
 ### 4. 删除事件监听器
 
@@ -322,14 +353,14 @@ DOM 2 级事件处理程序通过`addEventListener()`可以为一个元素添加
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        test.onclick = function(){
-            console.log("this is a test");
-        }
-        test.onclick = null; // 删除事件绑定
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function () {
+      console.log('this is a test');
+    };
+    test.onclick = null; // 删除事件绑定
+  </script>
 </body>
 ```
 
@@ -343,20 +374,20 @@ DOM 2 级事件处理程序通过`addEventListener()`可以为一个元素添加
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        //DOM 2级添加事件
-        let fn1 = function(){
-            console.log("this is a test");
-        }
-        let fn2 = function(){
-            console.log("this is a test,too");
-        }
-        test.addEventListener("click",fn1,false);
-        test.addEventListener("click",fn2,false);
-        test.removeEventListener("click",fn1); // 只删除第一个点击事件
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    //DOM 2级添加事件
+    let fn1 = function () {
+      console.log('this is a test');
+    };
+    let fn2 = function () {
+      console.log('this is a test,too');
+    };
+    test.addEventListener('click', fn1, false);
+    test.addEventListener('click', fn2, false);
+    test.removeEventListener('click', fn1); // 只删除第一个点击事件
+  </script>
 </body>
 ```
 
@@ -364,9 +395,9 @@ DOM 2 级事件处理程序通过`addEventListener()`可以为一个元素添加
 
 ![-w141](./images/15118626913300.jpg)
 
->注：在 Internet Explorer 浏览器中使用的方法为`detachEvent()`。
+> 注：在 Internet Explorer 浏览器中使用的方法为`detachEvent()`。
 
-## 三、事件类型 
+## 三、事件类型
 
 在上一小节中，我们介绍了在 JavaScript 中绑定事件的几种形式，但是演示的全部都是点击事件。触发事件就只能够通过点击鼠标来触发么？
 
@@ -392,55 +423,66 @@ mouseup：在用户释放鼠标按钮时触发。
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        div{
-            width: 100px;
-            height: 100px;
-            border: 1px solid;
-            float: left;
-            text-align: center;
-        }
-        .son{
-            width: 30px;
-            height: 30px;
-            border: 1px solid red;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid;
+      float: left;
+      text-align: center;
+    }
+    .son {
+      width: 30px;
+      height: 30px;
+      border: 1px solid red;
+    }
+  </style>
 </head>
 <body>
-   <!-- 设置 9 个div，其中 4,5,7,8 需要设置子元素 -->
-    <div id="one">1.click</div>
-    <div id="two">2.dblclick</div>
-    <div id="three">3.mousedown</div>
-    <div id="four">4.mouseenter<div class="son"></div></div>
-    <div id="five">5.mouseleave<div class="son"></div></div>
-    <div id="six">6.mousemove</div>
-    <div id="seven">7.mouseout<div class="son"></div></div>
-    <div id="eight">8.mouseover<div class="son"></div></div>
-    <div id="nine">9.mouseup</div>
-    <script>
-        // 事件处理程序
-        let test = function (){
-            console.log("你已经触发了事件");
-        }
-        // 9 种不同的事件
-        one.addEventListener("click",test);
-        two.addEventListener("dblclick",test);
-        three.addEventListener("mousedown",test);
-        four.addEventListener("mouseenter",test);
-        five.addEventListener("mouseleave",test);
-        six.addEventListener("mousemove",test);
-        seven.addEventListener("mouseout",test);
-        eight.addEventListener("mouseover",test);
-        nine.addEventListener("mouseup",test);
-    </script>
+  <!-- 设置 9 个div，其中 4,5,7,8 需要设置子元素 -->
+  <div id="one">1.click</div>
+  <div id="two">2.dblclick</div>
+  <div id="three">3.mousedown</div>
+  <div id="four">
+    4.mouseenter
+    <div class="son"></div>
+  </div>
+  <div id="five">
+    5.mouseleave
+    <div class="son"></div>
+  </div>
+  <div id="six">6.mousemove</div>
+  <div id="seven">
+    7.mouseout
+    <div class="son"></div>
+  </div>
+  <div id="eight">
+    8.mouseover
+    <div class="son"></div>
+  </div>
+  <div id="nine">9.mouseup</div>
+  <script>
+    // 事件处理程序
+    let test = function () {
+      console.log('你已经触发了事件');
+    };
+    // 9 种不同的事件
+    one.addEventListener('click', test);
+    two.addEventListener('dblclick', test);
+    three.addEventListener('mousedown', test);
+    four.addEventListener('mouseenter', test);
+    five.addEventListener('mouseleave', test);
+    six.addEventListener('mousemove', test);
+    seven.addEventListener('mouseout', test);
+    eight.addEventListener('mouseover', test);
+    nine.addEventListener('mouseup', test);
+  </script>
 </body>
 ```
 
-效果：
-![-w920](./images/15119639763378.jpg)
+效果： ![-w920](./images/15119639763378.jpg)
 
 主要需要注意的就是 mouseleave 与 mouseout，还有就是 mouseenter 和 mouseover 的区别。
 
@@ -454,17 +496,17 @@ keypress：按下键盘上一个字符键（不包括 shift 和 alt 键）时触
 keyup：当用户释放键盘上的键时触发。
 ```
 
->注：所谓字符键，是指按下后会产生一个字符值的按键，例如 A、B、C...等。而 shift 或者 alt 等功能按键则不是字符键。
+> 注：所谓字符键，是指按下后会产生一个字符值的按键，例如 A、B、C...等。而 shift 或者 alt 等功能按键则不是字符键。
 
 这里我们演示一个 keydown 事件，如下：
 
 ```html
 <body>
-    <script>
-        document.onkeydown = function(){
-            console.log('你按下了键盘上的某一个键');
-        }
-    </script>
+  <script>
+    document.onkeydown = function () {
+      console.log('你按下了键盘上的某一个键');
+    };
+  </script>
 </body>
 ```
 
@@ -474,7 +516,7 @@ keyup：当用户释放键盘上的键时触发。
 
 实际上，配合着事件对象里面的属性，我们就可以很轻松的获取到用户具体按下的是哪一个键，从而可以根据用户的按键触发不同的行为。
 
->注：我们会在下一小节中介绍事件对象。
+> 注：我们会在下一小节中介绍事件对象。
 
 ### 3. 页面事件
 
@@ -488,12 +530,12 @@ keyup：当用户释放键盘上的键时触发。
 
 ```html
 <body>
-    <p>在看到我之前，应该有一个弹出框</p>
-    <script>
-        window.onload = function(){
-            alert("你正在加载一个页面！");
-        }
-    </script>
+  <p>在看到我之前，应该有一个弹出框</p>
+  <script>
+    window.onload = function () {
+      alert('你正在加载一个页面！');
+    };
+  </script>
 </body>
 ```
 
@@ -503,8 +545,8 @@ keyup：当用户释放键盘上的键时触发。
 
 ```html
 <body>
-    <p>在看到我之前，应该有一个弹出框</p>
-    <img src="./1.jpg" alt="" onload="alert('Image loaded')">
+  <p>在看到我之前，应该有一个弹出框</p>
+  <img src="./1.jpg" alt="" onload="alert('Image loaded')" />
 </body>
 ```
 
@@ -514,16 +556,16 @@ keyup：当用户释放键盘上的键时触发。
 
 与`load`事件对应的是`unload`事件，这个事件是在文档完全被卸载后触发。只要用户从一个页面切换到另一个页面，或者关闭浏览器，就会触发这个事件。示例如下：
 
->注：现代浏览器规定当页面被卸载时，`alert()`，`confim()`，`prompt()`等模态对话框不再允许弹出，所以这里无法显示出其效果。
+> 注：现代浏览器规定当页面被卸载时，`alert()`，`confim()`，`prompt()`等模态对话框不再允许弹出，所以这里无法显示出其效果。
 
 ```html
 <body>
-    <p>Lorem ipsum dolor sit amet.</p>
-    <script>
-        window.onunload = function(){
-            console.log('页面已经卸载');
-        }
-    </script>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <script>
+    window.onunload = function () {
+      console.log('页面已经卸载');
+    };
+  </script>
 </body>
 ```
 
@@ -537,12 +579,12 @@ keyup：当用户释放键盘上的键时触发。
 
 ```html
 <body style="height:5000px;" id="body">
-    <p>Lorem ipsum dolor sit amet.</p>
-    <script>
-        document.body.onscroll = function(){
-            console.log(document.documentElement.scrollTop);
-        }
-    </script>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <script>
+    document.body.onscroll = function () {
+      console.log(document.documentElement.scrollTop);
+    };
+  </script>
 </body>
 ```
 
@@ -558,12 +600,12 @@ keyup：当用户释放键盘上的键时触发。
 
 ```html
 <body>
-    <p>Lorem ipsum dolor sit amet.</p>
-    <script>
-        window.onresize = function(){
-            console.log("窗口大小被重置了");
-        }
-    </script>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <script>
+    window.onresize = function () {
+      console.log('窗口大小被重置了');
+    };
+  </script>
 </body>
 ```
 
@@ -575,14 +617,14 @@ keyup：当用户释放键盘上的键时触发。
 
 ```html
 <body>
-    <p>Lorem ipsum dolor sit amet.</p>
-    <script>
-        window.onresize = function(){
-            console.clear(); // 清空控制台信息
-            console.log(document.body.clientHeight); // 高度会根据当前的页面高度而固定
-            console.log(document.body.clientWidth);
-        }
-    </script>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <script>
+    window.onresize = function () {
+      console.clear(); // 清空控制台信息
+      console.log(document.body.clientHeight); // 高度会根据当前的页面高度而固定
+      console.log(document.body.clientWidth);
+    };
+  </script>
 </body>
 ```
 
@@ -590,7 +632,7 @@ keyup：当用户释放键盘上的键时触发。
 
 ![-w265](./images/15153800549914.jpg)
 
-## 四、事件对象 
+## 四、事件对象
 
 在上一小节中我们已经介绍了一些常见的事件类型。每当这些事件被触发时，事件监听器就会执行相应的代码。
 
@@ -603,9 +645,13 @@ keyup：当用户释放键盘上的键时触发。
 语法结构如下：
 
 ```js
-事件源.addEventListener(eventName, function(event){ 
+事件源.addEventListener(
+  eventName,
+  function (event) {
     // event 就是事件对象
-}, boolean)
+  },
+  boolean
+);
 ```
 
 事件对象说明：
@@ -620,27 +666,27 @@ keyup：当用户释放键盘上的键时触发。
 具体的示例如下：
 
 ```js
-btn.onclick = function(event){
-    console.log(event);
-}
+btn.onclick = function (event) {
+  console.log(event);
+};
 ```
 
 而在 Internet Explorer 8 及之前的版本浏览器中，event 事件对象是作为 window 对象的一个属性。
 
-具体的示例如下： 
+具体的示例如下：
 
 ```js
-btn.onclick = function(event){
-    console.log(window.event);
-}
+btn.onclick = function (event) {
+  console.log(window.event);
+};
 ```
 
 想要实现 event 事件对象的兼容，我们可以在事件的处理函数中添加以下代码：
 
 ```js
-btn.onclick = function(event){
-    event = event || window.event;
-}
+btn.onclick = function (event) {
+  event = event || window.event;
+};
 ```
 
 ### 1. 通用的事件对象属性
@@ -655,17 +701,21 @@ btn.onclick = function(event){
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        test.addEventListener("click",function(event){
-            console.log(event.type); // click
-        },false);
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    test.addEventListener(
+      'click',
+      function (event) {
+        console.log(event.type); // click
+      },
+      false
+    );
+  </script>
 </body>
 ```
 
->注：event 对象会自动被传入到所绑定的回调函数里面，所以即便回调函数中没有书写以 event 作为的形参，函数内部依然可以正常使用。但是我们建议一般还是写上比较好。
+> 注：event 对象会自动被传入到所绑定的回调函数里面，所以即便回调函数中没有书写以 event 作为的形参，函数内部依然可以正常使用。但是我们建议一般还是写上比较好。
 
 **2. 事件目标**
 
@@ -675,13 +725,17 @@ btn.onclick = function(event){
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        let test = document.getElementById("test");
-        test.addEventListener("click",function(){
-            console.log(event.target);//<button id="test">点击我</button>
-        },false);
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    let test = document.getElementById('test');
+    test.addEventListener(
+      'click',
+      function () {
+        console.log(event.target); //<button id="test">点击我</button>
+      },
+      false
+    );
+  </script>
 </body>
 ```
 
@@ -691,30 +745,30 @@ btn.onclick = function(event){
 
 当我们触发一个事件的时候，事件处理程序里面的 this 指代的是**绑定事件的元素**，而事件对象的`target`属性指代的是**触发事件的元素**。
 
->注：`target`和`srcElememnt`是等价的。
+> 注：`target`和`srcElememnt`是等价的。
 
 我们来看下面的例子：
 
 ```html
 <body>
-    <ul id="color-list">
-        <li>red</li>
-        <li>yellow</li>
-        <li>blue</li>
-        <li>green</li>
-        <li>black</li>
-        <li>white</li>
-    </ul>
-    <script>
-        // this 是绑定事件的元素
-        // target 是触发事件的元素，和 srcElememnt 等价
-        let colorList = document.getElementById("color-list");
-        colorList.addEventListener("click", function (event) {
-            console.log('this:', this);
-            console.log('target:', event.target);
-            console.log('srcElement:', event.srcElement);
-        })
-    </script>
+  <ul id="color-list">
+    <li>red</li>
+    <li>yellow</li>
+    <li>blue</li>
+    <li>green</li>
+    <li>black</li>
+    <li>white</li>
+  </ul>
+  <script>
+    // this 是绑定事件的元素
+    // target 是触发事件的元素，和 srcElememnt 等价
+    let colorList = document.getElementById('color-list');
+    colorList.addEventListener('click', function (event) {
+      console.log('this:', this);
+      console.log('target:', event.target);
+      console.log('srcElement:', event.srcElement);
+    });
+  </script>
 </body>
 ```
 
@@ -730,7 +784,7 @@ btn.onclick = function(event){
 
 当我们触发鼠标事件时，会有一些与鼠标事件相关的属性被填入到 event 对象里面。
 
-**1. button属性**
+**1. button 属性**
 
 当我们按下鼠标时，会有一个`button`属性被填入到 event 对象里面。
 
@@ -740,12 +794,12 @@ button 属性有 3 个值：0 表示按下的是鼠标左键，1 表示按下的
 
 ```html
 <body>
-    <p id="test">Lorem ipsum dolor sit amet.</p>
-    <script>
-        test.onmousedown = function(event){
-            console.log(event.button);
-        }
-    </script>
+  <p id="test">Lorem ipsum dolor sit amet.</p>
+  <script>
+    test.onmousedown = function (event) {
+      console.log(event.button);
+    };
+  </script>
 </body>
 ```
 
@@ -770,14 +824,14 @@ event.pageY：可以获取事件发生时光标相对于当前窗口的垂直坐
 
 ```
 event.screenX：返回事件发生时鼠标指针相对于电脑屏幕左上角的水平坐标。
-event.screenY：返回事件发生时鼠标指针相对于电脑屏幕左上角的垂直坐标。 
+event.screenY：返回事件发生时鼠标指针相对于电脑屏幕左上角的垂直坐标。
 ```
 
 相对于事件源位置:
 
 ```
-event.offsetX：返回事件发生时鼠标指针相对于事件源的水平坐标 
-event.offsetY：返回事件发生时鼠标指针相对于事件源的垂直坐标 
+event.offsetX：返回事件发生时鼠标指针相对于事件源的水平坐标
+event.offsetY：返回事件发生时鼠标指针相对于事件源的垂直坐标
 event.layerX：返回事件发生时鼠标指针相对于事件源的水平坐标(Firefox)
 event.layerY：返回事件发生时鼠标指针相对于事件源的垂直坐标(Firefox)
 ```
@@ -788,33 +842,37 @@ event.layerY：返回事件发生时鼠标指针相对于事件源的垂直坐�
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        body {
-            height: 5000px;
-        }
-        div {
-            position: fixed;
-            top: 50px;
-            left: 100px;
-            width: 100px;
-            height: 100px;
-            border: 1px solid;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    body {
+      height: 5000px;
+    }
+    div {
+      position: fixed;
+      top: 50px;
+      left: 100px;
+      width: 100px;
+      height: 100px;
+      border: 1px solid;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="box"></div>
-    <script>
-        box.addEventListener("click", function () {
-            console.log("screen:", event.screenX, event.screenY);
-            console.log("page:", event.pageX, event.pageY);
-            console.log("client:", event.clientX, event.clientY);
-            console.log("offset:", event.offsetX, event.offsetY);
-        }, false);
-    </script>
+  <div id="box"></div>
+  <script>
+    box.addEventListener(
+      'click',
+      function () {
+        console.log('screen:', event.screenX, event.screenY);
+        console.log('page:', event.pageX, event.pageY);
+        console.log('client:', event.clientX, event.clientY);
+        console.log('offset:', event.offsetX, event.offsetY);
+      },
+      false
+    );
+  </script>
 </body>
 ```
 
@@ -834,15 +892,15 @@ offset：当前事件源的左上角作为参考点。
 **3. 滚动事件**
 
 - `onmousewheel`鼠标滚轮滚动的事件，会在滚轮滚动时触发，但是火狐不支持该属性
-  - 在火狐中需要使用 `DOMMouseScroll` 来绑定滚动事件，注意该事件需要通addEventListener()函数来绑定
+  - 在火狐中需要使用 `DOMMouseScroll` 来绑定滚动事件，注意该事件需要通 addEventListener()函数来绑定
 - `event.wheelDelta` 可以获取鼠标滚轮滚动的方向
-  - wheelDelta这个属性火狐中不支持，在火狐中使用event.detail来获取滚动的方向
+  - wheelDelta 这个属性火狐中不支持，在火狐中使用 event.detail 来获取滚动的方向
   - `if(event.wheelDelta > 0 || event.detail < 0){}`
 
-> 这两种事件接口皆非标准，如今的scroll事件对上述内容的行为响应做了统一。
+> 这两种事件接口皆非标准，如今的 scroll 事件对上述内容的行为响应做了统一。
 >
 > - `scroll`事件在元素内部内容区发生滚动时触发
-> - `wheel`是标准的滚轮事件，当鼠标滚轮滑动时触发，具体的默认行为取决于浏览器实现，所以不一定会触发scroll事件
+> - `wheel`是标准的滚轮事件，当鼠标滚轮滑动时触发，具体的默认行为取决于浏览器实现，所以不一定会触发 scroll 事件
 > - 此时若想获取滚动的方向，有两种方式：
 >   - [`WheelEvent.deltaY`](https://developer.mozilla.org/zh-CN/docs/Web/API/WheelEvent/deltaY)，但是标准未定义滚轮事件具体会引发什么样的行为，引发的行为实际上是各浏览器自行定义的，所以通过该滚轮事件获知文档内容滚动方向的方法并不可靠。而且当拖动滚动条滚动时也不会触发此事件。
 >   - 在文档内容滚动事件（[`scroll`](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/scroll_event)）中监视[`scrollLeft`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollLeft)和[`scrollTop`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollTop)二值变化情况
@@ -857,18 +915,22 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <input type="text" id="test">
-    <script>    
-        let test = document.getElementById("test");
-        test.addEventListener("keypress",function(){
-            console.log("你已经触发了事件");
-            console.log(event.keyCode);
-        },false);
-    </script>
+  <input type="text" id="test" />
+  <script>
+    let test = document.getElementById('test');
+    test.addEventListener(
+      'keypress',
+      function () {
+        console.log('你已经触发了事件');
+        console.log(event.keyCode);
+      },
+      false
+    );
+  </script>
 </body>
 ```
 
-效果：按下一个键，就会有对应的keyCode被打印到控制台
+效果：按下一个键，就会有对应的 keyCode 被打印到控制台
 
 ![-w134](./images/15119649350708.jpg)
 
@@ -878,18 +940,22 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 `key`属性是为了取代 keyCode 而新增的，它的值是一个字符串。在按下某个字符键时，key 的值就是相应的文本字符。在按下非字符键时，key 的值是相应键的名，默认为空字符串。
 
->注：Internet Explorer 8 以下的浏览器不支持，safari 浏览器不支持`keypress`事件中的 key 属性。
+> 注：Internet Explorer 8 以下的浏览器不支持，safari 浏览器不支持`keypress`事件中的 key 属性。
 
 ```html
 <body>
-    <input type="text" id="test">
-    <script>    
-        let test = document.getElementById("test");
-        test.addEventListener("keydown",function(){
-            console.log("你已经触发了事件");
-            console.log(event.key);
-        },false);
-    </script>
+  <input type="text" id="test" />
+  <script>
+    let test = document.getElementById('test');
+    test.addEventListener(
+      'keydown',
+      function () {
+        console.log('你已经触发了事件');
+        console.log(event.key);
+      },
+      false
+    );
+  </script>
 </body>
 ```
 
@@ -901,33 +967,33 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 **辅助按键（扩展）**
 
-按下键盘上的`shift`，`Ctrl`，`Alt`和`Meta`（Mac上的`command`）等辅助按键的时候，会触发`keydown`和`keyup`事件，但是不会触发`keypress`事件，因为它们不会在屏幕上产生任何字符。
+按下键盘上的`shift`，`Ctrl`，`Alt`和`Meta`（Mac 上的`command`）等辅助按键的时候，会触发`keydown`和`keyup`事件，但是不会触发`keypress`事件，因为它们不会在屏幕上产生任何字符。
 
 这里大家可以通过下面两段代码自行进行对比，如下：
 
 ```html
 <body>
-    <script>
-        window.onkeyup = function(){
-            console.log("OK");
-        }
-    </script>
+  <script>
+    window.onkeyup = function () {
+      console.log('OK');
+    };
+  </script>
 </body>
 ```
 
-效果：此时按下`shift`，`Ctrl`，`Alt`和`Meta`（Mac上的`command`）等辅助按键时将会触发事件。
+效果：此时按下`shift`，`Ctrl`，`Alt`和`Meta`（Mac 上的`command`）等辅助按键时将会触发事件。
 
 ```html
 <body>
-    <script>
-        window.onkeypress = function(){
-            console.log("OK");
-        }
-    </script>
+  <script>
+    window.onkeypress = function () {
+      console.log('OK');
+    };
+  </script>
 </body>
 ```
 
-效果：此时按下`shift`，`Ctrl`，`Alt`和`Meta`（Mac上的`command`）等辅助按键时不会触发事件。
+效果：此时按下`shift`，`Ctrl`，`Alt`和`Meta`（Mac 上的`command`）等辅助按键时不会触发事件。
 
 事件对象还有`shiftKey`，`ctrlKey`，`altKey`和`metaKey`属性，可以返回在键盘事件发生时，是否按下了对应的辅助按键。如果这几个属性返回 true ，就表示对应的键被按下了。
 
@@ -935,13 +1001,13 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <script>
-        window.onkeydown = function(){
-            if((event.key === 'c') && event.ctrlKey){
-                console.log("Yes,you pressed ctrl and c");
-            }
-        }
-    </script>
+  <script>
+    window.onkeydown = function () {
+      if (event.key === 'c' && event.ctrlKey) {
+        console.log('Yes,you pressed ctrl and c');
+      }
+    };
+  </script>
 </body>
 ```
 
@@ -949,13 +1015,13 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <script>
-        window.onclick = function(){
-            if(event.shiftKey){
-                console.log("Yes,you hold shiftKey and click the mouse");
-            }
-        }
-    </script>
+  <script>
+    window.onclick = function () {
+      if (event.shiftKey) {
+        console.log('Yes,you hold shiftKey and click the mouse');
+      }
+    };
+  </script>
 </body>
 ```
 
@@ -971,35 +1037,35 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        .father{
-            width: 200px;
-            height: 200px;
-            background-color: pink;
-        }
-        .son{
-            width: 100px;
-            height: 100px;
-            background-color: skyblue;
-            position: absolute;
-            left: 500px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    .father {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+    .son {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      position: absolute;
+      left: 500px;
+    }
+  </style>
 </head>
 <body>
-    <div class="father" onclick="test()">
-        <div class="son" onclick="test2()"></div>
-    </div>
-    <script>
-        let test = function(){
-            console.log("你点击了父元素");
-        }
-        let test2 = function(){
-            console.log("你点击了子元素");
-        }
-    </script>
+  <div class="father" onclick="test()">
+    <div class="son" onclick="test2()"></div>
+  </div>
+  <script>
+    let test = function () {
+      console.log('你点击了父元素');
+    };
+    let test2 = function () {
+      console.log('你点击了子元素');
+    };
+  </script>
 </body>
 ```
 
@@ -1019,37 +1085,37 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        .father{
-            width: 200px;
-            height: 200px;
-            background-color: pink;
-        }
-        .son{
-            width: 100px;
-            height: 100px;
-            background-color: skyblue;
-            position: absolute;
-            left: 500px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    .father {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+    .son {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+      position: absolute;
+      left: 500px;
+    }
+  </style>
 </head>
 <body>
-    <div class="father" onclick="test()">
-        <div class="son" onclick="test2()"></div>
-    </div>
-    <script>
-        let test = function(){
-            console.log("你点击了父元素");
-        }
-        let test2 = function(event){
-            console.log("你点击了子元素");
-            event.stopPropagation(); // 阻止事件向上冒泡
-        }
-    </script>
-</body>    
+  <div class="father" onclick="test()">
+    <div class="son" onclick="test2()"></div>
+  </div>
+  <script>
+    let test = function () {
+      console.log('你点击了父元素');
+    };
+    let test2 = function (event) {
+      console.log('你点击了子元素');
+      event.stopPropagation(); // 阻止事件向上冒泡
+    };
+  </script>
+</body>
 ```
 
 效果：当我们再次点击子元素来触发事件时，不会再同时触发绑定在父元素上面的事件。
@@ -1080,17 +1146,17 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 `cancelable`属性返回一个布尔值，表示事件是否可以取消。该属性为只读属性。返回 true 时，表示可以取消。否则，表示不可取消。
 
->注：Internet Explorer 8 及以下浏览器不支持。
+> 注：Internet Explorer 8 及以下浏览器不支持。
 
 ```html
 <body>
-    <a id="test" href="http://www.baidu.com">百度</a>
-    <script>
-         let test = document.getElementById("test");
-         test.onclick = function(event){
-            test.innerHTML = event.cancelable; // true
-         }
-    </script>
+  <a id="test" href="http://www.baidu.com">百度</a>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function (event) {
+      test.innerHTML = event.cancelable; // true
+    };
+  </script>
 </body>
 ```
 
@@ -1100,17 +1166,17 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 `preventDefault()`方法是 DOM 中最标准的取消浏览器默认行为的方式，无返回值。
 
->注：Internet Explorer 8 及以下浏览器不支持。
+> 注：Internet Explorer 8 及以下浏览器不支持。
 
 ```html
 <body>
-    <a id="test" href="http://www.baidu.com">百度</a>
-    <script>
-         let test = document.getElementById("test");
-         test.onclick = function(event){
-             event.preventDefault();
-         }
-    </script>
+  <a id="test" href="http://www.baidu.com">百度</a>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function (event) {
+      event.preventDefault();
+    };
+  </script>
 </body>
 ```
 
@@ -1120,17 +1186,17 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 最早在 Internet Explorer 的事件对象中实现了这种取消默认行为的方式，但是现在大多数浏览器都实现了该方式。
 
->注：firefox 和 Internet Explorer 9 以上浏览器不支持。
+> 注：firefox 和 Internet Explorer 9 以上浏览器不支持。
 
 ```html
 <body>
-    <a id="test" href="http://www.baidu.com">百度</a>
-    <script>
-         let test = document.getElementById("test");
-         test.onclick = function(event){
-            event.returnValue = false;
-         }
-    </script>
+  <a id="test" href="http://www.baidu.com">百度</a>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function (event) {
+      event.returnValue = false;
+    };
+  </script>
 </body>
 ```
 
@@ -1140,13 +1206,13 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <a id="test" href="http://www.baidu.com">百度</a>
-    <script>
-         let test = document.getElementById("test");
-         test.onclick = function(){
-            return false;
-         }
-    </script>
+  <a id="test" href="http://www.baidu.com">百度</a>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function () {
+      return false;
+    };
+  </script>
 </body>
 ```
 
@@ -1154,24 +1220,24 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 `defaultPrevented`属性表示默认行为是否被阻止，返回 true 时表示被阻止，返回 false 时，表示未被阻止。
 
->注：Internet Explorer 8 及以下浏览器不支持。
+> 注：Internet Explorer 8 及以下浏览器不支持。
 
 ```html
 <body>
-    <a id="test" href="http://www.baidu.com">百度</a>
-    <script>
-        let test = document.getElementById("test");
-        test.onclick = function(event){
-            // 采用两种不同的方式来阻止浏览器默认行为，这是为了照顾其兼容性
-            if(event.preventDefault){
-                event.preventDefault();
-            }else{
-                event.returnValue = false;
-            }
-            // 将是否阻止默认行为的结果赋值给 <a> 标签的文本内容
-            test.innerHTML = event.defaultPrevented;
-        }
-    </script>
+  <a id="test" href="http://www.baidu.com">百度</a>
+  <script>
+    let test = document.getElementById('test');
+    test.onclick = function (event) {
+      // 采用两种不同的方式来阻止浏览器默认行为，这是为了照顾其兼容性
+      if (event.preventDefault) {
+        event.preventDefault();
+      } else {
+        event.returnValue = false;
+      }
+      // 将是否阻止默认行为的结果赋值给 <a> 标签的文本内容
+      test.innerHTML = event.defaultPrevented;
+    };
+  </script>
 </body>
 ```
 
@@ -1181,29 +1247,33 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 事件对象的`eventPhase`属性可以返回一个整数值，表示事件目前所处的事件流阶段。0 表示事件没有发生，1 表示当前事件流处于捕获阶段，2 表示处于目标阶段，3 表示冒泡阶段。
 
->注：Internet Explorer 8 及以下浏览器不支持。
+> 注：Internet Explorer 8 及以下浏览器不支持。
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        test.onclick = function(){
-            test.innerText = event.eventPhase; // 2
-        }
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    test.onclick = function () {
+      test.innerText = event.eventPhase; // 2
+    };
+  </script>
 </body>
 ```
 
-效果：点击按钮后里面的文本变为2，说明处于目标阶段。
+效果：点击按钮后里面的文本变为 2，说明处于目标阶段。
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        document.addEventListener("click",function(){
-            test.innerText = event.eventPhase; // 1
-        },true); // 最后的布尔参数值为 true，说明在捕获阶段处理事件
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    document.addEventListener(
+      'click',
+      function () {
+        test.innerText = event.eventPhase; // 1
+      },
+      true
+    ); // 最后的布尔参数值为 true，说明在捕获阶段处理事件
+  </script>
 </body>
 ```
 
@@ -1211,18 +1281,22 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <button id="test">点击我</button>
-    <script>
-        document.addEventListener("click",function(){
-            test.innerText = event.eventPhase; // 3
-        },false); // 最后的布尔参数值为 false，说明在冒泡阶段处理事件
-    </script>
+  <button id="test">点击我</button>
+  <script>
+    document.addEventListener(
+      'click',
+      function () {
+        test.innerText = event.eventPhase; // 3
+      },
+      false
+    ); // 最后的布尔参数值为 false，说明在冒泡阶段处理事件
+  </script>
 </body>
 ```
 
-效果：点击按钮后里面的文本变为3，说明处于冒泡阶段。
+效果：点击按钮后里面的文本变为 3，说明处于冒泡阶段。
 
-## 五、事件委托 
+## 五、事件委托
 
 前面在介绍事件冒泡的时候，讲过了事件冒泡的缺点，所以必要的时候，我们需要阻止事件冒泡。但是事件冒泡并不是说只有缺点没有优点，事件冒泡一个最大的好处就是可以实现事件委托。
 
@@ -1238,14 +1312,14 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <ul id="color-list">
-        <li>red</li>
-        <li>yellow</li>
-        <li>blue</li>
-        <li>green</li>
-        <li>black</li>
-        <li>white</li>
-    </ul>
+  <ul id="color-list">
+    <li>red</li>
+    <li>yellow</li>
+    <li>blue</li>
+    <li>green</li>
+    <li>black</li>
+    <li>white</li>
+  </ul>
 </body>
 ```
 
@@ -1257,20 +1331,20 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <ul id="color-list">
-        <li>red</li>
-        <li>yellow</li>
-        <li>blue</li>
-        <li>green</li>
-        <li>black</li>
-        <li>white</li>
-    </ul>
-    <script>
-        let colorList = document.getElementById("color-list");
-        colorList.addEventListener("click",function(){
-            alert("Hello");
-        })
-    </script>
+  <ul id="color-list">
+    <li>red</li>
+    <li>yellow</li>
+    <li>blue</li>
+    <li>green</li>
+    <li>black</li>
+    <li>white</li>
+  </ul>
+  <script>
+    let colorList = document.getElementById('color-list');
+    colorList.addEventListener('click', function () {
+      alert('Hello');
+    });
+  </script>
 </body>
 ```
 
@@ -1282,22 +1356,22 @@ keyCode 属性会发生在`keydown`和`keyup`事件被触发时，每一个 keyC
 
 ```html
 <body>
-    <ul id="color-list">
-        <li>red</li>
-        <li>yellow</li>
-        <li>blue</li>
-        <li>green</li>
-        <li>black</li>
-        <li>white</li>
-    </ul>
-    <script>
-        let colorList = document.getElementById("color-list");
-        colorList.addEventListener("click", function (event) {
-            if (event.target.nodeName === 'LI') {
-                alert('点击 li');
-            }
-        })
-    </script>
+  <ul id="color-list">
+    <li>red</li>
+    <li>yellow</li>
+    <li>blue</li>
+    <li>green</li>
+    <li>black</li>
+    <li>white</li>
+  </ul>
+  <script>
+    let colorList = document.getElementById('color-list');
+    colorList.addEventListener('click', function (event) {
+      if (event.target.nodeName === 'LI') {
+        alert('点击 li');
+      }
+    });
+  </script>
 </body>
 ```
 
@@ -1315,20 +1389,23 @@ copy：在发生复制操作时触发。
 paste：在发生粘贴操作时触发。
 ```
 
->注：Internet Explorer 浏览器只有在文本中选定字符时，copy 和 cut 事件才会发生。且在非文本框中（如div元素）只能发生 copy 事件，firfox 浏览器只有焦点在文本框中才会发生 paste 事件。
+> 注：Internet Explorer 浏览器只有在文本中选定字符时，copy 和 cut 事件才会发生。且在非文本框中（如 div 元素）只能发生 copy 事件，firfox 浏览器只有焦点在文本框中才会发生 paste 事件。
 
 下面是一个剪贴板事件的基本操作示例，如下：
 
 ```html
 <body>
-    <input value="text" id="test">
-    <script>
-        test.onpaste = test.oncopy = test.oncut = function (e) {
-            e = e || event;
-            test.value = e.type;
-            return false;
-        }
-    </script>
+  <input value="text" id="test" />
+  <script>
+    test.onpaste =
+      test.oncopy =
+      test.oncut =
+        function (e) {
+          e = e || event;
+          test.value = e.type;
+          return false;
+        };
+  </script>
 </body>
 ```
 
@@ -1348,14 +1425,17 @@ beforepaste：在发生粘贴操作前触发。
 
 ```html
 <body>
-    <input value="text" id="test">
-    <script>
-        test.onbeforepaste = test.onbeforecopy = test.onbeforecut = function (e) {
-            e = e || event;
-            test.value = e.type;
-            return false;
-        }
-    </script>
+  <input value="text" id="test" />
+  <script>
+    test.onbeforepaste =
+      test.onbeforecopy =
+      test.onbeforecut =
+        function (e) {
+          e = e || event;
+          test.value = e.type;
+          return false;
+        };
+  </script>
 </body>
 ```
 
@@ -1378,21 +1458,21 @@ let clipboardData = e.clipboardData || window.clipboardData;
 
 在 Internet Explorer 中，有 2 种数据格式：text 和 URL。在其他浏览器中，这个参数是一种 MIME 类型；不过，可以用 text 代表。
 
->注：在 Internet Explorer 浏览器中，`cut`和`copy`事件中的`getData()`方法始终返回 null，而其他浏览器始终返回空字符串''。但如果和`setDada()`方法配合，就可以正常使用。
+> 注：在 Internet Explorer 浏览器中，`cut`和`copy`事件中的`getData()`方法始终返回 null，而其他浏览器始终返回空字符串''。但如果和`setDada()`方法配合，就可以正常使用。
 
 示例如下：
 
 ```html
 <body>
-    <input id="test" value="123">
-    <script>
-        test.onpaste = function (e) {
-            e = e || event;
-            let clipboardData = e.clipboardData || window.clipboardData;
-            test.value = '测试' + clipboardData.getData('text');
-            return false;
-        }
-    </script>
+  <input id="test" value="123" />
+  <script>
+    test.onpaste = function (e) {
+      e = e || event;
+      let clipboardData = e.clipboardData || window.clipboardData;
+      test.value = '测试' + clipboardData.getData('text');
+      return false;
+    };
+  </script>
 </body>
 ```
 
@@ -1404,22 +1484,22 @@ let clipboardData = e.clipboardData || window.clipboardData;
 
 `setData()`方法的第 1 个参数也是数据类型，第 2 个参数是要放在剪贴板中的文本。对于第 1 个参数的规则与`getData()`相同。
 
->注：在 Internet Explorer 浏览器中，该方法在成功将文本放到剪贴板中后，返回 true，否则返回false。而其他浏览器中，该方法无返回值。在 paste 事件中，只有 Internet Explorer 浏览器可以正常使用`setData()`方法，chrome 浏览器会失败，而 firefox 浏览器会报错。
+> 注：在 Internet Explorer 浏览器中，该方法在成功将文本放到剪贴板中后，返回 true，否则返回 false。而其他浏览器中，该方法无返回值。在 paste 事件中，只有 Internet Explorer 浏览器可以正常使用`setData()`方法，chrome 浏览器会失败，而 firefox 浏览器会报错。
 
 示例如下：
 
 ```html
 <body>
-    <input id="test" value="123">
-    <script>
-        test.oncopy = function (e) {
-            e = e || event;
-            var clipboardData = e.clipboardData || window.clipboardData;
-            clipboardData.setData('text', '测试');
-            test.value = clipboardData.getData('text');
-            return false;
-        }
-    </script>
+  <input id="test" value="123" />
+  <script>
+    test.oncopy = function (e) {
+      e = e || event;
+      var clipboardData = e.clipboardData || window.clipboardData;
+      clipboardData.setData('text', '测试');
+      test.value = clipboardData.getData('text');
+      return false;
+    };
+  </script>
 </body>
 ```
 
@@ -1433,21 +1513,21 @@ let clipboardData = e.clipboardData || window.clipboardData;
 
 在 Internet Explorer 中，有两种数据格式：text 和 URL。在其他浏览器中，这个参数是 1 种 MIME 类型。不过，可以用 text 表示。
 
->注：在 Internet Explorer 浏览器中，该方法在成功将文本放到剪贴板中后，返回 true，否则返回false。而其他浏览器该方法的返回值为 undefined。在 paste 事件中，chrome 浏览器和 Internet Explorer 浏览器可以正常使用`setData()`方法，而 firefox 浏览器会报错。
+> 注：在 Internet Explorer 浏览器中，该方法在成功将文本放到剪贴板中后，返回 true，否则返回 false。而其他浏览器该方法的返回值为 undefined。在 paste 事件中，chrome 浏览器和 Internet Explorer 浏览器可以正常使用`setData()`方法，而 firefox 浏览器会报错。
 
 示例如下：
 
 ```html
 <body>
-    <input id="test" value="123">
-    <script>
-        test.oncopy = function (e) {
-            e = e || event;
-            var clipboardData = e.clipboardData || window.clipboardData;
-            test.value = clipboardData.clearData('text');
-            return false;
-        }
-    </script>
+  <input id="test" value="123" />
+  <script>
+    test.oncopy = function (e) {
+      e = e || event;
+      var clipboardData = e.clipboardData || window.clipboardData;
+      test.value = clipboardData.clearData('text');
+      return false;
+    };
+  </script>
 </body>
 ```
 
@@ -1463,17 +1543,20 @@ let clipboardData = e.clipboardData || window.clipboardData;
 
 ```html
 <body>
-    <input value="text">
-    <button id="test">屏蔽剪贴板</button>
-    <script>
-        test.onclick = function () {
-            document.oncopy = document.oncut = document.onpaste = function (e) {
-                e = e || event;
-                alert('该文档不允许复制剪贴操作，谢谢配合')
-                return false;
-            }
-        }
-    </script>
+  <input value="text" />
+  <button id="test">屏蔽剪贴板</button>
+  <script>
+    test.onclick = function () {
+      document.oncopy =
+        document.oncut =
+        document.onpaste =
+          function (e) {
+            e = e || event;
+            alert('该文档不允许复制剪贴操作，谢谢配合');
+            return false;
+          };
+    };
+  </script>
 </body>
 ```
 
@@ -1487,18 +1570,18 @@ let clipboardData = e.clipboardData || window.clipboardData;
 
 ```html
 <body>
-    <p>123hello</p>
-    <p>45678</p>
-    <input id="test">
-    <script>
-        test.onpaste = function (e) {
-            e = e || event;
-            var clipboardData = e.clipboardData || window.clipboardData;
-            if (!/^\d+$/.test(clipboardData.getData('text'))) {
-                return false;
-            }
-        }
-    </script>
+  <p>123hello</p>
+  <p>45678</p>
+  <input id="test" />
+  <script>
+    test.onpaste = function (e) {
+      e = e || event;
+      var clipboardData = e.clipboardData || window.clipboardData;
+      if (!/^\d+$/.test(clipboardData.getData('text'))) {
+        return false;
+      }
+    };
+  </script>
 </body>
 ```
 
@@ -1506,9 +1589,8 @@ let clipboardData = e.clipboardData || window.clipboardData;
 
 ![2018-12-18 22.00.03-w186](./images/pastenum.gif)
 
-## 七、一些event的记录
+## 七、一些 event 的记录
 
 - `contextmenu `
   - contextmenu 事件会在用户尝试打开上下文菜单时被触发。该事件通常在鼠标点击右键或者按下键盘上的菜单键时被触发，如果使用菜单键，该上下文菜单会被展示 到所聚焦元素的左下角，但是如果该元素是一棵 DOM 树的话，上下文菜单便会展示在当前这一行的左下角.
   - 通过取消默认行为可以自定义右键操作
-

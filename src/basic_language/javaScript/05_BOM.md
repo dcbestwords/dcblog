@@ -1,6 +1,10 @@
 ---
 title: BOM
 order: 5
+category:
+  - 前端
+tag:
+  - BOM
 ---
 
 ## 一、浏览器引入 JavaScript
@@ -13,11 +17,11 @@ order: 5
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script>
-        // JavaScript 代码
-    </script>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <script>
+    // JavaScript 代码
+  </script>
 </head>
 ```
 
@@ -25,10 +29,10 @@ order: 5
 
 ```html
 <body>
-    <!-- HTML代码 -->
-    <script>
-        // JavaScript 代码
-    </script>
+  <!-- HTML代码 -->
+  <script>
+    // JavaScript 代码
+  </script>
 </body>
 ```
 
@@ -38,8 +42,8 @@ order: 5
 
 ```html
 <body>
-    <!-- HTML代码 -->
-    <script src="外部 JavaScript 文件"></script>
+  <!-- HTML代码 -->
+  <script src="外部 JavaScript 文件"></script>
 </body>
 ```
 
@@ -49,8 +53,8 @@ order: 5
 
 ```html
 <body>
-    <!-- HTML代码 -->
-    <a href="javascript:alert('Hello World')">点击</a>
+  <!-- HTML代码 -->
+  <a href="javascript:alert('Hello World')">点击</a>
 </body>
 ```
 
@@ -60,8 +64,8 @@ order: 5
 
 ```html
 <body>
-    <!-- HTML代码 -->
-    <button onclick="javascript:alert('Hello World!')">点击</button>
+  <!-- HTML代码 -->
+  <button onclick="javascript:alert('Hello World!')">点击</button>
 </body>
 ```
 
@@ -84,13 +88,13 @@ document：表示整个页面
 
 整个 BOM 的核心对象就是是 window 对象，它代表的是浏览器的一个实例。window 对象同时也是最顶层的对象。
 
-### 2. BOM 与 DOM 的关系	
+### 2. BOM 与 DOM 的关系
 
 在下一章，我们还会介绍一个东西，被称之为 DOM。
 
 很多初学者刚开始都搞不清楚 BOM 和 DOM 之间的关系。事实上很简单，DOM 可以算是 BOM 的一个分支。因为 BOM 里面存在一个叫做 Document 的对象，但是这个对象的属性和方法太多了，所以 W3C 将其单独取了出来，做成了一套规范，这个就是 DOM，英语全称 document object model，翻译成中文就是文档对象模型。
 
->W3C：万维网联盟。创建于 1994 年，是 Web 技术领域最具权威和影响力的国际中立性技术标准机构。到目前为止，W3C 已发布了 200 多项影响深远的 Web 技术标准及实施指南。
+> W3C：万维网联盟。创建于 1994 年，是 Web 技术领域最具权威和影响力的国际中立性技术标准机构。到目前为止，W3C 已发布了 200 多项影响深远的 Web 技术标准及实施指南。
 
 接下来，我们可以用一张层级关系图来表示 BOM 和 DOM 之间的关系，如下：
 
@@ -108,20 +112,20 @@ window 对象扮演着在 ECMAScript 中的 global 对象的角色，因此所�
 
 ```html
 <body>
-    <script>
-        var a = 1;
-        function test(){
-            alert("this is a test");
-        }
-        alert(a); // 1
-        alert(window.a); // 1
-        test(); // this is a test
-        window.test(); // this is a test
-    </script>
+  <script>
+    var a = 1;
+    function test() {
+      alert('this is a test');
+    }
+    alert(a); // 1
+    alert(window.a); // 1
+    test(); // this is a test
+    window.test(); // this is a test
+  </script>
 </body>
 ```
 
-可以看到，这里我们通过访问`window.a`和`window.test()`也可以打印出a变量的值和调用`test()`函数。
+可以看到，这里我们通过访问`window.a`和`window.test()`也可以打印出 a 变量的值和调用`test()`函数。
 
 **1. 全局属性和 window 属性的区别**
 
@@ -131,16 +135,16 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        var i = 10;
-        window.j = 20;
-        console.log(window.i);//10
-        console.log(window.j);//20
-        delete window.i;//并没有被删除掉
-        delete window.j;//已经被删除掉了
-        console.log(window.i);//可以打印出来
-        console.log(window.j);//被删除了,所以是undefined
-    </script>
+  <script>
+    var i = 10;
+    window.j = 20;
+    console.log(window.i); //10
+    console.log(window.j); //20
+    delete window.i; //并没有被删除掉
+    delete window.j; //已经被删除掉了
+    console.log(window.i); //可以打印出来
+    console.log(window.j); //被删除了,所以是undefined
+  </script>
 </body>
 ```
 
@@ -150,14 +154,14 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        var i = 10;
-        let j = 20;
-        const k = 30;
-        alert(window.i);//10
-        alert(window.j);//undefined
-        alert(window.k);//undefined
-    </script>
+  <script>
+    var i = 10;
+    let j = 20;
+    const k = 30;
+    alert(window.i); //10
+    alert(window.j); //undefined
+    alert(window.k); //undefined
+  </script>
 </body>
 ```
 
@@ -167,24 +171,22 @@ var 和 window 对象的属性真的就是一模一样么？
 
 **1. 窗口大小**
 
-关于窗口大小的属性有两组，`innerWidth`，`innerHeight`以及`outerWidth`，`outerHeight`
-区别在于：inner 那一组表示的是页面视图区的大小，而 outer 那一组表示的是浏览器窗口本身的尺寸。
+关于窗口大小的属性有两组，`innerWidth`，`innerHeight`以及`outerWidth`，`outerHeight` 区别在于：inner 那一组表示的是页面视图区的大小，而 outer 那一组表示的是浏览器窗口本身的尺寸。
 
 ```html
 <body>
-    <script>
-        console.log(`innerHeight:${innerHeight}`);
-        console.log(`innerWidth:${innerWidth}`);
-        console.log(`outerHeight:${outerHeight}`);
-        console.log(`outerWidth:${outerWidth}`);
-    </script>
+  <script>
+    console.log(`innerHeight:${innerHeight}`);
+    console.log(`innerWidth:${innerWidth}`);
+    console.log(`outerHeight:${outerHeight}`);
+    console.log(`outerWidth:${outerWidth}`);
+  </script>
 </body>
 ```
 
-效果：
-![-w530](./images/15450359326115.jpg)
+效果： ![-w530](./images/15450359326115.jpg)
 
->注：不同的浏览器，所表示的值略微有差异。
+> 注：不同的浏览器，所表示的值略微有差异。
 
 除了`innerWidth`和`innerHeight`以外，使用`document.documentElement.clientWidth`以及`document.documentElement.clientHeight`也可以获取到页面视图区的大小。
 
@@ -192,14 +194,14 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        console.log('innerHeight:',innerHeight);
-        console.log('innerWidth:',innerWidth);
-        console.log('outerHeight:',outerHeight);
-        console.log('outerWidth:',outerWidth);
-        console.log('document.documentElement.clientWidth:',document.documentElement.clientWidth);
-        console.log('document.documentElement.clientHeight:',document.documentElement.clientHeight);
-    </script>
+  <script>
+    console.log('innerHeight:', innerHeight);
+    console.log('innerWidth:', innerWidth);
+    console.log('outerHeight:', outerHeight);
+    console.log('outerWidth:', outerWidth);
+    console.log('document.documentElement.clientWidth:', document.documentElement.clientWidth);
+    console.log('document.documentElement.clientHeight:', document.documentElement.clientHeight);
+  </script>
 </body>
 ```
 
@@ -209,27 +211,26 @@ var 和 window 对象的属性真的就是一模一样么？
 
 那这两个属性有什么区别呢？具体如下表：
 
-| 属性                                  | 描述                                 |
-| ------------------------------------- | ------------------------------------ |
-| innerWidth                            | 返回窗口的文档显示区的宽度(IE不支持) |
-| innerHeight                           | 返回窗口的文档显示区的高度(IE不支持) |
-| document.documentElement.clientWidth  | 返回窗口的文档显示区的宽度(通用方法) |
-| document.documentElement.clientHeight | 返回窗口的文档显示区的宽度(通用方法) |
+| 属性                                  | 描述                                  |
+| ------------------------------------- | ------------------------------------- |
+| innerWidth                            | 返回窗口的文档显示区的宽度(IE 不支持) |
+| innerHeight                           | 返回窗口的文档显示区的高度(IE 不支持) |
+| document.documentElement.clientWidth  | 返回窗口的文档显示区的宽度(通用方法)  |
+| document.documentElement.clientHeight | 返回窗口的文档显示区的宽度(通用方法)  |
 
 **2. 窗口位置**
 
-窗口位置的属性也是有两组，分别是`screenLeft`和`screenTop`，还有`screenX`和`screenY`
-这两组属性都是表示窗口相对于屏幕左边和上边的位置，如下：
+窗口位置的属性也是有两组，分别是`screenLeft`和`screenTop`，还有`screenX`和`screenY` 这两组属性都是表示窗口相对于屏幕左边和上边的位置，如下：
 
 ```html
 <body>
-    <script>
-        console.log(`window.screenLeft:${window.screenLeft}`);
-        console.log(`window.screenTop:${window.screenTop}`);
-        console.log("--------");
-        console.log(`window.screenX:${window.screenX}`);
-        console.log(`window.screenY:${window.screenY}`);
-    </script>
+  <script>
+    console.log(`window.screenLeft:${window.screenLeft}`);
+    console.log(`window.screenTop:${window.screenTop}`);
+    console.log('--------');
+    console.log(`window.screenX:${window.screenX}`);
+    console.log(`window.screenY:${window.screenY}`);
+  </script>
 </body>
 ```
 
@@ -239,12 +240,12 @@ var 和 window 对象的属性真的就是一模一样么？
 
 区别在于 screenX 和 screenY 属性最早是火狐浏览器里面特有的属性。但是上面的代码是在谷歌浏览器里面运行的，可以看到，现在这两组属性在很多浏览器里面都是通用的了。接下来我将上面两组属性的区别总结成下面的表格，如下：
 
-| 属性       | 描述                                                         |
-| ---------- | ------------------------------------------------------------ |
-| screenX    | 返回浏览器相对于屏幕窗口的x坐标(IE不支持)                    |
-| screenY    | 返回浏览器相对于屏幕窗口的y坐标，即距离浏览器最顶端(IE不支持) |
-| screenLeft | 返回浏览器相对于屏幕窗口的x坐标                              |
-| screenTop  | 返回浏览器相对于屏幕窗口的y坐标(在IE中这个坐标包括了工具栏+菜单栏+地址栏的高度) |
+| 属性       | 描述                                                                                |
+| ---------- | ----------------------------------------------------------------------------------- |
+| screenX    | 返回浏览器相对于屏幕窗口的 x 坐标(IE 不支持)                                        |
+| screenY    | 返回浏览器相对于屏幕窗口的 y 坐标，即距离浏览器最顶端(IE 不支持)                    |
+| screenLeft | 返回浏览器相对于屏幕窗口的 x 坐标                                                   |
+| screenTop  | 返回浏览器相对于屏幕窗口的 y 坐标(在 IE 中这个坐标包括了工具栏+菜单栏+地址栏的高度) |
 
 **3. 元素位置**
 
@@ -254,35 +255,35 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        #one{
-            width: 200px;
-            height: 200px;
-            background-color: pink;
-            position: absolute;
-            left: 100px;
-            top: 100px;
-        }
-        #two{
-            width: 50px;
-            height: 50px;
-            background-color: skyblue;
-            position: absolute;
-            left: 50px;
-            top: 60px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    #one {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      position: absolute;
+      left: 100px;
+      top: 100px;
+    }
+    #two {
+      width: 50px;
+      height: 50px;
+      background-color: skyblue;
+      position: absolute;
+      left: 50px;
+      top: 60px;
+    }
+  </style>
 </head>
 <body>
-    <div id="one">
-        <div id="two"></div>
-    </div>
-    <script>
-        console.log(two.offsetLeft); // 50
-        console.log(two.offsetTop); // 60
-    </script>
+  <div id="one">
+    <div id="two"></div>
+  </div>
+  <script>
+    console.log(two.offsetLeft); // 50
+    console.log(two.offsetTop); // 60
+  </script>
 </body>
 ```
 
@@ -290,46 +291,46 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        #one {
-            width: 200px;
-            height: 200px;
-            background-color: pink;
-            position: absolute;
-            left: 100px;
-            top: 80px;
-            padding: 50px;
-        }
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    #one {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      position: absolute;
+      left: 100px;
+      top: 80px;
+      padding: 50px;
+    }
 
-        #two {
-            width: 150px;
-            height: 150px;
-            border: 1px solid;
-        }
+    #two {
+      width: 150px;
+      height: 150px;
+      border: 1px solid;
+    }
 
-        #three {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            left: 70px;
-            top: 70px;
-            background-color: skyblue;
-        }
-    </style>
+    #three {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      left: 70px;
+      top: 70px;
+      background-color: skyblue;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="one">
-        <div id="two">
-            <div id="three"></div>
-        </div>
+  <div id="one">
+    <div id="two">
+      <div id="three"></div>
     </div>
-    <script>
-        console.log(`offsetTop:${three.offsetTop}`); // offsetTop:70
-        console.log(`offsetLeft:${three.offsetLeft}`); // offsetLeft:70
-    </script>
+  </div>
+  <script>
+    console.log(`offsetTop:${three.offsetTop}`); // offsetTop:70
+    console.log(`offsetLeft:${three.offsetLeft}`); // offsetLeft:70
+  </script>
 </body>
 ```
 
@@ -341,25 +342,25 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        div{
-            width: 100px;
-            height: 150px;
-            background-color: pink;
-            position: absolute;
-            top: 300px;
-            left: 200px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 150px;
+      background-color: pink;
+      position: absolute;
+      top: 300px;
+      left: 200px;
+    }
+  </style>
 </head>
 <body>
-    <div id="div"></div>
-    <script>
-        console.log(div.offsetWidth); // 100
-        console.log(div.offsetHeight); // 150
-    </script>
+  <div id="div"></div>
+  <script>
+    console.log(div.offsetWidth); // 100
+    console.log(div.offsetHeight); // 150
+  </script>
 </body>
 ```
 
@@ -369,26 +370,26 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-        body {
-            height: 5000px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    body {
+      height: 5000px;
+    }
+  </style>
 </head>
 <body>
-    <script>
-        window.onscroll = function () {
-            console.log(window.pageYOffset);
-        }
-    </script>
+  <script>
+    window.onscroll = function () {
+      console.log(window.pageYOffset);
+    };
+  </script>
 </body>
 ```
 
 需要注意的是，`pageXOffset`和`pageYOffset`属性相等于`scrollX`和`scrollY`属性。**这些属性都是只读属性**。
 
->注：`document.body.onscroll`，`window.onscroll`，`document.documentElement.onscroll`这几个属性在各浏览器中的兼容性问题，可以参见这篇文档。https://blog.csdn.net/qq_26445509/article/details/51153153
+> 注：`document.body.onscroll`，`window.onscroll`，`document.documentElement.onscroll`这几个属性在各浏览器中的兼容性问题，可以参见这篇文档。https://blog.csdn.net/qq_26445509/article/details/51153153
 
 ### 3. 常用方法
 
@@ -398,15 +399,15 @@ var 和 window 对象的属性真的就是一模一样么？
 
 `alert()`：用于显示带有一条指定消息和一个确定按钮的警告框。
 
->注意：`alert()`方法会终止 JavaScript 代码的执行。
+> 注意：`alert()`方法会终止 JavaScript 代码的执行。
 
 示例如下：
 
 ```html
 <body>
-    <script>
-        window.alert("Hello");
-    </script>
+  <script>
+    window.alert('Hello');
+  </script>
 </body>
 ```
 
@@ -420,10 +421,10 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        let i = window.confirm("Are you sure?");
-        console.log(i,typeof i); // true "boolean"
-    </script>
+  <script>
+    let i = window.confirm('Are you sure?');
+    console.log(i, typeof i); // true "boolean"
+  </script>
 </body>
 ```
 
@@ -435,10 +436,10 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        let i = window.prompt("Please input something");
-        console.log(i,typeof i); // 用户输入内容  string
-    </script>
+  <script>
+    let i = window.prompt('Please input something');
+    console.log(i, typeof i); // 用户输入内容  string
+  </script>
 </body>
 ```
 
@@ -448,10 +449,10 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        window.resizeTo(100,100); // 调整到 100 x 100
-        window.resizeBy(100,50); // 在原来的基础上增加 100 和 50 变为 200 x 150
-    </script>
+  <script>
+    window.resizeTo(100, 100); // 调整到 100 x 100
+    window.resizeBy(100, 50); // 在原来的基础上增加 100 和 50 变为 200 x 150
+  </script>
 </body>
 ```
 
@@ -461,10 +462,10 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        window.moveTo(100,100); // 移动到100x100的位置
-        window.moveBy(100,50); // 在原来的基础上向右移动100,向下移动50
-    </script>
+  <script>
+    window.moveTo(100, 100); // 移动到100x100的位置
+    window.moveBy(100, 50); // 在原来的基础上向右移动100,向下移动50
+  </script>
 </body>
 ```
 
@@ -472,24 +473,24 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <button id='btn1'>调整到100x100</button>
-    <button id='btn2'>在原来的基础上增加100和50</button>
-    <button id='btn3'>移动到100x100的位置</button>
-    <button id='btn4'>在原来的基础上向右移动100,向下移动50</button>
-    <script>
-        btn1.onclick = function () {
-            window.resizeTo(100,100); // 调整到 100x100
-        }
-        btn2.onclick = function () {
-            window.resizeBy(100,50); // 在原来的基础上增加 100 和 50 变为 200x150
-        }
-        btn3.onclick = function () {
-            window.moveTo(100,100); // 移动到 100x100 的位置
-        }
-        btn4.onclick = function () {
-            window.moveBy(100,50); // 在原来的基础上向右移动 100,向下移动 50
-        }
-    </script>
+  <button id="btn1">调整到100x100</button>
+  <button id="btn2">在原来的基础上增加100和50</button>
+  <button id="btn3">移动到100x100的位置</button>
+  <button id="btn4">在原来的基础上向右移动100,向下移动50</button>
+  <script>
+    btn1.onclick = function () {
+      window.resizeTo(100, 100); // 调整到 100x100
+    };
+    btn2.onclick = function () {
+      window.resizeBy(100, 50); // 在原来的基础上增加 100 和 50 变为 200x150
+    };
+    btn3.onclick = function () {
+      window.moveTo(100, 100); // 移动到 100x100 的位置
+    };
+    btn4.onclick = function () {
+      window.moveBy(100, 50); // 在原来的基础上向右移动 100,向下移动 50
+    };
+  </script>
 </body>
 ```
 
@@ -503,17 +504,17 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        // 参数 1 : 要加载的 URL
-        // 参数 2 : 指定 target 属性或窗口的名称
-        // 参数 3 : 一个特性字符串,新窗口的大小
-        // 参数 4 : 新窗口是否取代历史记录中的当前页面     
-        window.open("2.html","123","height=400,width=400,top=10,resizable=yes");
-    </script>
+  <script>
+    // 参数 1 : 要加载的 URL
+    // 参数 2 : 指定 target 属性或窗口的名称
+    // 参数 3 : 一个特性字符串,新窗口的大小
+    // 参数 4 : 新窗口是否取代历史记录中的当前页面
+    window.open('2.html', '123', 'height=400,width=400,top=10,resizable=yes');
+  </script>
 </body>
 ```
 
-效果：重新加载页面以后弹出新的窗口（2.html文件是提前准备好了的）
+效果：重新加载页面以后弹出新的窗口（2.html 文件是提前准备好了的）
 
 ![-w412](./images/15118387667425.jpg)
 
@@ -523,17 +524,17 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <button onclick="test()">关闭新窗口</button>
-    <script>
-        // 参数 1 : 要加载的 URL
-        // 参数 2 : 指定 target 属性或窗口的名称
-        // 参数 3 : 一个特性字符串,新窗口的大小
-        // 参数 4 : 新窗口是否取代历史记录中的当前页面     
-        let i = window.open("2.html","123","height=400,width=400,resizable=yes");
-        let test = function(){
-            i.close();
-        }
-    </script>
+  <button onclick="test()">关闭新窗口</button>
+  <script>
+    // 参数 1 : 要加载的 URL
+    // 参数 2 : 指定 target 属性或窗口的名称
+    // 参数 3 : 一个特性字符串,新窗口的大小
+    // 参数 4 : 新窗口是否取代历史记录中的当前页面
+    let i = window.open('2.html', '123', 'height=400,width=400,resizable=yes');
+    let test = function () {
+      i.close();
+    };
+  </script>
 </body>
 ```
 
@@ -541,14 +542,14 @@ var 和 window 对象的属性真的就是一模一样么？
 
 ```html
 <body>
-    <script>
-        // 参数 1 : 要加载的 URL
-        // 参数 2 : 指定 target 属性或窗口的名称
-        // 参数 3 : 一个特性字符串,新窗口的大小
-        // 参数 4 : 新窗口是否取代历史记录中的当前页面     
-        let i = window.open("2.html","123","height=400,width=400,resizable=yes");
-        console.log(i.opener === window);//true
-    </script>
+  <script>
+    // 参数 1 : 要加载的 URL
+    // 参数 2 : 指定 target 属性或窗口的名称
+    // 参数 3 : 一个特性字符串,新窗口的大小
+    // 参数 4 : 新窗口是否取代历史记录中的当前页面
+    let i = window.open('2.html', '123', 'height=400,width=400,resizable=yes');
+    console.log(i.opener === window); //true
+  </script>
 </body>
 ```
 
@@ -576,17 +577,17 @@ clearInterval(id)
 
 ```html
 <body>
-    <script>
-        let i = 1;
-        let test = function(){
-            console.log(i);
-            if(i === 10){
-                clearInterval(id);
-            }
-            i++;
-        }
-        let id = setInterval("test()",1000);
-    </script>
+  <script>
+    let i = 1;
+    let test = function () {
+      console.log(i);
+      if (i === 10) {
+        clearInterval(id);
+      }
+      i++;
+    };
+    let id = setInterval('test()', 1000);
+  </script>
 </body>
 ```
 
@@ -596,12 +597,12 @@ clearInterval(id)
 
 ```html
 <body>
-    <span id="time"></span>
-    <script>
-        setInterval(function(){
-            time.innerHTML = new Date().toLocaleString();
-        },1000);
-    </script>
+  <span id="time"></span>
+  <script>
+    setInterval(function () {
+      time.innerHTML = new Date().toLocaleString();
+    }, 1000);
+  </script>
 </body>
 ```
 
@@ -631,13 +632,13 @@ clearInterval(id)
 
 ```html
 <body>
-    <button id="btn">5秒后显示</button>
-    <script>
-        let btn = document.getElementById("btn");
-        btn.onclick = function(){
-            setTimeout("alert('已经过了5秒了')",5000);
-        }
-    </script>
+  <button id="btn">5秒后显示</button>
+  <script>
+    let btn = document.getElementById('btn');
+    btn.onclick = function () {
+      setTimeout("alert('已经过了5秒了')", 5000);
+    };
+  </script>
 </body>
 ```
 
@@ -649,14 +650,14 @@ clearInterval(id)
 
 ```html
 <body>
-    <button id="btn">5秒后显示</button>
-    <script>
-        let btn = document.getElementById("btn");
-        btn.onclick = function(){
-            setTimeout("alert('已经过了 5 秒了')",5000);
-            clearTimeout(i);
-        }
-    </script>
+  <button id="btn">5秒后显示</button>
+  <script>
+    let btn = document.getElementById('btn');
+    btn.onclick = function () {
+      setTimeout("alert('已经过了 5 秒了')", 5000);
+      clearTimeout(i);
+    };
+  </script>
 </body>
 ```
 
@@ -689,12 +690,12 @@ navigator 对象所包含的属性大致如下表：
 
 ```html
 <body>
-    <script>
-        console.log("浏览器名称:",navigator.appName);
-        console.log("浏览器版本:",navigator.appVersion);
-        console.log("浏览器主语言:",navigator.language);
-        console.log("产品名称:",navigator.product);
-    </script>
+  <script>
+    console.log('浏览器名称:', navigator.appName);
+    console.log('浏览器版本:', navigator.appVersion);
+    console.log('浏览器主语言:', navigator.language);
+    console.log('产品名称:', navigator.product);
+  </script>
 </body>
 ```
 
@@ -706,25 +707,25 @@ navigator 对象所包含的属性大致如下表：
 
 ```html
 <body>
-    <script>
-        let str = navigator.userAgent.toLowerCase();
-        console.log(str);
-        if (str.search("firefox") >= 0) {
-            alert("当前浏览器是火狐。")
-        } else if (str.search("trident") >= 0) {
-            alert("当前浏览器是IE。")
-        } else if (str.search("safari") >= 0) {
-            if (str.search("chrome") >= 0) {
-                alert("当前浏览器是谷歌。")
-            } else if (str.search("opr") >= 0) {
-                alert("当前浏览器是欧朋。")
-            } else {
-                alert("当前浏览器是苹果。")
-            }
-        } else {
-            alert("其他浏览器。")
-        }
-    </script>
+  <script>
+    let str = navigator.userAgent.toLowerCase();
+    console.log(str);
+    if (str.search('firefox') >= 0) {
+      alert('当前浏览器是火狐。');
+    } else if (str.search('trident') >= 0) {
+      alert('当前浏览器是IE。');
+    } else if (str.search('safari') >= 0) {
+      if (str.search('chrome') >= 0) {
+        alert('当前浏览器是谷歌。');
+      } else if (str.search('opr') >= 0) {
+        alert('当前浏览器是欧朋。');
+      } else {
+        alert('当前浏览器是苹果。');
+      }
+    } else {
+      alert('其他浏览器。');
+    }
+  </script>
 </body>
 ```
 
@@ -736,9 +737,9 @@ location 对象提供了当前窗口中加载的文档的有关信息。这个�
 
 ```html
 <body>
-    <script>
-        console.log(window.location === document.location); // true
-    </script>
+  <script>
+    console.log(window.location === document.location); // true
+  </script>
 </body>
 ```
 
@@ -761,11 +762,11 @@ location 对象提供了当前窗口中加载的文档的有关信息。这个�
 
 ```html
 <body>
-    <script>
-        // 查看当前页面的 URL
-        console.log(location.href);
-        // file:///Users/Jie/Desktop/1.html
-    </script>
+  <script>
+    // 查看当前页面的 URL
+    console.log(location.href);
+    // file:///Users/Jie/Desktop/1.html
+  </script>
 </body>
 ```
 
@@ -773,13 +774,13 @@ location 对象提供了当前窗口中加载的文档的有关信息。这个�
 
 ```html
 <body>
-    <button onclick="test()">点击我们跳转</button>
-    <script>
-        let test = function(){
-            // 设置当前页面的 URL
-            location.href = "http://www.baidu.com";
-        }
-    </script>
+  <button onclick="test()">点击我们跳转</button>
+  <script>
+    let test = function () {
+      // 设置当前页面的 URL
+      location.href = 'http://www.baidu.com';
+    };
+  </script>
 </body>
 ```
 
@@ -787,7 +788,7 @@ location 对象提供了当前窗口中加载的文档的有关信息。这个�
 
 接下来我们来看一下其他的属性：
 
-- hash：如果URL中包含有'#'，该方法将返回该符号之后的内容。例如：'http://www.sunchis.com/index.html#welcome'的 hash 是'#welcome'。
+- hash：如果 URL 中包含有'#'，该方法将返回该符号之后的内容。例如：'http://www.sunchis.com/index.html#welcome'的 hash 是'#welcome'。
 
 - host：服务器的名字，例如'www.sunchis.com'。
 
@@ -795,10 +796,9 @@ location 对象提供了当前窗口中加载的文档的有关信息。这个�
 
 - href：当前页面载入的完整 URL。
 
-- pathname：URL 中主机名之后的部分。
-  例如：'http://www.sunchis.com/html/js/jsbasic/2010/0319/88.html'的 pathname 是'/html/js/jsbasic/2010/0319/88.html'。
+- pathname：URL 中主机名之后的部分。例如：'http://www.sunchis.com/html/js/jsbasic/2010/0319/88.html'的 pathname 是'/html/js/jsbasic/2010/0319/88.html'。
 
-- port：URL 中声明的请求端口。默认情况下，大多数 URL 没有端口信息（默认为80端口），所以该属性通常是空白的。例如'http://www.sunchis.com:8080/index.html'这样的 URL 的 port 属性为'8080'。
+- port：URL 中声明的请求端口。默认情况下，大多数 URL 没有端口信息（默认为 80 端口），所以该属性通常是空白的。例如'http://www.sunchis.com:8080/index.html'这样的 URL 的 port 属性为'8080'。
 
 - protocol：URL 中使用的协议，即双斜杠'//'之前的部分。例如'http://www.sunchis.com'中的 protocol 属性等于'http:'，'ftp://www.sunchis.com'的 protocol 属性等于'ftp:'。
 
@@ -818,12 +818,12 @@ location 对象中常见的方法如下表：
 
 ```html
 <body>
-    <button onclick="test()">刷下</button>
-    <script>
-        let test = function(){
-            location.reload();
-        }
-    </script>
+  <button onclick="test()">刷下</button>
+  <script>
+    let test = function () {
+      location.reload();
+    };
+  </script>
 </body>
 ```
 
@@ -835,12 +835,12 @@ location 对象中常见的方法如下表：
 
 ```html
 <body>
-    <button onclick="test()">加载</button>
-    <script>
-        let test = function(){
-            location.assign("http://www.baidu.com");
-        }
-    </script>
+  <button onclick="test()">加载</button>
+  <script>
+    let test = function () {
+      location.assign('http://www.baidu.com');
+    };
+  </script>
 </body>
 ```
 
@@ -848,12 +848,12 @@ location 对象中常见的方法如下表：
 
 ```html
 <body>
-    <button onclick="test()">替换</button>
-    <script>
-        let test = function(){
-            location.replace("http://www.baidu.com");
-        }
-    </script>
+  <button onclick="test()">替换</button>
+  <script>
+    let test = function () {
+      location.replace('http://www.baidu.com');
+    };
+  </script>
 </body>
 ```
 
@@ -868,11 +868,11 @@ location 对象中常见的方法如下表：
 最后我们来总结一下页面跳转的方式，抛开`<a>`标签，通过 JavaScript 代码来实现页面的跳转大致有下面几种方式:
 
 ```js
-location.href
-window.location
-location
-location.assign()
-location.replace()
+location.href;
+window.location;
+location;
+location.assign();
+location.replace();
 ```
 
 ## 六、history 对象
@@ -891,12 +891,12 @@ history 对象常见属性如下表：
 
 ```html
 <body>
-    <button onclick="test()">查看历史列表数量</button>
-    <script>
-        let test = function(){
-            console.log("历史列表数:",history.length);
-        }
-    </script>
+  <button onclick="test()">查看历史列表数量</button>
+  <script>
+    let test = function () {
+      console.log('历史列表数:', history.length);
+    };
+  </script>
 </body>
 ```
 
@@ -914,9 +914,9 @@ history 对象常见的方法如下表：
 
 ```html
 <script>
-    window.history.go(1); // 向前一个页面
-    window.history.go(0); // 重新加载当前页面
-    window.history.go(-1); // 回退一个页面
+  window.history.go(1); // 向前一个页面
+  window.history.go(0); // 重新加载当前页面
+  window.history.go(-1); // 回退一个页面
 </script>
 ```
 
@@ -926,48 +926,45 @@ history 对象常见的方法如下表：
 
 有时脚本需要获取浏览器或者显示器的一些信息，例如分辨率，有效分辨率，DPI 等。这个时候我们就可以使用 screen 对象。该对象提供了一组属性，供我们来获取到这些有用的信息。
 
->注意：目前没有应用于 screen 对象的公开标准，不过所有浏览器都支持该对象。
+> 注意：目前没有应用于 screen 对象的公开标准，不过所有浏览器都支持该对象。
 
 screen 对象属性如下表：
 
-| 属性                 | 说明                                                         |
-| -------------------- | ------------------------------------------------------------ |
-| height               | 屏幕的像素高度                                               |
-| width                | 屏幕的像素宽度                                               |
-| availHeight          | 屏幕的像素高度减去系统部件高度之后的值(只读)                 |
-| availWidth           | 屏幕的像素宽度减去系统部件宽度之后的值(只读)                 |
-| left                 | 当前屏幕距左边的像素距离[firefox返回0，chrome和IE不支持]     |
-| top                  | 当前屏幕距上方的像素距离[firefox返回0，chrome和IE不支持]     |
-| availLeft            | 未被系统部件占用的最左侧的像素值(只读)[chrome和firefox返回0，IE不支持] |
-| availTop             | 未被系统部件占用的最上方的像素值(只读)[chrome和firefox返回0，IE不支持] |
-| bufferDepth          | 读、写用于呈现屏外位图的位数[IE返回0，chrome和firefox不支持] |
-| colorDepth           | 用于表现颜色的位数(只读)[IE8-返回32，其他浏览器返回24]       |
-| pixelDepth           | 屏幕的位深(只读)[IE8-不支持，其他浏览器返回24]               |
-| deviceXDPI           | 屏幕实际的水平DPI(只读)[IE返回96，chrome和firefox不支持]     |
-| deviceYDPI           | 屏幕实际的垂直DPI(只读)[IE返回96，chrome和firefox不支持]     |
-| logicalXDPI          | 屏幕逻辑的水平DPI(只读)[IE返回96，chrome和firefox不支持]     |
-| logicalYDPI          | 屏幕逻辑的垂直DPI(只读)[IE返回96，chrome和firefox不支持]     |
-| updateInterval       | 读、写以毫秒表示的屏幕刷新时间间隔[IE返回0，chrome和firefox不支持] |
-| fontSmoothingEnabled | 是否启用了字体平滑(只读)[IE返回true，chrome和firefox不支持]  |
-
+| 属性 | 说明 |
+| --- | --- |
+| height | 屏幕的像素高度 |
+| width | 屏幕的像素宽度 |
+| availHeight | 屏幕的像素高度减去系统部件高度之后的值(只读) |
+| availWidth | 屏幕的像素宽度减去系统部件宽度之后的值(只读) |
+| left | 当前屏幕距左边的像素距离[firefox 返回 0，chrome 和 IE 不支持] |
+| top | 当前屏幕距上方的像素距离[firefox 返回 0，chrome 和 IE 不支持] |
+| availLeft | 未被系统部件占用的最左侧的像素值(只读)[chrome 和 firefox 返回 0，IE 不支持] |
+| availTop | 未被系统部件占用的最上方的像素值(只读)[chrome 和 firefox 返回 0，IE 不支持] |
+| bufferDepth | 读、写用于呈现屏外位图的位数[IE 返回 0，chrome 和 firefox 不支持] |
+| colorDepth | 用于表现颜色的位数(只读)[IE8-返回 32，其他浏览器返回 24] |
+| pixelDepth | 屏幕的位深(只读)[IE8-不支持，其他浏览器返回 24] |
+| deviceXDPI | 屏幕实际的水平 DPI(只读)[IE 返回 96，chrome 和 firefox 不支持] |
+| deviceYDPI | 屏幕实际的垂直 DPI(只读)[IE 返回 96，chrome 和 firefox 不支持] |
+| logicalXDPI | 屏幕逻辑的水平 DPI(只读)[IE 返回 96，chrome 和 firefox 不支持] |
+| logicalYDPI | 屏幕逻辑的垂直 DPI(只读)[IE 返回 96，chrome 和 firefox 不支持] |
+| updateInterval | 读、写以毫秒表示的屏幕刷新时间间隔[IE 返回 0，chrome 和 firefox 不支持] |
+| fontSmoothingEnabled | 是否启用了字体平滑(只读)[IE 返回 true，chrome 和 firefox 不支持] |
 
 个别属性示例：
 
 ```html
 <body>
-    <script>
-        console.log("屏幕高度:",screen.height);
-        console.log("屏幕宽度:",screen.width);
-        console.log("调色板比特深度:",screen.colorDepth);
-    </script>
+  <script>
+    console.log('屏幕高度:', screen.height);
+    console.log('屏幕宽度:', screen.width);
+    console.log('调色板比特深度:', screen.colorDepth);
+  </script>
 </body>
 ```
 
 效果：
 
 ![-w139](./images/15118430456275.jpg)
-
-
 
 ## 八、Geolocation
 
@@ -993,7 +990,7 @@ HTML 5 Geolocation 技术另一个应用场景就是构建计算行走（跑步�
 Latitude:39.17222,Longitude:-120.13778
 ```
 
-在这里，纬度（距离赤道以北或以南的数值表示）是39.17222，经度（距离英国格林威治以东或以西的数值表示）是120.13778，经纬度坐标的表示可以使用以下两种方式：
+在这里，纬度（距离赤道以北或以南的数值表示）是 39.17222，经度（距离英国格林威治以东或以西的数值表示）是 120.13778，经纬度坐标的表示可以使用以下两种方式：
 
 ```js
 十进制格式：如 120.13778
@@ -1012,13 +1009,13 @@ geolocation 是 navigator 对象的一个属性。这个属性有一个方法`ge
 
 ```html
 <body>
-    <script>
-        let youAreHere = function(position){
-            console.log(`纬度为：${position.coords.latitude}`);
-            console.log(`经度为：${position.coords.longitude}`);
-        }
-        navigator.geolocation.getCurrentPosition(youAreHere);
-    </script>
+  <script>
+    let youAreHere = function (position) {
+      console.log(`纬度为：${position.coords.latitude}`);
+      console.log(`经度为：${position.coords.longitude}`);
+    };
+    navigator.geolocation.getCurrentPosition(youAreHere);
+  </script>
 </body>
 ```
 
@@ -1061,30 +1058,30 @@ HTML 5 Geolocation API 为网站或者应用程序添加基于位置的信息提
 
 ```html
 <body>
-    <script>
-        let titleInit = document.title,
-            isShine = true;
-        // 定时器不断修改 document.title 的值
-        setInterval(function () {
-            let title = document.title;
-            if (isShine == true) {
-                if (/新/.test(title) === false) {
-                    document.title = '【你有新消息】';
-                } else {
-                    document.title = '【　　　　　】';
-                }
-            } else {
-                document.title = titleInit;
-            }
-        }, 100);
-        // 判断当前窗口是否处于焦点来决定还是否要闪烁
-        window.onfocus = function () {
-            isShine = false;
-        };
-        window.onblur = function () {
-            isShine = true;
-        };
-    </script>
+  <script>
+    let titleInit = document.title,
+      isShine = true;
+    // 定时器不断修改 document.title 的值
+    setInterval(function () {
+      let title = document.title;
+      if (isShine == true) {
+        if (/新/.test(title) === false) {
+          document.title = '【你有新消息】';
+        } else {
+          document.title = '【　　　　　】';
+        }
+      } else {
+        document.title = titleInit;
+      }
+    }, 100);
+    // 判断当前窗口是否处于焦点来决定还是否要闪烁
+    window.onfocus = function () {
+      isShine = false;
+    };
+    window.onblur = function () {
+      isShine = true;
+    };
+  </script>
 </body>
 ```
 
@@ -1104,11 +1101,11 @@ Notification API 可以让我们使用系统通知来显示消息。这通常是
 
 ```html
 <body>
-    <script>
-        if (window.Notification) {
-            Notification.requestPermission();
-        }
-    </script>
+  <script>
+    if (window.Notification) {
+      Notification.requestPermission();
+    }
+  </script>
 </body>
 ```
 
@@ -1126,21 +1123,20 @@ Notification API 可以让我们使用系统通知来显示消息。这通常是
 
 ```html
 <body>
-    <script>
-        if (window.Notification) {
-            Notification.requestPermission()
-                .then((permission) => {
-                    // 如果用户选择的是允许
-                    if (Notification.permission === 'granted') {
-                        // 通过 new Notification 来创建新的通知
-                        new Notification("sir, you got a message", {
-                            icon: './1.jpg',
-                            body: 'you will have a meeting 5 minutes later.',
-                        });
-                    }
-                });
+  <script>
+    if (window.Notification) {
+      Notification.requestPermission().then((permission) => {
+        // 如果用户选择的是允许
+        if (Notification.permission === 'granted') {
+          // 通过 new Notification 来创建新的通知
+          new Notification('sir, you got a message', {
+            icon: './1.jpg',
+            body: 'you will have a meeting 5 minutes later.',
+          });
         }
-    </script>
+      });
+    }
+  </script>
 </body>
 ```
 
@@ -1160,19 +1156,18 @@ Notification API 可以让我们使用系统通知来显示消息。这通常是
 
 ```html
 <body>
-    <script>
-        window.setTimeout(function () {
-            Notification.requestPermission()
-                .then((permission) => {
-                    if (Notification.permission === 'granted') {
-                        let notification = new Notification("sir, you got a message", {
-                            icon: './1.jpg',
-                            body: 'you will have a meeting 5 minutes later.',
-                        });
-                    }
-                });
-        }, 5000);
-    </script>
+  <script>
+    window.setTimeout(function () {
+      Notification.requestPermission().then((permission) => {
+        if (Notification.permission === 'granted') {
+          let notification = new Notification('sir, you got a message', {
+            icon: './1.jpg',
+            body: 'you will have a meeting 5 minutes later.',
+          });
+        }
+      });
+    }, 5000);
+  </script>
 </body>
 ```
 
@@ -1193,40 +1188,30 @@ Notification.onclose：处理 close 事件的处理。当用户关闭通知时�
 
 ```html
 <body>
-    <script>
-        // 判断浏览器是否支持 Notification
-        if (window.Notification) {
-            // 调用 Notification 的 requestPermission 方法来询问用户是否允许通知、返回一个 promise
-            Notification.requestPermission()
-                .then(() => {
-                    // 当用户选择允许通知时，Notification.permission 的值为 granted
-                    if (Notification.permission === 'granted') {
-                        // 将新建的通知存储在 notification 变量里面
-                        // 新建的通知包括标题、icon图标以及内容
-                        let notification = new Notification("sir, you got a message", {
-                            icon: './1.jpg',
-                            body: 'you will have a meeting 5 minutes later.',
-                        });
-                        // 为 notification 添加点击事件
-                        notification.addEventListener('click', function () {
-                            console.log('6666');
-                        })
-                    }
-                });
+  <script>
+    // 判断浏览器是否支持 Notification
+    if (window.Notification) {
+      // 调用 Notification 的 requestPermission 方法来询问用户是否允许通知、返回一个 promise
+      Notification.requestPermission().then(() => {
+        // 当用户选择允许通知时，Notification.permission 的值为 granted
+        if (Notification.permission === 'granted') {
+          // 将新建的通知存储在 notification 变量里面
+          // 新建的通知包括标题、icon图标以及内容
+          let notification = new Notification('sir, you got a message', {
+            icon: './1.jpg',
+            body: 'you will have a meeting 5 minutes later.',
+          });
+          // 为 notification 添加点击事件
+          notification.addEventListener('click', function () {
+            console.log('6666');
+          });
         }
-    </script>
+      });
+    }
+  </script>
 </body>
 ```
 
 效果：点击通知以后会触发事件
 
 ![2019-02-08 23.48.42-w362](./images/2019-02-08-2.gif)
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,11 @@
 ---
 title: async的实现原理
 star: true
+order: 1
+category:
+  - 源码解析
+tag:
+  - async和await
 ---
 
 async 函数的实现原理，就是将 `Generator` 函数和自动执行器，包装在一个函数里。
@@ -23,26 +28,34 @@ function fn(args) {
 
 ```js
 function spawn(genF) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     const gen = genF();
     function step(nextF) {
       let next;
       try {
         next = nextF(); //{value,done}
-      } catch(e) {
+      } catch (e) {
         return reject(e);
       }
-      if(next.done) {
+      if (next.done) {
         return resolve(next.value);
       }
-      Promise.resolve(next.value).then(function(v) {
-        step(function() { return gen.next(v); });
-      }, function(e) {
-        step(function() { return gen.throw(e); });
-      });
+      Promise.resolve(next.value).then(
+        function (v) {
+          step(function () {
+            return gen.next(v);
+          });
+        },
+        function (e) {
+          step(function () {
+            return gen.throw(e);
+          });
+        }
+      );
     }
-    step(function() { return gen.next(undefined); });
+    step(function () {
+      return gen.next(undefined);
+    });
   });
 }
 ```
-

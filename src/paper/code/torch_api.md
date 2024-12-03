@@ -1,6 +1,10 @@
 ---
 title: pytorch基础
 icon: fire fas
+category:
+  - 深度学习
+tag:
+  - pytorch
 ---
 
 ## 一、导入数据集

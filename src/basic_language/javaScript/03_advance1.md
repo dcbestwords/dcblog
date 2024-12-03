@@ -1,88 +1,93 @@
 ---
 title: JS进阶
 order: 3
+category:
+  - 前端
+tag:
+  - JavaScript
+  - 原型链
+  - 闭包
+  - 执行上下文
 ---
 
 ## 一、原型与原型链
 
 ### 1. 成分组成
 
-- **构造函数**：所有函数都有一个特别的属性, 它默认指向一个Object空对象(即称为: 原型对象)(Object不满足)
+- **构造函数**：所有函数都有一个特别的属性, 它默认指向一个 Object 空对象(即称为: 原型对象)(Object 不满足)
   - `prototype` : 显式原型属性
 - **实例对象**：所有实例对象都有一个特别的属性:
   - `__proto__` : 隐式原型属性
-- **原型对象**：原型对象中有一个属性constructor, 它指向函数对象，同时其作为Object的实例对象，也有一个\__proto__属性指向它的原型对象
+- **原型对象**：原型对象中有一个属性 constructor, 它指向函数对象，同时其作为 Object 的实例对象，也有一个\_\_proto\_\_属性指向它的原型对象
   - constructor：指向构造函数本身
-  
 
 ![](./images/prototype.png)
 
 ### 2. 显式原型与隐式原型的关系
 
-- 函数的prototype: 定义函数时被自动赋值, 值默认为{}(空对象), 即为原型对象
-  
+- 函数的 prototype: 定义函数时被自动赋值, 值默认为{}(空对象), 即为原型对象
+
   `this.prototype = {}`
-  
-- 实例对象的\__proto__: 在创建实例对象时被自动添加, 并赋值为构造函数的prototype值(两变量指向同一原型对象)
-  
+
+- 实例对象的\_\_proto\_\_: 在创建实例对象时被自动添加, 并赋值为构造函数的 prototype 值(两变量指向同一原型对象)
+
   `this.__proto__ = Fn.prototype`
-  
+
 - 对象的隐式原型的值为其对应构造函数的显式原型的值
-  
+
 ### 3. 原型链
 
-- 访问一个对象的属性时，会先在自身属性中查找，找到返回；如果没有, 再沿着\__proto__这条链向上查找, 找到返回;如果最终没找到, 返回**undefined**
+- 访问一个对象的属性时，会先在自身属性中查找，找到返回；如果没有, 再沿着\_\_proto\_\_这条链向上查找, 找到返回;如果最终没找到, 返回**undefined**
 - 别名:隐式原型链
 - 作用: 查找对象的属性(方法)
 - 当给对象属性赋值时不会使用原型链, 而只是在当前对象中进行操作
-  
 
 ![](./images/memory-structure.png)
 
-> - Object原型的隐式原型为null
-> - Function的隐式原型(图中未画)指向自己的原型
+> - Object 原型的隐式原型为 null
+> - Function 的隐式原型(图中未画)指向自己的原型
 
-- 所有函数都是Function的实例(包含Function)，所以函数对象也有\__proto__属性 
-- Object的原型对象是原型链尽头
+- 所有函数都是 Function 的实例(包含 Function)，所以函数对象也有\_\_proto\_\_属性
+- Object 的原型对象是原型链尽头
 - 方法一般定义在原型中, 属性一般通过构造函数定义在对象本身上（继承）
-- Object函数的显式原型和隐式原型指向的对象不同
+- Object 函数的显式原型和隐式原型指向的对象不同
 
 ### 4. 出现原因
 
-隐式原型和原型出现的根本原因在于JS没有记录类型的元数据，因此，JS只能通过对象的隐式原型找到创建它的函数的原型，从而确定其类型。
+隐式原型和原型出现的根本原因在于 JS 没有记录类型的元数据，因此，JS 只能通过对象的隐式原型找到创建它的函数的原型，从而确定其类型。
 
 ## 二、执行上下文与执行上下文栈
 
-### 1.  声明提前现象
+### 1. 声明提前现象
 
 - 变量提升: 在变量定义语句之前, 就可以访问到这个变量(未赋值：`undefined`)
 
 - 函数提升: 在函数定义语句之前, 就可以访问并执行该函数
 
-  - 变量和函数分别成为window全局执行上下文的属性和方法
+  - 变量和函数分别成为 window 全局执行上下文的属性和方法
   - 本质上还是先声明，再执行代码
 
 - 函数提升比变量提升的优先级高
 
   ```js
-   function a() {}
-   var a
-   console.log(typeof a) // 'function'
+  function a() {}
+  var a;
+  console.log(typeof a); // 'function'
   ```
 
   ```js
-   var c = 1	//var c
-   function c(c) {
-    console.log(c)
-    var c = 3
-   }
+  var c = 1; //var c
+  function c(c) {
+    console.log(c);
+    var c = 3;
+  }
   // c=1
-   c(2) // 报错
+  c(2); // 报错
   ```
 
 > 声明提前的出现就是下面提到的执行上下文引起的。
 
-### 2.  执行上下文的理解
+### 2. 执行上下文的理解
 
 代码（全局代码、函数代码） ==执行前进行的准备工作==
 
@@ -93,41 +98,42 @@ order: 3
   - 函数环境
   - eval 函数环境 （已不推荐使用）
 
-==执行上下文栈== （函数调用栈Call Stack）: 用来管理产生的多个执行上下文（n+1）
+==执行上下文栈== （函数调用栈 Call Stack）: 用来管理产生的多个执行上下文（n+1）
 
-- 由js引擎在代码执行前就创建
+- 由 js 引擎在代码执行前就创建
 - 用来确定函数嵌套时代码的执行顺序
 
-### 3.  生命周期
+### 3. 生命周期
 
 - 创建阶段（**进入**执行上下文）：函数被调用时，进入函数环境，为其创建一个执行上下文，此时进入创建阶段。
 - 执行阶段（代码**执行**）：执行函数中代码时，此时执行上下文进入执行阶段。
 
-### 4.  执行上下文创建和执行的过程
+### 4. 执行上下文创建和执行的过程
 
 ==创建阶段== 要做的事情主要如下：
 
-1. 创建**变量对象**（*VO：variable object*）
+1. 创建**变量对象**（_VO：variable object_）
 
    - 确定函数的形参（**并赋值**）
    - 函数环境会初始化创建 `Arguments`对象（**并赋值**）
    - 确定普通字面量形式的函数声明（**并赋值**）
    - 变量声明，函数表达式声明（**未赋值**）
 
-> 我们可以将整个上下文环境看作是一个对象。该对象拥有 *3* 个属性，如下：
+> 我们可以将整个上下文环境看作是一个对象。该对象拥有 _3_ 个属性，如下：
 >
 > ```javascript
 > executionContextObj = {
->      variableObject : {}, // 变量对象，里面包含 Arguments 对象，形式参数，函数和局部变量
->      scopeChain : {},// 作用域链，包含内部上下文所有变量对象的列表
->      this : {}// 上下文中 this 的指向对象
-> }
+>   variableObject: {}, // 变量对象，里面包含 Arguments 对象，形式参数，函数和局部变量
+>   scopeChain: {}, // 作用域链，包含内部上下文所有变量对象的列表
+>   this: {}, // 上下文中 this 的指向对象
+> };
 > ```
+>
 > 在函数的建立阶段，首先会建立 `Arguments` 对象。然后确定形式参数，检查当前上下文中的函数声明，每找到一个函数声明，就在 `variableObject` 下面用函数名建立一个属性，属性值就指向该函数在内存中的地址的一个引用。
 >
-> 如果上述函数名已经存在于 `variableObject`（简称 *VO*） 下面，那么对应的属性值会被新的引用给覆盖。最后，是确定当前上下文中的局部变量，如果遇到和函数名同名的变量，则会忽略该变量。
+> 如果上述函数名已经存在于 `variableObject`（简称 _VO_） 下面，那么对应的属性值会被新的引用给覆盖。最后，是确定当前上下文中的局部变量，如果遇到和函数名同名的变量，则会忽略该变量。
 
-2. 确定 *this* 指向（***this* 由调用者确定**）
+2. 确定 _this_ 指向（**_this_ 由调用者确定**）
 
 3. 确定作用域（**词法环境决定，哪里声明定义，就在哪里确定**）
 
@@ -139,22 +145,22 @@ order: 3
 2. 调用内部函数
 3. 顺序执行其它代码
 
-> 在`es6`中引入了块作用域的概念，通过 **let** 声明的变量 ，在编译阶段会存放到  ==词法环境==  中。
+> 在`es6`中引入了块作用域的概念，通过 **let** 声明的变量 ，在编译阶段会存放到 ==词法环境== 中。
 >
-> 具体内容参考[浏览器原理系列-JS执行上下文详解 - 掘金 (juejin.cn)](https://juejin.cn/post/6908314735708635150#heading-3)
+> 具体内容参考[浏览器原理系列-JS 执行上下文详解 - 掘金 (juejin.cn)](https://juejin.cn/post/6908314735708635150#heading-3)
 
 ---
 
-**实例1：**
+**实例 1：**
 
 > 原代码
 
 ```js
-const foo = function(i){
-    var a = "Hello";
-    var b = function privateB(){};
-    function c(){}
-}
+const foo = function (i) {
+  var a = 'Hello';
+  var b = function privateB() {};
+  function c() {}
+};
 foo(10);
 ```
 
@@ -192,23 +198,23 @@ fooExecutionContext = {
 
 ---
 
-**实例2：**
+**实例 2：**
 
 > 原代码
 
 ```js
 (function () {
-    console.log(typeof foo);
-    console.log(typeof bar);
-    var foo = "Hello";
-    var bar = function () {
-        return "World";
-    }
-    function foo() {
-        return "good";
-    }
-    console.log(foo, typeof foo);
-})()
+  console.log(typeof foo);
+  console.log(typeof bar);
+  var foo = 'Hello';
+  var bar = function () {
+    return 'World';
+  };
+  function foo() {
+    return 'good';
+  }
+  console.log(foo, typeof foo);
+})();
 ```
 
 > 建立阶段的变量对象
@@ -229,17 +235,17 @@ fooExecutionContext = {
 
 ```js
 (function () {
-    console.log(typeof foo); // function
-    console.log(typeof bar); // undefined
-    var foo = "Hello"; // foo 被重新赋值 变成了一个字符串
-    var bar = function () {
-        return "World";
-    }
-    function foo() {
-        return "good";
-    }
-    console.log(foo, typeof foo); //Hello string
-})()
+  console.log(typeof foo); // function
+  console.log(typeof bar); // undefined
+  var foo = 'Hello'; // foo 被重新赋值 变成了一个字符串
+  var bar = function () {
+    return 'World';
+  };
+  function foo() {
+    return 'good';
+  }
+  console.log(foo, typeof foo); //Hello string
+})();
 ```
 
 ## 三、作用域与作用域链
@@ -254,12 +260,13 @@ fooExecutionContext = {
 ### 2. 分类
 
 - 全局作用域
+
   - 最外层函数和在最外层函数外面定义的变量拥有全局作用域
   - 所有未定义直接赋值的变量自动声明为拥有全局作用域(包括内部函数中的变量)
-  - 所有 *window* 对象的属性拥有全局作用域
+  - 所有 _window_ 对象的属性拥有全局作用域
 
 - 函数作用域
-- 在ES6之前，js没有块作用域，es6之后一对大括号可以形成一个块作用域
+- 在 ES6 之前，js 没有块作用域，es6 之后一对大括号可以形成一个块作用域
 
 > **作用域是分层的，内层作用域可以访问外层作用域的变量，反之则不行**。
 
@@ -272,7 +279,7 @@ fooExecutionContext = {
 
 ### 4. 区别作用域与执行上下文
 
-*JavaScript* 属于解释型语言，*JavaScript* 的执行分为：解释和执行两个阶段，这两个阶段所做的事并不一样。
+_JavaScript_ 属于解释型语言，_JavaScript_ 的执行分为：解释和执行两个阶段，这两个阶段所做的事并不一样。
 
 **解释阶段**
 
@@ -288,39 +295,39 @@ fooExecutionContext = {
 
 **区别**
 
-- 作用域:  ==静态的, 编码时就确定了== (不是在运行时), 一旦确定就不会变化了
+- 作用域: ==静态的, 编码时就确定了== (不是在运行时), 一旦确定就不会变化了
 - 执行上下文: 动态的, 执行代码时动态创建, 当执行结束消失
 - 联系: 执行上下文环境从属于所在的作用域（先有作用域）
 
 ### 5. 面试题
 
 - ```js
-   var x = 10;
-   function fn() {
+  var x = 10;
+  function fn() {
     console.log(x);
-   }
-    
-   function show(f) {
+  }
+
+  function show(f) {
     var x = 20;
     f();
-   }
-    
-   show(fn); //10
+  }
+
+  show(fn); //10
   ```
 
 - ```js
   var fn = function () {
-    console.log(fn)
-   }
-   fn()  //fn的函数定义
-  
-   var obj = {
+    console.log(fn);
+  };
+  fn(); //fn的函数定义
+
+  var obj = {
     fn2: function () {
-     console.log(fn2)
-     //console.log(this.fn2)
-    }
-   }
-   obj.fn2() //报错
+      console.log(fn2);
+      //console.log(this.fn2)
+    },
+  };
+  obj.fn2(); //报错
   ```
 
 - 原型链实现对象继承；作用域描述代码的作用范围，作用域链实现变量的查找顺序；执行上下文对象保存运行环境的信息（预处理：声名提前问题）。
@@ -335,23 +342,22 @@ fooExecutionContext = {
 
 ![image-20230330171740243](./images/closure0.png)
 
-函数 *b* 中的 *y* 变量并没有被放在闭包中，**所以要不要放入闭包取决于该变量有没有被引用**，当然，此时的你可能会有这样的一个新问题，那么多闭包，那岂不是占用内存空间么？
+函数 _b_ 中的 _y_ 变量并没有被放在闭包中，**所以要不要放入闭包取决于该变量有没有被引用**，当然，此时的你可能会有这样的一个新问题，那么多闭包，那岂不是占用内存空间么？
 
-其实，如果是像这样自动形成的闭包，是会被销毁掉的，当我们执行完引用变量的函数c，此时闭包就自动销毁，垃圾回收器会自动回收没有引用的变量，不会有任何内存占用的情况。
-
+其实，如果是像这样自动形成的闭包，是会被销毁掉的，当我们执行完引用变量的函数 c，此时闭包就自动销毁，垃圾回收器会自动回收没有引用的变量，不会有任何内存占用的情况。
 
 ![image-20230330173503276](./images/closure1.png)
 
-通过chrome工具得知: 闭包本质是内部函数中的一个对象, 这个对象中包含引用的变量属性，所以当函数对象成为垃圾对象时，其包含的变量也会一并释放。
+通过 chrome 工具得知: 闭包本质是内部函数中的一个对象, 这个对象中包含引用的变量属性，所以当函数对象成为垃圾对象时，其包含的变量也会一并释放。
 
 当然这些都是自动产生闭包的情况，有时我们会根据需求手动的来制造一个闭包。
 
 ```js
-function eat(){
-    var food = '鸡翅';
-    return function(){
-        console.log(food);
-    }
+function eat() {
+  var food = '鸡翅';
+  return function () {
+    console.log(food);
+  };
 }
 var look = eat();
 look(); // 鸡翅
@@ -378,80 +384,79 @@ function fn1() {
   return fn2;
 }
 var f = fn1();
-f();//3
-f();//4
+f(); //3
+f(); //4
 //闭包死亡(包含闭包的函数对象成为垃圾对象)
-//f = null 
+//f = null
 
 // 2. 将函数作为实参传递给另一个函数调用
 function showDelay(msg, time) {
-    setTimeout(function () {
-        alert(msg)
-    }, time)
+  setTimeout(function () {
+    alert(msg);
+  }, time);
 }
-showDelay('atguigu', 2000)
+showDelay('atguigu', 2000);
 ```
 
 - 闭包应用:
 
-  - 模块化: 封装一些数据以及操作数据的函数, 只向外暴露一个包含n个方法的对象或函数(类)
+  - 模块化: 封装一些数据以及操作数据的函数, 只向外暴露一个包含 n 个方法的对象或函数(类)
     - `return {}`
     - `window.module={}` //匿名函数自定义
   - 循环遍历加监听
-  - JS框架(jQuery)大量使用了闭包
+  - JS 框架(jQuery)大量使用了闭包
 
 - 缺点:
+
   - 函数执行完后, 函数内的局部变量没有释放,占用内存的时间可能会过长
   - 可能导致内存泄露
   - 解决:
     - 及时释放 : f = null; //让内部函数对象成为垃圾对象
-    
 
 - 面试题
 
   ```js
-   //代码片段一
-   var name = "The Window";
-   var object = {
-    name : "My Object",
-    getNameFunc : function(){
-     return function(){
-       return this.name;
-     };
-    }
-   };
-   alert(object.getNameFunc()());  //?  the window
-  
-   //代码片段二
-   var name2 = "The Window";
-   var object2 = {
-    name2 : "My Object",
-    getNameFunc : function(){
-     var that = this;
-     return function(){
-       return that.name2;
-     };
-    }
-   };
-   alert(object2.getNameFunc()()); //?  my object
-  ```
+  //代码片段一
+  var name = 'The Window';
+  var object = {
+    name: 'My Object',
+    getNameFunc: function () {
+      return function () {
+        return this.name;
+      };
+    },
+  };
+  alert(object.getNameFunc()()); //?  the window
 
+  //代码片段二
+  var name2 = 'The Window';
+  var object2 = {
+    name2: 'My Object',
+    getNameFunc: function () {
+      var that = this;
+      return function () {
+        return that.name2;
+      };
+    },
+  };
+  alert(object2.getNameFunc()()); //?  my object
+  ```
 
 ## 五、内存溢出与内存泄露
 
 ### 1. 什么是内存泄露
 
-程序的运行需要内存。只要程序提出要求，操作系统或者运行时（*runtime*）就必须供给内存。
+程序的运行需要内存。只要程序提出要求，操作系统或者运行时（_runtime_）就必须供给内存。
 
-对于持续运行的服务进程（*daemon*），必须及时释放不再用到的内存。否则，内存占用越来越高，轻则影响系统性能，重则导致进程崩溃。
+对于持续运行的服务进程（_daemon_），必须及时释放不再用到的内存。否则，内存占用越来越高，轻则影响系统性能，重则导致进程崩溃。
 
-也就是说，不再用到的内存，如果没有及时释放，就叫做内存泄漏（*memory leak*）。
+也就是说，不再用到的内存，如果没有及时释放，就叫做内存泄漏（_memory leak_）。
 
 ### 2. JavaScript 中的垃圾回收
 
-浏览器的 *Javascript* 具有自动垃圾回收机制（*GC*：*Garbage Collecation*），也就是说，执行环境会负责管理代码执行过程中使用的内存。其原理是：**垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存**。
+浏览器的 _Javascript_ 具有自动垃圾回收机制（_GC_：_Garbage Collecation_），也就是说，执行环境会负责管理代码执行过程中使用的内存。其原理是：**垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存**。
 
-但是这个过程不是实时的，因为其开销比较大并且 *GC* 时停止响应其他操作，所以垃圾回收器会按照固定的时间间隔周期性的执行。
+但是这个过程不是实时的，因为其开销比较大并且 _GC_ 时停止响应其他操作，所以垃圾回收器会按照固定的时间间隔周期性的执行。
 
 不再使用的变量也就是生命周期结束的变量，当然只可能是局部变量，全局变量的生命周期直至浏览器卸载页面才会结束。局部变量只在函数的执行过程中存在，而在这个过程中会为局部变量在栈或堆上分配相应的空间，以存储它们的值，然后在函数中使用这些变量，直至函数结束，而闭包中由于内部函数的原因，外部函数并不能算是结束。
 
@@ -459,22 +464,22 @@ showDelay('atguigu', 2000)
 
 ```js
 function fn1() {
-    var obj = {name: 'zhangsan', age: 10};
+  var obj = { name: 'zhangsan', age: 10 };
 }
 function fn2() {
-    var obj = {name:'zhangsan', age: 10};
-    return obj;
+  var obj = { name: 'zhangsan', age: 10 };
+  return obj;
 }
 
 var a = fn1();
 var b = fn2();
 ```
 
-在上面的代码中，我们首先声明了两个函数，分别叫做 *fn1* 和 *fn2*。
+在上面的代码中，我们首先声明了两个函数，分别叫做 _fn1_ 和 _fn2_。
 
-当 *fn1* 被调用时，进入 *fn1* 的环境，会开辟一块内存存放对象 *{name: 'zhangsan', age: 10}*。而当调用结束后，出了 *fn1* 的环境，那么该块内存会被  *JavaScript* 引擎中的垃圾回收器自动释放；
+当 _fn1_ 被调用时，进入 _fn1_ 的环境，会开辟一块内存存放对象 _{name: 'zhangsan', age: 10}_。而当调用结束后，出了 _fn1_ 的环境，那么该块内存会被 _JavaScript_ 引擎中的垃圾回收器自动释放；
 
-在 *fn2* 被调用的过程中，返回的对象被全局变量 *b* 所指向，所以该块内存并不会被释放。
+在 _fn2_ 被调用的过程中，返回的对象被全局变量 _b_ 所指向，所以该块内存并不会被释放。
 
 这里问题就出现了：到底哪个变量是没有用的？
 
@@ -486,7 +491,7 @@ var b = fn2();
 
 ### 3. 标记清除
 
-*JavaScript* 中最常用的垃圾回收方式就是标记清除。
+_JavaScript_ 中最常用的垃圾回收方式就是标记清除。
 
 当变量进入环境时，例如，在函数中声明一个变量，就将这个变量标记为“进入环境”。
 
@@ -495,9 +500,9 @@ var b = fn2();
 而当变量离开环境时，则将其标记为“离开环境”。
 
 ```js
-function test(){
-  var a = 10 ; // 被标记 ，进入环境 
-  var b = 20 ; // 被标记 ，进入环境
+function test() {
+  var a = 10; // 被标记 ，进入环境
+  var b = 20; // 被标记 ，进入环境
 }
 test(); // 执行完毕 之后 a、b 又被标离开环境，被回收。
 ```
@@ -508,52 +513,52 @@ test(); // 执行完毕 之后 a、b 又被标离开环境，被回收。
 
 最后，垃圾回收器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。
 
-到目前为止，*IE9+、Firefox、Opera、Chrome、Safari* 的 *JS* 实现使用的都是标记清除的垃圾回收策略或类似的策略，只不过垃圾收集的时间间隔互不相同。
+到目前为止，_IE9+、Firefox、Opera、Chrome、Safari_ 的 _JS_ 实现使用的都是标记清除的垃圾回收策略或类似的策略，只不过垃圾收集的时间间隔互不相同。
 
 ### 4. 引用计数
 
 引用计数的含义是跟踪记录每个值被引用的次数。
 
-当声明了一个变量并将一个引用类型值赋给该变量时，则这个值的引用次数就是 *1*。如果同一个值又被赋给另一个变量，则该值的引用次数加 *1*。
+当声明了一个变量并将一个引用类型值赋给该变量时，则这个值的引用次数就是 _1_。如果同一个值又被赋给另一个变量，则该值的引用次数加 _1_。
 
-相反，如果包含对这个值引用的变量又取得了另外一个值，则这个值的引用次数减 *1*。当这个值的引用次数变成 *0* 时，则说明没有办法再访问这个值了，因而就可以将其占用的内存空间回收回来。
+相反，如果包含对这个值引用的变量又取得了另外一个值，则这个值的引用次数减 _1_。当这个值的引用次数变成 _0_ 时，则说明没有办法再访问这个值了，因而就可以将其占用的内存空间回收回来。
 
-这样，当垃圾回收器下次再运行时，它就会释放那些引用次数为 *0* 的值所占用的内存。
+这样，当垃圾回收器下次再运行时，它就会释放那些引用次数为 _0_ 的值所占用的内存。
 
 ```js
 function test() {
-    var a = {};	// a 指向对象的引用次数为 1
-    var b = a;	// a 指向对象的引用次数加 1，为 2
-    var c = a;	// a 指向对象的引用次数再加 1，为 3
-    var b = {};	// a 指向对象的引用次数减 1，为 2
+  var a = {}; // a 指向对象的引用次数为 1
+  var b = a; // a 指向对象的引用次数加 1，为 2
+  var c = a; // a 指向对象的引用次数再加 1，为 3
+  var b = {}; // a 指向对象的引用次数减 1，为 2
 }
 ```
 
-*Netscape Navigator3* 是最早使用引用计数策略的浏览器，但很快它就遇到一个严重的问题：**循环引用**。
+_Netscape Navigator3_ 是最早使用引用计数策略的浏览器，但很快它就遇到一个严重的问题：**循环引用**。
 
-循环引用指的是对象 *A* 中包含一个指向对象B的指针，而对象 *B* 中也包含一个指向对象 *A* 的引用。
+循环引用指的是对象 _A_ 中包含一个指向对象 B 的指针，而对象 _B_ 中也包含一个指向对象 _A_ 的引用。
 
 ```js
 function fn() {
-    var a = {};
-    var b = {};
-    a.pro = b;
-    b.pro = a;
+  var a = {};
+  var b = {};
+  a.pro = b;
+  b.pro = a;
 }
 fn();
 ```
 
-以上代码 *a* 和 *b* 的引用次数都是 *2*，*fn* 执行完毕后，两个对象都已经离开环境，在标记清除方式下是没有问题的，但是在引用计数策略下，因为 *a* 和 *b* 的引用次数不为 *0*，所以不会被垃圾回收器回收内存，如果 *fn* 函数被大量调用，就会造成内存泄露。在 *IE7* 与 *IE8* 上，内存直线上升。
+以上代码 _a_ 和 _b_ 的引用次数都是 _2_，_fn_ 执行完毕后，两个对象都已经离开环境，在标记清除方式下是没有问题的，但是在引用计数策略下，因为 _a_ 和 _b_ 的引用次数不为 _0_，所以不会被垃圾回收器回收内存，如果 _fn_ 函数被大量调用，就会造成内存泄露。在 _IE7_ 与 _IE8_ 上，内存直线上升。
 
 ### 5. 真题解答
 
-- 请介绍一下 *JavaScript* 中的垃圾回收站机制
+- 请介绍一下 _JavaScript_ 中的垃圾回收站机制
 
 > 参考答案：
 >
-> *JavaScript* 具有自动垃圾回收机制。垃圾收集器会按照固定的时间间隔周期性的执行。
+> _JavaScript_ 具有自动垃圾回收机制。垃圾收集器会按照固定的时间间隔周期性的执行。
 >
-> *JavaScript* 常见的垃圾回收方式：**标记清除**、**引用计数**方式。
+> _JavaScript_ 常见的垃圾回收方式：**标记清除**、**引用计数**方式。
 >
 > 1、标记清除方式：
 >
@@ -561,13 +566,13 @@ fn();
 >
 > - 工作流程：
 >
->  - 垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记；
+> - 垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记；
 >
->  - 去掉环境中的变量以及被环境中的变量引用的变量的标记；
+> - 去掉环境中的变量以及被环境中的变量引用的变量的标记；
 >
->  - 被加上标记的会被视为准备删除的变量；
+> - 被加上标记的会被视为准备删除的变量；
 >
->  - 垃圾回收器完成内存清理工作，销毁那些带标记的值并回收他们所占用的内存空间。
+> - 垃圾回收器完成内存清理工作，销毁那些带标记的值并回收他们所占用的内存空间。
 >
 > 2、引用计数方式：
 >
@@ -575,19 +580,19 @@ fn();
 >
 > - 工作流程：
 >
->  - 声明了一个变量并将一个引用类型的值赋值给这个变量，这个引用类型值的引用次数就是 *1*；
+> - 声明了一个变量并将一个引用类型的值赋值给这个变量，这个引用类型值的引用次数就是 _1_；
 >
->  - 同一个值又被赋值给另一个变量，这个引用类型值的引用次数加 *1*；
+> - 同一个值又被赋值给另一个变量，这个引用类型值的引用次数加 _1_；
 >
->  - 当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减 *1*；
+> - 当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减 _1_；
 >
->  - 当引用次数变成 *0* 时，说明没办法访问这个值了；
+> - 当引用次数变成 _0_ 时，说明没办法访问这个值了；
 >
->  - 当垃圾收集器下一次运行时，它就会释放引用次数是 *0* 的值所占的内存。
+> - 当垃圾收集器下一次运行时，它就会释放引用次数是 _0_ 的值所占的内存。
 
 ## 六、高阶函数
 
-### 1.  概念
+### 1. 概念
 
 高阶函数（higher-order-function）并不是 JavaScript 语言所特有的东西，它适用于整个计算机领域，甚至数学领域。
 
@@ -617,8 +622,8 @@ JavaScript 中的函数大多数情况下都是由用户主动调用触发的，
 - mousemove 事件。如果要实现一个拖拽功能，需要一路监听 mousemove 事件，在回调中获取元素当前位置，然后重置 DOM 的位置来进行样式改变。如果不加以控制，每移动一定像素而触发的回调数量非常惊人，回调中又伴随着 DOM 操作，继而引发浏览器的重排与重绘，性能差的浏览器可能就会直接假死。
 - window.onresize 事件。为 window 对象绑定了 resize 事件，当浏览器窗口大小被拖动而改变的时候，这个事件触发的频率非常之高。如果在 window.onresize 事件函数里有一些跟 DOM 节点相关的操作，而跟 DOM 节点相关的操作往往是非常消耗性能的，这时候浏览器可能就会吃不消而造成卡顿现象。
 - 射击游戏的 mousedown/keydown 事件（单位时间只能发射一颗子弹）
-- 搜索联想（keyup,keydown,input事件）
-- 监听滚动事件判断是否到页面底部自动加载更多（scroll事件）
+- 搜索联想（keyup,keydown,input 事件）
+- 监听滚动事件判断是否到页面底部自动加载更多（scroll 事件）
 
 #### 函数防抖（debounce）
 
@@ -630,23 +635,23 @@ JavaScript 中的函数大多数情况下都是由用户主动调用触发的，
 
 - 搜索框搜索输入。只需用户最后一次输入完，再发送请求
 - 手机号、邮箱验证输入检测
-- 窗口大小Resize。只需窗口调整完成后，计算窗口大小。防止重复渲染。
+- 窗口大小 Resize。只需窗口调整完成后，计算窗口大小。防止重复渲染。
 
 ```js
 const debounce = (fn, time) => {
   let timeout = null;
-  return function() {
-    clearTimeout(timeout)
+  return function () {
+    clearTimeout(timeout);
     timeout = setTimeout(() => {
       fn.apply(this, arguments);
     }, time);
-  }
+  };
 };
 ```
 
 #### 函数节流（throttle）
 
-> 限制一个函数在规定时间内只能执行一次。 如，乘坐地铁，过闸机时，每个人进入后3秒后门关闭，等待下一个人进入。
+> 限制一个函数在规定时间内只能执行一次。 如，乘坐地铁，过闸机时，每个人进入后 3 秒后门关闭，等待下一个人进入。
 
 简单的说，**当一个动作连续触发，间隔一段时间执行一次**。
 
@@ -659,22 +664,22 @@ const debounce = (fn, time) => {
 ```js
 const throttle = (fn, time) => {
   let flag = true;
-  return function() {
+  return function () {
     if (!flag) return;
     flag = false;
     setTimeout(() => {
       fn.apply(this, arguments);
       flag = true;
     }, time);
-  }
-}
+  };
+};
 ```
 
 #### 区别
 
-防抖：连续触发事件回调都会重新开始计算delay
+防抖：连续触发事件回调都会重新开始计算 delay
 
-节流：触发事件回调后开始delay然后开始下一次触发调用
+节流：触发事件回调后开始 delay 然后开始下一次触发调用
 
 ![16588246930073](./images/16588246930073.jpg)
 
@@ -686,19 +691,19 @@ const throttle = (fn, time) => {
 
 ```js
 function timeChunk(arr, fn, count, interval) {
-// 该分时函数接收 4 个参数：数据、创建节点逻辑的函数、每一批创建的节点数量、每个执行任务之间的时间间隔
-// 该分时函数将返回一个计时函数，根据数据是否已经创建完节点来决定是否停止
+  // 该分时函数接收 4 个参数：数据、创建节点逻辑的函数、每一批创建的节点数量、每个执行任务之间的时间间隔
+  // 该分时函数将返回一个计时函数，根据数据是否已经创建完节点来决定是否停止
   let obj, t;
   let len = arr.length;
-  const start = function() {
+  const start = function () {
     // 创建规定数量的节点
     for (let i = 0; i < Math.min(count || 1, arr.length); i++) {
       let obj = arr.shift();
       fn(obj);
     }
   };
-  return function() {
-    t = setInterval(function() {
+  return function () {
+    t = setInterval(function () {
       if (arr.length === 0) {
         return clearInterval(t);
       }
@@ -721,19 +726,18 @@ function timeChunk(arr, fn, count, interval) {
  * @param {*} args 要固定的参数
  */
 function curry(func, ...args) {
-    // 返回一个接收剩余参数的函数
-    return function (...inArgs) {
-        // 将固定的参数和剩余参数拼接
-        const allArgs = args.concat(inArgs);
-        if (allArgs.length >= func.length) {
-            // 若拼接后的参数集 大于等于 原本函数的参数数量，则执行原本的函数
-            return func(...allArgs);
-        }
-        else{
-            // 否则，继续柯里化，固定目前的参数
-            return curry(func, ...allArgs);
-        }
+  // 返回一个接收剩余参数的函数
+  return function (...inArgs) {
+    // 将固定的参数和剩余参数拼接
+    const allArgs = args.concat(inArgs);
+    if (allArgs.length >= func.length) {
+      // 若拼接后的参数集 大于等于 原本函数的参数数量，则执行原本的函数
+      return func(...allArgs);
+    } else {
+      // 否则，继续柯里化，固定目前的参数
+      return curry(func, ...allArgs);
     }
+  };
 }
 ```
 
@@ -741,7 +745,7 @@ function curry(func, ...args) {
 
 ```js
 function f(x, y, z) {
-    return (x + y) * z;
+  return (x + y) * z;
 }
 // 通过柯里化函数，固定函数 f 的第一个参数 x=2，得到一个新函数 g(y, z)
 const g = curry(f, 2);
@@ -769,30 +773,30 @@ console.log(k(4)); // (2+3)*4 输出：20
  * 函数管道
  * @param {Array} functions 要连接的函数数组
  */
-function pipe(...functions){
-    return function(data){
-        let midData = data; //midData用于保存每次调用的结果
-        for(const func of functions){
-            midData = func(midData);
-        }
-        return midData;
+function pipe(...functions) {
+  return function (data) {
+    let midData = data; //midData用于保存每次调用的结果
+    for (const func of functions) {
+      midData = func(midData);
     }
+    return midData;
+  };
 }
 ```
 
-reduce方法实现的版本
+reduce 方法实现的版本
 
 ```js
 /**
  * 函数管道
  * @param {Array} functions 要连接的函数数组
  */
-function pipe(...functions){
-    return function(data){
-        return functions.reduce((result, func)=>{
-            return func(result);
-        }, data);
-    }
+function pipe(...functions) {
+  return function (data) {
+    return functions.reduce((result, func) => {
+      return func(result);
+    }, data);
+  };
 }
 ```
 
@@ -801,9 +805,6 @@ function pipe(...functions){
 ```js
 //连接函数管道
 const camel = pipe(firstUpper, otherLower, removeEmpty, curry(cutString, 15));
-console.log(camel(" my firST nAme "));//输出：myFirstName
-console.log(camel(" user nick name "));//输出：userNickName
+console.log(camel(' my firST nAme ')); //输出：myFirstName
+console.log(camel(' user nick name ')); //输出：userNickName
 ```
-
-
-

@@ -2,6 +2,10 @@
 title: Git管理
 order: 3
 icon: git-alt fa-brands
+category:
+  - 前端
+tag:
+  - Git
 ---
 
 ## 一、安装
