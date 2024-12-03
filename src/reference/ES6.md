@@ -1,6 +1,5 @@
 ---
 title: ES6教程
-icon: es6
 containerClass: external-document
 sidebar: false
 breadcrumb: false
@@ -16,7 +15,4 @@ backtotop: false
 toc: false
 ---
 
-
-
 <iframe src="https://wangdoc.com/es6/" width="100%" height="100%" style="border:0;overflow:auto"></iframe>
-

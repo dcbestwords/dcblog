@@ -1,4 +1,5 @@
 import { hopeTheme } from 'vuepress-theme-hope';
+
 import navbar from './navbar.js';
 import sidebar from './sidebar.js';
 
@@ -10,9 +11,8 @@ export default hopeTheme({
     email: 'wyc168hard@163.com',
   },
 
-  // iconAssets: 'iconfont', //字体图标资源链接
-  iconAssets: ['iconfont', '//at.alicdn.com/t/c/font_4472470_m8s2vpe3bb9.css'],
-  iconPrefix: 'iconfont icon-',
+  iconAssets: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css',
+  iconPrefix: 'fa-',
 
   logo: '/logo.png', // 博主头像
 
@@ -22,10 +22,11 @@ export default hopeTheme({
 
   // 导航栏
   navbar,
+  themeColor: true,
   navbarLayout: {
     start: ['Brand'],
     center: ['Links'],
-    end: ['Language', 'Repo', 'Outlook', 'Search'],
+    end: ['Repo', 'Outlook', 'Search'],
   },
 
   // 侧边栏
@@ -40,7 +41,6 @@ export default hopeTheme({
     description: '努力做个好韭菜',
     intro: '/intro.html', // 个人介绍地址
     avatar: '/assets/images/avator.gif',
-    roundAvatar: true,
     medias: {
       //博主的媒体链接配置
       BiliBili: 'https://space.bilibili.com/102455608',
@@ -81,18 +81,30 @@ export default hopeTheme({
       components: ['Badge', 'VPCard', 'BiliBili'],
     },
 
+    markdownImage: {
+      figure: true, //图片 Figure 支持
+      lazyload: true, //懒加载
+      size: true, // 图片尺寸支持
+    },
+
+    markdownMath: {
+      // 启用前安装 katex
+      type: 'katex',
+    },
+
+    // 此功能被开启用于演示，你应仅当使用时保留。
+    markdownTab: true,
+
     // 此处开启了很多功能用于演示，你应仅保留用到的功能。
     mdEnhance: {
       align: true, //对齐
       attrs: true, // 自定义属性支持
-      codetabs: true,
       component: true, //组件支持
       demo: true, // 代码案例支持
-      figure: true, //图片 Figure 支持
-      imgLazyload: true,
-      imgSize: true, // 图片尺寸支持
       include: true,
       mark: true, // 标记格式支持
+      // plantuml: true,
+      spoiler: true,
       stylize: [
         // 对行内语法进行样式化以创建代码片段
         {
@@ -109,7 +121,7 @@ export default hopeTheme({
       ],
       sub: true, // 下角标格式支持
       sup: true,
-      tabs: true,
+      tasklist: true,
       vPre: true, //启用 v-pre 容器
 
       // 在启用之前安装 chart.js
@@ -126,22 +138,11 @@ export default hopeTheme({
       // gfm requires mathjax-full to provide tex support
       // gfm: true,
 
-      // 在启用之前安装 katex
-      katex: true,
-
-      // 在启用之前安装 mathjax-full
-      // mathjax: true,
-
       // 在启用之前安装 mermaid
       // mermaid: true,
 
       // playground: {
       //   presets: ["ts", "vue"],
-      // },
-
-      // 在启用之前安装 reveal.js
-      // revealJs: {
-      //   plugins: ["highlight", "math", "search", "notes", "zoom"],
       // },
 
       // 在启用之前安装 @vue/repl
@@ -205,6 +206,20 @@ export default hopeTheme({
             ],
           },
         ],
+      },
+    },
+
+    // 如果你需要幻灯片，安装 @vuepress/plugin-revealjs 并取消下方注释
+    // revealjs: {
+    //   plugins: ["highlight", "math", "search", "notes", "zoom"],
+    // },
+
+    shiki: {
+      lineNumbers: 15,
+      notationDiff: true,
+      themes: {
+        light: 'one-light',
+        dark: 'one-dark-pro',
       },
     },
   },

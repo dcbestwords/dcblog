@@ -2,7 +2,6 @@
 index: false
 dir:
   text: Mongodb
-  icon: mysql
-  collapsible: false
+  icon: database fas
+  collapsible: true
 ---
-

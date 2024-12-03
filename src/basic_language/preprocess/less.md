@@ -1,5 +1,6 @@
 ---
 title: Less
+icon: less fa-brands
 ---
 
 ## 一、简介
@@ -44,7 +45,7 @@ div {
 }
 ```
 
-::: tip 
+::: tip
 
 作为变量<strong style="color:green">属性值</strong>直接使用
 
@@ -64,6 +65,7 @@ div {
   margin: 0 auto;
 }
 ```
+
 - 变量用于**属性名**
 
 ```less
@@ -74,13 +76,15 @@ div {
   background-@{property}: #999;
 }
 ```
-::: tip 
+
+::: tip
 
 作为<strong style="color:green">变量名</strong>使用
 
 :::
 
 - 变量用于**URL**
+
 ```less
 // Variables
 @images: '../img';
@@ -91,7 +95,9 @@ body {
   background: url('@{images}/white-sand.png');
 }
 ```
-- 变量用于 @**import语句**
+
+- 变量用于 @**import 语句**
+
 ```less
 // Variables
 @themes: '../../src/themes';
@@ -100,7 +106,7 @@ body {
 @import '@{themes}/tidal-wave.less';
 ```
 
-::: tip 
+::: tip
 
 作为<strong style="color:green">字符串一部分</strong>使用
 
@@ -208,15 +214,15 @@ Less 使用嵌套代替层叠或与层叠结合使用
 
 ```less
 .button {
-    &-ok {
-        background-image: url('ok.png');
-    }
-    &-cancel {
-        background-image: url('cancel.png');
-    }
-    &1 {
-        width: 200px;
-    }
+  &-ok {
+    background-image: url('ok.png');
+  }
+  &-cancel {
+    background-image: url('cancel.png');
+  }
+  &1 {
+    width: 200px;
+  }
 }
 ```
 
@@ -235,14 +241,18 @@ Less 使用嵌套代替层叠或与层叠结合使用
 - 生成所有可能的选择器排列
 
 ```less
-p, a, ul, li {
+p,
+a,
+ul,
+li {
   border-top: 2px dotted #366;
   //生成所有可能的选择器排列
-  & &{
+  & & {
     border-top: 0;
   }
 }
 ```
+
 ```css
 p p,
 p a,
@@ -271,13 +281,13 @@ li li {
 ### 1. 普通混合
 
 ```less
-.common{
-    width: @width;
-    height: @height;
+.common {
+  width: @width;
+  height: @height;
 }
-div{
-    background-color: #bfa;
-    .common();
+div {
+  background-color: #bfa;
+  .common();
 }
 ```
 
@@ -295,7 +305,7 @@ div {
 
 ::: tip
 
-混合前的css代码同样存在
+混合前的 css 代码同样存在
 
 :::
 
@@ -363,7 +373,7 @@ div {
 }
 ```
 
-- 此时`@color`传的参数可以省略 
+- 此时`@color`传的参数可以省略
 
 ### 4. 匹配模式
 
@@ -491,4 +501,4 @@ nav ul {
 }
 ```
 
-> SCSS与less大同小异，具体的语法可以参考他人博客[常用的SCSS语法](https://juejin.cn/post/7116139958699556877#comment)
+> SCSS 与 less 大同小异，具体的语法可以参考他人博客[常用的 SCSS 语法](https://juejin.cn/post/7116139958699556877#comment)

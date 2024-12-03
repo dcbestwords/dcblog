@@ -1,33 +1,33 @@
 ---
 title: sass 应用
-icon: scss
+icon: sass fa-brands
 ---
 
-## 一、Sass简介
+## 一、Sass 简介
 
-Sass 又名 SCSS 是 CSS 预处理器之一，诞生于2007年,采用 Ruby 语言编写的一款 CSS 预处理语言。最初它是为了配合 HAML（一种缩进式 HTML 预编译器）而设计的，因此有着和 HTML 一样的缩进式风格。
+Sass 又名 SCSS 是 CSS 预处理器之一，诞生于 2007 年,采用 Ruby 语言编写的一款 CSS 预处理语言。最初它是为了配合 HAML（一种缩进式 HTML 预编译器）而设计的，因此有着和 HTML 一样的缩进式风格。
 
- Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：
+Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：
 
 1. 文件扩展名不同，Sass 是以“.sass”后缀为扩展名，而 SCSS 是以“.scss”后缀为扩展名
 2. 语法书写方式不同，Sass 是以严格的 ==缩进式== 语法规则来书写，不带大括号 {} 和分号 ; ，而 SCSS 的语法书写和 CSS 语法书写方式类似。
 
 ---
 
-## 二、Sass与CSS写法的差异
+## 二、Sass 与 CSS 写法的差异
 
 由于 Sass 是基于 Ruby 写出来的所以沿用了 Ruby 的书写规范，不带有大括号 " {} "和分号" ; "
 
-CSS的写法：
+CSS 的写法：
 
 ```css
-body{
+body {
   color: #fff;
   background: #f36;
 }
 ```
 
-Sass的写法：
+Sass 的写法：
 
 ```sass
 body
@@ -35,11 +35,10 @@ body
   background: #f36
 ```
 
-
-SCSS的写法：
+SCSS 的写法：
 
 ```scss
-body{
+body {
   color: $white;
   background: $f36;
 }
@@ -47,10 +46,9 @@ body{
 
 ---
 
-### 1. Sass语法格式
+### 1. Sass 语法格式
 
-这里说的 Sass 语法是 Sass 的最初语法格式，通过 tab 键控制缩进的一种语法规则，而且这种缩进要求非常严格。另外其不带有任何的分号和大括号。常常把这种格式称为 Sass 老版本，其文件名以“.sass”为扩展名。<br/>
-假设我们有一段这样的 CSS 代码：
+这里说的 Sass 语法是 Sass 的最初语法格式，通过 tab 键控制缩进的一种语法规则，而且这种缩进要求非常严格。另外其不带有任何的分号和大括号。常常把这种格式称为 Sass 老版本，其文件名以“.sass”为扩展名。<br/> 假设我们有一段这样的 CSS 代码：
 
 ```css
 body {
@@ -59,7 +57,7 @@ body {
 }
 ```
 
-Sass写法
+Sass 写法
 
 ```sass
 $font-stack: Helvetica, sans-serif
@@ -71,11 +69,11 @@ body
 
 ==这种语法格式对于前端人员都不太容易接受，而且容易出错。==
 
-### 2. SCSS语法格式
+### 2. SCSS 语法格式
 
 SCSS 是 Sass 的新语法格式，从外形上来判断他和 CSS 长得几乎是一模一样，其文件名格式常常以“.scss”为扩展名。
 
-上面那段代码用SCSS写法：
+上面那段代码用 SCSS 写法：
 
 ```scss
 $font-stack: Helvetica, sans-serif;
@@ -85,7 +83,6 @@ body {
   color: $primary-color;
 }
 ```
-
 
 使用 Sass 新的语法规则，而文件扩展名依旧使用的是“.sass”造成编译不出来。在此特别提醒： ==“.sass”的格式只能使用 Sass 老语法规则（缩进规则），“.scss”使用的是 Sass 的新语法规则，也就是 SCSS 语法规则（类似 CSS 语法格式）。==
 
@@ -106,7 +103,7 @@ Sass 提供了一些调试语句，有：
 Sass 通过 `@error <expression>` 。它会在控制台输出表达式返回的值（通常是一个字符串），一旦打印出错误，Sass 就停止编译，并抛出错误信息。
 
 ```scss
-@mixin text-align ($align) {
+@mixin text-align($align) {
   @if ($align != left or $align != center) {
     @error "调用 text-align 只能传递 left 或 center 值";
   }
@@ -129,17 +126,17 @@ Sass 通过 `@error <expression>` 。它会在控制台输出表达式返回的�
 通过 `@debug <expression>` 可以很方便地在控制台打印出表达式返回的值。
 
 ```scss
-@debug "1 + 1 = #{1 + 1}"; // 1 + 1 = 2
+@debug '1 + 1 = #{1 + 1}'; // 1 + 1 = 2
 ```
 
 ### 4. 注释
 
-sass中的注释主要有以下两种：
+sass 中的注释主要有以下两种：
 
 1. `/**/`;
 2. `//`
 
-两者的区别在于`/**/`的写法会在编译出来的CSS中显示，而`//`则不会。
+两者的区别在于`/**/`的写法会在编译出来的 CSS 中显示，而`//`则不会。
 
 ```scss
 // 这个注释不会在css的编译结果中出现.
@@ -153,30 +150,31 @@ sass中的注释主要有以下两种：
 
 p /* 多行注释可以写在任何允许
    * 空白输入的地方 */ .sans {
-  font: Helvetica, // So can single-line commments.
-        sans-serif;
+  font: Helvetica,
+    // So can single-line commments.
+    sans-serif;
 }
 ```
 
 ### 5. 嵌套
 
-####  属性嵌套
+#### 属性嵌套
 
-```css 
-.box{
-	border-top: 1px solid red;
-	border-right: 2px solid yellow;
+```css
+.box {
+  border-top: 1px solid red;
+  border-right: 2px solid yellow;
 }
 ```
 
-在SASS中的写法：
+在 SASS 中的写法：
 
 ```scss
-.box{
-	border:{
-		top: 1px solid red;
-		right: 2px solid yellow;
-	}
+.box {
+  border: {
+    top: 1px solid red;
+    right: 2px solid yellow;
+  }
 }
 ```
 
@@ -185,7 +183,7 @@ p /* 多行注释可以写在任何允许
 ## 四、变量
 
 ```scss
-$变量名称: 变量值；
+$变量名称: 变量值；;
 ```
 
 ### 1. 使用场合
@@ -197,7 +195,7 @@ $变量名称: 变量值；
   ```scss
   $primary-color: #3498db;
   $font-size: 16px;
-  
+
   body {
     color: $primary-color;
     font-size: $font-size;
@@ -209,7 +207,7 @@ $变量名称: 变量值；
   ```scss
   $base-spacing: 8px;
   $large-spacing: $base-spacing * 2;
-  
+
   button {
     margin: $large-spacing;
   }
@@ -219,11 +217,11 @@ $变量名称: 变量值；
 
   ```scss
   $base-padding: 10px;
-  
+
   @mixin padding($direction) {
     padding-#{$direction}: $base-padding;
   }
-  
+
   .container {
     @include padding(top);
   }
@@ -233,13 +231,13 @@ $变量名称: 变量值；
 
   ```scss
   $theme: light;
-  
+
   @if $theme == light {
     $background-color: #fff;
   } @else {
     $background-color: #333;
   }
-  
+
   body {
     background-color: $background-color;
   }
@@ -251,7 +249,7 @@ $变量名称: 变量值；
   $name: "btn";
   $top-or-bottom: top
   $left-or-right: left
-  
+
   .icon-#{$name} {
       background-image: url("/icons/#{$name}.svg");
       position: absolute;
@@ -260,7 +258,7 @@ $变量名称: 变量值；
     }
   ```
 
-> Sass 变量是命令式的，这意味着如果使用一个变量然后更改其值，之前的使用将保持不变。CSS变量是声明式的，这意味着如果更改其值，它将影响之前的使用和之后的使用。
+> Sass 变量是命令式的，这意味着如果使用一个变量然后更改其值，之前的使用将保持不变。CSS 变量是声明式的，这意味着如果更改其值，它将影响之前的使用和之后的使用。
 
 ### 2. 默认变量
 
@@ -268,18 +266,17 @@ $变量名称: 变量值；
 
 ```scss
 $fontSize: 12px;
-body{
-    font-size: $fontSize;
+body {
+  font-size: $fontSize;
 }
 ```
-
 
 默认变量仅需在值后面加上 !default:
 
 ```scss
-$baseLineHeight:1.5 !default;
-body{
-    line-height: $baseLineHeight; 
+$baseLineHeight: 1.5 !default;
+body {
+  line-height: $baseLineHeight;
 }
 ```
 
@@ -318,14 +315,14 @@ code {
 
 ```scss
 $color: yellow !default; //定义全局变量
-.div1{
-	color:$color;	//调用全局变量
+.div1 {
+  color: $color; //调用全局变量
 }
-.div2{
-	$color: red;	//定义局部变量
-	p{
-		color: $color;  // //调用局部变量
-	}
+.div2 {
+  $color: red; //定义局部变量
+  p {
+    color: $color; // //调用局部变量
+  }
 }
 ```
 
@@ -343,7 +340,9 @@ $variable: first global value;
   value: $variable;
 }
 ```
+
 编译结果
+
 ```css
 .content {
   value: second global value;
@@ -360,13 +359,13 @@ $variable: first global value;
 
 建议创建变量只适用于感觉确有必要的情况下，不要为了某些骇客行为而声明新变量，基本上没有理由声明一个永远不需要更新或只在单一地方使用的变量。只有满足下述标准时方可创建新变量：
 
-1. 该值至少重复出现了2次；
+1. 该值至少重复出现了 2 次；
 2. 该值至少可能被更新一次；
 3. 该值所有的表现都与变量有关。
 
 ### 4. 插值
 
-插值几乎可以在 Sass 样式表的任何地方使用，以将SassScript 表达式的结果嵌入到 CSS 块中。只需`#{}`在以下任意位置包装表达式即可：
+插值几乎可以在 Sass 样式表的任何地方使用，以将 SassScript 表达式的结果嵌入到 CSS 块中。只需`#{}`在以下任意位置包装表达式即可：
 
 - 样式规则中的选择器
 - 声明中的属性名称
@@ -375,27 +374,27 @@ $variable: first global value;
 - @extends
 - @import
 - 带引号或不带引号的字符串
-- 普通的CSS函数名称
+- 普通的 CSS 函数名称
 - 注释`/* */`
 
 ```scss
 @mixin corner-icon($name, $top-or-bottom, $left-or-right) {
   .icon-#{$name} {
-    background-image: url("/icons/#{$name}.svg");
+    background-image: url('/icons/#{$name}.svg');
     position: absolute;
     #{$top-or-bottom}: 0;
     #{$left-or-right}: 0;
   }
 }
 
-@include corner-icon("mail", top, left);
+@include corner-icon('mail', top, left);
 ```
 
 编译结果
 
 ```css
 .icon-mail {
-  background-image: url("/icons/mail.svg");
+  background-image: url('/icons/mail.svg');
   position: absolute;
   top: 0;
   left: 0;
@@ -432,9 +431,9 @@ Sass 支持两种内部结构相同但呈现方式不同的字符串：带引号
 可以使用 `string.unquote()` 函数将带引号的字符串转换为不带引号的字符串，也可以使用 `string.quote()` 函数将不带引号的字符串转换为带引号的字符串。
 
 ```scss
-@use "sass:string";
+@use 'sass:string';
 
-@debug string.unquote(".widget:hover"); // .widget:hover
+@debug string.unquote('.widget:hover'); // .widget:hover
 @debug string.quote(bold); // "bold"
 ```
 
@@ -459,18 +458,18 @@ $prefix: ms;
 
 正因为如此，除非您专门编写使用不带引号的字符串的 CSS 属性值，否则编写带引号的字符串通常是一个好主意。
 
-Sass有许多字符串函数，它们接受或返回数字作为索引，这些数字指的是字符串中的字符。
+Sass 有许多字符串函数，它们接受或返回数字作为索引，这些数字指的是字符串中的字符。
 
 Sass 的字符串中第一个字符的索引为 `1`，不同于大多数语言索引从 `0` 开始。
 
 `-1` 表示字符串中的最后一个字符，`-2` 表示倒数第二个字符，以此类推。
 
 ```scss
-@use "sass:string";
+@use 'sass:string';
 
-@debug string.index("Helvetica Neue", "Helvetica"); // 1
-@debug string.index("Helvetica Neue", "Neue"); // 11
-@debug string.slice("Roboto Mono", -4); // "Mono"
+@debug string.index('Helvetica Neue', 'Helvetica'); // 1
+@debug string.index('Helvetica Neue', 'Neue'); // 11
+@debug string.slice('Roboto Mono', -4); // "Mono"
 ```
 
 ### 3. [Color](https://sass.bootcss.com/documentation/values/colors.html)
@@ -540,7 +539,7 @@ $border4: [1px, solid, #f00];
 }
 ```
 
->  List的索引同样从1开始，-1表示列表中的最后一个元素
+> List 的索引同样从 1 开始，-1 表示列表中的最后一个元素
 
 #### 访问某个元素
 
@@ -609,9 +608,9 @@ $sizes: 40px, 50px, 80px;
 ```scss
 @use 'sass:list';
 
-@debug list.index(1px solid red, 1px);  // 1
-@debug list.index(1px solid red, solid);  // 2
-@debug list.index(1px solid red, dashed);  // null
+@debug list.index(1px solid red, 1px); // 1
+@debug list.index(1px solid red, solid); // 2
+@debug list.index(1px solid red, dashed); // null
 ```
 
 #### 列表的不可变性
@@ -639,7 +638,7 @@ $list: list.append($list, 25px);
 如果用户传递的关键字参数，可以将参数列表传递给 `meta.keywords()` 函数，将返回一个 map 类型的值。
 
 ```scss
-@use "sass:meta";
+@use 'sass:meta';
 
 @mixin syntax-colors($args...) {
   // map 类型的值 (string: #080, comment: #800, variable: #60b)
@@ -652,11 +651,7 @@ $list: list.append($list, 25px);
   }
 }
 
-@include syntax-colors(
-  $string: #080,
-  $comment: #800,
-  $variable: #60b,
-)
+@include syntax-colors($string: #080, $comment: #800, $variable: #60b);
 ```
 
 编译后的 css ：
@@ -680,7 +675,7 @@ pre span.stx-variable {
 布尔值是逻辑值 `true` 和 `false` 。除了它们的字面量形式，布尔值还可以由比较运算符和关系操作符以及许多内置函数（如 `math.comparable()` 和 `map. haskey()` ）返回。
 
 ```scss
-@use "sass:math";
+@use 'sass:math';
 
 @debug 1px == 2px; // false
 @debug 1px == 1px; // true
@@ -726,26 +721,34 @@ pre span.stx-variable {
 @debug if(false, 10px, 30px); // 30px
 ```
 
-### 6. [null](https://sass.bootcss.com/documentation/values/null.html) 
+### 6. [null](https://sass.bootcss.com/documentation/values/null.html)
 
 `null` 值也是该类型的唯一值。它表示没有值，通常由函数返回，表示没有结果。
 
 ```scss
-@use "sass:map";
-@use "sass:string";
+@use 'sass:map';
+@use 'sass:string';
 
-@debug string.index("Helvetica Neue", "Roboto"); // null
-@debug map.get(("large": 20px), "small"); // null
+@debug string.index('Helvetica Neue', 'Roboto'); // null
+@debug map.get(
+  (
+    'large': 20px,
+  ),
+  'small'
+); // null
 @debug &; // null
 ```
 
-如果列表中包含一个空值，则生成的CSS中将省略这个空值。
+如果列表中包含一个空值，则生成的 CSS 中将省略这个空值。
 
 ```scss
-$fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
+$fonts: (
+  'serif': 'Helvetica Neue',
+  'monospace': 'Consolas',
+);
 
 h3 {
-  font: 18px bold map.get($fonts, "sans");
+  font: 18px bold map.get($fonts, 'sans');
 }
 ```
 
@@ -760,13 +763,16 @@ h3 {
 如果属性值为空，则完全省略该属性。
 
 ```scss
-$fonts: ("serif": "Helvetica Neue", "monospace": "Consolas");
+$fonts: (
+  'serif': 'Helvetica Neue',
+  'monospace': 'Consolas',
+);
 
 h3 {
   font: {
     size: 18px;
     weight: bold;
-    family: map-get($fonts, "sans");
+    family: map-get($fonts, 'sans');
   }
 }
 ```
@@ -784,21 +790,25 @@ h3 {
 
 `map` 用来表示键值对的映射，格式为 `(key1: value, key2: value)` ，其中 key 必须唯一。与列表不同， map 必须用圆括号 `()` 括起来。空的 map 写为 `()` 。
 
-map将值与键关联起来的，例如：`("background": red, "foreground": pink)`
+map 将值与键关联起来的，例如：`("background": red, "foreground": pink)`
 
-事实上，所有map都算作List！每个map都算作一个List，其中包含每个键/值对的两元素列表。例如，`(1: 2, 3: 4)`算作 `(1 2, 3 4)`。
+事实上，所有 map 都算作 List！每个 map 都算作一个 List，其中包含每个键/值对的两元素列表。例如，`(1: 2, 3: 4)`算作 `(1 2, 3 4)`。
 
 #### 访问 map 的值
 
 通过 `map.get($map, $key)` 函数来访问值，第一个参数表示 map ，第二个参数表示对应的 key ，指定的 key 不存在时返回 `null` 。
 
 ```scss
-@use "sass:map";
+@use 'sass:map';
 
-$font-weights: ("regular": 400, "medium": 500, "bold": 700);
+$font-weights: (
+  'regular': 400,
+  'medium': 500,
+  'bold': 700,
+);
 
-@debug map.get($font-weights, "medium"); // 500
-@debug map.get($font-weights, "extra-bold"); // null
+@debug map.get($font-weights, 'medium'); // 500
+@debug map.get($font-weights, 'extra-bold'); // null
 ```
 
 #### 遍历 map
@@ -807,9 +817,9 @@ $font-weights: ("regular": 400, "medium": 500, "bold": 700);
 
 ```scss
 $colors: (
-  "red": #f00,
-  "green": #0f0,
-  "blue": #00f,
+  'red': #f00,
+  'green': #0f0,
+  'blue': #00f,
 );
 
 @each $key, $value in $colors {
@@ -840,18 +850,18 @@ $colors: (
 向 map 添加新的键值对或修改已存在的键值对。使用 `map.set($map， $key， $value)` 函数， 它返回设置完成后的新的 map ，不会修改原 map 。
 
 ```scss
-@use "sass:map";
+@use 'sass:map';
 
 $colors: (
-  "red": #f00,
-  "green": #0f0,
-  "blue": #00f,
+  'red': #f00,
+  'green': #0f0,
+  'blue': #00f,
 );
 
-@debug map.set($colors, "red", #a11);
+@debug map.set($colors, 'red', #a11);
 // ("red": #a11, "green": #0f0, "blue": #00f)
 
-@debug map.set($colors, "warning", #ff5);
+@debug map.set($colors, 'warning', #ff5);
 // ("red": #f00, "green": #0f0, "blue": #00f, "warning": #ff5)
 ```
 
@@ -860,17 +870,17 @@ $colors: (
 可以使用 `map.merge($map1, $map2)` 函数合并 map 并返回合并后的新 map 。
 
 ```scss
-@use "sass:map";
+@use 'sass:map';
 
 $colors: (
-  "red": #f00,
-  "green": #0f0,
-  "blue": #00f,
+  'red': #f00,
+  'green': #0f0,
+  'blue': #00f,
 );
 
 $colors2: (
-  "yellow": #ff0,
-  "skyblue": #0ff
+  'yellow': #ff0,
+  'skyblue': #0ff,
 );
 
 @debug map.merge($colors, $colors2);
@@ -890,7 +900,7 @@ Sass 本身已经有很多内置的函数可供使用，比如 `rgba()` , `nth()
 `@function` 的定义方式和 `@mixin` 非常类似，但是调用的时候不需要 `@include` 而是直接调用。
 
 ```scss
-@function my-color () {
+@function my-color() {
   @return #f00;
 }
 
@@ -912,13 +922,13 @@ Sass 本身已经有很多内置的函数可供使用，比如 `rgba()` , `nth()
 
 ### 1. `@if...@else`
 
-和js中的`if...else`大差不差，但还是有些微小的差别，如下：
+和 js 中的`if...else`大差不差，但还是有些微小的差别，如下：
 
-- if紧跟的表达式不需要写括号
-- js中除了`false`和`null`之外，还有更多值为假。Sass 不是这些语言之一！空字符串、空列表和数字`0`在 Sass 中都是真值。
+- if 紧跟的表达式不需要写括号
+- js 中除了`false`和`null`之外，还有更多值为假。Sass 不是这些语言之一！空字符串、空列表和数字`0`在 Sass 中都是真值。
 
 ```scss
-@use "sass:math";
+@use 'sass:math';
 
 @mixin triangle($size, $color, $direction) {
   height: 0;
@@ -1003,7 +1013,7 @@ $num: 5;
 
 使用 `@each` 可以方便的生成大量重复却有一点小变化的样式。
 
-#### 遍历list
+#### 遍历 list
 
 ```scss
 $sizes: 40px, 50px, 80px;
@@ -1045,10 +1055,10 @@ $sizes: 40px, 50px, 80px;
 
 ```scss
 $font-size: (
-  "big": 20px,
-  "middle": 16px,
-  "small": 14px,
-  "mini": 12px,
+  'big': 20px,
+  'middle': 16px,
+  'small': 14px,
+  'mini': 12px,
 );
 
 @each $key, $value in $font-size {
@@ -1083,10 +1093,7 @@ $font-size: (
 如果一个 list 中的元素也是 list，那么可以使用 `@each $a, $b, ..., $n in $list` 直接将内层 list 的值依次取出来。
 
 ```scss
-$font: 
-  "small" 14px 400 #f00,
-  "middle" 16px 500 #0f0,
-  "big" 18px 600 #00f;
+$font: 'small' 14px 400 #f00, 'middle' 16px 500 #0f0, 'big' 18px 600 #00f;
 
 @each $name, $size, $weight, $color in $font {
   .font-#{$name} {
@@ -1122,10 +1129,7 @@ $font:
 注意，如果 `@each` 后的变量数量多于内层数组的元素数量，多出来的变量将会得到 `null` 值。
 
 ```scss
-$font: 
-  "small" 14px 400 #f00,
-  "middle" 16px 500 #0f0,
-  "big" 18px 600 #00f;
+$font: 'small' 14px 400 #f00, 'middle' 16px 500 #0f0, 'big' 18px 600 #00f;
 
 @each $name, $size, $weight, $color, $other in $font {
   @debug $name, $size, $weight, $color, $other;
@@ -1140,9 +1144,9 @@ $font:
 
 ```scss
 $font: (
-  "small": 14px 400 #f00,
-  "middle": 16px 500 #0f0,
-  "big": 18px 600 #00f,
+  'small': 14px 400 #f00,
+  'middle': 16px 500 #0f0,
+  'big': 18px 600 #00f,
 );
 
 @each $name, $size, $weight, $color, $other in $font {
@@ -1159,9 +1163,7 @@ $font: (
 - 遍历 list 时，`@each` 之后的每个变量依次表示内层 list 的元素
 - 遍历 map 时，`@each` 之后只有两个变量可以拿到值，第一个变量表示 map 的 key，第二个变量表示 map 的 值，尽管这个值也是一个 list，之后的变量都是 `null` 值。
 
-
-
-##  七、混合宏mixin
+## 七、混合宏 mixin
 
 在单独的属性需要统一处理时，变量是个不错的选择。但当你的样式变得越来越复杂，需要重复使用大段样式时混合宏就会变得很有意义。
 
@@ -1170,104 +1172,113 @@ $font: (
 不带参数的混合宏：
 
 ```scss
-@mixin border-radius{
-	border-radius: 50%;
+@mixin border-radius {
+  border-radius: 50%;
 }
-@mixin 是用来声明混合宏的关键词，border-radius 是混合宏的名称，花括号里的是复用的样式代码。
+@mixin 是用来声明混合宏的关键词，border-radius 是混合宏的名称，花括号里的是复用的样式代码。;
 ```
 
 ### 2. 调用混合宏
 
-使用@mixin声明了一个混合宏后，我们使用 @include 来调用声明好的混合宏：
+使用@mixin 声明了一个混合宏后，我们使用 @include 来调用声明好的混合宏：
 
 ```scss
-@mixin border-radius{	//声明混合宏
-	border-radius: 50%;
+@mixin border-radius {
+  //声明混合宏
+  border-radius: 50%;
 }
-button{
-	@include border-radius;	//调用混合宏
+button {
+  @include border-radius; //调用混合宏
 }
 ```
 
 ### 3. 混合宏的参数－传一个不带值的参数
 
 ```scss
-@mixin border-radius($radius){
-	border-radius: $radius;		//在混合宏"border-radius"中定义了一个不带任何数值的参数"$radius"
+@mixin border-radius($radius) {
+  border-radius: $radius; //在混合宏"border-radius"中定义了一个不带任何数值的参数"$radius"
 }
-.box{
-	@include border-radius(10px);	//在调用时候给这个混合宏传一个参数值
+.box {
+  @include border-radius(10px); //在调用时候给这个混合宏传一个参数值
 }
 ```
 
 ### 4. 混合宏的参数－传一个带值的参数
 
 ```scss
-@mixin border-radius($radius:10px){	//给混合宏的参数传一个默认值；
+@mixin border-radius($radius: 10px) {
+  //给混合宏的参数传一个默认值；
   border-radius: $radius;
 }
 //在调用时只需要调用默认的混合宏"border-radius;"
-button{
-	@include border-radius;
+button {
+  @include border-radius;
 }
 //但有时某些元素的值又不一样，那么可以这样写：
-button{
-	@include border-radius(50px);
+button {
+  @include border-radius(50px);
 }
 ```
 
 ### 5. 混合宏的参数－传多个参数
 
 ```scss
-@mixin center($width,$height){
-	width:$width;
-	height:$height;
-	position: absolute;top: 50%;left: 50%;
-	margin-top: -($height)/2;
-	margin-left:-($width)/2;
+@mixin center($width, $height) {
+  width: $width;
+  height: $height;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -($height)/2;
+  margin-left: -($width)/2;
 }
-.centerBox{
-	@include center(500px,250px);
+.centerBox {
+  @include center(500px, 250px);
 }
 ```
 
 ---
 
-## 八、继承extend
+## 八、继承 extend
 
-SASS中，通过关键词"<mark>@extend</mark>"来继承已存在的类样式块。
+SASS 中，通过关键词"<mark>@extend</mark>"来继承已存在的类样式块。
+
 ```scss
-.button{
-	border: 1px solid #ccc;
-	padding: 5px 10px;
-	font-size: 20px;
+.button {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  font-size: 20px;
 }
-.buttonPrimary{
-	background: #f36;
-	color: white;
-	@extend .button;
+.buttonPrimary {
+  background: #f36;
+  color: white;
+  @extend .button;
 }
-.buttonSecond{
-	background: #ddd;
-	color: #000;
-	@extend .button;
+.buttonSecond {
+  background: #ddd;
+  color: #000;
+  @extend .button;
 }
 ```
 
 编译以后：
+
 ```scss
-.button,.buttonPrimary,.buttonSecond{	//在SASS中的继承可以继承类样式块中所有样式代码，并且编译出来会将选择器合并
-	border: 1px solid #ccc;
-	padding: 5px 10px;
-	font-size: 20px;
+.button,
+.buttonPrimary,
+.buttonSecond {
+  //在SASS中的继承可以继承类样式块中所有样式代码，并且编译出来会将选择器合并
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  font-size: 20px;
 }
-.buttonPrimary{
-	background: #f36;
-	color: white;
+.buttonPrimary {
+  background: #f36;
+  color: white;
 }
-.buttonSecond{
-	background: #ddd;
-	color: #000;
+.buttonSecond {
+  background: #ddd;
+  color: #000;
 }
 ```
 
@@ -1275,23 +1286,24 @@ SASS中，通过关键词"<mark>@extend</mark>"来继承已存在的类样式块
 
 ## 九、占位符
 
-==%== placeholder 声明的代码如果不被@extend调用的话，不会产生任何代码。取代从前CSS中的代码冗余的情形。
+==%== placeholder 声明的代码如果不被@extend 调用的话，不会产生任何代码。取代从前 CSS 中的代码冗余的情形。
 
-```scss
-%marginTop5{
-	margin-top: 5px;
-}
-%paddingTop5{
-	padding-top: 5px;
-}
-```
-
-这段代码没有被 @extend 调用，他并没有产生任何代码块，只是静静的躺在你的某个 SCSS 文件中。只有通过 @extend 调用才会产生代码：
 ```scss
 %marginTop5 {
   margin-top: 5px;
 }
-%paddingTop5{
+%paddingTop5 {
+  padding-top: 5px;
+}
+```
+
+这段代码没有被 @extend 调用，他并没有产生任何代码块，只是静静的躺在你的某个 SCSS 文件中。只有通过 @extend 调用才会产生代码：
+
+```scss
+%marginTop5 {
+  margin-top: 5px;
+}
+%paddingTop5 {
   padding-top: 5px;
 }
 button {
@@ -1306,18 +1318,20 @@ button {
 }
 ```
 
-编译出来的CSS：
+编译出来的 CSS：
 
 ```css
-button, .content {
+button,
+.content {
   margin-top: 5px;
 }
-button, .content span {
+button,
+.content span {
   padding-top: 5px;
 }
 ```
 
-由以上代码可以看出，通过@entend调用的占位符编译出来的代码会将代码合并在一起，让代码变的更为干净易读。同时，也更突出了@extend的强大。
+由以上代码可以看出，通过@entend 调用的占位符编译出来的代码会将代码合并在一起，让代码变的更为干净易读。同时，也更突出了@extend 的强大。
 
 ---
 
@@ -1331,15 +1345,15 @@ button, .content span {
 
 ==占位符== ：使用占位符编译出来的 CSS 代码和使用继承基本上是相同的，只是不会在代码中生成占位符 marginTop 的选择器。那么占位符和继承的主要区别的，“ ==占位符是独立定义，不调用的时候是不会在 CSS 中产生任何代码；继承是首先有一个基类存在，不管调用与不调用，基类的样式都将会出现在编译出来的 CSS 代码中。== ”
 
-|          | 混合宏                                                       | 继承                                                         | 占位符                                                       |
-| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 声明方式 | @mixin                                                       | .class                                                       | %placeholder                                                 |
-| 调用方式 | @include                                                     | @extend                                                      | @extend                                                      |
-| 使用环境 | 相同代码块需要在不同环境传递不同值时，可通过混合宏定义重复使用的代码块。不足之处在于编译出来的CSS代码文件臃肿、代码冗余。 | 相同代码块不需要传递不同的值，并且此代码块已在Sass文件中定义，可通过Sass的继承来调用已存在的基类，会将调用相同基类的代码合并在一起。不足之处在于如果基类并不存在于HTML结构时，不管调用与否，在编译出的CSS中都将产生基类对应的样式代码。 | 与继承基本类似。不同之处在于相同代码块并没有在基类中存在，而是额外声明。如果不调用已声明的占位符，将不会产生任何样式代码，如果在不同选择器调用占位符，那么编译出的CSS代码将会把相同的代码合并在一起。 |
+|  | 混合宏 | 继承 | 占位符 |
+| --- | --- | --- | --- |
+| 声明方式 | @mixin | .class | %placeholder |
+| 调用方式 | @include | @extend | @extend |
+| 使用环境 | 相同代码块需要在不同环境传递不同值时，可通过混合宏定义重复使用的代码块。不足之处在于编译出来的 CSS 代码文件臃肿、代码冗余。 | 相同代码块不需要传递不同的值，并且此代码块已在 Sass 文件中定义，可通过 Sass 的继承来调用已存在的基类，会将调用相同基类的代码合并在一起。不足之处在于如果基类并不存在于 HTML 结构时，不管调用与否，在编译出的 CSS 中都将产生基类对应的样式代码。 | 与继承基本类似。不同之处在于相同代码块并没有在基类中存在，而是额外声明。如果不调用已声明的占位符，将不会产生任何样式代码，如果在不同选择器调用占位符，那么编译出的 CSS 代码将会把相同的代码合并在一起。 |
 
 ![](./images/使用分析.png)
 
-## 十一、sass的模块化
+## 十一、sass 的模块化
 
 与模块化相关的@规则主要有以下三种：
 
@@ -1351,7 +1365,7 @@ button, .content span {
 
 由 `@use` 加载的样式表被称为模块（modules）。Sass 一些内置模块，其中有很多实用的函数。
 
->  通过 `@use` 加载的模块不管被引用了多少次，都只会在编译后输出一次到 css 中。但是使用 `@import` 多次引入同一模块，会反复输出到 css 中。
+> 通过 `@use` 加载的模块不管被引用了多少次，都只会在编译后输出一次到 css 中。但是使用 `@import` 多次引入同一模块，会反复输出到 css 中。
 
 ```scss
 // module.scss
@@ -1360,13 +1374,9 @@ button, .content span {
 }
 
 // a.scss
-@use './module.scss'
-
-// b.scss
-@use './module.scss'
-    
-// index.scss
-@use './a.scss';
+@use './module.scss' // b.scss
+  @use './module.scss' // index.scss
+  @use './a.scss';
 @use './b.scss';
 ```
 
@@ -1481,10 +1491,7 @@ $bg: #fff;
 ```scss
 // index.scss
 
-@use './a.scss' with(
-  $red: #a55,
-  $size: 14px
-);
+@use './a.scss' with($red: #a55, $size: 14px);
 
 .button {
   @include a.base;
@@ -1547,10 +1554,7 @@ $-box-shadow: null;
 
 @use 'library';
 
-@include library.configure(
-  $black: #222,
-  $border-radius: 0.1rem
-);
+@include library.configure($black: #222, $border-radius: 0.1rem);
 @include library.styles;
 ```
 
@@ -1565,11 +1569,11 @@ $-box-shadow: null;
 
 在所有系统上，路径分隔符统一使用 `/` 而不是反斜线 `\`。当前目录模块不需要写 `./` 。
 
-如果 Sass文件只打算作为模块加载，而不是自己编译，文件名以 `_` 开头即可，这些被称为部分（partials），它们告诉 Sass 工具不要尝试自己编译这些文件。但是在导入这些模块时可以不用书写 `_` 符号。
+如果 Sass 文件只打算作为模块加载，而不是自己编译，文件名以 `_` 开头即可，这些被称为部分（partials），它们告诉 Sass 工具不要尝试自己编译这些文件。但是在导入这些模块时可以不用书写 `_` 符号。
 
 使用 `@use "directory"` 导入一个目录时，编译器会尝试自动查找 `_index.scss` 或 `_index.sass` 文件。
 
-加载一个**纯CSS文件**作为模块时，不允许任何特殊的 Sass 特性（如 variables, functions, mixins），为了避免作者一不小心把 Sass 写进 CSS 中，所有 Sass 的特性如果不是合法的 CSS 代码将会报错。否则，CSS将按原样呈现。它甚至可以被继承（extend）!
+加载一个**纯 CSS 文件**作为模块时，不允许任何特殊的 Sass 特性（如 variables, functions, mixins），为了避免作者一不小心把 Sass 写进 CSS 中，所有 Sass 的特性如果不是合法的 CSS 代码将会报错。否则，CSS 将按原样呈现。它甚至可以被继承（extend）!
 
 ### 2. `@forward`
 
@@ -1613,7 +1617,7 @@ $red: #f00 !default;
 ```scss
 // index.scss
 
-@use 'b.scss' ;
+@use 'b.scss';
 
 .index {
   @extend .a;
@@ -1691,7 +1695,7 @@ $green: #0f0 !default;
 // 转发成员时进行配置，修改默认值，或修改为固定的值
 @forward 'a.scss' with (
   $red: #f55 !default,
-  $black: #333,
+  $black: #333
 );
 ```
 
@@ -1699,7 +1703,7 @@ $green: #0f0 !default;
 // index.scss
 
 @use 'b.scss' with (
-  $red: #f11,
+  $red: #f11
 );
 
 .div {
@@ -1726,7 +1730,7 @@ css 中本身就有 `@import`，sass 在其基础上进行扩展，可以用来�
 和 css 中的 `@import` 不同之处在于，css 中的 `@import` 可以是一个线上 url 地址，浏览器会在运行时下载这个文件，而 sass 中的 `@import` 只能在编译打包阶段运行，所以在 sass 中只能导入一个本地存在的 sass/scss/css 文件。
 
 ```scss
-@import "a.scss", "b.scss", "c.scss";
+@import 'a.scss', 'b.scss', 'c.scss';
 ```
 
 `@import` 在 sass 中的用法和在 css 中一样，只不过在 sass 中允许写一个 `@import` 导入多个文件，文件以逗号 `,` 分隔开即可，css 中必须每个文件写一个 `@import` 。
@@ -1748,7 +1752,7 @@ Sass 团队不推荐继续使用 `@import`。Sass 将在未来几年内逐步淘
 ```scss
 // a.scss
 
-@import "c";
+@import 'c';
 
 $red: #f00;
 ```
@@ -1756,7 +1760,7 @@ $red: #f00;
 ```scss
 // b.scss
 
-@import "c";
+@import 'c';
 
 .b {
   color: $red;
@@ -1803,7 +1807,7 @@ $black: #000;
 
 #### 嵌套的 `@import`
 
-`@import` 通常是写在样式表的顶层，但其实它们也可以嵌套在样式块中或纯 CSS at-rules中。
+`@import` 通常是写在样式表的顶层，但其实它们也可以嵌套在样式块中或纯 CSS at-rules 中。
 
 导入的 CSS 代码块将嵌套在该上下文中，这使得嵌套的 `@import` 对于将 CSS 块定位到特定元素或媒体查询非常有用。
 
@@ -1823,7 +1827,7 @@ $black: #000;
 $red: #a55;
 
 .index {
-  @import "a";
+  @import 'a';
 }
 ```
 
@@ -1852,7 +1856,7 @@ $red: #a55;
 ```scss
 // index.scss
 
-@import "a";
+@import 'a';
 
 .index {
   @extend .a;
@@ -1877,7 +1881,7 @@ $red: #a55;
 如果将 `@import "a";` 改为 `@import "a.css";` ：
 
 ```scss
-@import "a.css";
+@import 'a.css';
 
 .index {
   // 报错：The target selector was not found.
@@ -1902,30 +1906,30 @@ $red: #a55;
 - 语句中有媒体查询
 
 ```scss
-@import "xxx.css";
-@import "http://xxx.css";
+@import 'xxx.css';
+@import 'http://xxx.css';
 @import url(xxx);
-@import "landscape" screen and (orientation: landscape);
+@import 'landscape' screen and (orientation: landscape);
 ```
 
 #### `@import` 中使用插值
 
 sass 中的 `@import` 语句是不支持使用插值的，因为这可能会让人不知道变量，函数，mixin 是从哪里来的。
 
-但是，对于纯css `@import` 语句却是可以的，可以用来动态生成纯 css 的 `@import` 语句。
+但是，对于纯 css `@import` 语句却是可以的，可以用来动态生成纯 css 的 `@import` 语句。
 
 ```scss
 @mixin get-font($family) {
-  @import url("http://xxx.com/#{$family}.css");
+  @import url('http://xxx.com/#{$family}.css');
 }
 
-@include get-font("font-name");
+@include get-font('font-name');
 ```
 
 编译后的 css ：
 
 ```css
-@import url("http://xxx.com/font-name.css");
+@import url('http://xxx.com/font-name.css');
 ```
 
 #### `@import` 与模块
@@ -1945,7 +1949,7 @@ $red: #f00;
 ```scss
 // b.scss
 
-@use "a.scss";
+@use 'a.scss';
 
 $black: #000;
 
@@ -1956,7 +1960,7 @@ $black: #000;
 ```
 
 ```scss
-@import "b.scss";
+@import 'b.scss';
 
 .index {
   // color: $red; // 无法直接访问没有被转发的成员
@@ -2019,7 +2023,7 @@ $red: #f00;
 使用 `@use` 导入：
 
 ```scss
-@use "a";
+@use 'a';
 
 .user {
   color: a.$red;
@@ -2029,7 +2033,7 @@ $red: #f00;
 使用 `@import` 导入：
 
 ```scss
-@import "a";
+@import 'a';
 
 .user {
   color: $a-red;
@@ -2074,7 +2078,7 @@ $red: #f00 !default;
 
 $a-red: #f55; // 在 @import 前定义全局变量，可配置模块成员
 
-@import "a";
+@import 'a';
 
 .user {
   color: $a-red;

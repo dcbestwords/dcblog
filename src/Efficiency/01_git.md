@@ -1,12 +1,12 @@
 ---
 title: Git管理
 order: 3
-icon: git
+icon: git-alt fa-brands
 ---
 
 ## 一、安装
 
-阿里的git镜像站：[https://npm.taobao.org/mirrors/git-for-windows/](https://npm.taobao.org/mirrors/git-for-windows/)，下载安装即可
+阿里的 git 镜像站：[https://npm.taobao.org/mirrors/git-for-windows/](https://npm.taobao.org/mirrors/git-for-windows/)，下载安装即可
 
 ## 二、配置
 
@@ -17,7 +17,7 @@ git config --global user.name "xxxx"
 git config --global user.email "xxx@xxx.xxx"
 ```
 
-查看当前的Git配置
+查看当前的 Git 配置
 
 ```bash
 git config --list
@@ -41,35 +41,34 @@ git init
 
 1. 未跟踪
 
-   - 文件没有被git所管理
+   - 文件没有被 git 所管理
 
 2. 已跟踪
 
-   文件已经被git所管理
+   文件已经被 git 所管理
 
-   - 暂存，文件修改已经保存，但是尚未提交到git仓库
-   - 未修改，表示磁盘中的文件和git仓库中的文件相同，没有修改
-   - 已修改，表示磁盘中的文件已被修改，和git仓库中文件不同
+   - 暂存，文件修改已经保存，但是尚未提交到 git 仓库
+   - 未修改，表示磁盘中的文件和 git 仓库中的文件相同，没有修改
+   - 已修改，表示磁盘中的文件已被修改，和 git 仓库中文件不同
    - 可以使用`git status`来查看文件的状态
 
 3. 未跟踪 → 暂存
 
-    ```bash
-    git add <filename> 将文件切换到暂存的状态
-    git add * 将所有已修改（未跟踪）的文件暂存
-    ```
+   ```bash
+   git add <filename> 将文件切换到暂存的状态
+   git add * 将所有已修改（未跟踪）的文件暂存
+   ```
 
 4. 暂存 → 未修改（将本地修改的代码提交到仓库与之同步）
 
-    ```bash
-    git commit -m "xxxx" 将暂存的文件存储到仓库中
-    git commit -a -m "xxxx" 提交所有已修改的文件（未跟踪的文件不会提交）
-    ```
+   ```bash
+   git commit -m "xxxx" 将暂存的文件存储到仓库中
+   git commit -a -m "xxxx" 提交所有已修改的文件（未跟踪的文件不会提交）
+   ```
 
 5. 未修改 → 修改
 
-    - 修改代码后，文件会变为修改状态
-
+   - 修改代码后，文件会变为修改状态
 
 ### 4. 常用的命令
 
@@ -142,7 +141,7 @@ git branch -d <branch name> # 删除分支
 
 目前我们对于 git 所有操作都是在本地进行的。在开发中显然不能这样的，这时我们就需要一个远程的 git 仓库。远程的 git 仓库和本地的本质没有什么区别，不同点在于远程的仓库可以被多人同时访问使用，方便我们协同开发。在实际工作中，git 的服务器通常由公司搭建内部使用或是购买一些公共的私有 git 服务器。我们学习阶段，直接使用一些开放的公共 git 仓库。目前我们常用的库有两个：GitHub 和 Gitee（码云）
 
->  将本地库上传 git：
+> 将本地库上传 git：
 
 ```bash
 git remote add origin https://github.com/lilichao/git-demo.git
@@ -156,7 +155,7 @@ git push -u origin main
 # git push 将代码上传服务器上
 ```
 
->  将本地库上传 gitee：
+> 将本地库上传 gitee：
 
 ```bash
 git remote add gitee https://gitee.com/ymhold/vue-course.git
@@ -186,82 +185,81 @@ git pull  # 从服务器上拉取代码并自动合并
 
 ### 2. tag 标签
 
--   当头指针没有执行某个分支的头部时，这种状态我们称为分离头指针（HEAD detached），分离头指针的状态下也可以操作代码，但是这些操作不会出现在任何的分支上，所以注意不要再分离头指针的状态下来操作仓库。
+- 当头指针没有执行某个分支的头部时，这种状态我们称为分离头指针（HEAD detached），分离头指针的状态下也可以操作代码，但是这些操作不会出现在任何的分支上，所以注意不要再分离头指针的状态下来操作仓库。
 
--   如果非得要回到后边的节点对代码进行操作，则可以选择创建分支后再操作
+- 如果非得要回到后边的节点对代码进行操作，则可以选择创建分支后再操作
 
-    ```bash
-    git switch -c <分支名> <提交id>
-    ```
+  ```bash
+  git switch -c <分支名> <提交id>
+  ```
 
--   可以为提交记录设置标签，设置标签以后，可以通过标签快速的识别出不同的开发节点：
+- 可以为提交记录设置标签，设置标签以后，可以通过标签快速的识别出不同的开发节点：
 
-    ```bash
-    git tag
-    git tag 版本
-    git tag 版本 提交id
-    git push 远程仓库 标签名
-    git push 远程仓库 --tags
-    git tag -d 标签名 # 删除标签
-    git push 远程仓库 --delete 标签名 # 删除远程标签
-    ```
-
+  ```bash
+  git tag
+  git tag 版本
+  git tag 版本 提交id
+  git push 远程仓库 标签名
+  git push 远程仓库 --tags
+  git tag -d 标签名 # 删除标签
+  git push 远程仓库 --delete 标签名 # 删除远程标签
+  ```
 
 ### 3. gitignore
 
 - 默认情况下，git 会监视项目中所有内容，但是有些内容比如 node_modules 目录中的内容，我们不希望它被 git 所管理。我们可以在项目目录中添加一个`.gitignore`文件，来设置那些需要 git 忽略的文件。
 
 - ```
-  # Numerous always-ignore extensions  
-  *.bak  
-  *.patch  
-  *.diff  
-  *.err  
-  
-  # temp file for git conflict merging  
-  *.orig  
-  *.log  
-  *.rej  
-  *.swo  
-  *.swp  
-  *.zip  
-  *.vi  
-  *~  
-  *.sass-cache  
-  *.tmp.html  
-  *.dump  
-  
-  # OS or Editor folders  
-  .DS_Store  
-  ._*  
-  .cache  
-  .project  
-  .settings  
-  .tmproj  
-  *.esproj  
-  *.sublime-project  
-  *.sublime-workspace  
-  nbproject  
-  thumbs.db  
-  *.iml  
-  
-  # Folders to ignore  
-  .hg  
-  .svn  
-  .CVS  
-  .idea  
-  node_modules/  
-  jscoverage_lib/  
-  bower_components/  
-  dist/  
+  # Numerous always-ignore extensions
+  *.bak
+  *.patch
+  *.diff
+  *.err
+
+  # temp file for git conflict merging
+  *.orig
+  *.log
+  *.rej
+  *.swo
+  *.swp
+  *.zip
+  *.vi
+  *~
+  *.sass-cache
+  *.tmp.html
+  *.dump
+
+  # OS or Editor folders
+  .DS_Store
+  ._*
+  .cache
+  .project
+  .settings
+  .tmproj
+  *.esproj
+  *.sublime-project
+  *.sublime-workspace
+  nbproject
+  thumbs.db
+  *.iml
+
+  # Folders to ignore
+  .hg
+  .svn
+  .CVS
+  .idea
+  node_modules/
+  jscoverage_lib/
+  bower_components/
+  dist/
   ```
 
 ### 4. github 的静态页面
 
--   在 github 中，可以将自己的静态页面直接部署到 github 中，它会给我们提供一个地址使得我们的页面变成一个真正的网站，可以供用户访问。
--   要求：
-    -   静态页面的分支必须叫做：gh-pages
-    -   如果希望页面可以通过 xxx.github.io 访问，则需要将库的名字配置为 xxx.github.io
+- 在 github 中，可以将自己的静态页面直接部署到 github 中，它会给我们提供一个地址使得我们的页面变成一个真正的网站，可以供用户访问。
+- 要求：
+  - 静态页面的分支必须叫做：gh-pages
+  - 如果希望页面可以通过 xxx.github.io 访问，则需要将库的名字配置为 xxx.github.io
 
 ## 六、常规工作流
 
@@ -279,7 +277,7 @@ git checkout -b my-feature
 git switch -c my-feature
 ```
 
-修改代码（添加功能、修改bug...），此时可以通过下述命令查看代码变化（==非必须==）
+修改代码（添加功能、修改 bug...），此时可以通过下述命令查看代码变化（==非必须==）
 
 ```bash
 git diff
@@ -291,7 +289,7 @@ git diff
 git add <changed_file>
 ```
 
-将改变提交到本地git仓库
+将改变提交到本地 git 仓库
 
 ```bash
 git commit -m 'fix xxx'
@@ -305,18 +303,18 @@ git push origin my-feature
 
 ---
 
-如果此时远程仓库存在更新，则本地的版本低于远程库，push默认推不上去，此时需要先同步远程仓库的变化
+如果此时远程仓库存在更新，则本地的版本低于远程库，push 默认推不上去，此时需要先同步远程仓库的变化
 
 ```bash
-git checkout main 
+git checkout main
 // git switch main
-git pull origin master 
+git pull origin master
 ```
 
 然后切回自己的分支合并自己的修改与最新代码，当出现冲突的时候选择需要保留的代码
 
 ```
-git checkout my-feature 
+git checkout my-feature
 // git switch my-feature
 git rebase main
 ```
@@ -327,11 +325,11 @@ git rebase main
 git push -f origin my-feature
 ```
 
-请求pull request
+请求 pull request
 
 ---
 
-仓库维护者审查代码之后执行squash and merge，将分支上的改变合并为一个改变并合并，删除远程分支
+仓库维护者审查代码之后执行 squash and merge，将分支上的改变合并为一个改变并合并，删除远程分支
 
 ---
 
@@ -341,4 +339,3 @@ git push -f origin my-feature
 git branch -D my-feature
 git pull origin master
 ```
-

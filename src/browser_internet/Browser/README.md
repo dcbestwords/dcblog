@@ -1,7 +1,7 @@
 ---
 title: 浏览器
 index: false
-icon: chrome
+icon: chrome fa-brands
 category:
   - 浏览器通信
 tag:

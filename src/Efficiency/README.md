@@ -1,7 +1,7 @@
 ---
 title: 效率协作
 index: false
-icon: group
+icon: user-group fas
 category:
   - 效率协作
 ---

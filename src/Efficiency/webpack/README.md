@@ -2,7 +2,6 @@
 index: false
 dir:
   text: Webpack
-  icon: safe
-  collapsible: false
+  icon: dharmachakra fas
+  collapsible: true
 ---
-

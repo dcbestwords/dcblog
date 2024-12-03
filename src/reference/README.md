@@ -1,7 +1,7 @@
 ---
 title: 文档教程
 index: false
-icon: article
+icon: book fas
 category:
   - 文档教程
 ---

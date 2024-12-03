@@ -1,9 +1,9 @@
 ---
 title: pytorch基础
-icon: pytorch
+icon: fire fas
 ---
 
-## 一、导入数据集 
+## 一、导入数据集
 
 ### 1. 处理数据集
 
@@ -18,11 +18,11 @@ icon: pytorch
 例如，以下代码创建了一个 `TensorDataset` 对象，包含数据 `X` 和标签 `y`：
 
 ```python
-import torch 
+import torch
 from torch.utils.data import TensorDataset
-X = torch.randn(100, 10) 
+X = torch.randn(100, 10)
 y = torch.randint(0, 2, (100,))
-ds = TensorDataset(X, y) 
+ds = TensorDataset(X, y)
 ```
 
 在上面的代码中，我们创建了一个大小为 `(100, 10)` 的张量 `X`，和一个大小为 `(100,)` 的张量 `y`，分别代表输入数据和标签。然后，我们创建了一个 `TensorDataset` 对象 `ds`，将 `X` 和 `y` 作为参数传入。这样，我们就将数据 `X` 与标签 `y` 封装为了一个 PyTorch 的数据集对象，即 `ds`。
@@ -31,7 +31,7 @@ ds = TensorDataset(X, y)
 
 这是一个抽象类，用作自定义数据集的基础。如果要**自定义数据集**，需要继承它并实现其中的两个方法：`len()` 和 `getItem()`。
 
-`len()` 方法返回数据集中的样本数量，`getitem()` 方法传递样本索引并返回样本及其标签（如果不需要标签，则可以选择省略）。在`__init__`方法中，我们可以将数据集读取到内存中，可以使用Pandas库等来读取CSV格式的数据，也可以通过自己编写函数读取图像数据。
+`len()` 方法返回数据集中的样本数量，`getitem()` 方法传递样本索引并返回样本及其标签（如果不需要标签，则可以选择省略）。在`__init__`方法中，我们可以将数据集读取到内存中，可以使用 Pandas 库等来读取 CSV 格式的数据，也可以通过自己编写函数读取图像数据。
 
 ```python
 import torch
@@ -63,9 +63,10 @@ class MyCustomDataset(Dataset):
 
         return (image, label)
 ```
+
 - 在训练模型时，我们可以通过 `DataLoader` 类来使用 `TensorDataset` 或者`Dataset`对象，从而实现批量加载数据，并且可以进行数据增强和多线程加载等操作。
 
-> `torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False, sampler=None, num_workers=0, collate_fn=None, pin_memory=False, drop_last=False)` 
+> `torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False, sampler=None, num_workers=0, collate_fn=None, pin_memory=False, drop_last=False)`
 
 这是 PyTorch 中用于**数据加载**的工具类，用于<strong style="color:red">在训练过程中批量加载数据，进行数据增强、数据划分和多线程等操作</strong>。
 
@@ -73,7 +74,7 @@ class MyCustomDataset(Dataset):
 - `batch_size`: 批处理大小。
 - `shuffle`: 是否打乱数据。
 - `sampler`: 样本抽样方式，可以自定义。
-- `num_workers`: 线程的数量，0表示不使用多线程。
+- `num_workers`: 线程的数量，0 表示不使用多线程。
 - `collate_fn`: 自定义的 batch 操作。
 - `pin_memory`: 是否将数据保存到 CUDA 的固定内存上，提高 GPU 效率。
 - `drop_last`: 如果 dataset 中数据总数不能被 batch_size 整除，则 drop_last 如果为 True，则将多余的数据删除；否则放到最后一个 batch 里去。
@@ -81,17 +82,17 @@ class MyCustomDataset(Dataset):
 例如，以下代码展示了如何使用 `DataLoader` 加载一个 `TensorDataset` 对象：
 
 ```python
-import torch 
+import torch
 from torch.utils.data import TensorDataset, DataLoader
 
-X = torch.randn(100, 10) 
+X = torch.randn(100, 10)
 y = torch.randint(0, 2, (100,))
-ds = TensorDataset(X, y) 
+ds = TensorDataset(X, y)
 
 loader = DataLoader(ds, batch_size=10, shuffle=True)
 
-for batch_idx, (data, target) in enumerate(loader):    
-    # 进行训练或推理的代码    pass 
+for batch_idx, (data, target) in enumerate(loader):
+    # 进行训练或推理的代码    pass
 ```
 
 在上面的代码中，我们首先创建了一个大小为 `(100, 10)` 的数据张量 `X` 和大小为 `(100,)` 的标签张量 `y`，然后使用 `TensorDataset` 将这两个张量封装成一个数据集 `ds`。
@@ -137,14 +138,14 @@ for inputs, labels in dataloader:
 例如，以下代码给出了如何使用 `torchvision.datasets` 加载 MNIST 数据集并进行数据预处理：
 
 ```python
-import torchvision.datasets as datasets 
+import torchvision.datasets as datasets
 import torchvision.transforms as transforms
-# 数据预处理，将输入数据放缩到 (0, 1) 范围内 
-transform = transforms.Compose(    
-    [transforms.ToTensor(),     
+# 数据预处理，将输入数据放缩到 (0, 1) 范围内
+transform = transforms.Compose(
+    [transforms.ToTensor(),
      transforms.Normalize((0.5,), (0.5,))])
-# 下载和加载数据集 
-train_data = datasets.MNIST('data/MNIST', train=True, download=True, transform=transform) test_data = datasets.MNIST('data/MNIST', train=False, download=True, transform=transform) 
+# 下载和加载数据集
+train_data = datasets.MNIST('data/MNIST', train=True, download=True, transform=transform) test_data = datasets.MNIST('data/MNIST', train=False, download=True, transform=transform)
 ```
 
 在上面的代码中，我们首先定义了一个数据预处理函数 `transform`，将输入数据放缩到 (0, 1) 范围内。然后，我们使用 `datasets.MNIST` 来下载和加载 MNIST 数据集，其中传入了一些参数，例如 `root` 表示数据存放的根目录，`train` 表示加载训练数据集，`transform` 是数据预处理函数。
@@ -163,13 +164,13 @@ train_data = datasets.MNIST('data/MNIST', train=True, download=True, transform=t
 
 **鞍点**
 
-除了局部最小值之外，鞍点是梯度消失的另一个原因。*鞍点*（saddle point）是指函数的所有梯度都消失但既不是全局最小值也不是局部最小值的任何位置。考虑这个函数f(x)=x^3。它的一阶和二阶导数在x=0时消失。这时优化可能会停止，尽管它不是最小值。
+除了局部最小值之外，鞍点是梯度消失的另一个原因。_鞍点_（saddle point）是指函数的所有梯度都消失但既不是全局最小值也不是局部最小值的任何位置。考虑这个函数 f(x)=x^3。它的一阶和二阶导数在 x=0 时消失。这时优化可能会停止，尽管它不是最小值。
 
 ![../_images/output_optimization-intro_70d214_66_0.svg](./images/saddle.svg)
 
 **梯度消失**
 
-假设我们想最小化函数$f(x)=tanh⁡(x)$，然后我们恰好从$x=4$开始。正如我们所看到的那样，f的梯度接近零。更具体地说，$f′(x)=1−tanh^2⁡(x)$，因此是$f′(4)=0.0013$。因此，在我们取得进展之前，优化将会停滞很长一段时间。事实证明，这是在引入ReLU激活函数之前训练深度学习模型相当棘手的原因之一。
+假设我们想最小化函数$f(x)=tanh⁡(x)$，然后我们恰好从$x=4$开始。正如我们所看到的那样，f 的梯度接近零。更具体地说，$f′(x)=1−tanh^2⁡(x)$，因此是$f′(4)=0.0013$。因此，在我们取得进展之前，优化将会停滞很长一段时间。事实证明，这是在引入 ReLU 激活函数之前训练深度学习模型相当棘手的原因之一。
 
 ![../_images/output_optimization-intro_70d214_96_0.svg](./images/gradient.svg)
 
@@ -179,7 +180,7 @@ train_data = datasets.MNIST('data/MNIST', train=True, download=True, transform=t
 
 > `torch.optim.SGD(params, lr, momentum=0, dampening=0, weight_decay=0, nesterov=False)`
 
-`torch.optim.SGD(params, lr, momentum=0, dampening=0, weight_decay=0, nesterov=False)` 是 PyTorch 中的一个优化器类，实现了随机梯度下降（SGD）算法。该算法是常用的优化算法之一，通过计算当前梯度和历史梯度的加权平均值来更新模型参数。  
+`torch.optim.SGD(params, lr, momentum=0, dampening=0, weight_decay=0, nesterov=False)` 是 PyTorch 中的一个优化器类，实现了随机梯度下降（SGD）算法。该算法是常用的优化算法之一，通过计算当前梯度和历史梯度的加权平均值来更新模型参数。
 
 - `params`：待优化的参数。
 - `lr`：学习率，控制每次更新的步长大小。
@@ -206,7 +207,7 @@ for inputs, labels in data_loader:
 
 在上面的代码中，我们首先定义了一个模型 `MyModel`，然后使用 `model.parameters()` 获取模型的参数，传入 `optim.SGD()` 函数中创建一个 `SGD` 优化器对象 `optimizer`。在模型的训练过程中，我们使用 `optimizer.zero_grad()` 来清空历史梯度，然后进行前向传播和反向传播，最后通过 `optimizer.step()` 来更新模型的参数。
 
-## 三、网络层结构 
+## 三、网络层结构
 
 ### 1. 展平层
 
@@ -218,25 +219,25 @@ for inputs, labels in data_loader:
 
 ```python
 import torch.nn as nn
-model = nn.Sequential(    
-    nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1),    
-    nn.ReLU(),    
-    nn.MaxPool2d(kernel_size=2),    
-    nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1),    
-    nn.ReLU(),    
-    nn.MaxPool2d(kernel_size=2),    
-    nn.Flatten(),    
-    nn.Linear(in_features=64*8*8, out_features=10) 
-) 
+model = nn.Sequential(
+    nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2),
+    nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2),
+    nn.Flatten(),
+    nn.Linear(in_features=64*8*8, out_features=10)
+)
 ```
 
 在上面的代码中，我们定义了一个简单的 CNN 模型，其中包含了两个卷积层、两个 ReLU 激活层和两个 MaxPool 层。这些层的输出都是四维张量，因此我们需要在最后一个 MaxPool2d 层之后使用 `nn.Flatten()` 层将输出张量展平成二维张量，然后才能进入全连接层进行分类。
 
 ### 2. 卷积层
 
-`nn.Conv2d`是PyTorch中用于定义二维卷积层的函数。它是基于torch.nn.Module构造出的类，可以直接使用PyTorch提供的API进行调用，其主要参数包括：输入通道数，输出通道数，卷积核大小，步长、填充等。当定义了卷积层后，需要调用forward函数计算输出值。
+`nn.Conv2d`是 PyTorch 中用于定义二维卷积层的函数。它是基于 torch.nn.Module 构造出的类，可以直接使用 PyTorch 提供的 API 进行调用，其主要参数包括：输入通道数，输出通道数，卷积核大小，步长、填充等。当定义了卷积层后，需要调用 forward 函数计算输出值。
 
-例如，下面是一个使用nn.Conv2d定义卷积层的简单示例：
+例如，下面是一个使用 nn.Conv2d 定义卷积层的简单示例：
 
 ```python
 import torch.nn as nn
@@ -255,13 +256,13 @@ output = conv_layer(x)
 print(output.size())
 ```
 
-这个示例中，定义了一个输入通道数为3，输出通道数为64，卷积核大小为3x3，步长、填充均为1的卷积层，并将其应用到一个大小为[16, 3, 28, 28]的张量上，然后输出的结果大小是[16, 64, 28, 28]，其中16是batch_size的大小。
+这个示例中，定义了一个输入通道数为 3，输出通道数为 64，卷积核大小为 3x3，步长、填充均为 1 的卷积层，并将其应用到一个大小为[16, 3, 28, 28]的张量上，然后输出的结果大小是[16, 64, 28, 28]，其中 16 是 batch_size 的大小。
 
 ### 3. 池化层
 
 > `nn.MaxPool2d`
 
-`nn.MaxPool2d`是PyTorch神经网络库中提供的最大池化层。它可以在输入上执行2D最大池化操作，将输入划分为固定的池化区域，并在每个池化区域内找到最大值。具体而言，MaxPool2d的作用是将输入张量在每个池化窗口内取最大值，并将所有结果组合成一个张量，作为输出。
+`nn.MaxPool2d`是 PyTorch 神经网络库中提供的最大池化层。它可以在输入上执行 2D 最大池化操作，将输入划分为固定的池化区域，并在每个池化区域内找到最大值。具体而言，MaxPool2d 的作用是将输入张量在每个池化窗口内取最大值，并将所有结果组合成一个张量，作为输出。
 
 该函数有以下参数：
 
@@ -289,13 +290,13 @@ print(f"Input shape: {input_tensor.shape}")
 print(f"Output shape: {output_tensor.shape}")
 ```
 
-这段代码定义了一个kernel大小为2 * 2，步幅为2的2D最大池化层，并将该层应用于一个张量。输入张量的形状为（1，3，4，4），其中1表示批次大小，3表示通道数，4和4表示输入图像的宽度和高度。在这种情况下，MaxPool2d的输出张量形状为（1，3，2，2），因为窗口中的4个池化区域中的每个都有一个输出值。在这个示例中，不使用其他参数，因此默认参数被用到。
+这段代码定义了一个 kernel 大小为 2 \* 2，步幅为 2 的 2D 最大池化层，并将该层应用于一个张量。输入张量的形状为（1，3，4，4），其中 1 表示批次大小，3 表示通道数，4 和 4 表示输入图像的宽度和高度。在这种情况下，MaxPool2d 的输出张量形状为（1，3，2，2），因为窗口中的 4 个池化区域中的每个都有一个输出值。在这个示例中，不使用其他参数，因此默认参数被用到。
 
 ---
 
 > `nn.AdaptiveAvgPool2d`
 
-`nn.AdaptiveAvgPool2d`是PyTorch神经网络库中提供的自适应平均池化层。它对输入进行二维平均池化，使输出具有特定形状。它可以自适应地考虑更大或更小的输入张量，并根据指定的输出大小调整窗口大小和步幅，以使输出具有期望的大小。
+`nn.AdaptiveAvgPool2d`是 PyTorch 神经网络库中提供的自适应平均池化层。它对输入进行二维平均池化，使输出具有特定形状。它可以自适应地考虑更大或更小的输入张量，并根据指定的输出大小调整窗口大小和步幅，以使输出具有期望的大小。
 
 这个函数有一个必须的参数输出大小（output_size），我们希望输出的张量大小为（batch_size，channel，output_size，output_size）
 
@@ -318,13 +319,13 @@ print(f"Input shape: {input_tensor.shape}")
 print(f"Output shape: {output_tensor.shape}")
 ```
 
-这段代码定义了一个2D自适应平均池化层，并将其应用于一个输入张量。输入张量的形状为（1，3，4，4），其中1表示批次大小，3表示通道数，4和4表示输入图像的宽度和高度。 在这个示例中，输出大小为（2,2），因此输出张量的形状为（1，3，2，2）。
+这段代码定义了一个 2D 自适应平均池化层，并将其应用于一个输入张量。输入张量的形状为（1，3，4，4），其中 1 表示批次大小，3 表示通道数，4 和 4 表示输入图像的宽度和高度。 在这个示例中，输出大小为（2,2），因此输出张量的形状为（1，3，2，2）。
 
 ### 4. Dropout
 
-`dropout`是一种常用的正则化方法用于减少神经网络的过拟合风险。 在运行时期间，`dropout`以一定的概率丢弃（设置于0）输入单元或输出单元的权重，然后从训练数据集的小批量数据中随机选择新的输入单元或输出单元的权重。 过拟合风险较大的神经元将会有较大的概率被丢弃，保留较小的概率，以减轻神经元之间的复杂协同关系。
+`dropout`是一种常用的正则化方法用于减少神经网络的过拟合风险。 在运行时期间，`dropout`以一定的概率丢弃（设置于 0）输入单元或输出单元的权重，然后从训练数据集的小批量数据中随机选择新的输入单元或输出单元的权重。 过拟合风险较大的神经元将会有较大的概率被丢弃，保留较小的概率，以减轻神经元之间的复杂协同关系。
 
-在深度学习网络训练过程中，`dropout`层一般加在全连接层之后，可以通过`nn.Dropout(p = probability)`直接实现。p为丢弃的概率，通常取0.2~0.5之间的值。
+在深度学习网络训练过程中，`dropout`层一般加在全连接层之后，可以通过`nn.Dropout(p = probability)`直接实现。p 为丢弃的概率，通常取 0.2~0.5 之间的值。
 
 ```python
 dropout = nn.Dropout(p=0.2)
@@ -332,15 +333,15 @@ dropout = nn.Dropout(p=0.2)
 
 ### 5. BatchNorm
 
-`nn.BatchNorm2d`是PyTorch中的一个批量归一化（Batch Normalization）操作类。它会对输入进行标准化处理，让前一层的输出其均值为0，方差为1，并通过可学习的缩放和偏移参数，使模型能够恢复任意的变换。
+`nn.BatchNorm2d`是 PyTorch 中的一个批量归一化（Batch Normalization）操作类。它会对输入进行标准化处理，让前一层的输出其均值为 0，方差为 1，并通过可学习的缩放和偏移参数，使模型能够恢复任意的变换。
 
 该类的主要参数包括：
 
 - `num_features`：输入特征的通道数。
 - `eps`：为了避免分母为零的情况，在分母上加上一个很小的数 eps。
 - `momentum`：用于计算移动平均值的动量系数，用于更新求得的均值和方差。
-- `affine`: bool类型，默认值为True，表示是否启用可学习的缩放和平移参数。
-- `track_running_stats`: bool类型，默认值为True，表示是否使用运行统计信息（如平均值和标准差）来标准化。
+- `affine`: bool 类型，默认值为 True，表示是否启用可学习的缩放和平移参数。
+- `track_running_stats`: bool 类型，默认值为 True，表示是否使用运行统计信息（如平均值和标准差）来标准化。
 
 下面是一个简单的使用实例：
 
@@ -358,7 +359,7 @@ print(input.shape)
 print(output.shape)
 ```
 
-该例子中，`num_features`被设置为3，表示输入特征的通道数为3。输入的张量`input`的形状为(2, 3, 4, 4)，表示batch_size为2，通道数为3，每个特征图的大小为(4, 4)。执行`bn(input)`后，返回的输出张量`output`具有相同的形状。
+该例子中，`num_features`被设置为 3，表示输入特征的通道数为 3。输入的张量`input`的形状为(2, 3, 4, 4)，表示 batch_size 为 2，通道数为 3，每个特征图的大小为(4, 4)。执行`bn(input)`后，返回的输出张量`output`具有相同的形状。
 
 在训练过程中，`BatchNorm2d` 对接收到的每个 `feature map` 分别执行以下操作：
 
@@ -369,11 +370,11 @@ print(output.shape)
 
 需要注意的是，在测试模式下，BatchNorm2d 的运作方式与训练模式不同，其前向传播不会使用 mini-batch 的均值和方差，而是使用全局的均值和方差（在训练过程中通过动量方式累积得到的均值和方差）来进行标准化处理。
 
-### 6.  Relu
+### 6. Relu
 
-`nn.ReLU`是对输入的数据进行修正线性单元(Rectified Linear Units, ReLU)操作的类。ReLU是深度学习中常用的激活函数，它可以通过将负值变为0来增强线性神经网络的非线性性。其代数式为$f(x) = max(0,x)$，即当输入x大于0时$f(x)$等于$x$，否则$f(x)$等于0。
+`nn.ReLU`是对输入的数据进行修正线性单元(Rectified Linear Units, ReLU)操作的类。ReLU 是深度学习中常用的激活函数，它可以通过将负值变为 0 来增强线性神经网络的非线性性。其代数式为$f(x) = max(0,x)$，即当输入 x 大于 0 时$f(x)$等于$x$，否则$f(x)$等于 0。
 
-`nn.ReLU`的功能很简单，它接收输入张量并将其作用于ReLU激活函数，输出ReLU激活后的张量。在pytorch中使用`nn.ReLU`的代码如下：
+`nn.ReLU`的功能很简单，它接收输入张量并将其作用于 ReLU 激活函数，输出 ReLU 激活后的张量。在 pytorch 中使用`nn.ReLU`的代码如下：
 
 ```python
 import torch.nn as nn
@@ -382,20 +383,20 @@ relu = nn.ReLU()
 output = relu(input)
 ```
 
-其中`input`是输入张量，`output`是经过ReLU激活后的输出张量。
+其中`input`是输入张量，`output`是经过 ReLU 激活后的输出张量。
 
 > `nn.ReLU(inplace=True)`
 
 `nn.ReLU(inplace=True)`与`nn.ReLU()`的区别在于，它将原地修改输入张量而不是创建一个新的张量作为输出，并返回已修改的输入张量。
 
-这意味着，使用`nn.ReLU(inplace=True)`会省略内存分配和释放，因为不会产生新的内存分配和释放操作。这在处理大量数据时，可以有效地减少内存开销，因为每次内存分配和释放都需要消耗大量的时间和资源。同时，使用inplace的操作还可以提高计算性能，因为不需要将数据从一个位置复制到另一个位置。
+这意味着，使用`nn.ReLU(inplace=True)`会省略内存分配和释放，因为不会产生新的内存分配和释放操作。这在处理大量数据时，可以有效地减少内存开销，因为每次内存分配和释放都需要消耗大量的时间和资源。同时，使用 inplace 的操作还可以提高计算性能，因为不需要将数据从一个位置复制到另一个位置。
 
-需要注意的是，使用`inplace=True`有时也可能会导致不可预测的结果或者梯度计算的错误。因此，在使用时需要谨慎，并根据具体情况判断是否需要开启inplace模式。
+需要注意的是，使用`inplace=True`有时也可能会导致不可预测的结果或者梯度计算的错误。因此，在使用时需要谨慎，并根据具体情况判断是否需要开启 inplace 模式。
 
 `nn.ReLU`可能存在的问题有两个：
 
-1. 梯度消失或爆炸：当输入很大或很小的时候，ReLU的导数会变成0或无穷大，从而导致梯度消失或爆炸的问题。
-2. 神经元死亡：如果训练期间一个ReLU神经元被更新成一直输出0的状态，那么在以后的训练过程中该神经元的参数将一直保持不变，也就是被"死亡"了。这种情况的发生通常与学习率过高有关，可以通过减小学习率或使用其他激活函数来缓解。
+1. 梯度消失或爆炸：当输入很大或很小的时候，ReLU 的导数会变成 0 或无穷大，从而导致梯度消失或爆炸的问题。
+2. 神经元死亡：如果训练期间一个 ReLU 神经元被更新成一直输出 0 的状态，那么在以后的训练过程中该神经元的参数将一直保持不变，也就是被"死亡"了。这种情况的发生通常与学习率过高有关，可以通过减小学习率或使用其他激活函数来缓解。
 
 ### 7. 反卷积层
 
@@ -435,7 +436,7 @@ print(output.size()) # 输出形状为 [1, 64, 25, 25]
 
 ### 1. `named_parameters()`或`parameters()`
 
-使用model.named_parameters()或model.parameters()方法，返回一个生成器，遍历每个参数并返回对应的参数张量及名称，代码示例如下：
+使用 model.named_parameters()或 model.parameters()方法，返回一个生成器，遍历每个参数并返回对应的参数张量及名称，代码示例如下：
 
 ```python
 import torch.nn as nn
@@ -464,7 +465,7 @@ for name, param in model.named_parameters():
 
 > `model.named_parameters`访问的是所有层的参数，要想访问具体某一层的参数，只需要`model.(层name).named_parameters`.
 
-### 2.  `model.layer.weight`
+### 2. `model.layer.weight`
 
 使用`model.layer.weight`和`model.layer.bias`直接获取某一层的权重和偏置，示例代码如下：
 
@@ -493,7 +494,7 @@ print(weight, bias)
 
 ### 3. `state_dict`
 
-使用model.state_dict()方法获取网络层的参数字典，该字典包含每个层的名称和参数，例如`model.state_dict()['layer.weight']`，示例代码如下：
+使用 model.state_dict()方法获取网络层的参数字典，该字典包含每个层的名称和参数，例如`model.state_dict()['layer.weight']`，示例代码如下：
 
 ```python
 import torch.nn as nn
@@ -518,6 +519,7 @@ print(weight, bias)
 ```
 
 > 下面是`state_dict()`返回的结果样例
+
 ```python
 OrderedDict([('weight', tensor([[ 0.3016, -0.1901, -0.1991, -0.1220,  0.1121, -0.1424, -0.3060,  0.3400]])), ('bias', tensor([-0.0291]))])
 ```
@@ -571,7 +573,7 @@ mydict2
 
 ### 2. 查看数据结构
 
-使用torch.save()函数保存的模型权重参数文件默认是以Python的pickle格式进行序列化的，包括datasets中数据集默认也是以这种方式进行的存储，这种文件直接使用文本打开会显示乱码，我们可以利用pickle对文件进行反序列化，以查看其数据结构：
+使用 torch.save()函数保存的模型权重参数文件默认是以 Python 的 pickle 格式进行序列化的，包括 datasets 中数据集默认也是以这种方式进行的存储，这种文件直接使用文本打开会显示乱码，我们可以利用 pickle 对文件进行反序列化，以查看其数据结构：
 
 ```python
 import pickle
@@ -579,11 +581,11 @@ filename = '../cifar10/cifar-10-batches-py/test_batch'
 with open(filename,'rb') as f:
     dataset = pickle.load(f, encoding='bytes')
     print(type(dataset))
- 
+
 # out: <class 'dict'>
 ```
 
-## 六、GPU相关
+## 六、GPU 相关
 
 ```shell
 nvidia-smi
@@ -597,32 +599,32 @@ nvidia-smi
 import torch
 from torch import nn
 
-torch.device('cpu'), 
+torch.device('cpu'),
 torch.device('cuda'), # cuda和cuda:0等价
 torch.device('cuda:1'),
-torch.device(f'cuda:{i}') 
+torch.device(f'cuda:{i}')
 
 # 常用
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 ```
 
-### 1. 将模型参数放在gpu
+### 1. 将模型参数放在 gpu
 
-1. 在创建的时候指定device
+1. 在创建的时候指定 device
 
    ```python
    X = torch.ones(2, 3, device=torch.device('cuda'))
    X
    ```
 
-2. 使用cuda()复制
+2. 使用 cuda()复制
 
    ```python
    Z = X.cuda() # 参数为cuda的编号
    Z
    ```
 
-3. 使用to()指定
+3. 使用 to()指定
 
    ```python
    net = net.to(device=torch.device('cuda'))
@@ -632,7 +634,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 - 切换：`model.train()和model.eval()`
 - 判断：`torch.is_grad_enabled()`
-  - 检查当前PyTorch计算图是否启用梯度计算。它返回一个布尔值，如果梯度计算启用，则返回True，否则返回False。
+  - 检查当前 PyTorch 计算图是否启用梯度计算。它返回一个布尔值，如果梯度计算启用，则返回 True，否则返回 False。
 
 ## 七、注意力机制
 
@@ -644,9 +646,9 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 - 键(Keys)：它是用来表示输入序列中各个位置的特征的向量，一般是通过对输入进行变换（如全连接层或卷积操作）获得。
 
-- 值(Value)：它是输入序列中的各个位置所对应的实际数值（训练时的输出y），是未经过变换的原始输入。
+- 值(Value)：它是输入序列中的各个位置所对应的实际数值（训练时的输出 y），是未经过变换的原始输入。
 
-在注意力机制中，我们做的实际上是以下3件事：
+在注意力机制中，我们做的实际上是以下 3 件事：
 
 - 首先将查询向量与键向量计算余弦相似度或欧式距离（评分函数）
   - 越小代表键靠近自己想查询的值，随之计算出的权重越大
@@ -704,4 +706,3 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
     print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec '
           f'on {str(device)}')
 ```
-

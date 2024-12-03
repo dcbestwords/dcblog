@@ -1,7 +1,7 @@
 ---
 title: 包管理工具
 order: 1
-icon: npm
+icon: npm fa-brands
 ---
 
 ![06_包管理工具](./images/1.jpg)
@@ -27,13 +27,13 @@ nodejs 对 npm 支持非常良好
 当使用 nodejs 导入模块时，如果模块路径不是以 ./ 或 ../ 开头，则 node 会认为导入的模块来自于 node_modules 目录，例如：
 
 ```js
-var _ = require("lodash");
+var _ = require('lodash');
 ```
 
 1. 优先在当前文件夹下 node_modules 中寻找同名的文件夹
    - 找到该第三方包中的`package.json`文件，并且找到里面的`main`属性对应的入口模块，该入口模块即为加载的第三方模块。
    - 如果在要加载的第三方包中没有找到`package.json`文件或者是`package.json`文件中没有`main`属性，则默认加载第三方包中的`index.js`文件。
-   - 如果在加载第三方模块的文件的同级目录没有找到`node_modules`文件夹，或者以上所有情况都没有找到，则跳到第2步继续查找。
+   - 如果在加载第三方模块的文件的同级目录没有找到`node_modules`文件夹，或者以上所有情况都没有找到，则跳到第 2 步继续查找。
 2. 在上级目录中下的 node_modules 中寻找同名的文件夹，直至找到磁盘根目录，如果一直找到该模块的磁盘根路径都没有找到，则会报错：`can not find module xxx`。
 
 ### 3. 常用的包管理工具
@@ -76,15 +76,15 @@ node.js 在安装时会 `自动安装 npm` ，所以如果你已经安装了 nod
 
 ```json
 {
-	"name": "01_npm",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "",
-	"license": "ISC"
+  "name": "01_npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
 ```
 
@@ -139,9 +139,9 @@ npm i uniq
 - `node_modules 文件夹` 存放下载的包
 - `package-lock.json 包的锁文件`，用来锁定包的版本
 
->安装 uniq 之后， uniq 就是当前这个包的一个 `依赖包` ，有时会简称为 `依赖`
+> 安装 uniq 之后， uniq 就是当前这个包的一个 `依赖包` ，有时会简称为 `依赖`
 >
->比如我们创建一个包名字为 A，A 中安装了包名字是 B，我们就说 <span style="color:red">B 是 A 的一个依赖包</span>，也会说 <span style="color:red">A 依赖 B</span>
+> 比如我们创建一个包名字为 A，A 中安装了包名字是 B，我们就说 <span style="color:red">B 是 A 的一个依赖包</span>，也会说 <span style="color:red">A 依赖 B</span>
 >
 > 如果本地安装的包带有 CLI，npm 会将它的 CLI 脚本文件放置到`node_modules/.bin`下，使用命令`npx 命令名`即可调用
 
@@ -172,7 +172,7 @@ npm config set registry https://registry.npmmirror.com/
 
 #### 工具配置
 
-使用 `nrm` 配置 npm 的镜像地址 
+使用 `nrm` 配置 npm 的镜像地址
 
 1. 安装 nrm
 
@@ -200,7 +200,7 @@ npm config set registry https://registry.npmmirror.com/
 
    检查 registry 地址是否为 `https://registry.npmmirror.com/` , 如果 `是` 则表明成功
 
-#### 使用cnpm替换npm
+#### 使用 cnpm 替换 npm
 
 ### 4. 生产环境与开发环境
 
@@ -210,26 +210,24 @@ npm config set registry https://registry.npmmirror.com/
 
 如何优雅的让 node 知道处于什么环境，是极其重要的
 
-比如，我们有如下的js代码：
+比如，我们有如下的 js 代码：
 
 **index.js:**
 
 ```js
-var a = "没有环境变量";
-console.log(process.env.NODE_ENV)
-if(process.env.NODE_ENV === "development"){
-    a = "开发环境"
+var a = '没有环境变量';
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  a = '开发环境';
+} else if (process.env.NODE_ENV === 'production') {
+  a = '生产环境';
+} else if (process.env.NODE_ENV === 'test') {
+  a = '测试环境';
 }
-else if(process.env.NODE_ENV === "production"){
-    a = "生产环境"
-}
-else if(process.env.NODE_ENV === "test"){
-    a = "测试环境"
-}
-console.log(a)
+console.log(a);
 ```
 
-这段代码的意思，就是检测系统环境的`NODE_ENV`值，来判定node程序处于何种环境
+这段代码的意思，就是检测系统环境的`NODE_ENV`值，来判定 node 程序处于何种环境
 
 当然，不同系统环境，配置环境变量各不相同，所以，我们必须使用第三方包来帮助我们进行配置
 
@@ -253,9 +251,9 @@ npm i -D cross-env
 
 我们可以在安装时设置选项来区分 `依赖的类型`，目前分为两类：
 
-| 类型     | 命令                                    | 补充                                                         |
-| -------- | --------------------------------------- | ------------------------------------------------------------ |
-| 生产依赖 | npm i -S uniq <br/>npm i --save uniq    | -S 等效于 --save，`-S 是默认选项`<br/>包信息保存在 package.json 中 `dependencies` 属性 |
+| 类型 | 命令 | 补充 |
+| --- | --- | --- |
+| 生产依赖 | npm i -S uniq <br/>npm i --save uniq | -S 等效于 --save，`-S 是默认选项`<br/>包信息保存在 package.json 中 `dependencies` 属性 |
 | 开发依赖 | npm i -D less<br/>npm i --save-dev less | -D 等效于 --save-dev<br/>包信息保存在 package.json 中 `devDependencies` 属性 |
 
 > 举个例子方便大家理解，比如说做蛋炒饭需要`大米`，`油`，`葱`，`鸡蛋`，`锅`，`煤气`，`铲子`等
@@ -358,14 +356,13 @@ npm start
 
 ### 11. npx
 
-npm 从5.2版开始，增加了 npx 命令，具体使用参考[npx 使用教程 - 阮一峰的网络日志 ](https://www.ruanyifeng.com/blog/2019/02/npx.html)
+npm 从 5.2 版开始，增加了 npx 命令，具体使用参考[npx 使用教程 - 阮一峰的网络日志 ](https://www.ruanyifeng.com/blog/2019/02/npx.html)
 
 ## 三、cnpm
 
 ### 介绍
 
-cnpm 是一个淘宝构建的`npmjs.com`的完整镜像，也称为『淘宝镜像』，网址https://npmmirror.com/
-cnpm 服务部署在国内 <span style="color:red">阿里云服务器上</span>，可以提高包的下载速度
+cnpm 是一个淘宝构建的`npmjs.com`的完整镜像，也称为『淘宝镜像』，网址https://npmmirror.com/ cnpm 服务部署在国内 <span style="color:red">阿里云服务器上</span>，可以提高包的下载速度
 
 官方也提供了一个全局工具包 `cnpm` ，操作命令与 npm 大体相同
 
@@ -379,12 +376,12 @@ npm install -g cnpm --registry=https://registry.npmmirror.com
 
 ### 操作命令
 
-| 功能         | 命令                                                         |
-| ------------ | ------------------------------------------------------------ |
-| 初始化       | cnpm init / cnpm init                                        |
+| 功能         | 命令                                                                    |
+| ------------ | ----------------------------------------------------------------------- |
+| 初始化       | cnpm init / cnpm init                                                   |
 | 安装包       | cnpm i uniq<br/>cnpm i -S uniq<br/>cnpm i -D uniq<br/>cnpm i -g nodemon |
-| 安装项目依赖 | cnpm i                                                       |
-| 删除         | cnpm r uniq                                                  |
+| 安装项目依赖 | cnpm i                                                                  |
+| 删除         | cnpm r uniq                                                             |
 
 > 虽然 cnpm 可以提高速度，但是 npm 也可以通过淘宝镜像进行加速，所以 <span style="color:red">npm 的使用率还是高于 cnpm</span>
 
@@ -414,13 +411,13 @@ npm i -g yarn
 
 ### yarn 常用命令
 
-| 功能         | 命令                                                         |
-| ------------ | ------------------------------------------------------------ |
-| 初始化       | yarn init / yarn init -y                                     |
-| 安装包       | yarn add uniq 生产依赖<br/>yarn add less --dev 开发依赖<br/>yarn global add nodemon 全局安装 |
-| 删除包       | yarn remove uniq 删除项目依赖包<br>yarn global remove nodemon 全局删除包 |
-| 安装项目依赖 | yarn                                                         |
-| 运行命令别名 | yarn <别名> # 不需要添加 `run`                               |
+| 功能 | 命令 |
+| --- | --- |
+| 初始化 | yarn init / yarn init -y |
+| 安装包 | yarn add uniq 生产依赖<br/>yarn add less --dev 开发依赖<br/>yarn global add nodemon 全局安装 |
+| 删除包 | yarn remove uniq 删除项目依赖包<br>yarn global remove nodemon 全局删除包 |
+| 安装项目依赖 | yarn |
+| 运行命令别名 | yarn <别名> # 不需要添加 `run` |
 
 > 思考题：
 >
@@ -448,13 +445,12 @@ yarn config set registry https://registry.npmmirror.com/
 
    如果是个人项目，<span style="color:red">哪个工具都可以</span>，可以根据自己的喜好来选择
 
-2. 公司项目
-   如果是公司要根据项目代码来选择，可以 <span style="color:red">通过锁文件判断</span> 项目的包管理工具
-   
+2. 公司项目如果是公司要根据项目代码来选择，可以 <span style="color:red">通过锁文件判断</span> 项目的包管理工具
+
    - npm 的锁文件为 `package-lock.json`
    - yarn 的锁文件为 `yarn.lock`
 
->包管理工具 <span style="color:red">不要混着用，切记，切记，切记</span>
+> 包管理工具 <span style="color:red">不要混着用，切记，切记，切记</span>
 
 ## 五、管理发布包
 

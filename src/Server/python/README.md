@@ -2,7 +2,6 @@
 index: false
 dir:
   text: python
-  icon: python
-  collapsible: false
+  icon: python fa-brands
+  collapsible: true
 ---
-

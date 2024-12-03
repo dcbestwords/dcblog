@@ -1,9 +1,9 @@
 ---
 title: 论文
 index: false
-icon: paper
+icon: user-graduate fas
 category:
-  - 论文
+  - 论文公考
 ---
 
 <Catalog />
