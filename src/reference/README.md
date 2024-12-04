@@ -4,6 +4,8 @@ icon: book fas
 index: false
 sidebar: false
 editLink: false
+lastUpdated: false
+contributors: false
 category:
   - 文档教程
 ---
