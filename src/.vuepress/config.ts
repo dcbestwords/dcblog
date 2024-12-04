@@ -3,7 +3,8 @@ import { viteBundler } from '@vuepress/bundler-vite';
 import theme from './theme.js';
 
 export default defineUserConfig({
-  base: '/dcblog/',
+  // base: '/dcblog/',
+  base: (process.env.BASE_URL || '/') as '/' | `/${string}/`,
   lang: 'zh-CN',
   title: 'dcBlog',
   description: '记录前端学习和课题论文的笔记',
