@@ -36,7 +36,7 @@ jobs:
       - name: 构建文档
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          BASE_URL: /dcbestwords.github.io/ #其中test为你创建的仓库名称
+          BASE_URL: / #其中test为你创建的仓库名称
         run: |-
           pnpm run docs:build
           > src/.vuepress/dist/.nojekyll
