@@ -1,4 +1,5 @@
 import { hopeTheme } from 'vuepress-theme-hope';
+import { docsearchPlugin } from '@vuepress/plugin-docsearch';
 
 import navbar from './navbar.js';
 import sidebar from './sidebar.js';
@@ -70,7 +71,18 @@ export default hopeTheme({
     blog: {
       excerptLength: 100,
     },
-    searchPro: true,
+
+    docsearch: {
+      appId: 'Z2IPG5DD6V',
+      apiKey: '4cd935ac5e6fe32d76f8516e67b0c616',
+      indexName: 'dachao',
+      placeholder: '搜索文档',
+      translations: {
+        button: {
+          buttonText: '搜索文档',
+        },
+      },
+    },
 
     // 在启用之前需要安装 @waline/client
     // 警告: 这是一个仅供演示的测试服务器，在生产环境中请自行部署并使用自己的服务器！
