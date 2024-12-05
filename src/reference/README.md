@@ -1,6 +1,7 @@
 ---
 title: 文档教程
 icon: book fas
+containerClass: external-document
 index: false
 sidebar: false
 editLink: false
