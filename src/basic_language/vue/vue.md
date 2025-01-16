@@ -656,7 +656,11 @@ Object.defineProperty(obj2, 'x', {
 >
 > `$on`、`$emit` 是基于发布订阅模式的，维护一个事件中心，`$on`的时候将事件按名称存在事件中心（`vm._events`）里，称之为订阅者，然后`$emit`将对应的事件进行发布，去执行事件中心里的对应的回调
 
-::: danger 注意 methods 中配置的函数，不要用箭头函数！否则 this 就不是 vm 了； :::
+::: danger
+
+注意 methods 中配置的函数，不要用箭头函数！否则 this 就不是 vm 了。
+
+:::
 
 methods 中配置的函数，都是被 Vue 所管理的函数，this 的指向是 ==组件实例对象==
 
@@ -765,17 +769,17 @@ methods 中配置的函数，都是被 Vue 所管理的函数，this 的指向�
 
 #### (1).定义
 
-​ 要使用的属性不存在，要通过已有属性计算得来。
+ 要使用的属性不存在，要通过已有属性计算得来。
 
 #### (2).原理
 
-​ 底层借助了`Objcet.defineproperty`方法提供的`getter`和`setter`。
+ 底层借助了`Objcet.defineproperty`方法提供的`getter`和`setter`。
 
 #### (3).优势
 
-​ 与`methods`实现相比，内部有 ==缓存机制（复用）== ，效率更高，调试方便；
+ 与`methods`实现相比，内部有 ==缓存机制（复用）== ，效率更高，调试方便；
 
-​ 与插值直接实现相比，更加直观，不用在模板中添加过多代码。
+ 与插值直接实现相比，更加直观，不用在模板中添加过多代码。
 
 #### (4).计算属性中 get 函数什么时候执行？
 
@@ -872,7 +876,7 @@ watch:{
                   console.log('a被改变了')
               }
           }
-
+  
       //监视多级结构中所有属性的变化
           numbers:{
               deep:true,
@@ -1074,7 +1078,7 @@ classArr:['sty1','sty2','sty3'],
 
 #### (3).注意
 
-​ 使用`v-if`的时，元素可能无法获取到，而使用`v-show`一定可以获取到。
+ 使用`v-if`的时，元素可能无法获取到，而使用`v-show`一定可以获取到。
 
 ### 12. 列表渲染
 
@@ -1307,7 +1311,11 @@ vm._data = data = obs;
    - `Vue.set()` 或 `vm.$set()`
    - 其他方法没有进行包裹实现，更改数据时不会重新解析模板
 
-::: warning 注意特别注意：`Vue.set()` 和 `vm.$set()` 不能给 vm 或 vm 的根数据对象(vm.\_data) 添加属性！！！ :::
+::: warning 注意
+
+特别注意：`Vue.set()` 和 `vm.$set()` 不能给 vm 或 vm 的根数据对象(vm.\_data) 添加属性！！！ 
+
+:::
 
 ### 13. 过滤器
 
@@ -1680,7 +1688,7 @@ Vue.component('hello', hello);
 
 #### (3).使用组件(写组件标签)
 
-​ `<school></school>`
+ `<school></school>`
 
 ### 3. 几个注意点
 
@@ -1718,7 +1726,7 @@ const school = options;
 
 ### 4. 组件的嵌套
 
-​ 当各组件发生嵌套时，只需要在**父组件中注册子组件**，并在父组件的模板中使用组件标签。
+ 当各组件发生嵌套时，只需要在**父组件中注册子组件**，并在父组件的模板中使用组件标签。
 
 ```js
 //定义hello组件
@@ -1983,7 +1991,7 @@ this.$refs.xxx
 >    export function registerRef(vnode: VNodeWithData, isRemoval: ?boolean) {
 >      const key = vnode.data.ref;
 >      if (!isDef(key)) return;
->
+>   
 >      const vm = vnode.context;
 >      const ref = vnode.componentInstance || vnode.elm; // vnode对应的组件实例或dom元素
 >      const refs = vm.$refs;
@@ -2231,15 +2239,15 @@ npm i less-loader
 
    - `xxxxxStorage.getItem('person');`
 
-   ​ 该方法接受一个键名作为参数，返回键名对应的值。
+    该方法接受一个键名作为参数，返回键名对应的值。
 
    - `xxxxxStorage.removeItem('key');`
 
-   ​ 该方法接受一个键名作为参数，并把该键名从存储中删除。
+    该方法接受一个键名作为参数，并把该键名从存储中删除。
 
    - ` xxxxxStorage.clear()`
 
-   ​ 该方法会清空存储中的所有数据。
+    该方法会清空存储中的所有数据。
 
 4. 备注：
 
@@ -2651,7 +2659,7 @@ getStudents(){
 
 ### 2. 何时使用？
 
-​ 多个组件需要共享数据(即对公共数据进行读/写)时。(包括一些共享的业务逻辑可以编写在`actions`中)
+ 多个组件需要共享数据(即对公共数据进行读/写)时。(包括一些共享的业务逻辑可以编写在`actions`中)
 
 ### 3. 搭建 vuex 环境
 
@@ -2687,7 +2695,7 @@ getStudents(){
    //引入store
    import store from './store'
    ......
-
+   
    //创建vm
    new Vue({
    	el:'#app',
@@ -2802,7 +2810,7 @@ getStudents(){
    computed: {
        //借助mapGetters生成计算属性：bigSum（对象写法）
        ...mapGetters({bigSum:'bigSum'}),
-
+   
        //借助mapGetters生成计算属性：bigSum（数组写法）
        ...mapGetters(['bigSum'])
    },
@@ -3101,10 +3109,10 @@ mapActions 与 mapMutations 使用时，若需要传递参数需要：在**模�
    ```vue
    <!--简化前，需要写完整的路径 -->
    <router-link to="/demo/test/welcome">跳转</router-link>
-
+   
    <!--简化后，直接通过名字跳转 -->
    <router-link :to="{ name: 'hello' }">跳转</router-link>
-
+   
    <!--简化写法配合传递参数 -->
    <router-link
      :to="{
@@ -3148,7 +3156,7 @@ mapActions 与 mapMutations 使用时，若需要传递参数需要：在**模�
    ```vue
    <!-- 跳转并携带params参数，to的字符串写法 -->
    <router-link :to="/home/message/detail/666/你好">跳转</router-link>
-
+   
    <!-- 跳转并携带params参数，to的对象写法 -->
    <router-link
      :to="{
@@ -3234,7 +3242,7 @@ export default {
        title: xxx,
      },
    });
-
+   
    this.$router.replace({
      name: 'xiangqing',
      params: {
@@ -3242,7 +3250,7 @@ export default {
        title: xxx,
      },
    });
-
+   
    //操作浏览器的前进与后退
    this.$router.forward(); //前进
    this.$router.back(); //后退
@@ -3260,7 +3268,7 @@ export default {
    <keep-alive include="News"> 
        <router-view></router-view>
    </keep-alive>
-
+   
    <!-- 缓存多个路由组件 -->
    <keep-alive :include="['News', 'Message']"> 
        <router-view></router-view>

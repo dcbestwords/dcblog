@@ -1,5 +1,5 @@
 ---
-title: 论文
+title: 课题公考
 star: true
 index: false
 icon: user-graduate fas

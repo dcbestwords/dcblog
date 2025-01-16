@@ -198,14 +198,14 @@ app.mount('#app');
    ```vue
    <script setup>
      import { reactive } from 'vue';
-
+   
      const state = reactive({ count: 0 });
-
+   
      function increment() {
        state.count++;
      }
    </script>
-
+   
    <template>
      <button @click="increment">
        {{ state.count }}
@@ -301,34 +301,34 @@ setup(){
 
 #### Vue3.0 的响应式
 
-- 实现原理:
+实现原理:
 
-  - 通过 Proxy（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。
-  - 通过 Reflect（反射）: 对源对象的属性进行操作。
-  - MDN 文档中描述的 Proxy 与 Reflect：
+- 通过 Proxy（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。
+- 通过 Reflect（反射）: 对源对象的属性进行操作。
+- MDN 文档中描述的 Proxy 与 Reflect：
 
-    - Proxy：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+  - Proxy：[MDN|Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
-    - Reflect：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
+  - Reflect：[MDN|Reflect](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
 
-      ```js
-      new Proxy(data, {
-        // 拦截读取属性值
-        get(target, prop) {
-          return Reflect.get(target, prop);
-        },
-        // 拦截设置属性值或添加新属性
-        set(target, prop, value) {
-          return Reflect.set(target, prop, value);
-        },
-        // 拦截删除属性
-        deleteProperty(target, prop) {
-          return Reflect.deleteProperty(target, prop);
-        },
-      });
-
-      proxy.name = 'tom';
-      ```
+    ```js
+    new Proxy(data, {
+      // 拦截读取属性值
+      get(target, prop) {
+        return Reflect.get(target, prop);
+      },
+      // 拦截设置属性值或添加新属性
+      set(target, prop, value) {
+        return Reflect.set(target, prop, value);
+      },
+      // 拦截删除属性
+      deleteProperty(target, prop) {
+        return Reflect.deleteProperty(target, prop);
+      },
+    });
+    
+    proxy.name = 'tom';
+    ```
 
 ### 5.reactive 对比 ref
 
@@ -464,7 +464,7 @@ setup 的 ==参数==
 
   ```js
   import {computed} from 'vue'
-
+  
   setup(){
       ...
   	//计算属性——简写
@@ -503,12 +503,12 @@ setup 的 ==参数==
     },
     { immediate: true }
   );
-
+  
   //情况二：监视多个ref定义的响应式数据
   watch([sum, msg], (newValue, oldValue) => {
     console.log('sum或msg变化了', newValue, oldValue);
   });
-
+  
   /* 情况三：监视reactive定义的响应式数据
   			若watch监视的是reactive定义的响应式数据，则无法正确获得oldValue！！
   			若watch监视的是reactive定义的响应式数据，则强制开启了深度监视 
@@ -520,7 +520,7 @@ setup 的 ==参数==
     },
     { immediate: true, deep: false }
   ); //此处的deep配置不再奏效
-
+  
   //情况四：监视reactive定义的响应式数据中的某个属性
   watch(
     () => person.job,
@@ -529,7 +529,7 @@ setup 的 ==参数==
     },
     { immediate: true, deep: true }
   );
-
+  
   //情况五：监视reactive定义的响应式数据中的某些属性
   watch(
     [() => person.job, () => person.name],
@@ -538,7 +538,7 @@ setup 的 ==参数==
     },
     { immediate: true, deep: true }
   );
-
+  
   //特殊情况
   watch(
     () => person.job,
@@ -752,7 +752,7 @@ sum = shallowReadonly(sum);
     <input type="text" v-model="keyword" />
     <h3>{{ keyword }}</h3>
   </template>
-
+  
   <script>
     import { ref, customRef } from 'vue';
     export default {
@@ -955,7 +955,7 @@ Vue 2.x 有许多全局 API 和配置。
     }),
     template: '<button @click="count++">Clicked {{ count }} times.</button>'
   })
-
+  
   //注册全局指令
   Vue.directive('focus', {
     inserted: el => el.focus()
