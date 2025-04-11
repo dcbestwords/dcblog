@@ -34,7 +34,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.19.0
-          cache: pnpm
+          cache: npm
 
       - name: 构建文档
         env:
