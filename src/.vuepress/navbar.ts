@@ -36,6 +36,11 @@ export default navbar([
         link: '/Server/',
         icon: 'laptop-code fas',
       },
+      {
+        text: '面试题汇总',
+        link: '/Interview/',
+        icon: 'chalkboard-user fas',
+      },
     ],
   },
   {

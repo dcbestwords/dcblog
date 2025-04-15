@@ -70,6 +70,7 @@ export default sidebar({
   ],
   '/Server/': 'structure',
   '/Efficiency/': 'structure',
+  '/Interview/': 'structure',
   '/source_code/': [
     {
       text: 'Lodash',
