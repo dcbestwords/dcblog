@@ -11,7 +11,7 @@ export default hopeTheme({
     email: 'wyc168hard@163.com',
   },
 
-  iconAssets: 'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css',
+  iconAssets: 'https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css',
   iconPrefix: 'fa-',
 
   logo: '/logo.png', // 博主头像
